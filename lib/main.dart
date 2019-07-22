@@ -139,10 +139,44 @@ class _MyHomePageState extends State<MyHomePage> {
 
                     final dynamic0 = dynamics[index];
   
-                    return ListTile(
-                      title: new Text(dynamic0['user']['nickname']) ,
-                      subtitle: new Text(dynamic0['content']),
-                    );
+                    // return ListTile(
+                    //   title: new Text(dynamic0['user']['nickname']) ,
+                    //   subtitle: new Text(dynamic0['content']),
+                    // );
+
+                    return Center(
+                      child: Card(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              new ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage: NetworkImage(dynamic0['user']['avatarUrl']),
+                                ),
+                                title: Text(dynamic0['user']['nickname']),
+                                subtitle: Text(dynamic0['content']),
+                              ),
+                              
+                              ButtonTheme.bar(
+                                // make buttons use the appropriate styles for cards
+                                child: ButtonBar(
+                                  children: <Widget>[
+                                    FlatButton(
+                                      child: const Text('BUY TICKETS'),
+                                      onPressed: () {/* ... */},
+                                    ),
+                                    FlatButton(
+                                      child: const Text('LISTEN'),
+                                      onPressed: () {/* ... */},
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+
                   },
                 );
               },
