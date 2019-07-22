@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:graphql_flutter/graphql_flutter.dart';
+import '../../../utils/common.dart';
 
 List<Widget> getPicturesList(pictures) {
   List<Widget> list = [];
@@ -28,7 +29,7 @@ class DynamicItem extends StatelessWidget {
             backgroundImage: NetworkImage(data['user']['avatarUrl']),
           ),
           title: Text(data['user']['nickname']),
-          subtitle: Text(data['content']),
+          subtitle: Text(RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])))),
         ),
         
         data.containsKey('pictures') ? Container(
