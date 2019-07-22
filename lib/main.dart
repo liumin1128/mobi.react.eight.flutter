@@ -4,9 +4,24 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 List<Widget> getPicturesList(pictures) {
   List<Widget> list = [];
   for(var i in pictures) {
-    list.add(new Image.network(i));
+    list.add(new Container(
+      width: 100,
+      height: 100,
+      // alignment: Alignment.topLeft,
+        // backgroundColor: '#333',
+        // decoration: BoxDecoration(
+        // backgroundColor: '#333',
+        //   gradient: LinearGradient(colors: [
+        //     Colors.orangeAccent,
+        //     Colors.orange,
+        //     Colors.deepOrange
+        //   ]),
+        // ),
+        child: new Image.network(i),
+      )
+    );
   }
-  print(pictures);
+  // print(pictures);
   return list;
 }
 
@@ -193,11 +208,14 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
 
                               
-                                dynamic0.containsKey('pictures') ? Wrap(
-                                  spacing: 2, //主轴上子控件的间距
-                                  runSpacing: 5,
+                              dynamic0.containsKey('pictures') ? Container(
+                                alignment: Alignment.topLeft,
+                                child: Wrap(
+                                  spacing: 8, //主轴上子控件的间距
+                                  runSpacing: 8,
                                   children: getPicturesList(dynamic0['pictures']), //要显示的子控件集合 //交叉轴上子控件之间的间距
-                                ) : Text('xxx'),
+                                )
+                              ) : Text('xxx'),
 
 
                               // Container(
