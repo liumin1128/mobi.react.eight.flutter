@@ -3,7 +3,8 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 Future<void> main() async {
   final HttpLink httpLink = HttpLink(
-    uri: 'https://api.github.com/graphql',
+    uri: 'http://localhost:3101/graphql',
+    // uri: 'http://api.react.mobi/graphql',
   );
 
   final AuthLink authLink = AuthLink(
@@ -15,8 +16,8 @@ Future<void> main() async {
   String typenameDataIdFromObject(Object object) {
     if (object is Map<String, Object> &&
         object.containsKey('__typename') &&
-        object.containsKey('id')) {
-      return "${object['__typename']}/${object['id']}";
+        object.containsKey('_id')) {
+      return "${object['__typename']}/${object['_id']}";
     }
     return null;
   }
@@ -26,6 +27,10 @@ Future<void> main() async {
       cache: NormalizedInMemoryCache(
         dataIdFromObject: typenameDataIdFromObject,
       ),
+
+      // cache: InMemoryCache(),
+
+
       link: link,
     ),
   );
@@ -38,13 +43,11 @@ class MyApp extends StatelessWidget {
   MyApp({ this.client });
   final client;
 
- 
   @override
   Widget build(BuildContext context) {
 
     print('client');
     print(client);
-
 
     return GraphQLProvider(
       client: client,
@@ -74,6 +77,33 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  String readRepositories = """
+    query DynamicList(\$first: Int, \$skip: Int, \$topic: String, \$user: String) {
+      list: dynamics(first: \$first, skip: \$skip, topic: \$topic, user: \$user) {
+        __typename
+        createdAt
+        _id
+        content
+        pictures
+        zanCount
+        zanStatus
+        commentCount
+        topics {
+          _id
+          title
+          number
+        }
+        user {
+          nickname
+          avatarUrl
+        }
+      }
+      meta: _dynamicsMeta {
+        count
+      }
+    }
+  """;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,18 +111,42 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '666',
+        child: Query(
+              options: QueryOptions(
+                document: readRepositories, // this is the query string you just created
+                // variables: {
+                  // 'nRepositories': 50,
+                // },
+                // pollInterval: 10,
+              ),
+              // Just like in apollo refetch() could be used to manually trigger a refetch
+              builder: (QueryResult result, { VoidCallback refetch }) {
+
+                if (result.errors != null) {
+                  return Text(result.errors.toString());
+                }
+
+                if (result.loading) {
+                  return Text('Loading');
+                }
+
+                // it can be either Map or List
+                List dynamics = result.data['list'];
+
+                return ListView.builder(
+                  itemCount: dynamics.length,
+                  itemBuilder: (_, int index) {
+
+                    final dynamic0 = dynamics[index];
+  
+                    return ListTile(
+                      title: new Text(dynamic0['user']['nickname']) ,
+                      subtitle: new Text(dynamic0['content']),
+                    );
+                  },
+                );
+              },
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
