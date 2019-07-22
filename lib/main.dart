@@ -1,16 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  final HttpLink httpLink = HttpLink(
+    uri: 'https://api.github.com/graphql',
+  );
+
+  final AuthLink authLink = AuthLink(
+    getToken: () async => 'Bearer <YOUR_PERSONAL_ACCESS_TOKEN>',
+  );
+
+  final Link link = authLink.concat(httpLink as Link);
+
+  String typenameDataIdFromObject(Object object) {
+    if (object is Map<String, Object> &&
+        object.containsKey('__typename') &&
+        object.containsKey('id')) {
+      return "${object['__typename']}/${object['id']}";
+    }
+    return null;
+  }
+
+  final ValueNotifier<GraphQLClient> client = ValueNotifier(
+    GraphQLClient(
+      cache: NormalizedInMemoryCache(
+        dataIdFromObject: typenameDataIdFromObject,
+      ),
+      link: link,
+    ),
+  );
+
+  runApp(MyApp(client: client));
+}
 
 class MyApp extends StatelessWidget {
+
+  MyApp({ this.client });
+  final client;
+
+ 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page 111'),
+
+    print('client');
+    print(client);
+
+
+    return GraphQLProvider(
+      client: client,
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: MyHomePage(title: 'Flutter D222'),
+      )
     );
   }
 }
