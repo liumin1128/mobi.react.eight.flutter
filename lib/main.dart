@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import './dynamic/list/item.dart';
+import './pages/dynamic/list/item.dart';
 
 List<Widget> getPicturesList(pictures) {
   List<Widget> list = [];
