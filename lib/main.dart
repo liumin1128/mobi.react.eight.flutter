@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import './dynamic/list/item.dart';
 
 List<Widget> getPicturesList(pictures) {
   List<Widget> list = [];
@@ -189,109 +190,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
                     final dynamic0 = dynamics[index];
   
-                    // return ListTile(
-                    //   title: new Text(dynamic0['user']['nickname']) ,
-                    //   subtitle: new Text(dynamic0['content']),
-                    // );
-
                     return Center(
                       child: Card(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              new ListTile(
-                                leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(dynamic0['user']['avatarUrl']),
-                                ),
-                                title: Text(dynamic0['user']['nickname']),
-                                subtitle: Text(dynamic0['content']),
-                              ),
-
-                              
-                              dynamic0.containsKey('pictures') ? Container(
-                                alignment: Alignment.topLeft,
-                                child: Wrap(
-                                  spacing: 8, //主轴上子控件的间距
-                                  runSpacing: 8,
-                                  children: getPicturesList(dynamic0['pictures']), //要显示的子控件集合 //交叉轴上子控件之间的间距
-                                )
-                              ) : Text('xxx'),
-
-
-                              // Container(
-                              //   margin: new EdgeInsets.symmetric(vertical: 20.0),
-                              //   height: 200.0,
-                              //   child: new ListView(
-                              //     scrollDirection: Axis.horizontal,
-                              //     children: <Widget>[
-                              //       new Container(
-                              //         width: 160.0,
-                              //         color: Colors.red,
-                              //       ),
-                              //       new Container(
-                              //         width: 160.0,
-                              //         color: Colors.blue,
-                              //       ),
-                              //       new Container(
-                              //         width: 160.0,
-                              //         color: Colors.green,
-                              //       ),
-                              //       new Container(
-                              //         width: 160.0,
-                              //         color: Colors.yellow,
-                              //       ),
-                              //       new Container(
-                              //         width: 160.0,
-                              //         color: Colors.orange,
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-
-
-                              // GridView.count(
-                              //   //水平子Widget之间间距
-                              //   crossAxisSpacing: 10.0,
-                              //   //垂直子Widget之间间距
-                              //   mainAxisSpacing: 30.0,
-                              //   //GridView内边距
-                              //   padding: EdgeInsets.all(10.0),
-                              //   //一行的Widget数量
-                              //   crossAxisCount: 2,
-                              //   //子Widget宽高比例
-                              //   childAspectRatio: 2.0,
-                              //   //子Widget列表
-                              //   children: getWidgetList() 
-                              // ),
-
-                              
-                              // GridView.builder(
-                              //   itemCount: dynamics.length,
-                              //   itemBuilder: (_, int index2) {
-                              //     return CircleAvatar(
-                              //       backgroundImage: NetworkImage(dynamic0['user']['avatarUrl']),
-                              //     );
-                              //   }
-                              // ),
-
-
-                              ButtonTheme.bar(
-                                // make buttons use the appropriate styles for cards
-                                child: ButtonBar(
-                                  children: <Widget>[
-                                    FlatButton(
-                                      child: const Text('BUY TICKETS'),
-                                      onPressed: () {/* ... */},
-                                    ),
-                                    FlatButton(
-                                      child: const Text('LISTEN'),
-                                      onPressed: () {/* ... */},
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                        child: DynamicItem(data: dynamic0),
                         ),
                       );
 
