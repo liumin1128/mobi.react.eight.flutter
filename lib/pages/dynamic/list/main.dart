@@ -62,18 +62,18 @@ class _DynamicListState extends State<DynamicList> {
       // ), // This trailing comma makes auto-formatting nicer for build methods.
 
 
-      floatingActionButton: new StoreConnector<int, VoidCallback>(
-        converter: (store) {
-          return () => store.dispatch(DynamicActions.Increment);
-        },
-        builder: (context, callback) {
-          return new FloatingActionButton(
-            onPressed: callback,
-            tooltip: 'Increment',
-            child: new Icon(Icons.add),
-          );
-        },
-      ),
+      // floatingActionButton: new StoreConnector<int, VoidCallback>(
+      //   converter: (store) {
+      //     return () => store.dispatch(DynamicActions.Increment);
+      //   },
+      //   builder: (context, callback) {
+      //     return new FloatingActionButton(
+      //       onPressed: callback,
+      //       tooltip: 'Increment',
+      //       child: new Icon(Icons.add),
+      //     );
+      //   },
+      // ),
     );
   }
 }
