@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import './test/LongList.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
 import './pages/dynamic/list/main.dart';
+import './store/actions.dart';
+import './test/LongList.dart';
 
+int counterReducer(int state, dynamic action) {
+  if (action == DynamicActions.Increment) {
+    return state + 1;
+  }
+  return state;
+}
 
 Future<void> main() async {
   final HttpLink httpLink = HttpLink(
@@ -30,39 +39,45 @@ Future<void> main() async {
       cache: NormalizedInMemoryCache(
         dataIdFromObject: typenameDataIdFromObject,
       ),
-
       // cache: InMemoryCache(),
-
-
       link: link,
     ),
   );
 
-  runApp(MyApp(client: client));
+  final store = new Store<int>(counterReducer, initialState: 0);
+
+  runApp(MyApp(client: client, store: store));
 }
 
 class MyApp extends StatelessWidget {
 
-  MyApp({ this.client });
+  MyApp({ this.client, this.store });
   final client;
+  final store;
 
   @override
   Widget build(BuildContext context) {
 
-    print('client');
-    print(client);
+    // print('client');
+    // print(client);
 
-    return GraphQLProvider(
-      client: client,
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          // primaryColor: Colors.pink,
-          brightness: Brightness.light,
-          primaryColor: Colors.pink[400],
-          accentColor: Colors.pink[400],
-        ),
-        home: DynamicList(),
+    // print('store');
+    // print(store);
+
+    return  new StoreProvider<int>(
+      store: store,
+      child: GraphQLProvider(
+        client: client,
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            // primaryColor: Colors.pink,
+            brightness: Brightness.light,
+            primaryColor: Colors.pink[400],
+            accentColor: Colors.pink[400],
+          ),
+          home: DynamicList(),
+        )
       )
     );
   }

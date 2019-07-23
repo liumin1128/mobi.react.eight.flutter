@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+// import 'package:flutter_html/flutter_html.dart';
+// import 'package:flutter_redux/flutter_redux.dart';
+// import 'package:redux/redux.dart';
 // import 'package:graphql_flutter/graphql_flutter.dart';
 import '../../../utils/common.dart';
 
@@ -35,6 +37,17 @@ class DynamicItem extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+
+        // new StoreConnector<int, String>(
+        //   converter: (store) => store.state.toString(),
+        //   builder: (context, count) {
+        //     return new Text(
+        //       count,
+        //       style: Theme.of(context).textTheme.display1,
+        //     );
+        //   },
+        // ),
+
         new ListTile(
           leading: CircleAvatar(
             backgroundImage: NetworkImage(data['user']['avatarUrl']),
@@ -43,14 +56,11 @@ class DynamicItem extends StatelessWidget {
           subtitle: Text(RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])))),
         ),
 
-        // new Text(data['content']),
-
         // Html(data: text2html(data['content'])),
 
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           alignment: Alignment.topLeft,
-          // color: Colors.black87,
           child: Text(data['content'], 
             style: Theme.of(context)
             .textTheme
@@ -70,7 +80,6 @@ class DynamicItem extends StatelessWidget {
         ) : Container(),
 
         Container(
-          // child: Divider(),
           color: Color.fromRGBO(0, 0, 0, 0.05),
           height: 8,
           margin: const EdgeInsets.only(top: 16),
