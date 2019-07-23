@@ -44,8 +44,7 @@ class _DynamicListState extends State<DynamicList> {
             return ListView.builder(
               itemCount: dynamics.length,
               itemBuilder: (_, int index) {
-                final dynamic0 = dynamics[index];
-                return DynamicItem(data: dynamic0);
+                return DynamicItem(data: dynamics[index]);
               },
             );
           },
