@@ -49,7 +49,7 @@ class LongList extends StatelessWidget {
                       style: Theme.of(context)
                       .textTheme
                       .body1
-                      .copyWith(color: Colors.black87, fontSize: 24)
+                      .copyWith(color: Colors.black87)
                     )
                 ),
                 Container(
@@ -64,7 +64,11 @@ class LongList extends StatelessWidget {
                       'https://imgs.react.mobi/Fv-r9Nya5b32jJEy3R12yuYJOTke',
                     ]), //要显示的子控件集合 //交叉轴上子控件之间的间距`
                   )
-                )
+                ),
+                Container(
+                  child: Divider(),
+                  padding: const EdgeInsets.only(top: 16),
+                ),
               ]
             );
           }, 
