@@ -55,7 +55,7 @@ class DynamicItem extends StatelessWidget {
             style: Theme.of(context)
             .textTheme
             .body1
-            .copyWith(color: Colors.black87)
+            // .copyWith(color: Colors.black87)
           )
         ),
 
@@ -70,8 +70,9 @@ class DynamicItem extends StatelessWidget {
         ) : Container(),
 
         Container(
-          child: Divider(),
-          // color: Colors.black87,
+          // child: Divider(),
+          color: Color.fromRGBO(0, 0, 0, 0.05),
+          height: 8,
           margin: const EdgeInsets.only(top: 16),
         ),
     

@@ -57,7 +57,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.pink,
+          primaryColor: Colors.pink,
+          brightness: Brightness.dark,
         ),
         home: DynamicList(),
       )
