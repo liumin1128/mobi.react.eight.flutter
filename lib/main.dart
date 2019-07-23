@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import './pages/dynamic/list/item.dart';
 import './test/LongList.dart';
 import './pages/dynamic/list/main.dart';
 
@@ -39,7 +38,7 @@ Future<void> main() async {
     ),
   );
 
-  runApp(LongList());
+  runApp(MyApp(client: client));
 }
 
 class MyApp extends StatelessWidget {
@@ -60,7 +59,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: DynamicList(title: 'Flutter D222'),
+        home: DynamicList(),
       )
     );
   }

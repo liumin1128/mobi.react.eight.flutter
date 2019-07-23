@@ -42,7 +42,7 @@ class _DynamicListState extends State<DynamicList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('动态'),
       ),
       body: Center(
         child: Query(
