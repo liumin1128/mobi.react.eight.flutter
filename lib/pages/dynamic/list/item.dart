@@ -44,10 +44,22 @@ class DynamicItem extends StatelessWidget {
 
         // new Text(data['content']),
 
-        Html(data: text2html(data['content'])),
+        // Html(data: text2html(data['content'])),
+
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          alignment: Alignment.topLeft,
+          child: Text(data['content'], 
+              style: Theme.of(context)
+              .textTheme
+              .body1
+              .copyWith(color: Colors.black87)
+            )
+        ),
         
         data.containsKey('pictures') ? Container(
           alignment: Alignment.topLeft,
+          padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
           child: Wrap(
             spacing: 8, //主轴上子控件的间距
             runSpacing: 8,
@@ -55,21 +67,8 @@ class DynamicItem extends StatelessWidget {
           )
         ) : null,
 
-        ButtonTheme.bar(
-          // make buttons use the appropriate styles for cards
-          child: ButtonBar(
-            children: <Widget>[
-              FlatButton(
-                child: const Text('BUY TICKETS'),
-                onPressed: () {/* ... */},
-              ),
-              FlatButton(
-                child: const Text('LISTEN'),
-                onPressed: () {/* ... */},
-              ),
-            ],
-          ),
-        ),
+        Divider()
+    
       ],
     );
   }
