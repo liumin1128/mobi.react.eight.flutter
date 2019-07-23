@@ -79,11 +79,37 @@ class DynamicItem extends StatelessWidget {
           )
         ) : Container(),
 
+        
+
+
+        Container(
+          alignment: Alignment.topLeft,
+          padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+          child: Wrap(
+            children: <Widget>[
+              Icon(
+                Icons.thumb_up,
+                color: Colors.black38,
+                size: 16,
+              ),
+              Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
+              Icon(
+                Icons.comment,
+                color: Colors.black38,
+                size: 16,
+              ),
+            ]
+          ),
+        ),
+
+
+
         Container(
           color: Color.fromRGBO(0, 0, 0, 0.05),
           height: 8,
           margin: const EdgeInsets.only(top: 16),
         ),
+        
     
       ],
     );

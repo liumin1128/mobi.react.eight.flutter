@@ -29,6 +29,7 @@ class _DynamicListState extends State<DynamicList> {
             // },
             // pollInterval: 10,
           ),
+          
           // Just like in apollo refetch() could be used to manually trigger a refetch
           builder: (QueryResult result, { VoidCallback refetch }) {
 
