@@ -54,8 +54,8 @@ Widget getItemContainer(String item) {
 
 Future<void> main() async {
   final HttpLink httpLink = HttpLink(
-    uri: 'http://localhost:3101/graphql',
-    // uri: 'http://api.react.mobi/graphql',
+    // uri: 'http://localhost:3101/graphql',
+    uri: 'http://api.react.mobi/graphql',
   );
 
   final AuthLink authLink = AuthLink(

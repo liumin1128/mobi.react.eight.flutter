@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 // import 'package:graphql_flutter/graphql_flutter.dart';
 import '../../../utils/common.dart';
+
+
+text2html(str) {
+  return str;
+  // .replaceAll(new RegExp(r"(.*?)\[(.*?)_(.*?)]"), '\$1<img src="https://imgs.react.mobi/emoticon/\$2/\$3.gif" class="emoji" alt="[\$2_\$3]">');
+    // .replace(/(.*?)\[(.*?)_(.*?)]/ig, )
+    // .replace(/(.*?)\n(.*?)/ig, '$1<div>$2</div>');
+}
+
 
 List<Widget> getPicturesList(pictures) {
   List<Widget> list = [];
@@ -31,6 +41,10 @@ class DynamicItem extends StatelessWidget {
           title: Text(data['user']['nickname']),
           subtitle: Text(RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])))),
         ),
+
+        // new Text(data['content']),
+
+        Html(data: text2html(data['content'])),
         
         data.containsKey('pictures') ? Container(
           alignment: Alignment.topLeft,
