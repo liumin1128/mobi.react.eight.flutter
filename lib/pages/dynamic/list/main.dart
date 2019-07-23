@@ -18,7 +18,7 @@ class _DynamicListState extends State<DynamicList> {
       appBar: AppBar(
         title: Text('动态'),
       ),
-      body: Center(
+      body: Container(
         child: Query(
           options: QueryOptions(
             document: dynamics, // this is the query string you just created
