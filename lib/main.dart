@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import './pages/dynamic/list/item.dart';
+import './test/LongList.dart';
 
 List<Widget> getPicturesList(pictures) {
   List<Widget> list = [];
@@ -86,7 +87,7 @@ Future<void> main() async {
     ),
   );
 
-  runApp(MyApp(client: client));
+  runApp(LongList());
 }
 
 class MyApp extends StatelessWidget {
@@ -209,3 +210,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
