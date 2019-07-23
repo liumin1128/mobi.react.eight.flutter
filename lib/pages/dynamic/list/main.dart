@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:flutter_redux/flutter_redux.dart';
+// import 'package:flutter_redux/flutter_redux.dart';
 import './item.dart';
 import '../../../graphql/schema/dynamic.dart';
-import '../../../store/actions.dart';
+// import '../../../store/actions.dart';
 
 class DynamicList extends StatefulWidget {
   DynamicList({ Key key, this.title }) : super(key: key);
