@@ -2,55 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import './pages/dynamic/list/item.dart';
 import './test/LongList.dart';
-
-List<Widget> getPicturesList(pictures) {
-  List<Widget> list = [];
-  for(var i in pictures) {
-    list.add(new Container(
-      width: 100,
-      height: 100,
-      // alignment: Alignment.topLeft,
-        // backgroundColor: '#333',
-        // decoration: BoxDecoration(
-        // backgroundColor: '#333',
-        //   gradient: LinearGradient(colors: [
-        //     Colors.orangeAccent,
-        //     Colors.orange,
-        //     Colors.deepOrange
-        //   ]),
-        // ),
-        child: new Image.network(i),
-      )
-    );
-  }
-  // print(pictures);
-  return list;
-}
-
-List<String> getDataList() {
-  List<String> list = [];
-  for (int i = 0; i < 100; i++) {
-    list.add(i.toString());
-  }
-  return list;
-}
-
-List<Widget> getWidgetList() {
-  return getDataList().map((item) => getItemContainer(item)).toList();
-}
-
-Widget getItemContainer(String item) {
-  return Container(
-    alignment: Alignment.center,
-    child: Text(
-      item,
-      style: TextStyle(color: Colors.white, fontSize: 20),
-    ),
-    color: Colors.blue,
-  );
-}
-
-
+import './pages/dynamic/list/main.dart';
 
 
 Future<void> main() async {
@@ -108,107 +60,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MyHomePage(title: 'Flutter D222'),
+        home: DynamicList(title: 'Flutter D222'),
       )
     );
   }
 }
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({ Key key, this.title }) : super(key: key);
-  final String title;
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  String readRepositories = """
-    query DynamicList(\$first: Int, \$skip: Int, \$topic: String, \$user: String) {
-      list: dynamics(first: \$first, skip: \$skip, topic: \$topic, user: \$user) {
-        __typename
-        createdAt
-        _id
-        content
-        pictures
-        zanCount
-        zanStatus
-        commentCount
-        topics {
-          _id
-          title
-          number
-        }
-        user {
-          nickname
-          avatarUrl
-        }
-      }
-      meta: _dynamicsMeta {
-        count
-      }
-    }
-  """;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Query(
-              options: QueryOptions(
-                document: readRepositories, // this is the query string you just created
-                // variables: {
-                  // 'nRepositories': 50,
-                // },
-                // pollInterval: 10,
-              ),
-              // Just like in apollo refetch() could be used to manually trigger a refetch
-              builder: (QueryResult result, { VoidCallback refetch }) {
-
-                if (result.errors != null) {
-                  return Text(result.errors.toString());
-                }
-
-                if (result.loading) {
-                  return Text('Loading');
-                }
-
-                // it can be either Map or List
-                List dynamics = result.data['list'];
-
-                return ListView.builder(
-                  itemCount: dynamics.length,
-                  itemBuilder: (_, int index) {
-
-                    final dynamic0 = dynamics[index];
-  
-                    return Center(
-                      child: Card(
-                        child: DynamicItem(data: dynamic0),
-                        ),
-                      );
-
-                  },
-                );
-              },
-            ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
-
-
