@@ -19,6 +19,7 @@ List<Widget> getPicturesList(pictures) {
       new Container(
         width: 100,
         height: 100,
+        color: Colors.black87,
         child: new Image.network(i),
       )
     );
@@ -49,15 +50,16 @@ class DynamicItem extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           alignment: Alignment.topLeft,
+          // color: Colors.black87,
           child: Text(data['content'], 
-              style: Theme.of(context)
-              .textTheme
-              .body1
-              .copyWith(color: Colors.black87)
-            )
+            style: Theme.of(context)
+            .textTheme
+            .body1
+            .copyWith(color: Colors.black87)
+          )
         ),
-        
-        data.containsKey('pictures') ? Container(
+
+        data['pictures'].length > 0 ? Container(
           alignment: Alignment.topLeft,
           padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
           child: Wrap(
@@ -65,9 +67,13 @@ class DynamicItem extends StatelessWidget {
             runSpacing: 8,
             children: getPicturesList(data['pictures']), //要显示的子控件集合 //交叉轴上子控件之间的间距
           )
-        ) : null,
+        ) : Container(),
 
-        Divider()
+        Container(
+          child: Divider(),
+          // color: Colors.black87,
+          margin: const EdgeInsets.only(top: 16),
+        ),
     
       ],
     );
