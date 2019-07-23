@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
+import './components/Navigation/BottomNavigationBar/index.dart';
+import './pages/user/login.dart';
 import './pages/dynamic/list/main.dart';
 import './store/actions.dart';
 import './test/LongList.dart';
@@ -69,13 +71,24 @@ class MyApp extends StatelessWidget {
       child: GraphQLProvider(
         client: client,
         child: MaterialApp(
+
           title: 'Flutter Demo',
+
           theme: ThemeData(
             // primaryColor: Colors.pink,
             brightness: Brightness.light,
             primaryColor: Colors.pink[400],
             accentColor: Colors.pink[400],
           ),
+
+          // initialRoute: '/login',
+
+          // routes: <String, WidgetBuilder>{
+          //   // '/': (BuildContext context) => DynamicList(),
+          //   '/login': (BuildContext context) => DynamicList(title: 'xxxx'),
+          //   // '/register': (BuildContext context) => DynamicList(),
+          // },
+
           home: DynamicList(),
         )
       )
