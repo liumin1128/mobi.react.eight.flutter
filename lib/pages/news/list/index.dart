@@ -58,19 +58,54 @@ class _NewsListState extends State<NewsList> {
 
                 var data = list[index];
                 var cover = data['cover'] == null ? (data['photos'][0] != null ? data['photos'][0] : 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz') : data['cover'];
-                var smallCover = getSmallImg(cover, 100, 100);
-                // var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
+                var smallCover = getSmallImg(cover, 80, 80);
+                var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
 
-                return new ListTile(
-                  leading: Image.network(smallCover, width: 100, height: 100, fit: BoxFit.cover),
-                  title: Text(data['title']),
-                  subtitle: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(data['_id']),
-                    ],
+                      Image.network(smallCover, width: 80, height: 80, fit: BoxFit.cover),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(16,0,0,0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(data['title'], 
+                                softWrap: true,
+                                overflow: TextOverflow.ellipsis, 
+                                maxLines: 2,
+                                style: const TextStyle(
+                                  fontSize: 18.0,
+                                  color: Colors.black87,
+                                )
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(data['appName'], style: const TextStyle(fontSize: 14.0, color: Colors.black38)),
+                                  Text(createdAt, style: const TextStyle(fontSize: 14.0, color: Colors.black38)),
+                                ],
+                              )
+                          ],)
+                        )
+                      )
+                    ]
                   )
                 );
+                // return new ListTile(
+                //   thumbnail: Image.network(smallCover, width: 100, height: 100, fit: BoxFit.cover),
+                //   title: Text(data['title']),
+                //   subtitle: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: <Widget>[
+                //       Text(data['_id']),
+                //     ],
+                //   )
+                // );
               }
             )
           );
