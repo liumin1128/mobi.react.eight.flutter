@@ -21,67 +21,97 @@ class _NewsListState extends State<NewsList> {
       appBar: AppBar(
         title: Text('动态'),
       ),
-      body: Container(
-        child: Query(
-          options: QueryOptions(
-            document: newsSchema, // this is the query string you just created
-            // variables: {
-              // 'nRepositories': 50,
-            // },
-            // pollInterval: 10,
-          ),
-          
-          // Just like in apollo refetch() could be used to manually trigger a refetch
-          builder: (QueryResult result, { VoidCallback refetch }) {
+      body: GraphQLConsumer(
+        builder: (GraphQLClient client) {
+          return Container(
+            child: Center(
+              child: Query(
+                options: QueryOptions(
+                  document: newsSchema, // this is the query string you just created
+                  // variables: {
+                    // 'nRepositories': 50,
+                  // },
+                  // fetchPolicy: 
+                  // pollInterval: 10,
+                ),
+                
+                // Just like in apollo refetch() could be used to manually trigger a refetch
+                builder: (QueryResult result, { VoidCallback refetch }) {
 
-            if (result.errors != null) {
-              return Text(result.errors.toString());
-            }
+                  if (result.errors != null) {
+                    return Text(result.errors.toString());
+                  }
 
-            if (result.loading) {
-              return Text('Loading');
-            }
+                  if (result.loading) {
+                    return Text('Loading');
+                  }
 
-            // it can be either Map or List
-            List dynamics = result.data['list'];
+                  List dynamics = result.data['list'];
 
-            Future<Null> _onRefresh() async {
-              print('onRefresh');
-              refetch();
-            }
+                  Future<Null> _onRefresh() async {
+                    print('onRefresh');
+                    refetch();
+                  }
 
-            Future<Null> _onScrollToBottom() async {
-              print('_onScrollToBottom');
-              refetch();
-            }
+                  Future<Null> _onScrollToBottom() async {
+                    print('_onScrollToBottom');
+                    refetch();
+                  }
 
-            return ListViewPro(
-              onRefresh: _onRefresh,
-              onScrollToBottom: _onScrollToBottom,
-              itemCount: dynamics.length,
-              itemBuilder: (_, int index) {
+                  // Future<Null> _onScrollToBottom() async {
+                  //   print('xxxxxxxxxxxxxxxxxxxxxx');
 
-                var data = dynamics[index];
-                var cover = data['cover'] == null ? (data['photos'][0] != null ? data['photos'][0] : 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz') : data['cover'];
-                var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
+                  //   // final QueryResult res = await client.mutate(
+                  //   //   MutationOptions(
+                  //   //     document: newsSchema,
+                  //   //     variables: {
+                  //   //       'skip': 1 * 16
+                  //   //     },
+                  //   //   ),
+                  //   // );
 
-                return new ListTile(
-                  leading: Image.network(cover, width: 100, height: 100, fit: BoxFit.cover),
-                  title: Text(data['title']),
-                  subtitle: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(data['appName']),
-                      Text(createdAt),
-                    ],
-                  )
-                );
-              }
-            );
-          },
-        ),
-      ),
+                  //   // if(res.hasErrors) return;
 
+                  //   // final List<dynamic> updated = List<dynamic>.from(result.data['list'])..addAll(res.data['list']);
+                    
+                  //   // client.cache.write(typenameDataIdFromObject(updated[3]), updated[3]);
+                  //   // client.cache.restore();
+                  //   // print(client.cache.read(typenameDataIdFromObject(updated[3]))['title']);
+                  //   // client.queryManager.rebroadcastQueries();
+                    
+                  // }
+
+
+                  return ListViewPro(
+                    onRefresh: _onRefresh,
+                    onScrollToBottom: _onScrollToBottom,
+                    itemCount: dynamics.length,
+                    itemBuilder: (_, int index) {
+
+                      var data = dynamics[index];
+                      var cover = data['cover'] == null ? (data['photos'][0] != null ? data['photos'][0] : 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz') : data['cover'];
+                      // var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
+
+                      return new ListTile(
+                        leading: Image.network(cover, width: 100, height: 100, fit: BoxFit.cover),
+                        title: Text(data['title']),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(data['_id']),
+                          ],
+                        )
+                      );
+
+
+                    }
+                  );
+                },
+              ),
+            )
+          );
+        },
+      )
     );
   }
 

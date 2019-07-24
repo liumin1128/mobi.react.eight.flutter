@@ -34,16 +34,16 @@ class _ListViewProState extends State<ListViewPro> {
 
   Future<Null> _onRefresh() async {
     print('onRefresh');
-    if(widget.onRefresh != null) {
+    // if(widget.onRefresh != null) {
       widget.onRefresh();
-    }
+    // }
   }
 
   Future<Null> _onScrollToBottom() async {
     print('onScrollToBottom');
-    if(widget.onScrollToBottom != null) {
+    // if(widget.onScrollToBottom != null) {
       widget.onScrollToBottom();
-    }
+    // }
   }
 
   @override
