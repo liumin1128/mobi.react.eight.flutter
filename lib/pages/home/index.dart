@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../dynamic/list/main.dart';
+import '../news/list/index.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({ Key key, this.title }) : super(key: key);
@@ -14,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     DynamicList(),
+    NewsList(),
     Text(
       'Index 1: Business',
       style: optionStyle,
