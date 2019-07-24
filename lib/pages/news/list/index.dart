@@ -36,6 +36,10 @@ class _NewsListState extends State<NewsList> {
 
           if(list.length == 0 && loading) return Text('Loading');
 
+          print('list');
+          print(list);
+          print(list.length);
+
           return Container(
             child: ListViewPro(
               onRefresh: refetch,
@@ -57,8 +61,8 @@ class _NewsListState extends State<NewsList> {
                 );
 
                 var data = list[index];
-                var cover = data['cover'] == null ? (data['photos'][0] != null ? data['photos'][0] : 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz') : data['cover'];
-                var smallCover = getSmallImg(cover, 160, 160);
+                var cover = data['cover'] == null ? data['photos'][0] : data['cover'];
+                var smallCover = cover == null ? 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz' : getSmallImg(cover, 160, 160);
                 var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
 
                 return Container(
