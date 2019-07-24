@@ -67,7 +67,7 @@ class QueryProWidthClient extends StatefulWidget {
 // QueryProWidthClient 默认的实例,有状态
 class _QueryProWidthClientState extends State<QueryProWidthClient> {
   int page = 0;
-  int first = 10;
+  int first = 20;
   bool loading = false;
   List<dynamic> list = [];
   final StreamController _streamController = StreamController();

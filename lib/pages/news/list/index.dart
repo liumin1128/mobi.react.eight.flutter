@@ -58,7 +58,7 @@ class _NewsListState extends State<NewsList> {
 
                 var data = list[index];
                 var cover = data['cover'] == null ? (data['photos'][0] != null ? data['photos'][0] : 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz') : data['cover'];
-                var smallCover = getSmallImg(cover, 80, 80);
+                var smallCover = getSmallImg(cover, 160, 160);
                 var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
 
                 return Container(
