@@ -66,3 +66,10 @@ class RelativeDateFormat {
     return toMonths(date) / 365;
   }
 }
+
+
+getSmallImg(url, propsX, propsY) {
+  var x = propsX == null ? 200 : propsX;
+  var y = propsY == null ? 200 : propsY;
+  return '\${url}?imageMogr2/thumbnail/!\${x}x\${y}r/gravity/Center/crop/\${x}x\${y}';
+}

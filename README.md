@@ -21,3 +21,5 @@ https://pub.dev/packages
 https://flutterchina.club/widgets/
 
 https://github.com/alibaba/flutter-go
+
+https://pub.dev/packages/graphql_flutter
