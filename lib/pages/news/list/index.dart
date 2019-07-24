@@ -56,7 +56,7 @@ class _NewsListState extends State<NewsList> {
                   children: <Widget>[
                     // Text(data['cover']),
                     new ListTile(
-                      leading: CircleAvatar(backgroundImage: NetworkImage(cover)),
+                      leading: Image.network(cover, width: 100, height: 100, fit: BoxFit.cover),
                       title: Text(data['title']),
                       subtitle: Text(RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']))),
                     )
