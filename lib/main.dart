@@ -4,6 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import './components/Navigation/BottomNavigationBar/index.dart';
 import './pages/user/login.dart';
+import './pages/home/index.dart';
 import './pages/dynamic/list/main.dart';
 import './store/actions.dart';
 import './test/LongList.dart';
@@ -84,7 +85,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
 
           routes: <String, WidgetBuilder>{
-            '/': (BuildContext context) => DynamicList(),
+            '/': (BuildContext context) => HomePage(),
             '/login': (BuildContext context) => UserLogin(),
             '/register': (BuildContext context) => UserLogin(),
           },
