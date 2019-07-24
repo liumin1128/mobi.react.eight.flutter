@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../dynamic/list/main.dart'
+import '../dynamic/list/main.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({ Key key, this.title }) : super(key: key);
@@ -12,7 +12,8 @@ class _HomePageState extends State<HomePage> {
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
+    DynamicList(),
     Text(
       'Index 1: Business',
       style: optionStyle,
@@ -32,11 +33,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      // appBar: AppBar(
+      //   title: const Text('BottomNavigationBar Sample'),
+      // ),
+      body: Container(
+        child: _widgetOptions[_selectedIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
