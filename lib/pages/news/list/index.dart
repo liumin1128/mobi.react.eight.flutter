@@ -37,29 +37,40 @@ class _NewsListState extends State<NewsList> {
           if(list.length == 0 && loading) return Text('Loading');
 
           return Container(
-            child: Center(
-              child: ListViewPro(
-                onRefresh: refetch,
-                onScrollToBottom: fetchMore,
-                itemCount: list.length,
-                itemBuilder: (_, int index) {
+            child: ListViewPro(
+              onRefresh: refetch,
+              onScrollToBottom: fetchMore,
+              itemCount: list.length + 1,
+              itemBuilder: (_, int index) {
 
-                  var data = list[index];
-                  var cover = data['cover'] == null ? (data['photos'][0] != null ? data['photos'][0] : 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz') : data['cover'];
-                  // var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
-
-                  return new ListTile(
-                    leading: Image.network(cover, width: 100, height: 100, fit: BoxFit.cover),
-                    title: Text(data['title']),
-                    subtitle: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(data['_id']),
-                      ],
+                if(index == list.length) return Container(
+                  padding: const EdgeInsets.only(top: 16,bottom: 16),
+                  child: Center(
+                    child: Container(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                      )
                     )
-                  );
-                }
-              )
+                  )
+                );
+
+                var data = list[index];
+                var cover = data['cover'] == null ? (data['photos'][0] != null ? data['photos'][0] : 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz') : data['cover'];
+                // var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
+
+                return new ListTile(
+                  leading: Image.network(cover, width: 100, height: 100, fit: BoxFit.cover),
+                  title: Text(data['title']),
+                  subtitle: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(data['_id']),
+                    ],
+                  )
+                );
+              }
             )
           );
 
