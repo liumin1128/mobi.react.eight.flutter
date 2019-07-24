@@ -81,15 +81,15 @@ class MyApp extends StatelessWidget {
             accentColor: Colors.pink[400],
           ),
 
-          // initialRoute: '/login',
+          initialRoute: '/login',
 
-          // routes: <String, WidgetBuilder>{
-          //   // '/': (BuildContext context) => DynamicList(),
-          //   '/login': (BuildContext context) => DynamicList(title: 'xxxx'),
-          //   // '/register': (BuildContext context) => DynamicList(),
-          // },
+          routes: <String, WidgetBuilder>{
+            '/': (BuildContext context) => DynamicList(),
+            '/login': (BuildContext context) => UserLogin(),
+            '/register': (BuildContext context) => UserLogin(),
+          },
 
-          home: DynamicList(),
+          // home: UserLogin(),
         )
       )
     );
