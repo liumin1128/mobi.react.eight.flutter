@@ -36,14 +36,14 @@ class _HomePageState extends State<HomePage> {
       // appBar: AppBar(
       //   title: const Text('BottomNavigationBar Sample'),
       // ),
-      body: Container(
+      body: Center(
         child: _widgetOptions[_selectedIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home')),
-          BottomNavigationBarItem(icon: Icon(Icons.business),title: Text('Business')),
-          BottomNavigationBarItem(icon: Icon(Icons.school),title: Text('School')),
+          BottomNavigationBarItem(icon: Icon(Icons.explore), title: Text('动态')),
+          BottomNavigationBarItem(icon: Icon(Icons.business),title: Text('资讯')),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle),title: Text('我的')),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
