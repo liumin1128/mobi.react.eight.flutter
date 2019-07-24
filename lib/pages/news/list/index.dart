@@ -50,19 +50,18 @@ class _NewsListState extends State<NewsList> {
 
                 var data = dynamics[index];
                 var cover = data['cover'] == null ? data['photos'][0] : data['cover'];
-
-                return new Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    // Text(data['cover']),
-                    new ListTile(
-                      leading: Image.network(cover, width: 100, height: 100, fit: BoxFit.cover),
-                      title: Text(data['title']),
-                      subtitle: Text(RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']))),
-                    )
-                  ]
+                var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']))
+                return new ListTile(
+                  leading: Image.network(cover, width: 100, height: 100, fit: BoxFit.cover),
+                  title: Text(data['title']),
+                  subtitle: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(data['appName']),
+                      Text(createdAt),
+                    ],
+                  )
                 );
-
               },
             );
           },
