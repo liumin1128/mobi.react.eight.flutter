@@ -3,6 +3,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 // import 'package:flutter_redux/flutter_redux.dart';
 import '../../../graphql/schema/news.dart';
 // import '../../../store/actions.dart';
+import '../../../utils/common.dart';
 
 class NewsList extends StatefulWidget {
   NewsList({ Key key, this.title }) : super(key: key);
@@ -46,7 +47,22 @@ class _NewsListState extends State<NewsList> {
             return ListView.builder(
               itemCount: dynamics.length,
               itemBuilder: (_, int index) {
-                return Text('xxxxxxxxxxxxxxxxxxxxxxx');
+
+                var data = dynamics[index];
+                var cover = data['cover'] == null ? data['photos'][0] : data['cover'];
+
+                return new Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    // Text(data['cover']),
+                    new ListTile(
+                      leading: CircleAvatar(backgroundImage: NetworkImage(cover)),
+                      title: Text(data['title']),
+                      subtitle: Text(RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']))),
+                    )
+                  ]
+                );
+
               },
             );
           },
