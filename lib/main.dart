@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
             accentColor: Colors.pink[400],
           ),
 
-          initialRoute: '/login',
+          initialRoute: '/',
 
           routes: <String, WidgetBuilder>{
             '/': (BuildContext context) => DynamicList(),
