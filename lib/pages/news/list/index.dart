@@ -58,10 +58,11 @@ class _NewsListState extends State<NewsList> {
 
                 var data = list[index];
                 var cover = data['cover'] == null ? (data['photos'][0] != null ? data['photos'][0] : 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz') : data['cover'];
+                var smallCover = getSmallImg(cover, 100, 100);
                 // var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
 
                 return new ListTile(
-                  leading: Image.network(cover, width: 100, height: 100, fit: BoxFit.cover),
+                  leading: Image.network(smallCover, width: 100, height: 100, fit: BoxFit.cover),
                   title: Text(data['title']),
                   subtitle: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
