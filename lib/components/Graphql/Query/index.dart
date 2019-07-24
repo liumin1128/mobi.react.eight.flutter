@@ -76,6 +76,7 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
     loading = true;
     page = page += 1;
     _streamController.sink.add(loading);
+    
     final QueryResult res = await widget.client.mutate(
       MutationOptions(
         document: newsSchema,
