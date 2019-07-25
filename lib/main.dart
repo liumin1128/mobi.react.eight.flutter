@@ -78,6 +78,7 @@ class MyApp extends StatelessWidget {
             '/': (BuildContext context) => HomePage(),
             '/login': (BuildContext context) => UserLogin(),
             '/register': (BuildContext context) => UserLogin(),
+            // '/news/detail': CupertinoPageRoute(builder: (BuildContext context) => Text('xxx'))
           },
 
           initialRoute: '/',

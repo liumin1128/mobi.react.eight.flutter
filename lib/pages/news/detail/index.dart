@@ -6,17 +6,23 @@ import 'package:flutter/cupertino.dart';
 // import '../../../graphql/schema/news.dart';
 // import '../../../utils/common.dart';
 
-class NewsList extends StatefulWidget {
-
+class NewsDetail extends StatefulWidget {
+  NewsDetail({ Key key, this.id }) : super(key: key);
+  final String id;
+  
   @override
-  _NewsListState createState() => _NewsListState();
+  _NewsDetailState createState() => _NewsDetailState();
 }
 
-class _NewsListState extends State<NewsList> {
+class _NewsDetailState extends State<NewsDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return Text('detail');
+    return Container(
+      child: Center(
+        child: Text(widget.id)
+      )
+    );
   }
 
 }

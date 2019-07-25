@@ -5,6 +5,7 @@ import '../../../components/ListViewPro/index.dart';
 import '../../../components/Graphql/Query/index.dart';
 import '../../../graphql/schema/news.dart';
 import '../../../utils/common.dart';
+import '../detail/index.dart';
 
 class NewsList extends StatefulWidget {
 
@@ -50,46 +51,64 @@ class _NewsListState extends State<NewsList> {
               var smallCover = cover == null ? 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz' : getSmallImg(cover, 160, 160);
               var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
 
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Image.network(smallCover, width: 80, height: 80, fit: BoxFit.cover),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(16,0,0,0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(data['title'], 
-                              softWrap: true,
-                              overflow: TextOverflow.ellipsis, 
-                              maxLines: 2,
-                              // style: const TextStyle(
-                              //   fontSize: 18.0,
-                              //   color: Colors.black87,
-                              // )
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(data['appName']
-                                // , style: const TextStyle(fontSize: 14.0, color: Colors.black38)
-                                ),
-                                Text(createdAt, 
-                                // style: const TextStyle(fontSize: 14.0, color: Colors.black38)
-                                ),
-                              ],
-                            )
-                        ],)
+              return GestureDetector(
+                onTap: () {
+                  print('xxxx');
+                  // Navigator.of(context).pushNamed('/');
+                  Navigator.push(
+                    context,
+                    new CupertinoPageRoute(
+                      builder: (context) => CupertinoPageScaffold(
+                        navigationBar: CupertinoNavigationBar(
+                          middle: Text("资讯"),
+                        ),
+                        child: NewsDetail(id: data['_id']),
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Image.network(smallCover, width: 80, height: 80, fit: BoxFit.cover),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(16,0,0,0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(data['title'], 
+                                softWrap: true,
+                                overflow: TextOverflow.ellipsis, 
+                                maxLines: 2,
+                                // style: const TextStyle(
+                                //   fontSize: 18.0,
+                                //   color: Colors.black87,
+                                // )
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(data['appName']
+                                  // , style: const TextStyle(fontSize: 14.0, color: Colors.black38)
+                                  ),
+                                  Text(createdAt, 
+                                  // style: const TextStyle(fontSize: 14.0, color: Colors.black38)
+                                  ),
+                                ],
+                              )
+                          ],)
+                        )
                       )
-                    )
-                  ]
+                    ]
+                  )
                 )
-              );
 
+              );
+              
             }
           )
         );
