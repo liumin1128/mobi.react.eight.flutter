@@ -3,11 +3,12 @@ import 'package:flutter/cupertino.dart';
 
 // ListViewPro 默认的实例
 class ListViewPro extends StatefulWidget {
-  ListViewPro({ Key key, this.onScrollToBottom, this.onRefresh, this.itemCount, this.itemBuilder }) : super(key: key);
+  ListViewPro({ Key key, this.title, this.onScrollToBottom, this.onRefresh, this.itemCount, this.itemBuilder }) : super(key: key);
   final onScrollToBottom;
   final onRefresh;
   final itemCount;
   final itemBuilder;
+  final title;
   @override
   _ListViewProState createState() => _ListViewProState();
 }
@@ -68,7 +69,7 @@ class _ListViewProState extends State<ListViewPro> {
       controller: _scrollController,
       physics: ScrollPhysics(),
       slivers: <Widget>[
-        CupertinoSliverNavigationBar(largeTitle: new Text('TESTING'),),
+        widget.title != null ? CupertinoSliverNavigationBar(largeTitle: new Text(widget.title),) : null,
         CupertinoSliverRefreshControl(onRefresh: _onRefresh),
         SliverSafeArea(
           top: true,

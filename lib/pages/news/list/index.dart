@@ -8,9 +8,6 @@ import '../../../utils/common.dart';
 
 class NewsList extends StatefulWidget {
 
-  NewsList({ Key key, this.title }) : super(key: key);
-  final String title;
-
   @override
   _NewsListState createState() => _NewsListState();
 }
@@ -29,6 +26,7 @@ class _NewsListState extends State<NewsList> {
 
         return Container(
           child: ListViewPro(
+            title: '资讯',
             onRefresh: refetch,
             onScrollToBottom: fetchMore,
             itemCount: list.length + 1,

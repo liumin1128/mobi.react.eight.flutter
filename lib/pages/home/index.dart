@@ -28,9 +28,9 @@ class _HomePageState extends State<HomePage> {
     ),
 
     CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text("资讯"),
-      ),
+      // navigationBar: CupertinoNavigationBar(
+      //   middle: Text("资讯"),
+      // ),
       child: Center(
         child: NewsList(),
       ),
