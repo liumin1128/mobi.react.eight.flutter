@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import './components/Navigation/BottomNavigationBar/index.dart';
 import './pages/user/login.dart';
 import './pages/home/index.dart';
-import './pages/dynamic/list/main.dart';
 import './store/actions.dart';
-import './test/LongList.dart';
 
 int counterReducer(int state, dynamic action) {
   if (action == DynamicActions.Increment) {
@@ -61,19 +58,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // print('client');
-    // print(client);
-
-    // print('store');
-    // print(store);
-
     return  new StoreProvider<int>(
       store: store,
       child: GraphQLProvider(
         client: client,
         child: MaterialApp(
-
-          title: 'Flutter Demo',
 
           theme: ThemeData(
             // primaryColor: Colors.pink,
