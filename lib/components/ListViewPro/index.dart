@@ -37,14 +37,14 @@ class _ListViewProState extends State<ListViewPro> {
   Future<Null> _onRefresh() async {
     print('onRefresh');
     // if(widget.onRefresh != null) {
-      widget.onRefresh();
+      await widget.onRefresh();
     // }
   }
 
   Future<Null> _onScrollToBottom() async {
     print('onScrollToBottom');
     // if(widget.onScrollToBottom != null) {
-      widget.onScrollToBottom();
+      await widget.onScrollToBottom();
     // }
   }
 
@@ -70,7 +70,7 @@ class _ListViewProState extends State<ListViewPro> {
       physics: ScrollPhysics(),
       slivers: <Widget>[
         widget.title != null ? CupertinoSliverNavigationBar(largeTitle: new Text(widget.title),) : null,
-        CupertinoSliverRefreshControl(onRefresh: _onRefresh),
+        CupertinoSliverRefreshControl(onRefresh:_onRefresh),
         SliverSafeArea(
           top: true,
           bottom: true,

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 typedef BoolCallback = bool Function();
-typedef FutureCallback = Future<Null> Function();
+typedef FutureCallback = Future<void> Function();
 
 typedef QueryBuilder = Widget Function(
   List list, 
@@ -74,7 +74,7 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
   List<dynamic> list = [];
   final StreamController _streamController = StreamController();
 
-  Future<Null> _fetchMore() async {
+  Future<void> _fetchMore() async {
     loading = true;
     page = page += 1;
     _streamController.sink.add(loading);
@@ -95,10 +95,12 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
     _streamController.sink.add(list);
   }
 
-  Future<Null> _refresh() async {
+  Future<void> _refresh() async {
     page = 0;
     loading = true;
-    _streamController.sink.add(loading);
+    _streamController.sink.add(loading); 
+    print('11111');
+    // await new Future<void>.delayed(const Duration(seconds: 5));
     final QueryResult res = await widget.client.mutate(
       MutationOptions(
         document: widget.document,
@@ -108,6 +110,7 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
         },
       ),
     );
+    print('22222');
     loading = false;
     if(res.hasErrors) return;
     list = res.data['list'];

@@ -74,6 +74,9 @@ getSmallImg(url, propsX, propsY) {
   return "${url}?imageMogr2/thumbnail/!${x}x${y}r/gravity/Center/crop/${x}x${y}";
 }
 
+// sleep(ss) {
+//   return new Future<void>.delayed(const Duration(seconds: ss));
+// }
 
 //  new CupertinoRefreshControl(onRefresh: () {
 //           return new Future<void>.delayed(const Duration(seconds: 1))
