@@ -15,3 +15,22 @@ query NewsList(\$first: Int, \$skip: Int) {
   }
 }
 """;
+
+String newsDetailSchema = """
+query NewsDetail(\$_id: String!) {
+  data: NewsDetail(_id: \$_id) {
+    __typename
+    title
+    createdAt
+    content
+    appCode
+    appName
+    showHtml
+    html
+    photos
+    cover
+    tags
+    url
+  }
+}
+""";
