@@ -17,8 +17,25 @@ class _HomePageState extends State<HomePage> {
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   
   static List<Widget> _widgetOptions = <Widget>[
-    DynamicList(),
-    NewsList(),
+
+    CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text("资讯"),
+      ),
+      child: Center(
+        child: DynamicList(),
+      ),
+    ),
+
+    CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text("资讯"),
+      ),
+      child: Center(
+        child: NewsList(),
+      ),
+    ),
+    
     Text(
       'Index 1: Business',
       style: optionStyle,

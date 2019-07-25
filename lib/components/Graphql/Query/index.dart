@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:graphql_flutter/graphql_flutter.dart';
-// import 'package:graphql/internal.dart';
-import '../../../graphql/schema/news.dart';
 
 typedef BoolCallback = bool Function();
 typedef FutureCallback = Future<Null> Function();
@@ -21,10 +19,12 @@ class QueryPro extends StatefulWidget {
     final Key key,
     // @required this.options,
     @required this.builder,
+    @required this.document,
   }) : super(key: key);
 
   // final QueryOptions options;
   final QueryBuilder builder;
+  final document;
 
   @override
   _QueryProState createState() => _QueryProState();
@@ -37,8 +37,8 @@ class _QueryProState extends State<QueryPro> {
     return GraphQLConsumer(
       builder: (GraphQLClient client) {
         return QueryProWidthClient(
-          // options: widget.options,
           builder: widget.builder,
+          document: widget.document,
           client: client,
         );
       }
@@ -53,12 +53,14 @@ class QueryProWidthClient extends StatefulWidget {
     final Key key,
     // @required this.options,
     @required this.builder,
+    @required this.document,
     @required this.client,
   }) : super(key: key);
 
   // final QueryOptions options;
   final QueryBuilder builder;
   final client;
+  final document;
 
   @override
   _QueryProWidthClientState createState() => _QueryProWidthClientState();
@@ -79,7 +81,7 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
     
     final QueryResult res = await widget.client.mutate(
       MutationOptions(
-        document: newsSchema,
+        document: widget.document,
         variables: {
           'skip': page * first,
           'first': first
@@ -99,7 +101,7 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
     _streamController.sink.add(loading);
     final QueryResult res = await widget.client.mutate(
       MutationOptions(
-        document: newsSchema,
+        document: widget.document,
         variables: {
           'skip': page * first,
           'first': first
