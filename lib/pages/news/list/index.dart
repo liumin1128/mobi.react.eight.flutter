@@ -20,6 +20,7 @@ class _NewsListState extends State<NewsList> {
   @override
   Widget build(BuildContext context) {
 
+
     return QueryPro(
       document: newsSchema,
       builder: (list, loading, { VoidCallback refetch, VoidCallback fetchMore }) {
@@ -39,8 +40,8 @@ class _NewsListState extends State<NewsList> {
                   child: Container(
                     width: 16,
                     height: 16,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
+                    child: CupertinoActivityIndicator(
+                      // strokeWidth: 2,
                     )
                   )
                 )
@@ -68,16 +69,20 @@ class _NewsListState extends State<NewsList> {
                               softWrap: true,
                               overflow: TextOverflow.ellipsis, 
                               maxLines: 2,
-                              style: const TextStyle(
-                                fontSize: 18.0,
-                                color: Colors.black87,
-                              )
+                              // style: const TextStyle(
+                              //   fontSize: 18.0,
+                              //   color: Colors.black87,
+                              // )
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Text(data['appName'], style: const TextStyle(fontSize: 14.0, color: Colors.black38)),
-                                Text(createdAt, style: const TextStyle(fontSize: 14.0, color: Colors.black38)),
+                                Text(data['appName']
+                                // , style: const TextStyle(fontSize: 14.0, color: Colors.black38)
+                                ),
+                                Text(createdAt, 
+                                // style: const TextStyle(fontSize: 14.0, color: Colors.black38)
+                                ),
                               ],
                             )
                         ],)

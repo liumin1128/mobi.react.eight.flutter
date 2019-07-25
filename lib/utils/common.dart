@@ -73,3 +73,15 @@ getSmallImg(url, propsX, propsY) {
   var y = propsY == null ? 200 : propsY;
   return "${url}?imageMogr2/thumbnail/!${x}x${y}r/gravity/Center/crop/${x}x${y}";
 }
+
+
+//  new CupertinoRefreshControl(onRefresh: () {
+//           return new Future<void>.delayed(const Duration(seconds: 1))
+//             ..then((_) => setState(() {
+//               if (flag) {
+//                 flag = false;
+//               } else {
+//                 flag = true;
+//               }
+//             }));
+//         })

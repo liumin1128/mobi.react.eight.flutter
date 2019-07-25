@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
@@ -58,20 +60,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
     return  new StoreProvider<int>(
       store: store,
       child: GraphQLProvider(
         client: client,
-        child: MaterialApp(
 
-          theme: ThemeData(
+        child: CupertinoApp(
+          theme: CupertinoThemeData(
             // primaryColor: Colors.pink,
             brightness: Brightness.light,
             primaryColor: Colors.pink[400],
-            accentColor: Colors.pink[400],
+            // accentColor: Colors.pink[400],
           ),
-
-          initialRoute: '/',
 
           routes: <String, WidgetBuilder>{
             '/': (BuildContext context) => HomePage(),
@@ -79,8 +80,31 @@ class MyApp extends StatelessWidget {
             '/register': (BuildContext context) => UserLogin(),
           },
 
-          // home: UserLogin(),
+          initialRoute: '/',
+
+
         )
+        // child: MaterialApp(
+
+        //   theme: ThemeData(
+        //     // primaryColor: Colors.pink,
+        //     brightness: Brightness.light,
+        //     primaryColor: Colors.pink[400],
+        //     accentColor: Colors.pink[400],
+        //   ),
+
+        //   initialRoute: '/',
+
+        //   routes: <String, WidgetBuilder>{
+        //     '/': (BuildContext context) => HomePage(),
+        //     '/login': (BuildContext context) => UserLogin(),
+        //     '/register': (BuildContext context) => UserLogin(),
+        //   },
+
+        //   // home: UserLogin(),
+        // )
+
+
       )
     );
   }

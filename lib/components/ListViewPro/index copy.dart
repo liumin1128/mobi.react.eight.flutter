@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 // ListViewPro 默认的实例
 class ListViewPro extends StatefulWidget {
@@ -49,40 +48,13 @@ class _ListViewProState extends State<ListViewPro> {
 
   @override
   Widget build(BuildContext context) {
-    // return new CupertinoSliverRefreshControl(
-    //   onRefresh: _onRefresh,
-    //   child: ListView.builder(
-    //     controller: _scrollController,
-    //     itemCount: widget.itemCount,
-    //     itemBuilder: widget.itemBuilder,
-    //   )
-    // );
-
-    // return ListView.builder(
-    //   controller: _scrollController,
-    //   itemCount: widget.itemCount,
-    //   itemBuilder: widget.itemBuilder,
-    // );
-
-    return CustomScrollView(
-      controller: _scrollController,
-      physics: ScrollPhysics(),
-      slivers: <Widget>[
-        CupertinoSliverNavigationBar(largeTitle: new Text('TESTING'),),
-        CupertinoSliverRefreshControl(onRefresh: _onRefresh),
-        SliverSafeArea(
-          top: true,
-          bottom: true,
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return widget.itemBuilder(context, index);
-              },
-              childCount: widget.itemCount,
-            ),
-          )
-        )
-      ],
+    return new RefreshIndicator(
+      onRefresh: _onRefresh,
+      child: ListView.builder(
+        controller: _scrollController,
+        itemCount: widget.itemCount,
+        itemBuilder: widget.itemBuilder,
+      )
     );
   }
 }
