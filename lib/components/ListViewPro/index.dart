@@ -76,9 +76,7 @@ class _ListViewProState extends State<ListViewPro> {
           bottom: true,
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return widget.itemBuilder(context, index);
-              },
+              widget.itemBuilder,
               childCount: widget.itemCount,
             ),
           )
