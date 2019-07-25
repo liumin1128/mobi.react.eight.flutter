@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../dynamic/list/main.dart';
+import '../dynamic/list/index.dart';
 import '../news/list/index.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(icon: Icon(CupertinoIcons.news,),title: Text("资讯")),
             BottomNavigationBarItem(icon: Icon(CupertinoIcons.person,),title: Text("设置")),
           ],
+          currentIndex: 1,
           activeColor: Theme.of(context).accentColor,
           // inactiveColor: Color(0xff333333),
           // backgroundColor: Color(0xfff1f1f1),
