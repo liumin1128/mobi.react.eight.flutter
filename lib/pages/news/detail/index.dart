@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:html/dom.dart' as dom;
 // import '../../../components/ListViewPro/index.dart';
 // import '../../../components/Graphql/Query/index.dart';
 import '../../../graphql/schema/news.dart';
@@ -50,27 +51,53 @@ class _NewsDetailState extends State<NewsDetail> {
 
             return new CustomScrollView(
               shrinkWrap: true,
-              // 内容
-              slivers: <Widget>[
-                new SliverPadding(
-                  padding: const EdgeInsets.all(16.0),
-                  sliver: new SliverList(
-                    delegate: new SliverChildListDelegate(
-                      <Widget>[
+              slivers: <Widget>[ 
 
-                        // 文章主体
-                        Container(
-                          child: Center(
-                            child: Column(
-                              children: <Widget>[
-                                Text(data['title']),
-                                Html(data: data['html'])
-                        ],),))
+                SliverSafeArea(
+                  top: true,
+                  bottom: true,
+                  sliver: SliverPadding(
+                    padding: const EdgeInsets.all(16.0),
+                    sliver: new SliverList(
+                      delegate: new SliverChildListDelegate(
+                        <Widget>[
 
-                      ],
+                          // 文章主体
+                          Container(
+                              child: Column(
+
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+
+                                children: <Widget>[
+                                  Text(data['title'], textAlign: TextAlign.left),
+                                  Html(data: data['html'], 
+                                    customTextAlign: (dom.Node node) {
+                                      if (node is dom.Element) {
+                                        switch (node.localName) {
+                                          case "p":
+                                            return TextAlign.justify;
+                                        }
+                                      }
+                                    },
+                                    customTextStyle: (dom.Node node, TextStyle baseStyle) {
+                                      if (node is dom.Element) {
+                                        switch (node.localName) {
+                                          case "p":
+                                            return baseStyle.merge(TextStyle(height: 1.25, fontSize: 14));
+                                        }
+                                      }
+                                      return baseStyle;
+                                    }
+                                  )
+                          ],),)
+
+                        ],
+                      ),
                     ),
                   ),
-                ),
+                )
+
               ],
             );
 
