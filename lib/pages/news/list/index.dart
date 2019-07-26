@@ -60,7 +60,10 @@ class _NewsListState extends State<NewsList> {
                     new CupertinoPageRoute(
                       builder: (context) => CupertinoPageScaffold(
                         navigationBar: CupertinoNavigationBar(
-                          middle: Text("资讯"),
+                          middle: Text(data['title'], 
+                            overflow: TextOverflow.ellipsis, 
+                            maxLines: 1,
+                          ),
                         ),
                         child: NewsDetail(id: data['_id']),
                       ),
@@ -116,15 +119,11 @@ class _NewsListState extends State<NewsList> {
                     ]
                   )
                 )
-
               );
-              
             }
           )
         );
       }
-
     );
   }
-
 }

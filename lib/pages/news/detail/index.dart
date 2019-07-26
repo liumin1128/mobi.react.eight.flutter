@@ -20,7 +20,6 @@ class _NewsDetailState extends State<NewsDetail> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
         child: Query(
           options: QueryOptions(
             document: newsDetailSchema, // this is the query string you just created
@@ -54,7 +53,7 @@ class _NewsDetailState extends State<NewsDetail> {
               // 内容
               slivers: <Widget>[
                 new SliverPadding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(16.0),
                   sliver: new SliverList(
                     delegate: new SliverChildListDelegate(
                       <Widget>[
@@ -77,7 +76,6 @@ class _NewsDetailState extends State<NewsDetail> {
 
           
           },
-        )
       )
     );
   }
