@@ -43,24 +43,43 @@ class _NewsDetailState extends State<NewsDetail> {
 
             // it can be either Map or List
             // List data = result.data['data'];
-            print(result);
-            print(result.data['data']['title']);
+            // print(result);
+            // print(result.data['data']['title']);
+            // print(result.data['data']['html']);
 
             final data = result.data['data'];
 
-            // return Html(data: data['html']);
+            return new CustomScrollView(
+              shrinkWrap: true,
+              // 内容
+              slivers: <Widget>[
+                new SliverPadding(
+                  padding: const EdgeInsets.all(20.0),
+                  sliver: new SliverList(
+                    delegate: new SliverChildListDelegate(
+                      <Widget>[
 
-            return Container(
-              child: Center(
-                child: Column(
-                  children: <Widget>[
-                    Text(data['title']),
-                    Html(data: data['html'])
-            ],),));
+                        // 文章主体
+                        Container(
+                          child: Center(
+                            child: Column(
+                              children: <Widget>[
+                                Text(data['title']),
+                                Html(data: data['html'])
+                        ],),))
+
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+
+          
           },
         )
       )
     );
   }
 
-}
+} 
