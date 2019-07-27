@@ -51,7 +51,7 @@ class _NewsListState extends State<NewsList> {
                               style: BorderStyle.none,
                             ),
                           ),
-                          backgroundColor: Colors.white,
+                          // backgroundColor: Colors.white,
                           // padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                           middle: Text(data['title'], 
                             overflow: TextOverflow.ellipsis, 
