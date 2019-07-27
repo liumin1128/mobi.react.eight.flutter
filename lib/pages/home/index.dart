@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import '../../components/Icons/Eva.dart';
 import '../dynamic/list/index.dart';
 import '../news/list/index.dart';
 
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     return CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
           items: [
-            BottomNavigationBarItem(icon: Icon(CupertinoIcons.home,),title: Text("动态")),
+            BottomNavigationBarItem(icon: Icon(EvaIcons.activityOutline,),title: Text("动态")),
             BottomNavigationBarItem(icon: Icon(CupertinoIcons.news,),title: Text("资讯")),
             BottomNavigationBarItem(icon: Icon(CupertinoIcons.person,),title: Text("设置")),
           ],
