@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         child: NewsList(),
       ),
     ),
-    
+
     Text(
       'Index 1: Business',
       // style: optionStyle,

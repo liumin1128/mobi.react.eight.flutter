@@ -69,6 +69,7 @@ class _ListViewProState extends State<ListViewPro> {
       controller: _scrollController,
       physics: ScrollPhysics(),
       slivers: <Widget>[
+
         widget.title != null 
           ? CupertinoSliverNavigationBar(
             largeTitle: new Text(widget.title),
@@ -80,18 +81,29 @@ class _ListViewProState extends State<ListViewPro> {
             )
           ) 
           : null,
+
         CupertinoSliverRefreshControl(onRefresh:_onRefresh),
+
+    
+
+    
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            widget.itemBuilder,
+            childCount: widget.itemCount,
+          ),
+        ),
+
         SliverSafeArea(
-          top: true,
+          // top: true,
           bottom: true,
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              widget.itemBuilder,
-              childCount: widget.itemCount,
-            ),
-          )
+          sliver: SliverToBoxAdapter(
+            child: Text('loading')
+          ),
         )
+        
       ],
     );
   }
 }
+ 

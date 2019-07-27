@@ -30,22 +30,22 @@ class _NewsListState extends State<NewsList> {
             title: '资讯',
             onRefresh: refetch,
             onScrollToBottom: fetchMore,
-            itemCount: list.length + 1,
+            itemCount: list.length,
             itemBuilder: (_, int index) {
 
-              if(index == list.length) return Container(
-                padding: const EdgeInsets.only(top: 16,bottom: 16),
-                child: Center(
-                  child: Container(
-                    width: 16,
-                    height: 16,
-                    child: CupertinoActivityIndicator(
-                      // strokeWidth: 2,
-                    )
-                  )
-                )
-              );
-
+              // if(index == list.length) return Container(
+              //   padding: const EdgeInsets.only(top: 16,bottom: 16),
+              //   child: Center(
+              //     child: Container(
+              //       width: 16,
+              //       height: 16,
+              //       child: CupertinoActivityIndicator(
+              //         // strokeWidth: 2,
+              //       )
+              //     )
+              //   )
+              // );
+ 
               var data = list[index];
               var cover = data['cover'] == null ? data['photos'][0] : data['cover'];
               var smallCover = cover == null ? 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz' : getSmallImg(cover, 160, 160);
