@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+
 // import 'package:flutter_html/flutter_html.dart';
 // import 'package:flutter_redux/flutter_redux.dart';
 // import 'package:redux/redux.dart';
 // import 'package:graphql_flutter/graphql_flutter.dart';
 import '../../../utils/common.dart';
+import '../../../components/Icons/Eva.dart';
 
-
+ 
 text2html(str) {
   return str;
   // .replaceAll(new RegExp(r"(.*?)\[(.*?)_(.*?)]"), '\$1<img src="https://imgs.react.mobi/emoticon/\$2/\$3.gif" class="emoji" alt="[\$2_\$3]">');
@@ -98,7 +100,7 @@ class DynamicItem extends StatelessWidget {
               children: <Widget>[
 
                 Icon(
-                  Icons.thumb_up,
+                  EvaIcons.heartOutline,
                   color: Colors.black38,
                   size: 16,
                 ),
@@ -113,7 +115,7 @@ class DynamicItem extends StatelessWidget {
                 Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
 
                 Icon(
-                  Icons.mode_comment,
+                  EvaIcons.messageCircleOutline,
                   color: Colors.black38,
                   size: 16,
                 ),
