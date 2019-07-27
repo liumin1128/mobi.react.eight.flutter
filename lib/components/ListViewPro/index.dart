@@ -84,9 +84,6 @@ class _ListViewProState extends State<ListViewPro> {
 
         CupertinoSliverRefreshControl(onRefresh:_onRefresh),
 
-    
-
-    
         SliverList(
           delegate: SliverChildBuilderDelegate(
             widget.itemBuilder,
