@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:transparent_image/transparent_image.dart';
 // import '../../../components/ListViewPro/index.dart';
 // import '../../../components/Graphql/Query/index.dart';
 import '../../../graphql/schema/news.dart';
@@ -71,7 +72,33 @@ class _NewsDetailState extends State<NewsDetail> {
 
                                 children: <Widget>[
                                   Text(data['title'], textAlign: TextAlign.left),
+
+
                                   Html(data: data['html'], 
+                                    // useRichText: false,
+                                    customRender: (node, children) {
+                                      if(node is dom.Element) {
+                                        switch(node.localName) {
+                                          case 'img': {
+                                            return ClipRRect(
+                                              borderRadius: BorderRadius.circular(4),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.black12
+                                                ),
+                                                child: FadeInImage.memoryNetwork(
+                                                  placeholder: kTransparentImage,
+                                                  image: node.attributes['src'],
+                                                )
+                                              )
+                                            );
+                                          }
+                                          // case "video": return Chewie(...);
+                                          // case "custom_tag": return CustomWidget(...);
+                                        }
+                                      }
+                                    },
+
                                     customTextAlign: (dom.Node node) {
                                       if (node is dom.Element) {
                                         switch (node.localName) {
@@ -80,6 +107,7 @@ class _NewsDetailState extends State<NewsDetail> {
                                         }
                                       }
                                     },
+
                                     customTextStyle: (dom.Node node, TextStyle baseStyle) {
                                       if (node is dom.Element) {
                                         switch (node.localName) {
@@ -90,6 +118,8 @@ class _NewsDetailState extends State<NewsDetail> {
                                       return baseStyle;
                                     }
                                   )
+
+
                           ],),)
 
                         ],
