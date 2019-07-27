@@ -48,13 +48,13 @@ class DynamicItem extends StatelessWidget {
         //   },
         // ),
 
-        new ListTile(
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage(data['user']['avatarUrl']),
-          ),
-          title: Text(data['user']['nickname']),
-          subtitle: Text(RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])))),
-        ),
+        // new ListTile(
+        //   leading: CircleAvatar(
+        //     backgroundImage: NetworkImage(data['user']['avatarUrl']),
+        //   ),
+        //   title: Text(data['user']['nickname']),
+        //   subtitle: Text(RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])))),
+        // ),
 
         // Html(data: text2html(data['content'])),
 
@@ -96,9 +96,9 @@ class DynamicItem extends StatelessWidget {
               Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
               Text(data['zanCount'].toString(),
                   style: Theme.of(context)
-                .textTheme
-                .body1
-                .copyWith(color: Colors.black38, fontSize: 16)
+                    .textTheme
+                    .body1
+                    .copyWith(color: Colors.black38, fontSize: 16)
               ),
 
 

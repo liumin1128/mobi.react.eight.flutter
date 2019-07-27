@@ -16,11 +16,7 @@ class _DynamicListState extends State<DynamicList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('动态'),
-      ),
-      body: Container(
+    return Container(
         child: Query(
           options: QueryOptions(
             document: dynamics, // this is the query string you just created
@@ -51,8 +47,7 @@ class _DynamicListState extends State<DynamicList> {
               },
             );
           },
-        ),
-      ),
+        )
 
 
       // floatingActionButton: FloatingActionButton(
