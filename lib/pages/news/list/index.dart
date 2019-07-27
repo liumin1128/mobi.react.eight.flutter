@@ -42,9 +42,9 @@ class _NewsListState extends State<NewsList> {
               return GestureDetector(
                 
                 onTap: () {
-                  Navigator.push(
-                    context,
+                  Navigator.of(context,rootNavigator: true).push(
                     new CupertinoPageRoute(
+                      // fullscreenDialog: true,
                       builder: (context) => CupertinoPageScaffold(
                         navigationBar: CupertinoNavigationBar(
                           middle: Text(data['title'], 
