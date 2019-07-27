@@ -70,9 +70,9 @@ class MyApp extends StatelessWidget {
 
           theme: CupertinoThemeData(
             brightness: Brightness.light,
-            primaryColor: Colors.pink[400],
-            scaffoldBackgroundColor: Colors.white,
-            primaryContrastingColor: Colors.pink[400],
+            primaryColor: Colors.pink,
+            // scaffoldBackgroundColor: Colors.white,
+            // primaryContrastingColor: Colors.pink[400],
           ),
 
           routes: <String, WidgetBuilder>{
