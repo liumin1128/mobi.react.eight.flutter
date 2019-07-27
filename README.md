@@ -34,3 +34,7 @@ https://api.flutter.dev/flutter/cupertino/cupertino-library.html
 flutter 导入icon
 
 https://segmentfault.com/a/1190000019750283
+
+tab页切换，tab隐藏
+
+https://www.jianshu.com/p/1b02cbb32bdc?utm_source=desktop&utm_medium=timeline

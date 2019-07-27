@@ -37,16 +37,22 @@ class _NewsListState extends State<NewsList> {
               var data = list[index];
               var cover = data['cover'] == null ? data['photos'][0] : data['cover'];
               var smallCover = cover == null ? 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz' : getSmallImg(cover, 160, 160);
-              var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
+              var createdAt = RelativeDateFormat.format(DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
 
               return GestureDetector(
                 
                 onTap: () {
                   Navigator.of(context,rootNavigator: true).push(
-                    new CupertinoPageRoute(
-                      // fullscreenDialog: true,
+                    CupertinoPageRoute(
                       builder: (context) => CupertinoPageScaffold(
                         navigationBar: CupertinoNavigationBar(
+                          border: Border(
+                            top: BorderSide(
+                              style: BorderStyle.none,
+                            ),
+                          ),
+                          backgroundColor: Colors.white,
+                          // padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                           middle: Text(data['title'], 
                             overflow: TextOverflow.ellipsis, 
                             maxLines: 1,
@@ -59,14 +65,13 @@ class _NewsListState extends State<NewsList> {
                 },
                 
                 child: Container(
-                  decoration: new BoxDecoration(),
+                  decoration: BoxDecoration(),
                   padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
                   child: Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
               
-
                       Container(
                         width: 80,
                         height: 80,
