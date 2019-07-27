@@ -23,28 +23,16 @@ class _NewsListState extends State<NewsList> {
       document: newsSchema,
       builder: (list, loading, { VoidCallback refetch, VoidCallback fetchMore }) {
 
-        if(list.length == 0 && loading) return Text('Loading');
+        if(list.length == 0 && loading) return Center( child: Container( width: 16, height: 16, child: CupertinoActivityIndicator( ) ) );
 
         return Container(
           child: ListViewPro(
+            
             title: '资讯',
             onRefresh: refetch,
             onScrollToBottom: fetchMore,
             itemCount: list.length,
             itemBuilder: (_, int index) {
-
-              // if(index == list.length) return Container(
-              //   padding: const EdgeInsets.only(top: 16,bottom: 16),
-              //   child: Center(
-              //     child: Container(
-              //       width: 16,
-              //       height: 16,
-              //       child: CupertinoActivityIndicator(
-              //         // strokeWidth: 2,
-              //       )
-              //     )
-              //   )
-              // );
  
               var data = list[index];
               var cover = data['cover'] == null ? data['photos'][0] : data['cover'];

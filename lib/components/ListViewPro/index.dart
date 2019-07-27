@@ -98,7 +98,19 @@ class _ListViewProState extends State<ListViewPro> {
           // top: true,
           bottom: true,
           sliver: SliverToBoxAdapter(
-            child: Text('loading')
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              // child: Text('loading more...', textAlign: TextAlign.center)
+              child: Center(
+                child: Container(
+                  width: 16,
+                  height: 16,
+                  child: CupertinoActivityIndicator(
+                    // strokeWidth: 2,
+                  )
+                )
+              )
+            )
           ),
         )
         
