@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:transparent_image/transparent_image.dart';
-// import 'package:transparent_image/transparent_image.dart';
-// import 'package:graphql_flutter/graphql_flutter.dart';
 import '../../../components/ListViewPro/index.dart';
 import '../../../components/Graphql/Query/index.dart';
 import '../../../graphql/schema/news.dart';
@@ -67,17 +65,26 @@ class _NewsListState extends State<NewsList> {
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+              
+
                       Container(
                         width: 80,
                         height: 80,
-                        decoration: new BoxDecoration(
-                          color: Colors.black12
+                        
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black12
+                            ),
+                            child: FadeInImage.memoryNetwork(
+                              placeholder: kTransparentImage,
+                              image: smallCover,
+                            )
+                          )
                         ),
-                        child: FadeInImage.memoryNetwork(
-                          placeholder: kTransparentImage,
-                          image: smallCover,
-                        )
                       ),
+
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(16,0,0,0),
