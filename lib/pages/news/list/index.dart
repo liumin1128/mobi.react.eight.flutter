@@ -69,6 +69,9 @@ class _NewsListState extends State<NewsList> {
                       Container(
                         width: 80,
                         height: 80,
+                        decoration: new BoxDecoration(
+                          color: Colors.black12
+                        ),
                         child: FadeInImage.memoryNetwork(
                           placeholder: kTransparentImage,
                           image: smallCover,
