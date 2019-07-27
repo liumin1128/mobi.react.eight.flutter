@@ -69,7 +69,17 @@ class _ListViewProState extends State<ListViewPro> {
       controller: _scrollController,
       physics: ScrollPhysics(),
       slivers: <Widget>[
-        widget.title != null ? CupertinoSliverNavigationBar(largeTitle: new Text(widget.title),) : null,
+        widget.title != null 
+          ? CupertinoSliverNavigationBar(
+            largeTitle: new Text(widget.title),
+            backgroundColor: Colors.white,
+            border: Border(
+              top: BorderSide(
+                style: BorderStyle.none,
+              ),
+            )
+          ) 
+          : null,
         CupertinoSliverRefreshControl(onRefresh:_onRefresh),
         SliverSafeArea(
           top: true,

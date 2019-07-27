@@ -53,11 +53,14 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(icon: Icon(CupertinoIcons.person,),title: Text("设置")),
           ],
           currentIndex: 1,
-          activeColor: Theme.of(context).accentColor,
-          // inactiveColor: Color(0xff333333),
-          // backgroundColor: Color(0xfff1f1f1),
-          // iconSize: 25.0,
+          // 隐藏CupertinoTabBar上边
+          border: Border(
+            top: BorderSide(
+              style: BorderStyle.none,
+            ),
+          )
         ),
+
         tabBuilder: (context, index) {
           return CupertinoTabView(
             builder: (context) {

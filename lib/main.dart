@@ -67,18 +67,18 @@ class MyApp extends StatelessWidget {
         client: client,
 
         child: CupertinoApp(
+
           theme: CupertinoThemeData(
-            // primaryColor: Colors.pink,
             brightness: Brightness.light,
             primaryColor: Colors.pink[400],
-            // accentColor: Colors.pink[400],
+            scaffoldBackgroundColor: Colors.white,
+            primaryContrastingColor: Colors.pink[400],
           ),
 
           routes: <String, WidgetBuilder>{
             '/': (BuildContext context) => HomePage(),
             '/login': (BuildContext context) => UserLogin(),
             '/register': (BuildContext context) => UserLogin(),
-            // '/news/detail': CupertinoPageRoute(builder: (BuildContext context) => Text('xxx'))
           },
 
           initialRoute: '/',
