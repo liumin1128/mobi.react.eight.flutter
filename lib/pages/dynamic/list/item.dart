@@ -43,7 +43,7 @@ class DynamicItem extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white
       ),
-      margin: const EdgeInsets.only(bottom: 8),
+      // margin: const EdgeInsets.only(bottom: 8),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -132,11 +132,11 @@ class DynamicItem extends StatelessWidget {
 
 
 
-          // Container(
-          //   color: Color.fromRGBO(0, 0, 0, 0.05),
-          //   height: 8,
-          //   margin: const EdgeInsets.only(top: 16),
-          // ),
+          Container(
+            color: Color.fromRGBO(0, 0, 0, 0.05),
+            height: 8,
+            margin: const EdgeInsets.only(top: 16),
+          ),
           
       
         ],
