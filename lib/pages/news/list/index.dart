@@ -42,6 +42,7 @@ class _NewsListState extends State<NewsList> {
               var createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
 
               return GestureDetector(
+                
                 onTap: () {
                   Navigator.push(
                     context,
@@ -83,16 +84,17 @@ class _NewsListState extends State<NewsList> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(data['title'], softWrap: true, overflow: TextOverflow.ellipsis, maxLines: 2),
+                              Text(data['title'], 
+                                maxLines: 2,
+                                softWrap: true, 
+                                overflow: TextOverflow.ellipsis, 
+                                style: Theme.of(context).textTheme.title.copyWith(fontWeight: FontWeight.normal)
+                              ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  Text(data['appName']
-                                  // , style: const TextStyle(fontSize: 14.0, color: Colors.black38)
-                                  ),
-                                  Text(createdAt, 
-                                  // style: const TextStyle(fontSize: 14.0, color: Colors.black38)
-                                  ),
+                                  Text(data['appName'], style: Theme.of(context).textTheme.caption),
+                                  Text(createdAt, style: Theme.of(context).textTheme.caption),
                                 ],
                               )
                           ],)
