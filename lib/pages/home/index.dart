@@ -21,13 +21,19 @@ class _HomePageState extends State<HomePage> {
 
     CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text("资讯22"),
+        middle: Text("动态"),
         border: Border(
           top: BorderSide(
             style: BorderStyle.none,
           ),
         ),
-        backgroundColor: Colors.white,
+        trailing: CupertinoButton(
+          onPressed: () {},
+          child: Icon(CupertinoIcons.add),
+          padding: const EdgeInsets.all(0)
+        )
+        // trailing: Icon(CupertinoIcons.add)
+        // backgroundColor: Colors.white,
       ),
       child: Center(
         child: DynamicList(),
