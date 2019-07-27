@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
           theme: CupertinoThemeData(
             brightness: Brightness.light,
             primaryColor: Colors.pink,
-            scaffoldBackgroundColor: Colors.white70,
+            scaffoldBackgroundColor: Color(0xD0FFFFFF),
             // primaryContrastingColor: Colors.pink[400],
           ),
 
