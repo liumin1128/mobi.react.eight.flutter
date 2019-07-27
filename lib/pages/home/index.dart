@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(icon: Icon(CupertinoIcons.game_controller,),title: Text("资讯")),
             BottomNavigationBarItem(icon: Icon(CupertinoIcons.person,),title: Text("设置")),
           ],
-          currentIndex: 1,
+          currentIndex: 0,
           // 隐藏CupertinoTabBar上边
           border: Border(
             top: BorderSide(

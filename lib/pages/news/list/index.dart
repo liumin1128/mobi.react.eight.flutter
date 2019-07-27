@@ -38,7 +38,7 @@ class _NewsListState extends State<NewsList> {
               var cover = data['cover'] == null ? data['photos'][0] : data['cover'];
               var smallCover = cover == null ? 'https://imgs.react.mobi/FldU5XAVJksEDNDEs7MZiF36DMAz' : getSmallImg(cover, 160, 160);
               var createdAt = RelativeDateFormat.format(DateTime.fromMicrosecondsSinceEpoch(data['createdAt']));
-
+ 
               return GestureDetector(
                 
                 onTap: () {

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-// import 'package:flutter_redux/flutter_redux.dart';
 import './item.dart';
 import '../../../graphql/schema/dynamic.dart';
-// import '../../../store/actions.dart';
 
 class DynamicList extends StatefulWidget {
   DynamicList({ Key key, this.title }) : super(key: key);
@@ -49,27 +47,6 @@ class _DynamicListState extends State<DynamicList> {
           },
         )
 
-
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => {
-      //   },
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
-
-
-      // floatingActionButton: new StoreConnector<int, VoidCallback>(
-      //   converter: (store) {
-      //     return () => store.dispatch(DynamicActions.Increment);
-      //   },
-      //   builder: (context, callback) {
-      //     return new FloatingActionButton(
-      //       onPressed: callback,
-      //       tooltip: 'Increment',
-      //       child: new Icon(Icons.add),
-      //     );
-      //   },
-      // ),
     );
   }
 }

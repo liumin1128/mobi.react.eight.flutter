@@ -32,31 +32,38 @@ List<Widget> getPicturesList(pictures) {
 class DynamicItem extends StatelessWidget {
   DynamicItem({ this.data });
   final data;
+
+  
   @override
   Widget build(BuildContext context) {
+
+    final createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])));
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
 
-        // new StoreConnector<int, String>(
-        //   converter: (store) => store.state.toString(),
-        //   builder: (context, count) {
-        //     return new Text(
-        //       count,
-        //       style: Theme.of(context).textTheme.display1,
-        //     );
-        //   },
-        // ),
-
-        // new ListTile(
-        //   leading: CircleAvatar(
-        //     backgroundImage: NetworkImage(data['user']['avatarUrl']),
-        //   ),
-        //   title: Text(data['user']['nickname']),
-        //   subtitle: Text(RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])))),
-        // ),
-
-        // Html(data: text2html(data['content'])),
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(data['user']['avatarUrl']),
+                  ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Text(data['user']['nickname'], style: Theme.of(context).textTheme.body2),
+                  Text(createdAt, style: Theme.of(context).textTheme.caption),
+                ],
+              )
+          ],)
+        ),
 
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
