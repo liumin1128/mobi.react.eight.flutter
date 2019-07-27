@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import '../../components/Icons/Eva.dart';
 import '../dynamic/list/index.dart';
+import '../user/me/index.dart';
 import '../news/list/index.dart';
 
 class HomePage extends StatefulWidget {
@@ -49,10 +50,7 @@ class _HomePageState extends State<HomePage> {
       ),
     ),
 
-    Text(
-      'Index 1: Business',
-      // style: optionStyle,
-    ),
+    UserMe(),
   ];
 
   @override
