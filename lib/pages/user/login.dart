@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import '../../graphql/schema/user.dart';
+import 'package:reactmobi/graphql/schema/user.dart';
 
 class UserLogin extends StatefulWidget {
   @override

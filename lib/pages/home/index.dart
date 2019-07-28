@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import '../../components/Icons/Eva.dart';
-import '../dynamic/list/index.dart';
-import '../user/me/index.dart';
-import '../news/list/index.dart';
+import 'package:reactmobi/pages/dynamic/list/index.dart';
+import 'package:reactmobi/pages/user/me/index.dart';
+import 'package:reactmobi/pages/news/list/index.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);

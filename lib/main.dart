@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import './pages/user/login.dart';
-import './pages/home/index.dart';
-import './store/actions.dart';
+import 'package:reactmobi/pages/user/login.dart';
+import 'package:reactmobi/pages/home/index.dart';
+import 'package:reactmobi/store/actions.dart';
 
 int counterReducer(int state, dynamic action) {
   if (action == DynamicActions.Increment) {

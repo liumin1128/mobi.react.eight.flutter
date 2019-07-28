@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../login.dart';
+import 'package:reactmobi/pages/user/login.dart';
 
 class UserMe extends StatefulWidget {
   UserMe({Key key, this.title}) : super(key: key);
@@ -28,14 +28,12 @@ class _UserMeState extends State<UserMe> {
                 padding: const EdgeInsets.all(16),
                 child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Theme.of(context).primaryColorLight),
+                      border: Border.all(color: Theme.of(context).primaryColorLight),
                       borderRadius: BorderRadius.all(Radius.circular(32.0)),
                     ),
                     child: Container(
                         child: CupertinoButton(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(32.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(32.0)),
                             // color: Theme.of(context).primaryColor,
                             onPressed: () {
                               Navigator.of(context, rootNavigator: true).push(

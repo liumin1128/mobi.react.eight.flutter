@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:transparent_image/transparent_image.dart';
-import '../../../components/ListViewPro/index.dart';
-import '../../../components/Graphql/Query/index.dart';
-import '../../../graphql/schema/news.dart';
-import '../../../utils/common.dart';
-import '../detail/index.dart';
+import 'package:reactmobi/components/ListViewPro/index.dart';
+import 'package:reactmobi/components/Graphql/Query/index.dart';
+import 'package:reactmobi/graphql/schema/news.dart';
+import 'package:reactmobi/utils/common.dart';
+import 'package:reactmobi/pages/news/detail/index.dart';
 
 class NewsList extends StatefulWidget {
   @override
