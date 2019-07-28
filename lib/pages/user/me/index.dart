@@ -16,7 +16,7 @@ class _UserMeState extends State<UserMe> {
       physics: ScrollPhysics(),
       slivers: <Widget>[
         CupertinoSliverNavigationBar(
-            largeTitle: Text('xxxxxx'),
+            largeTitle: Text('我的'),
             border: Border(
               top: BorderSide(
                 style: BorderStyle.none,
@@ -27,14 +27,38 @@ class _UserMeState extends State<UserMe> {
                 padding: const EdgeInsets.all(16),
                 child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: Theme.of(context).buttonColor),
+                      border: Border.all(
+                          color: Theme.of(context).primaryColorLight),
                       borderRadius: BorderRadius.all(Radius.circular(32.0)),
                     ),
                     child: Container(
                         child: CupertinoButton(
-                            // borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(32.0)),
                             // color: Theme.of(context).primaryColor,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context, rootNavigator: true).push(
+                                CupertinoPageRoute(
+                                  fullscreenDialog: true,
+                                  builder: (context) => CupertinoPageScaffold(
+                                    navigationBar: CupertinoNavigationBar(
+                                      border: Border(
+                                        top: BorderSide(
+                                          style: BorderStyle.none,
+                                        ),
+                                      ),
+                                      // backgroundColor: Colors.white,
+                                      middle: Text(
+                                        '登录',
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                    child: Center(child: Text('1111')),
+                                  ),
+                                ),
+                              );
+                            },
                             child: Text('立即登录')))))),
         SliverSafeArea(
           // top: true,
