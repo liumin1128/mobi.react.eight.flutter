@@ -41,15 +41,13 @@ class _UserLoginWithClientState extends State<UserLoginWithClient> {
   }
 
   Future<void> loginWithPassword(String username, String password) async {
-    final QueryResult res = await widget.client.mutate(
-      MutationOptions(
-        document: userLogin,
-        variables: {
-          'username': username,
-          'password': password
-        },
-      ),
-    );
+    final QueryResult res = await widget.client.mutate(MutationOptions(
+      document: userLogin,
+      variables: {
+        'username': username,
+        'password': password
+      },
+    ));
 
     if (res.hasErrors) return;
 
@@ -74,20 +72,22 @@ class _UserLoginWithClientState extends State<UserLoginWithClient> {
         CupertinoTextField(controller: _phone),
         CupertinoTextField(controller: _code),
         CupertinoButton(
-            child: Text('获取验证码'),
-            onPressed: () {
-              print('phone.text');
-              print(_phone.text);
-            }),
+          child: Text('获取验证码'),
+          onPressed: () {
+            print('phone.text');
+            print(_phone.text);
+          },
+        ),
         CupertinoTextField(controller: _username),
         CupertinoTextField(controller: _password),
         CupertinoButton(
-            child: Text('登录'),
-            onPressed: () {
-              String username = _username.text;
-              String password = _password.text;
-              loginWithPassword(username, password);
-            }),
+          child: Text('登录'),
+          onPressed: () {
+            String username = _username.text;
+            String password = _password.text;
+            loginWithPassword(username, password);
+          },
+        ),
       ],
     )));
   }
