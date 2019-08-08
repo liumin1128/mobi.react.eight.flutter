@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:reactmobi/pages/user/login.dart';
 import 'package:reactmobi/pages/home/index.dart';
-import 'package:reactmobi/test/fish/index.dart';
+// import 'package:reactmobi/test/fish/index.dart';
 
 Future<void> main() async {
   final HttpLink httpLink = HttpLink(
@@ -37,8 +37,8 @@ Future<void> main() async {
 
   // final store = new Store<int>(counterReducer, initialState: 0);
 
-  // runApp(MyApp(client: client));
-  runApp(FishSimpleDemo());
+  runApp(MyApp(client: client));
+  // runApp(FishSimpleDemo());
 }
 
 class MyApp extends StatelessWidget {
