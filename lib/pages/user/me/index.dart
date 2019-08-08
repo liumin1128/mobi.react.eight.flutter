@@ -12,11 +12,11 @@ class UserMe extends StatelessWidget {
         'main': MainPage(),
       },
     );
-    return MaterialApp(
+    return CupertinoApp(
       title: 'Simple',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: CupertinoThemeData(
+        primaryColor: Colors.blue,
       ),
       home: routes.buildPage('main', null),
     );

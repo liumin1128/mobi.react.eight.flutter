@@ -6,17 +6,22 @@ import 'state.dart';
 
 Widget buildView(PageState state, Dispatch dispatch, ViewService viewService) {
   println('view: buildView');
-  return Scaffold(
-    appBar: AppBar(title: Text(state.title)),
-    body: Center(
+  return CupertinoPageScaffold(
+    navigationBar: CupertinoNavigationBar(
+        middle: Text("我"),
+        border: Border(
+          top: BorderSide(
+            style: BorderStyle.none,
+          ),
+        ),
+        trailing: CupertinoButton(
+            onPressed: () {
+              dispatch(PageActionCreator.update('Say', 'Hello, fish redux'));
+            },
+            child: Icon(CupertinoIcons.add),
+            padding: const EdgeInsets.all(0))),
+    child: Center(
       child: Text(state.content),
-    ),
-    floatingActionButton: FloatingActionButton(
-      onPressed: () {
-        //点击按钮发送意图
-        dispatch(PageActionCreator.update('Say', 'Hello, fish redux'));
-      },
-      child: Icon(Icons.edit),
     ),
   );
 }
