@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import './page.dart';
+import 'page.dart';
 
 class FishSimpleDemo extends StatelessWidget {
   @override

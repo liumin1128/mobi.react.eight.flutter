@@ -2,10 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'action.dart';
-import 'effect.dart';
-import 'reducer.dart';
 import 'state.dart';
-import 'view.dart';
 
 Widget buildView(PageState state, Dispatch dispatch, ViewService viewService) {
   println('view: buildView');
