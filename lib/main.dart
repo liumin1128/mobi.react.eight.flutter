@@ -2,18 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
 import 'package:reactmobi/pages/user/login.dart';
 import 'package:reactmobi/pages/home/index.dart';
-import 'package:reactmobi/store/actions.dart';
-
-int counterReducer(int state, dynamic action) {
-  if (action == DynamicActions.Increment) {
-    return state + 1;
-  }
-  return state;
-}
+import 'package:reactmobi/test/fish/index.dart';
 
 Future<void> main() async {
   final HttpLink httpLink = HttpLink(
@@ -44,9 +35,10 @@ Future<void> main() async {
     ),
   );
 
-  final store = new Store<int>(counterReducer, initialState: 0);
+  // final store = new Store<int>(counterReducer, initialState: 0);
 
-  runApp(MyApp(client: client, store: store));
+  // runApp(MyApp(client: client));
+  runApp(FishSimpleDemo());
 }
 
 class MyApp extends StatelessWidget {
@@ -56,44 +48,42 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new StoreProvider<int>(
-        store: store,
-        child: GraphQLProvider(
-            client: client,
-            child: CupertinoApp(
-              theme: CupertinoThemeData(
-                brightness: Brightness.light,
-                primaryColor: Colors.pink,
-                // scaffoldBackgroundColor: Color(0xD0FFFFFF),
-                // primaryContrastingColor: Colors.pink[400],
-              ),
-              routes: <String, WidgetBuilder>{
-                '/': (BuildContext context) => HomePage(),
-                '/login': (BuildContext context) => UserLogin(),
-                '/register': (BuildContext context) => UserLogin(),
-              },
-              initialRoute: '/',
-            )
-            // child: MaterialApp(
+    return GraphQLProvider(
+        client: client,
+        child: CupertinoApp(
+          theme: CupertinoThemeData(
+            brightness: Brightness.light,
+            primaryColor: Colors.pink,
+            // scaffoldBackgroundColor: Color(0xD0FFFFFF),
+            // primaryContrastingColor: Colors.pink[400],
+          ),
+          routes: <String, WidgetBuilder>{
+            '/': (BuildContext context) => HomePage(),
+            '/login': (BuildContext context) => UserLogin(),
+            '/register': (BuildContext context) => UserLogin(),
+          },
+          initialRoute: '/',
+        )
+        // child: MaterialApp(
 
-            //   theme: ThemeData(
-            //     // primaryColor: Colors.pink,
-            //     brightness: Brightness.light,
-            //     primaryColor: Colors.pink[400],
-            //     accentColor: Colors.pink[400],
-            //   ),
+        //   theme: ThemeData(
+        //     // primaryColor: Colors.pink,
+        //     brightness: Brightness.light,
+        //     primaryColor: Colors.pink[400],
+        //     accentColor: Colors.pink[400],
+        //   ),
 
-            //   initialRoute: '/',
+        //   initialRoute: '/',
 
-            //   routes: <String, WidgetBuilder>{
-            //     '/': (BuildContext context) => HomePage(),
-            //     '/login': (BuildContext context) => UserLogin(),
-            //     '/register': (BuildContext context) => UserLogin(),
-            //   },
+        //   routes: <String, WidgetBuilder>{
+        //     '/': (BuildContext context) => HomePage(),
+        //     '/login': (BuildContext context) => UserLogin(),
+        //     '/register': (BuildContext context) => UserLogin(),
+        //   },
 
-            //   // home: UserLogin(),
-            // )
+        //   // home: UserLogin(),
+        // )
 
-            ));
+        );
   }
 }
