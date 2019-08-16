@@ -123,7 +123,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
   void initState() {
     super.initState();
     _phone = TextEditingController(text: '18629974148');
-    _code = TextEditingController(text: 'code');
+    // _code = TextEditingController(text: '');
 
     _username = TextEditingController(text: '18629974148');
     _password = TextEditingController(text: '123456');
@@ -131,7 +131,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
     _countryCode = '+86';
   }
 
-  Future<void> loginWithPassword(String username, String password) async {
+  Future<void> _loginWithPassword(String username, String password) async {
     final QueryResult res = await widget.client.mutate(MutationOptions(
       document: userLogin,
       variables: {
@@ -150,6 +150,29 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
       print('用户名密码错误');
     } else {
       print('登录失败');
+    }
+  }
+
+  Future<void> _getPhoneCode(String purePhoneNumber, String countryCode) async {
+    print(purePhoneNumber);
+    print(countryCode);
+    final QueryResult res = await widget.client.mutate(MutationOptions(
+      document: getPhoneNumberCode,
+      variables: {
+        'purePhoneNumber': purePhoneNumber,
+        'countryCode': countryCode
+      },
+    ));
+
+    if (res.hasErrors) return;
+
+    final data = res.data['result'];
+
+    if (data['status'] == 200) {
+      // showCupertinoAlert()
+      print('获取验证码成功');
+    } else {
+      print('获取验证码失败');
     }
   }
 
@@ -211,7 +234,9 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
               ),
               suffix: CupertinoButton(
                 child: Text('获取验证码'),
-                onPressed: () {},
+                onPressed: () {
+                  _getPhoneCode(_phone.text, _countryCode);
+                },
               ),
             ),
             Padding(padding: EdgeInsets.all(16)),
@@ -230,7 +255,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
             //   onPressed: () {
             //     String username = _username.text;
             //     String password = _password.text;
-            //     loginWithPassword(username, password);
+            //     _loginWithPassword(username, password);
             //   },
             // ),
           ],
