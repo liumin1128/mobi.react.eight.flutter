@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:reactmobi/pages/dynamic/list/index.dart';
 import 'package:reactmobi/pages/user/me/index.dart';
 import 'package:reactmobi/pages/news/list/index.dart';
+// import 'package:reactmobi/pages/user/login.dart';
+import 'package:reactmobi/pages/user/login/phone/index.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -38,6 +41,25 @@ class _HomePageState extends State<HomePage> {
       child: Center(
         child: NewsList(),
       ),
+    ),
+    CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        backgroundColor: Colors.white,
+        border: Border(
+          top: BorderSide(
+            style: BorderStyle.none,
+          ),
+        ),
+        middle: Text(
+          '登录',
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+          style: new TextStyle(
+            fontSize: 20,
+          ),
+        ),
+      ),
+      child: UserPhoneLogin(),
     ),
     UserMe(),
   ];
