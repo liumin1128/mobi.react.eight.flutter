@@ -1,6 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Action;
 import 'action.dart';
 import 'state.dart';
 
@@ -38,6 +38,12 @@ Widget buildView(PageState state, Dispatch dispatch, ViewService viewService) {
           child: Text('onTest'),
           onPressed: () {
             dispatch(PageActionCreator.onTest());
+          },
+        ),
+        CupertinoButton(
+          child: Text('onShowLoginPage'),
+          onPressed: () {
+            dispatch(PageActionCreator.onShowLoginPage());
           },
         ),
       ],
