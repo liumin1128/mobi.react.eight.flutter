@@ -33,7 +33,31 @@ void _onTest(Action action, Context<PageState> ctx) async {
   ctx.dispatch(PageActionCreator.update('_onTest1111', '_onTest2222'));
 }
 
-void _onShowLoginPage(Action action, Context<PageState> ctx) async {}
+void _onShowLoginPage(Action action, Context<PageState> ctx) async {
+  ctx.dispatch(PageActionCreator.update('_onTest1111', '_onTest2222'));
+
+  Navigator.of(ctx.context, rootNavigator: true).push(
+    CupertinoPageRoute(
+      fullscreenDialog: true,
+      builder: (context) => CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          border: Border(
+            top: BorderSide(
+              style: BorderStyle.none,
+            ),
+          ),
+          // backgroundColor: Colors.white,
+          middle: Text(
+            '登录',
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ),
+        ),
+        child: UserLogin(),
+      ),
+    ),
+  );
+}
 
 // class MessageComponent extends Component<String> {
 //     MessageComponent(): super(
