@@ -177,19 +177,16 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
               prefix: new GestureDetector(
                 onTap: () {
                   showCupertinoPicker(context, (val) {
-                    print(val);
-                    print(val);
-                    print(val);
                     setState(() {
                       _countryCode = val;
                     });
                   });
                 },
                 child: new Container(
-                  // color: Colors.yellow,
+                  padding: const EdgeInsets.only(right: 16),
                   child: new Text(
                     _countryCode,
-                    style: new TextStyle(fontSize: 24),
+                    style: new TextStyle(fontSize: 24, color: Colors.black38),
                   ),
                 ),
               ),
