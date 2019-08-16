@@ -18,7 +18,7 @@ void showCupertinoPicker(BuildContext context, onChange) {
         child: FutureBuilder(
           future: DefaultAssetBundle.of(context).loadString('assets/config/countries.json'),
           builder: (context, snapshot) {
-            if (!snapshot.hasData) return Center(child: Text('loading'));
+            if (!snapshot.hasData) return Center(child: Container(width: 16, height: 16, child: CupertinoActivityIndicator()));
             if (snapshot.hasError) return Text('error');
 
             var countries = json.decode(snapshot.data.toString());
@@ -163,9 +163,13 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
           children: <Widget>[
             CupertinoTextField(
               controller: _phone,
+              placeholder: '输入手机号',
               autofocus: true,
               keyboardType: TextInputType.phone,
-              style: new TextStyle(fontSize: 24),
+              style: new TextStyle(
+                fontSize: 22,
+                color: Colors.black87,
+              ),
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
@@ -183,10 +187,10 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                   });
                 },
                 child: new Container(
-                  padding: const EdgeInsets.only(right: 16),
+                  padding: const EdgeInsets.only(right: 8),
                   child: new Text(
                     _countryCode,
-                    style: new TextStyle(fontSize: 24, color: Colors.black38),
+                    style: new TextStyle(fontSize: 24),
                   ),
                 ),
               ),
@@ -204,6 +208,10 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     color: Colors.black12,
                   ),
                 ),
+              ),
+              suffix: CupertinoButton(
+                child: Text('获取验证码'),
+                onPressed: () {},
               ),
             ),
             Padding(padding: EdgeInsets.all(16)),
