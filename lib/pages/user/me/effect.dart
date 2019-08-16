@@ -41,16 +41,21 @@ void _onShowLoginPage(Action action, Context<PageState> ctx) async {
       fullscreenDialog: true,
       builder: (context) => CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
+          backgroundColor: Colors.white,
           border: Border(
             top: BorderSide(
               style: BorderStyle.none,
             ),
           ),
-          // backgroundColor: Colors.white,
+          // leading: Icon(CupertinoIcons.back),
+          leading: CupertinoNavigationBarBackButton(),
           middle: Text(
             '登录',
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
+            style: new TextStyle(
+              fontSize: 20,
+            ),
           ),
         ),
         child: UserLogin(),
