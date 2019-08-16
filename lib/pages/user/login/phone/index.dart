@@ -5,7 +5,7 @@ import 'package:reactmobi/graphql/schema/user.dart';
 import 'dart:convert';
 
 void showCupertinoPicker(BuildContext context, onChange) {
-  var val;
+  var val = 0;
   showCupertinoModalPopup(
     context: context,
     builder: (context) {
