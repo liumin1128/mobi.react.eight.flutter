@@ -67,7 +67,6 @@ class RelativeDateFormat {
   }
 }
 
-
 getSmallImg(url, propsX, propsY) {
   var x = propsX == null ? 200 : propsX;
   var y = propsY == null ? 200 : propsY;
@@ -77,6 +76,8 @@ getSmallImg(url, propsX, propsY) {
 // sleep(ss) {
 //   return new Future<void>.delayed(const Duration(seconds: ss));
 // }
+
+// await Future<void>.delayed(Duration(milliseconds: 1000));
 
 //  new CupertinoRefreshControl(onRefresh: () {
 //           return new Future<void>.delayed(const Duration(seconds: 1))
