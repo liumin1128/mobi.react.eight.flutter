@@ -121,6 +121,9 @@ class UserPhoneLoginWithClient extends StatefulWidget {
 class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
   TextEditingController _phone;
   TextEditingController _code;
+  FocusNode focusNodePhone = new FocusNode();
+  FocusNode focusNodeCode = new FocusNode();
+
   String _countryCode;
 
   @override
@@ -213,6 +216,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
               controller: _phone,
               placeholder: '输入手机号',
               autofocus: true,
+              focusNode: focusNodePhone,
               onChanged: (str) {
                 setState(() {
                   _phone = TextEditingController.fromValue(
@@ -271,6 +275,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
             CupertinoTextField(
                 controller: _code,
                 autofocus: true,
+                focusNode: focusNodeCode,
                 onChanged: (str) {
                   setState(() {
                     _code = TextEditingController.fromValue(
@@ -304,7 +309,11 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                 suffix: GetPhoneCodeButton(
                   enabled: isPhoneNumber(_phone.text),
                   onPress: () {
-                    _getPhoneCode(_phone.text, _countryCode);
+                    setState(() {
+                      // _getPhoneCode(_phone.text, _countryCode);
+                      focusNodePhone.unfocus();
+                      FocusScope.of(context).requestFocus(focusNodeCode);
+                    });
                   },
                 )
 
