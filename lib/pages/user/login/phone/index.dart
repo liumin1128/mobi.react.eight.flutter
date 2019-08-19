@@ -121,8 +121,6 @@ class UserPhoneLoginWithClient extends StatefulWidget {
 class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
   TextEditingController _phone;
   TextEditingController _code;
-  // TextEditingController _username;
-  // TextEditingController _password;
   String _countryCode;
 
   @override
@@ -130,10 +128,6 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
     super.initState();
     _phone = TextEditingController(text: '');
     _code = TextEditingController(text: '');
-
-    // _username = TextEditingController(text: '18629974148');
-    // _password = TextEditingController(text: '123456');
-
     _countryCode = '+86';
   }
 
