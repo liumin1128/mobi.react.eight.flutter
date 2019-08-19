@@ -37,7 +37,7 @@ void showCupertinoPicker(BuildContext context, onChange) {
                 children: <Widget>[
                   // Padding(padding: EdgeInsets.only(top: 8)),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                    // padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -46,6 +46,7 @@ void showCupertinoPicker(BuildContext context, onChange) {
                             Navigator.pop(context, 1);
                           },
                           child: new Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             child: new Text(
                               '取消',
                               style: new TextStyle(fontSize: 20, color: Colors.black38),
@@ -60,6 +61,7 @@ void showCupertinoPicker(BuildContext context, onChange) {
                             Navigator.pop(context, 1);
                           },
                           child: new Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             child: new Text(
                               '确认',
                               style: new TextStyle(fontSize: 20, color: Colors.amber),
@@ -184,6 +186,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            // 输入手机号
             CupertinoTextField(
               controller: _phone,
               placeholder: '输入手机号',
@@ -201,6 +204,8 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                   ),
                 ),
               ),
+
+              // 设置国家
               prefix: new GestureDetector(
                 onTap: () {
                   showCupertinoPicker(context, (val) {
@@ -218,12 +223,18 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                 ),
               ),
             ),
+
             Padding(padding: EdgeInsets.all(16)),
+
+            // 输入验证码
             CupertinoTextField(
               controller: _code,
               autofocus: true,
               keyboardType: TextInputType.phone,
-              style: new TextStyle(fontSize: 24),
+              style: new TextStyle(
+                fontSize: 22,
+                color: Colors.black87,
+              ),
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
@@ -232,21 +243,43 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                   ),
                 ),
               ),
-              suffix: CupertinoButton(
-                child: Text('获取验证码'),
-                onPressed: () {
+              // suffix: CupertinoButton(
+              //   child: Text('获取验证码'),
+              //   onPressed: () {
+              //     _getPhoneCode(_phone.text, _countryCode);
+              //   },
+              // ),
+
+              suffix: GestureDetector(
+                onTap: () {
                   _getPhoneCode(_phone.text, _countryCode);
                 },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  // decoration: BoxDecoration(
+                  //   border: Border.all(),
+                  // ),
+                  child: Text(
+                    '获取验证码',
+                    style: new TextStyle(fontSize: 20, color: Colors.black38),
+                  ),
+                ),
               ),
             ),
+
             Padding(padding: EdgeInsets.all(16)),
 
-            CupertinoButton(
-              child: Text('获取验证码'),
-              onPressed: () {
-                print('phone.text');
-                print(_phone.text);
-              },
+            SizedBox(
+              width: double.infinity,
+              child: CupertinoButton(
+                child: Text('立即登录'),
+                borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                color: CupertinoTheme.of(context).primaryColor,
+                onPressed: () {
+                  print('phone.text');
+                  print(_phone.text);
+                },
+              ),
             ),
             // CupertinoTextField(controller: _username),
             // CupertinoTextField(controller: _password),

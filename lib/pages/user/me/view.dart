@@ -43,6 +43,7 @@ Widget buildView(PageState state, Dispatch dispatch, ViewService viewService) {
         ),
         CupertinoButton(
           child: Text('onShowLoginPage'),
+          color: Colors.amber,
           onPressed: () {
             dispatch(PageActionCreator.onShowLoginPage());
           },
