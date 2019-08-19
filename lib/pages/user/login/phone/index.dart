@@ -176,6 +176,30 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
     }
   }
 
+  Future<void> _loginWithCode(String countryCode, String purePhoneNumber, String code) async {
+    final QueryResult res = await widget.client.mutate(MutationOptions(
+      document: userLoginByPhonenumberCode,
+      variables: {
+        'countryCode': countryCode,
+        'purePhoneNumber': purePhoneNumber,
+        'code': code,
+      },
+    ));
+
+    if (res.hasErrors) return;
+
+    final data = res.data['result'];
+
+    if (data['status'] == 200) {
+      print('登录成功');
+      print(data['token']);
+    } else if (data['status'] == 403) {
+      print('用户名密码错误');
+    } else {
+      print(data['message']);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -331,6 +355,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     print(_phone.text);
                     print(_code.text);
                     print(_countryCode);
+                    _loginWithCode(_countryCode, _phone.text, _code.text);
                   }),
             ),
           ],
