@@ -324,6 +324,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
 
             Padding(padding: EdgeInsets.all(16)),
 
+            // 全宽按钮
             SizedBox(
               width: double.infinity,
               child: CupertinoButton(
@@ -331,29 +332,13 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                   color: CupertinoTheme.of(context).primaryColor,
                   // onPressed: isPhoneNumber(_phone.text) && _code.text != ''
-                  //     ? () {
-                  //         print('phone.text');
-                  //         print(_phone.text);
-                  //         print(_code.text);
-                  //       }
-                  //     : null,
-
                   onPressed: () {
                     print('phone.text');
                     print(_phone.text);
                     print(_code.text);
+                    print(_countryCode);
                   }),
             ),
-            // CupertinoTextField(controller: _username),
-            // CupertinoTextField(controller: _password),
-            // CupertinoButton(
-            //   child: Text('登录'),
-            //   onPressed: () {
-            //     String username = _username.text;
-            //     String password = _password.text;
-            //     _loginWithPassword(username, password);
-            //   },
-            // ),
           ],
         ),
       ),
