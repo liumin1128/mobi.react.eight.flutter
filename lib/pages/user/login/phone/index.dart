@@ -48,6 +48,7 @@ void showCupertinoPicker(BuildContext context, onChange) {
                             Navigator.pop(context, 1);
                           },
                           child: new Container(
+                            color: Colors.white,
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             child: new Text(
                               '取消',
@@ -63,10 +64,11 @@ void showCupertinoPicker(BuildContext context, onChange) {
                             Navigator.pop(context, 1);
                           },
                           child: new Container(
+                            color: Colors.white,
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             child: new Text(
                               '确认',
-                              style: new TextStyle(fontSize: 20, color: Colors.amber),
+                              style: new TextStyle(fontSize: 20, color: CupertinoTheme.of(context).primaryColor),
                             ),
                           ),
                         )
@@ -119,18 +121,18 @@ class UserPhoneLoginWithClient extends StatefulWidget {
 class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
   TextEditingController _phone;
   TextEditingController _code;
-  TextEditingController _username;
-  TextEditingController _password;
+  // TextEditingController _username;
+  // TextEditingController _password;
   String _countryCode;
 
   @override
   void initState() {
     super.initState();
-    _phone = TextEditingController(text: '18629974148');
-    // _code = TextEditingController(text: '');
+    _phone = TextEditingController(text: '');
+    _code = TextEditingController(text: '');
 
-    _username = TextEditingController(text: '18629974148');
-    _password = TextEditingController(text: '123456');
+    // _username = TextEditingController(text: '18629974148');
+    // _password = TextEditingController(text: '123456');
 
     _countryCode = '+86';
   }
@@ -251,6 +253,23 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
             CupertinoTextField(
                 controller: _code,
                 autofocus: true,
+                onChanged: (str) {
+                  setState(() {
+                    _code = TextEditingController.fromValue(
+                      TextEditingValue(
+                        // 设置内容
+                        text: str,
+                        // 保持光标在最后
+                        selection: TextSelection.fromPosition(
+                          TextPosition(
+                            affinity: TextAffinity.downstream,
+                            offset: str.length,
+                          ),
+                        ),
+                      ),
+                    );
+                  });
+                },
                 keyboardType: TextInputType.phone,
                 style: new TextStyle(
                   fontSize: 22,
@@ -265,7 +284,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                   ),
                 ),
                 suffix: GetPhoneCodeButton(
-                  enabled: true,
+                  enabled: isPhoneNumber(_phone.text),
                   onPress: () {
                     _getPhoneCode(_phone.text, _countryCode);
                   },
@@ -308,14 +327,22 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
             SizedBox(
               width: double.infinity,
               child: CupertinoButton(
-                child: Text('立即登录'),
-                borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                color: CupertinoTheme.of(context).primaryColor,
-                onPressed: () {
-                  print('phone.text');
-                  print(_phone.text);
-                },
-              ),
+                  child: Text('立即登录'),
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                  color: CupertinoTheme.of(context).primaryColor,
+                  // onPressed: isPhoneNumber(_phone.text) && _code.text != ''
+                  //     ? () {
+                  //         print('phone.text');
+                  //         print(_phone.text);
+                  //         print(_code.text);
+                  //       }
+                  //     : null,
+
+                  onPressed: () {
+                    print('phone.text');
+                    print(_phone.text);
+                    print(_code.text);
+                  }),
             ),
             // CupertinoTextField(controller: _username),
             // CupertinoTextField(controller: _password),
