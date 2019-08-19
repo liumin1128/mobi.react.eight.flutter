@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:reactmobi/graphql/schema/user.dart';
 import 'dart:convert';
+import 'package:reactmobi/utils/common.dart';
+import 'getPhoneCode.dart';
 
 void showCupertinoPicker(BuildContext context, onChange) {
   var val = 0;
@@ -191,7 +193,26 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
               controller: _phone,
               placeholder: '输入手机号',
               autofocus: true,
+              onChanged: (str) {
+                setState(() {
+                  _phone = TextEditingController.fromValue(
+                    TextEditingValue(
+                      // 设置内容
+                      text: str,
+                      // 保持光标在最后
+                      selection: TextSelection.fromPosition(
+                        TextPosition(
+                          affinity: TextAffinity.downstream,
+                          offset: str.length,
+                        ),
+                      ),
+                    ),
+                  );
+                });
+              },
+
               keyboardType: TextInputType.phone,
+
               style: new TextStyle(
                 fontSize: 22,
                 color: Colors.black87,
@@ -228,44 +249,59 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
 
             // 输入验证码
             CupertinoTextField(
-              controller: _code,
-              autofocus: true,
-              keyboardType: TextInputType.phone,
-              style: new TextStyle(
-                fontSize: 22,
-                color: Colors.black87,
-              ),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    style: BorderStyle.solid,
-                    color: Colors.black12,
+                controller: _code,
+                autofocus: true,
+                keyboardType: TextInputType.phone,
+                style: new TextStyle(
+                  fontSize: 22,
+                  color: Colors.black87,
+                ),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      style: BorderStyle.solid,
+                      color: Colors.black12,
+                    ),
                   ),
                 ),
-              ),
-              // suffix: CupertinoButton(
-              //   child: Text('获取验证码'),
-              //   onPressed: () {
-              //     _getPhoneCode(_phone.text, _countryCode);
-              //   },
-              // ),
+                suffix: GetPhoneCodeButton(
+                  enabled: true,
+                  onPress: () {
+                    _getPhoneCode(_phone.text, _countryCode);
+                  },
+                )
 
-              suffix: GestureDetector(
-                onTap: () {
-                  _getPhoneCode(_phone.text, _countryCode);
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  // decoration: BoxDecoration(
-                  //   border: Border.all(),
-                  // ),
-                  child: Text(
-                    '获取验证码',
-                    style: new TextStyle(fontSize: 20, color: Colors.black38),
-                  ),
+                // suffix: CupertinoButton(
+                //   minSize: 20,
+                //   padding: const EdgeInsets.all(6),
+                //   child: Text('获取验证码'),
+                //   // disabledColor: Colors.black12,
+                //   // onPressed: () {
+                //   //   _getPhoneCode(_phone.text, _countryCode);
+                //   // },
+                //   onPressed: isPhoneNumber(_phone.text)
+                //       ? () {
+                //           _getPhoneCode(_phone.text, _countryCode);
+                //         }
+                //       : null,
+                // ),
+
+                // suffix: GestureDetector(
+                //   onTap: () {
+                //     _getPhoneCode(_phone.text, _countryCode);
+                //   },
+                //   child: Container(
+                //     padding: const EdgeInsets.symmetric(vertical: 4),
+                //     // decoration: BoxDecoration(
+                //     //   border: Border.all(),
+                //     // ),
+                //     child: Text(
+                //       '获取验证码',
+                //       style: new TextStyle(fontSize: 20, color: Colors.black38),
+                //     ),
+                //   ),
+                // ),
                 ),
-              ),
-            ),
 
             Padding(padding: EdgeInsets.all(16)),
 
