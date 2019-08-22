@@ -97,6 +97,14 @@ void showCupertinoPicker(BuildContext context, onChange) {
   );
 }
 
+// class UserPhoneLoginPage extends StatelessWidget {
+//   UserPhoneLoginPage();
+//   @override
+//   Widget build(BuildContext context) {
+//     return UserPhoneLogin();
+//   }
+// }
+
 class UserPhoneLogin extends StatefulWidget {
   @override
   _UserPhoneLoginState createState() => _UserPhoneLoginState();
@@ -179,7 +187,25 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
     }
   }
 
-  Future<void> _loginWithCode(String countryCode, String purePhoneNumber, String code) async {
+  Future<void> _loginWithCode(BuildContext context, String countryCode, String purePhoneNumber, String code) async {
+    if (countryCode == '') return;
+    if (purePhoneNumber == '') {
+      print('xxxxxxxxx');
+      print('xxxxxxxxx');
+      print('xxxxxxxxx');
+      print('xxxxxxxxx');
+      print('xxxxxxxxx');
+      print('xxxxxxxxx');
+      print('xxxxxxxxx');
+      print('xxxxxxxxx');
+      print('xxxxxxxxx');
+      print('xxxxxxxxx');
+      print('xxxxxxxxx');
+
+      return;
+    }
+    ;
+    if (code == '') return;
     final QueryResult res = await widget.client.mutate(MutationOptions(
       document: userLoginByPhonenumberCode,
       variables: {
@@ -364,7 +390,49 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     print(_phone.text);
                     print(_code.text);
                     print(_countryCode);
-                    _loginWithCode(_countryCode, _phone.text, _code.text);
+
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return CupertinoAlertDialog(
+                            title: Text("这是一个iOS风格的对话框"),
+                            content: SizedBox(
+                              height: 100.0,
+                              child: SingleChildScrollView(
+                                child: ListBody(
+                                  children: <Widget>[
+                                    Text("第1行"),
+                                    Text("第2行"),
+                                    Text("第3行"),
+                                    Text("第4行"),
+                                    Text("第5行"),
+                                    Text("第6行"),
+                                    Text("第7行"),
+                                    Text("第8行"),
+                                    Text("第9行"),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            actions: <Widget>[
+                              CupertinoDialogAction(
+                                child: Text("取消"),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  print("取消");
+                                },
+                              ),
+                              CupertinoDialogAction(
+                                child: Text("确定"),
+                                onPressed: () {
+                                  print("确定");
+                                },
+                              ),
+                            ],
+                          );
+                        });
+
+                    // _loginWithCode(context, _countryCode, _phone.text, _code.text);
                   }),
             ),
           ],
