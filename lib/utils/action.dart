@@ -18,8 +18,8 @@ Future<T> alert<T>({
       context: context,
       builder: (context) {
         return CupertinoAlertDialog(
-          title: title == null ? null : Text('登录成功'),
-          content: contentBuilder == null ? (content == null ? null : Text('登录成功')) : contentBuilder,
+          title: title == null ? null : Text(title),
+          content: contentBuilder == null ? (content == null ? null : Text(content)) : contentBuilder,
           actions: <Widget>[
             showCancel
                 ? CupertinoDialogAction(

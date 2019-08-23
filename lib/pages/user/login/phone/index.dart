@@ -2,109 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:reactmobi/graphql/schema/user.dart';
-import 'dart:convert';
 import 'package:reactmobi/utils/common.dart';
 import 'package:reactmobi/utils/action.dart';
 import 'getPhoneCode.dart';
-
-void showCupertinoPicker(BuildContext context, onChange) {
-  var val = 0;
-  showCupertinoModalPopup(
-    context: context,
-    builder: (context) {
-      return Container(
-        height: 300,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          // borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-        ),
-        child: FutureBuilder(
-          future: DefaultAssetBundle.of(context).loadString('assets/config/countries.json'),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) return Center(child: Container(width: 16, height: 16, child: CupertinoActivityIndicator()));
-            if (snapshot.hasError) return Text('error');
-
-            var countries = json.decode(snapshot.data.toString());
-
-            List<Widget> list = [];
-
-            for (var i in countries) {
-              list.add(Text(
-                i['name'] + ' ' + i['code'],
-                style: new TextStyle(fontSize: 20, height: 1.5),
-              ));
-            }
-
-            return Container(
-              child: Column(
-                children: <Widget>[
-                  // Padding(padding: EdgeInsets.only(top: 8)),
-                  Container(
-                    // padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        new GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context, 1);
-                          },
-                          child: new Container(
-                            color: Colors.white,
-                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                            child: new Text(
-                              '取消',
-                              style: new TextStyle(fontSize: 20, color: Colors.black38),
-                            ),
-                          ),
-                        ),
-                        Text(''),
-                        new GestureDetector(
-                          onTap: () {
-                            final value = countries[val]['code'];
-                            onChange(value);
-                            Navigator.pop(context, 1);
-                          },
-                          child: new Container(
-                            color: Colors.white,
-                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                            child: new Text(
-                              '确认',
-                              style: new TextStyle(fontSize: 20, color: CupertinoTheme.of(context).primaryColor),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: 245,
-                    child: CupertinoPicker(
-                      itemExtent: 40,
-                      // backgroundColor: Colors.white,
-                      onSelectedItemChanged: (position) {
-                        print('The position is $position');
-                        val = position;
-                      },
-                      children: list,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      );
-    },
-  );
-}
-
-// class UserPhoneLoginPage extends StatelessWidget {
-//   UserPhoneLoginPage();
-//   @override
-//   Widget build(BuildContext context) {
-//     return UserPhoneLogin();
-//   }
-// }
+import 'showCountryCodePicker.dart';
 
 class UserPhoneLogin extends StatefulWidget {
   @override
@@ -191,21 +92,8 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
   Future<void> _loginWithCode(BuildContext context, String countryCode, String purePhoneNumber, String code) async {
     if (countryCode == '') return;
     if (purePhoneNumber == '') {
-      print('xxxxxxxxx');
-      print('xxxxxxxxx');
-      print('xxxxxxxxx');
-      print('xxxxxxxxx');
-      print('xxxxxxxxx');
-      print('xxxxxxxxx');
-      print('xxxxxxxxx');
-      print('xxxxxxxxx');
-      print('xxxxxxxxx');
-      print('xxxxxxxxx');
-      print('xxxxxxxxx');
-
       return;
     }
-    ;
     if (code == '') return;
     final QueryResult res = await widget.client.mutate(MutationOptions(
       document: userLoginByPhonenumberCode,
@@ -228,6 +116,11 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
     } else {
       print(data['message']);
     }
+  }
+
+  Future<void> _saveToken(BuildContext context, String token) async {
+    print(token);
+    return;
   }
 
   @override
@@ -280,7 +173,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
               // 设置国家
               prefix: new GestureDetector(
                 onTap: () {
-                  showCupertinoPicker(context, (val) {
+                  showCountryCodePicker(context, (val) {
                     setState(() {
                       _countryCode = val;
                     });
@@ -300,81 +193,50 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
 
             // 输入验证码
             CupertinoTextField(
-                controller: _code,
-                // autofocus: true,
-                focusNode: focusNodeCode,
-                onChanged: (str) {
-                  setState(() {
-                    _code = TextEditingController.fromValue(
-                      TextEditingValue(
-                        // 设置内容
-                        text: str,
-                        // 保持光标在最后
-                        selection: TextSelection.fromPosition(
-                          TextPosition(
-                            affinity: TextAffinity.downstream,
-                            offset: str.length,
-                          ),
+              controller: _code,
+              // autofocus: true,
+              focusNode: focusNodeCode,
+              onChanged: (str) {
+                setState(() {
+                  _code = TextEditingController.fromValue(
+                    TextEditingValue(
+                      // 设置内容
+                      text: str,
+                      // 保持光标在最后
+                      selection: TextSelection.fromPosition(
+                        TextPosition(
+                          affinity: TextAffinity.downstream,
+                          offset: str.length,
                         ),
                       ),
-                    );
-                  });
-                },
-                // keyboardType: TextInputType.phone,
-                style: new TextStyle(
-                  fontSize: 22,
-                  color: Colors.black87,
-                ),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      style: BorderStyle.solid,
-                      color: Colors.black12,
                     ),
+                  );
+                });
+              },
+              // keyboardType: TextInputType.phone,
+              style: new TextStyle(
+                fontSize: 22,
+                color: Colors.black87,
+              ),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    style: BorderStyle.solid,
+                    color: Colors.black12,
                   ),
                 ),
-                suffix: GetPhoneCodeButton(
-                  enabled: isPhoneNumber(_phone.text),
-                  onPress: () {
-                    setState(() {
-                      // _getPhoneCode(_phone.text, _countryCode);
-                      focusNodePhone.unfocus();
-                      FocusScope.of(context).requestFocus(focusNodeCode);
-                    });
-                  },
-                )
-
-                // suffix: CupertinoButton(
-                //   minSize: 20,
-                //   padding: const EdgeInsets.all(6),
-                //   child: Text('获取验证码'),
-                //   // disabledColor: Colors.black12,
-                //   // onPressed: () {
-                //   //   _getPhoneCode(_phone.text, _countryCode);
-                //   // },
-                //   onPressed: isPhoneNumber(_phone.text)
-                //       ? () {
-                //           _getPhoneCode(_phone.text, _countryCode);
-                //         }
-                //       : null,
-                // ),
-
-                // suffix: GestureDetector(
-                //   onTap: () {
-                //     _getPhoneCode(_phone.text, _countryCode);
-                //   },
-                //   child: Container(
-                //     padding: const EdgeInsets.symmetric(vertical: 4),
-                //     // decoration: BoxDecoration(
-                //     //   border: Border.all(),
-                //     // ),
-                //     child: Text(
-                //       '获取验证码',
-                //       style: new TextStyle(fontSize: 20, color: Colors.black38),
-                //     ),
-                //   ),
-                // ),
-                ),
+              ),
+              suffix: GetPhoneCodeButton(
+                enabled: isPhoneNumber(_phone.text),
+                onPress: () {
+                  setState(() {
+                    _getPhoneCode(_phone.text, _countryCode);
+                    focusNodePhone.unfocus();
+                    FocusScope.of(context).requestFocus(focusNodeCode);
+                  });
+                },
+              ),
+            ),
 
             Padding(padding: EdgeInsets.all(16)),
 
@@ -382,21 +244,36 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
             SizedBox(
               width: double.infinity,
               child: CupertinoButton(
-                  child: Text('立即登录'),
+                  child: Text('立即登录2'),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                   color: CupertinoTheme.of(context).primaryColor,
                   // onPressed: isPhoneNumber(_phone.text) && _code.text != ''
                   onPressed: () {
-                    print('phone.text');
+                    print('phone.text111111');
                     print(_phone.text);
                     print(_code.text);
                     print(_countryCode);
+                    _saveToken(context, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8');
+                    return;
 
-                    alert(
-                      context: context,
-                      title: '1111',
-                      content: '1111',
-                    );
+                    if (!isPhoneNumber(_phone.text)) {
+                      alert(
+                        context: context,
+                        title: '电话号码错误',
+                        content: '电话号码格式不正确，请重新输入',
+                      );
+                      return;
+                    }
+
+                    if (_code.text == '' || _code.text.length != 6) {
+                      alert(
+                        context: context,
+                        title: '验证码错误',
+                        content: '验证码格式不正确，请重新输入',
+                      );
+                      return;
+                    }
+
                     // _loginWithCode(context, _countryCode, _phone.text, _code.text);
                   }),
             ),
