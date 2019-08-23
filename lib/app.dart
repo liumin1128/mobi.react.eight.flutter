@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:reactmobi/pages/user/login.dart';
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
       child: CupertinoApp(
         theme: CupertinoThemeData(
           brightness: Brightness.light,
-          primaryColor: Colors.pink,
+          primaryColor: Color(0xFFfd4c86),
         ),
         routes: <String, WidgetBuilder>{
           '/': (BuildContext context) => HomePage(),
