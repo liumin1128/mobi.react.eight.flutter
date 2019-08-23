@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:reactmobi/blocs/counter_bloc.dart';
 import 'package:reactmobi/blocs/theme_bloc.dart';
+import 'package:reactmobi/blocs/user_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserMe extends StatelessWidget {
@@ -8,6 +9,7 @@ class UserMe extends StatelessWidget {
   Widget build(BuildContext context) {
     final counterBloc = BlocProvider.of<CounterBloc>(context);
     final themeBloc = BlocProvider.of<ThemeBloc>(context);
+    final userBloc = BlocProvider.of<UserBloc>(context);
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
@@ -25,7 +27,8 @@ class UserMe extends StatelessWidget {
         ),
         trailing: GestureDetector(
           onTap: () {
-            themeBloc.dispatch(SetTheme(theme: 'dark1'));
+            // themeBloc.dispatch(SetTheme(theme: 'dark1'));
+            userBloc.dispatch(LoginWithCode(context: context));
           },
           child: Icon(CupertinoIcons.bell),
         ),

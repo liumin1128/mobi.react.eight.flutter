@@ -4,6 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 import 'package:reactmobi/blocs/theme_bloc.dart';
 import 'package:reactmobi/blocs/counter_bloc.dart';
+import 'package:reactmobi/blocs/user_bloc.dart';
 import 'package:reactmobi/pages/home/index.dart';
 
 class App extends StatefulWidget {
@@ -24,14 +25,17 @@ class AppState extends State<App> {
           builder: (context, theme) {
             return BlocProvider<CounterBloc>(
               builder: (context) => CounterBloc(),
-              child: CupertinoApp(
-                theme: theme,
-                routes: <String, WidgetBuilder>{
-                  '/': (BuildContext context) => HomePage(),
-                  // '/login': (BuildContext context) => UserLogin(),
-                  // '/register': (BuildContext context) => UserLogin(),
-                },
-                initialRoute: '/',
+              child: BlocProvider<UserBloc>(
+                builder: (context) => UserBloc(),
+                child: CupertinoApp(
+                  theme: theme,
+                  routes: <String, WidgetBuilder>{
+                    '/': (BuildContext context) => HomePage(),
+                    // '/login': (BuildContext context) => UserLogin(),
+                    // '/register': (BuildContext context) => UserLogin(),
+                  },
+                  initialRoute: '/',
+                ),
               ),
             );
           },
