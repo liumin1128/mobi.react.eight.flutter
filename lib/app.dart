@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'package:bloc/bloc.dart';
-// import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactmobi/blocs/theme_bloc.dart';
@@ -37,7 +34,7 @@ class AppState extends State<App> {
 class CounterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final counterBloc = BlocProvider.of<CounterBloc>(context);
+    final counterBloc = BlocProvider.of<CounterBloc>(context);
     final themeBloc = BlocProvider.of<ThemeBloc>(context);
 
     return CupertinoPageScaffold(
@@ -48,17 +45,17 @@ class CounterPage extends StatelessWidget {
             style: BorderStyle.none,
           ),
         ),
-        trailing: Column(
-          // crossAxisAlignment: CrossAxisAlignment.end,
-          // mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                themeBloc.dispatch(SetTheme(theme: 'dark1'));
-              },
-              child: Icon(CupertinoIcons.bell),
-            ),
-          ],
+        leading: GestureDetector(
+          onTap: () {
+            counterBloc.dispatch(CounterEvent.increment);
+          },
+          child: Icon(CupertinoIcons.bell),
+        ),
+        trailing: GestureDetector(
+          onTap: () {
+            themeBloc.dispatch(SetTheme(theme: 'dark1'));
+          },
+          child: Icon(CupertinoIcons.bell),
         ),
         // trailing: Icon(CupertinoCupertinoIcons.add)
         // backgroundColor: Colors.white,
@@ -81,22 +78,3 @@ class CounterPage extends StatelessWidget {
     );
   }
 }
-
-enum CounterEvent { increment, decrement }
-
-// class CounterBloc extends Bloc<CounterEvent, int> {
-//   @override
-//   int get initialState => 99;
-
-//   @override
-//   Stream<int> mapEventToState(CounterEvent event) async* {
-//     switch (event) {
-//       case CounterEvent.decrement:
-//         yield currentState - 1;
-//         break;
-//       case CounterEvent.increment:
-//         yield currentState + 1;
-//         break;
-//     }
-//   }
-// }
