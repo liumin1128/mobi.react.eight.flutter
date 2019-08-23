@@ -21,13 +21,8 @@ class AppState extends State<App> {
       child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
         builder: (context, theme) {
           return CupertinoApp(
-            title: 'Flutter Demo1111',
-            // home: HomePage(),
-            home: BlocProvider(
-              builder: (context) => CounterBloc(),
-              child: CounterPage(),
-            ),
             theme: theme,
+            home: CounterPage(),
           );
         },
       ),
@@ -38,63 +33,47 @@ class AppState extends State<App> {
 class CounterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final counterBloc = BlocProvider.of<CounterBloc>(context);
+    // final counterBloc = BlocProvider.of<CounterBloc>(context);
     final themeBloc = BlocProvider.of<ThemeBloc>(context);
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-          middle: Text("动态"),
-          border: Border(
-            top: BorderSide(
-              style: BorderStyle.none,
-            ),
+        middle: Text("动态"),
+        border: Border(
+          top: BorderSide(
+            style: BorderStyle.none,
           ),
-          trailing: Column(
-            // crossAxisAlignment: CrossAxisAlignment.end,
-            // mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              // Padding(
-              //   padding: EdgeInsets.symmetric(vertical: 5.0),
-              //   child: CupertinoButton(
-              //     child: Icon(CupertinoIcons.add),
-              //     onPressed: () {
-              //       counterBloc.dispatch(CounterEvent.increment);
-              //     },
-              //   ),
-              // ),
-              // Padding(
-              //   padding: EdgeInsets.symmetric(vertical: 5.0),
-              //   child: CupertinoButton(
-              //     child: Icon(CupertinoIcons.book),
-              //     onPressed: () {
-              //       counterBloc.dispatch(CounterEvent.decrement);
-              //     },
-              //   ),
-              // ),
-
-              GestureDetector(
-                onTap: () {
-                  themeBloc.dispatch(SetTheme(theme: 'dark1'));
-                },
-                child: Icon(CupertinoIcons.bell),
-              ),
-            ],
-          )
-          // trailing: Icon(CupertinoCupertinoIcons.add)
-          // backgroundColor: Colors.white,
-          ),
-      child: Center(
-        child: BlocBuilder<CounterBloc, int>(
-          builder: (context, count) {
-            return Center(
-              child: Text(
-                '$count',
-                style: TextStyle(fontSize: 24.0),
-              ),
-            );
-          },
         ),
+        trailing: Column(
+          // crossAxisAlignment: CrossAxisAlignment.end,
+          // mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                themeBloc.dispatch(SetTheme(theme: 'dark1'));
+              },
+              child: Icon(CupertinoIcons.bell),
+            ),
+          ],
+        ),
+        // trailing: Icon(CupertinoCupertinoIcons.add)
+        // backgroundColor: Colors.white,
       ),
+      child: Center(
+        child: Text('1111'),
+      ),
+      // child: Center(
+      //   child: BlocBuilder<CounterBloc, int>(
+      //     builder: (context, count) {
+      //       return Center(
+      //         child: Text(
+      //           '$count',
+      //           style: TextStyle(fontSize: 24.0),
+      //         ),
+      //       );
+      //     },
+      //   ),
+      // ),
     );
   }
 }
