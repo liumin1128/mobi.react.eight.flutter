@@ -16,32 +16,26 @@ class App extends StatefulWidget {
 class AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ThemeBloc>(
-      builder: (context) => ThemeBloc(),
-      child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
-        builder: (context, theme) {
-          return CupertinoApp(
-            theme: theme,
-            home: BlocProvider<CounterBloc>(
+    return GraphQLProvider(
+      client: widget.client,
+      child: BlocProvider<ThemeBloc>(
+        builder: (context) => ThemeBloc(),
+        child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
+          builder: (context, theme) {
+            return BlocProvider<CounterBloc>(
               builder: (context) => CounterBloc(),
-              child: GraphQLProvider(
-                client: widget.client,
-                child: CupertinoApp(
-                  theme: CupertinoThemeData(
-                    brightness: Brightness.light,
-                    primaryColor: Color(0xFFfd4c86),
-                  ),
-                  routes: <String, WidgetBuilder>{
-                    '/': (BuildContext context) => HomePage(),
-                    // '/login': (BuildContext context) => UserLogin(),
-                    // '/register': (BuildContext context) => UserLogin(),
-                  },
-                  initialRoute: '/',
-                ),
+              child: CupertinoApp(
+                theme: theme,
+                routes: <String, WidgetBuilder>{
+                  '/': (BuildContext context) => HomePage(),
+                  // '/login': (BuildContext context) => UserLogin(),
+                  // '/register': (BuildContext context) => UserLogin(),
+                },
+                initialRoute: '/',
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
