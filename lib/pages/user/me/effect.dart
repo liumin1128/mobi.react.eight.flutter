@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart' hide Action;
 import 'package:flutter/material.dart' hide Action;
 import 'state.dart';
 import 'action.dart';
-import 'package:reactmobi/pages/user/login.dart';
+import 'package:reactmobi/pages/user/login/phone/index.dart';
 
 /// another style of writing
 Effect<PageState> buildEffect() {
@@ -58,7 +58,7 @@ void _onShowLoginPage(Action action, Context<PageState> ctx) async {
             ),
           ),
         ),
-        child: UserLogin(),
+        child: UserPhoneLogin(),
       ),
     ),
   );

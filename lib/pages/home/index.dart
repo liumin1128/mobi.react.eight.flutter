@@ -42,25 +42,25 @@ class _HomePageState extends State<HomePage> {
         child: NewsList(),
       ),
     ),
-    CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        backgroundColor: Colors.white,
-        border: Border(
-          top: BorderSide(
-            style: BorderStyle.none,
-          ),
-        ),
-        middle: Text(
-          '登录',
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-          style: new TextStyle(
-            fontSize: 20,
-          ),
-        ),
-      ),
-      child: UserPhoneLogin(),
-    ),
+    // CupertinoPageScaffold(
+    //   navigationBar: CupertinoNavigationBar(
+    //     backgroundColor: Colors.white,
+    //     border: Border(
+    //       top: BorderSide(
+    //         style: BorderStyle.none,
+    //       ),
+    //     ),
+    //     middle: Text(
+    //       '登录',
+    //       overflow: TextOverflow.ellipsis,
+    //       maxLines: 1,
+    //       style: new TextStyle(
+    //         fontSize: 20,
+    //       ),
+    //     ),
+    //   ),
+    //   child: UserPhoneLogin(),
+    // ),
     UserMe(),
   ];
 

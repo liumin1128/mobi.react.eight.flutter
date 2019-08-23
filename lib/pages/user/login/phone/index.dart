@@ -127,6 +127,8 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
     String _aaa = prefs.getString('token');
     print(_aaa);
 
+    Navigator.pop(context, 1);
+
     return;
   }
 
