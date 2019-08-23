@@ -4,6 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:reactmobi/graphql/schema/user.dart';
 import 'dart:convert';
 import 'package:reactmobi/utils/common.dart';
+import 'package:reactmobi/utils/action.dart';
 import 'getPhoneCode.dart';
 
 void showCupertinoPicker(BuildContext context, onChange) {
@@ -241,7 +242,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
             CupertinoTextField(
               controller: _phone,
               placeholder: '输入手机号',
-              autofocus: true,
+              // autofocus: true,
               focusNode: focusNodePhone,
               onChanged: (str) {
                 setState(() {
@@ -300,7 +301,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
             // 输入验证码
             CupertinoTextField(
                 controller: _code,
-                autofocus: true,
+                // autofocus: true,
                 focusNode: focusNodeCode,
                 onChanged: (str) {
                   setState(() {
@@ -319,7 +320,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     );
                   });
                 },
-                keyboardType: TextInputType.phone,
+                // keyboardType: TextInputType.phone,
                 style: new TextStyle(
                   fontSize: 22,
                   color: Colors.black87,
@@ -391,47 +392,11 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     print(_code.text);
                     print(_countryCode);
 
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return CupertinoAlertDialog(
-                            title: Text("这是一个iOS风格的对话框"),
-                            content: SizedBox(
-                              height: 100.0,
-                              child: SingleChildScrollView(
-                                child: ListBody(
-                                  children: <Widget>[
-                                    Text("第1行"),
-                                    Text("第2行"),
-                                    Text("第3行"),
-                                    Text("第4行"),
-                                    Text("第5行"),
-                                    Text("第6行"),
-                                    Text("第7行"),
-                                    Text("第8行"),
-                                    Text("第9行"),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            actions: <Widget>[
-                              CupertinoDialogAction(
-                                child: Text("取消"),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  print("取消");
-                                },
-                              ),
-                              CupertinoDialogAction(
-                                child: Text("确定"),
-                                onPressed: () {
-                                  print("确定");
-                                },
-                              ),
-                            ],
-                          );
-                        });
-
+                    alert(
+                      context: context,
+                      title: '1111',
+                      content: '1111',
+                    );
                     // _loginWithCode(context, _countryCode, _phone.text, _code.text);
                   }),
             ),
