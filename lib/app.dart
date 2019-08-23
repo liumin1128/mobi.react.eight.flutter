@@ -22,7 +22,10 @@ class AppState extends State<App> {
         builder: (context, theme) {
           return CupertinoApp(
             theme: theme,
-            home: CounterPage(),
+            home: BlocProvider(
+              builder: (context) => CounterBloc(),
+              child: CounterPage(),
+            ),
           );
         },
       ),
@@ -59,21 +62,21 @@ class CounterPage extends StatelessWidget {
         // trailing: Icon(CupertinoCupertinoIcons.add)
         // backgroundColor: Colors.white,
       ),
-      child: Center(
-        child: Text('1111'),
-      ),
       // child: Center(
-      //   child: BlocBuilder<CounterBloc, int>(
-      //     builder: (context, count) {
-      //       return Center(
-      //         child: Text(
-      //           '$count',
-      //           style: TextStyle(fontSize: 24.0),
-      //         ),
-      //       );
-      //     },
-      //   ),
+      //   child: Text('1111'),
       // ),
+      child: Center(
+        child: BlocBuilder<CounterBloc, int>(
+          builder: (context, count) {
+            return Center(
+              child: Text(
+                '$count',
+                style: TextStyle(fontSize: 24.0),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }
