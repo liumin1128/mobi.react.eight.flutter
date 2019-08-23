@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:reactmobi/graphql/schema/user.dart';
 import 'package:reactmobi/utils/common.dart';
 import 'package:reactmobi/utils/action.dart';
@@ -120,6 +121,12 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
 
   Future<void> _saveToken(BuildContext context, String token) async {
     print(token);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setString('token', token);
+    String _aaa = prefs.getString('token');
+    print(_aaa);
+
     return;
   }
 
