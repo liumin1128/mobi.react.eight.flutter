@@ -64,6 +64,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.1.2"
+  equatable:
+    dependency: "direct main"
+    description:
+      name: equatable
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.0"
   fish_redux:
     dependency: "direct main"
     description:

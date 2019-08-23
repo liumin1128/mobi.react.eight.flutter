@@ -1,29 +1,119 @@
+import 'dart:async';
+import 'package:bloc/bloc.dart';
+// import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:reactmobi/pages/user/login.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reactmobi/blocs/theme_bloc.dart';
 import 'package:reactmobi/pages/home/index.dart';
 
-class MyApp extends StatelessWidget {
-  MyApp({this.client, this.store});
+class App extends StatefulWidget {
+  App({this.client});
   final client;
-  final store;
+  @override
+  State<StatefulWidget> createState() => AppState();
+}
 
+class AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
-    return GraphQLProvider(
-      client: client,
-      child: CupertinoApp(
-        theme: CupertinoThemeData(
-          brightness: Brightness.light,
-          primaryColor: Color(0xFFfd4c86),
-        ),
-        routes: <String, WidgetBuilder>{
-          '/': (BuildContext context) => HomePage(),
-          '/login': (BuildContext context) => UserLogin(),
-          '/register': (BuildContext context) => UserLogin(),
+    return BlocProvider<ThemeBloc>(
+      builder: (context) => ThemeBloc(),
+      child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
+        builder: (context, theme) {
+          return CupertinoApp(
+            title: 'Flutter Demo1111',
+            // home: HomePage(),
+            home: BlocProvider(
+              builder: (context) => CounterBloc(),
+              child: CounterPage(),
+            ),
+            theme: theme,
+          );
         },
-        initialRoute: '/',
       ),
     );
+  }
+}
+
+class CounterPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final counterBloc = BlocProvider.of<CounterBloc>(context);
+    final themeBloc = BlocProvider.of<ThemeBloc>(context);
+
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+          middle: Text("动态"),
+          border: Border(
+            top: BorderSide(
+              style: BorderStyle.none,
+            ),
+          ),
+          trailing: Column(
+            // crossAxisAlignment: CrossAxisAlignment.end,
+            // mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              // Padding(
+              //   padding: EdgeInsets.symmetric(vertical: 5.0),
+              //   child: CupertinoButton(
+              //     child: Icon(CupertinoIcons.add),
+              //     onPressed: () {
+              //       counterBloc.dispatch(CounterEvent.increment);
+              //     },
+              //   ),
+              // ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(vertical: 5.0),
+              //   child: CupertinoButton(
+              //     child: Icon(CupertinoIcons.book),
+              //     onPressed: () {
+              //       counterBloc.dispatch(CounterEvent.decrement);
+              //     },
+              //   ),
+              // ),
+
+              GestureDetector(
+                onTap: () {
+                  themeBloc.dispatch(SetTheme(theme: 'dark'));
+                },
+                child: Icon(CupertinoIcons.bell),
+              ),
+            ],
+          )
+          // trailing: Icon(CupertinoCupertinoIcons.add)
+          // backgroundColor: Colors.white,
+          ),
+      child: Center(
+        child: BlocBuilder<CounterBloc, int>(
+          builder: (context, count) {
+            return Center(
+              child: Text(
+                '$count',
+                style: TextStyle(fontSize: 24.0),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+enum CounterEvent { increment, decrement }
+
+class CounterBloc extends Bloc<CounterEvent, int> {
+  @override
+  int get initialState => 99;
+
+  @override
+  Stream<int> mapEventToState(CounterEvent event) async* {
+    switch (event) {
+      case CounterEvent.decrement:
+        yield currentState - 1;
+        break;
+      case CounterEvent.increment:
+        yield currentState + 1;
+        break;
+    }
   }
 }
