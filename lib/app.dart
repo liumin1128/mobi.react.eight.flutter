@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactmobi/blocs/theme_bloc.dart';
+import 'package:reactmobi/blocs/counter_bloc.dart';
 import 'package:reactmobi/pages/home/index.dart';
 
 class App extends StatefulWidget {
@@ -22,7 +23,7 @@ class AppState extends State<App> {
         builder: (context, theme) {
           return CupertinoApp(
             theme: theme,
-            home: BlocProvider(
+            home: BlocProvider<CounterBloc>(
               builder: (context) => CounterBloc(),
               child: CounterPage(),
             ),
@@ -83,19 +84,19 @@ class CounterPage extends StatelessWidget {
 
 enum CounterEvent { increment, decrement }
 
-class CounterBloc extends Bloc<CounterEvent, int> {
-  @override
-  int get initialState => 99;
+// class CounterBloc extends Bloc<CounterEvent, int> {
+//   @override
+//   int get initialState => 99;
 
-  @override
-  Stream<int> mapEventToState(CounterEvent event) async* {
-    switch (event) {
-      case CounterEvent.decrement:
-        yield currentState - 1;
-        break;
-      case CounterEvent.increment:
-        yield currentState + 1;
-        break;
-    }
-  }
-}
+//   @override
+//   Stream<int> mapEventToState(CounterEvent event) async* {
+//     switch (event) {
+//       case CounterEvent.decrement:
+//         yield currentState - 1;
+//         break;
+//       case CounterEvent.increment:
+//         yield currentState + 1;
+//         break;
+//     }
+//   }
+// }
