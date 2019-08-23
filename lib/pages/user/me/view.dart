@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' hide Action;
 import 'action.dart';
 import 'state.dart';
 import 'package:reactmobi/pages/user/login.dart';
+import 'package:reactmobi/components/LikeBtn/like_button.dart';
 
 Widget buildView(PageState state, Dispatch dispatch, ViewService viewService) {
   println('view: buildView');
@@ -15,12 +16,17 @@ Widget buildView(PageState state, Dispatch dispatch, ViewService viewService) {
             style: BorderStyle.none,
           ),
         ),
-        trailing: CupertinoButton(
-            onPressed: () {
-              dispatch(PageActionCreator.update('Say121212121', 'Hello, fish redux22222'));
-            },
-            child: Icon(CupertinoIcons.add),
-            padding: const EdgeInsets.all(0))),
+        trailing: LikeButton(
+          width: 56.0,
+          duration: Duration(milliseconds: 500),
+        )
+        // trailing: CupertinoButton(
+        //     onPressed: () {
+        //       dispatch(PageActionCreator.update('Say121212121', 'Hello, fish redux22222'));
+        //     },
+        //     child: Icon(CupertinoIcons.add),
+        //     padding: const EdgeInsets.all(0)),
+        ),
     child: Center(
         child: Column(
       children: <Widget>[
