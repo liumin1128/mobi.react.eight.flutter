@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+
 import 'package:reactmobi/blocs/theme_bloc.dart';
 import 'package:reactmobi/blocs/counter_bloc.dart';
 import 'package:reactmobi/pages/home/index.dart';
@@ -22,7 +24,21 @@ class AppState extends State<App> {
             theme: theme,
             home: BlocProvider<CounterBloc>(
               builder: (context) => CounterBloc(),
-              child: CounterPage(),
+              child: GraphQLProvider(
+                client: widget.client,
+                child: CupertinoApp(
+                  theme: CupertinoThemeData(
+                    brightness: Brightness.light,
+                    primaryColor: Color(0xFFfd4c86),
+                  ),
+                  routes: <String, WidgetBuilder>{
+                    '/': (BuildContext context) => HomePage(),
+                    // '/login': (BuildContext context) => UserLogin(),
+                    // '/register': (BuildContext context) => UserLogin(),
+                  },
+                  initialRoute: '/',
+                ),
+              ),
             ),
           );
         },
@@ -31,50 +47,50 @@ class AppState extends State<App> {
   }
 }
 
-class CounterPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final counterBloc = BlocProvider.of<CounterBloc>(context);
-    final themeBloc = BlocProvider.of<ThemeBloc>(context);
+// class CounterPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     final counterBloc = BlocProvider.of<CounterBloc>(context);
+//     final themeBloc = BlocProvider.of<ThemeBloc>(context);
 
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text("动态"),
-        border: Border(
-          top: BorderSide(
-            style: BorderStyle.none,
-          ),
-        ),
-        leading: GestureDetector(
-          onTap: () {
-            counterBloc.dispatch(CounterEvent.increment);
-          },
-          child: Icon(CupertinoIcons.bell),
-        ),
-        trailing: GestureDetector(
-          onTap: () {
-            themeBloc.dispatch(SetTheme(theme: 'dark1'));
-          },
-          child: Icon(CupertinoIcons.bell),
-        ),
-        // trailing: Icon(CupertinoCupertinoIcons.add)
-        // backgroundColor: Colors.white,
-      ),
-      // child: Center(
-      //   child: Text('1111'),
-      // ),
-      child: Center(
-        child: BlocBuilder<CounterBloc, int>(
-          builder: (context, count) {
-            return Center(
-              child: Text(
-                '$count',
-                style: TextStyle(fontSize: 24.0),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
+//     return CupertinoPageScaffold(
+//       navigationBar: CupertinoNavigationBar(
+//         middle: Text("动态"),
+//         border: Border(
+//           top: BorderSide(
+//             style: BorderStyle.none,
+//           ),
+//         ),
+//         leading: GestureDetector(
+//           onTap: () {
+//             counterBloc.dispatch(CounterEvent.increment);
+//           },
+//           child: Icon(CupertinoIcons.bell),
+//         ),
+//         trailing: GestureDetector(
+//           onTap: () {
+//             themeBloc.dispatch(SetTheme(theme: 'dark1'));
+//           },
+//           child: Icon(CupertinoIcons.bell),
+//         ),
+//         // trailing: Icon(CupertinoCupertinoIcons.add)
+//         // backgroundColor: Colors.white,
+//       ),
+//       // child: Center(
+//       //   child: Text('1111'),
+//       // ),
+//       child: Center(
+//         child: BlocBuilder<CounterBloc, int>(
+//           builder: (context, count) {
+//             return Center(
+//               child: Text(
+//                 '$count',
+//                 style: TextStyle(fontSize: 24.0),
+//               ),
+//             );
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }
