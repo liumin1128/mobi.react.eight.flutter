@@ -38,7 +38,7 @@ class ThemeBloc extends Bloc<ThemeEvent, CupertinoThemeData> {
   @override
   Stream<CupertinoThemeData> mapEventToState(ThemeEvent event) async* {
     if (event is SetTheme) {
-      yield event.theme == 'dark' ? themes['light'] : themes['dart'];
+      yield event.theme == 'dark' ? themes['light'] : themes['dark'];
     }
   }
 }

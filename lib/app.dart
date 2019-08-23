@@ -74,7 +74,7 @@ class CounterPage extends StatelessWidget {
 
               GestureDetector(
                 onTap: () {
-                  themeBloc.dispatch(SetTheme(theme: 'dark'));
+                  themeBloc.dispatch(SetTheme(theme: 'dark1'));
                 },
                 child: Icon(CupertinoIcons.bell),
               ),
