@@ -20,72 +20,34 @@ class _HomePageState extends State<HomePage> {
   static List<Widget> _widgetOptions = <Widget>[
     CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-          middle: Text("动态"),
-          border: Border(
-            top: BorderSide(
-              style: BorderStyle.none,
-            ),
-          ),
-          trailing: CupertinoButton(onPressed: () {}, child: Icon(CupertinoIcons.add), padding: const EdgeInsets.all(0))
-          // trailing: Icon(CupertinoIcons.add)
-          // backgroundColor: Colors.white,
-          ),
-      child: Center(
-        child: DynamicList(),
+        middle: Text("动态"),
+        border: Border(top: BorderSide(style: BorderStyle.none)),
       ),
+      child: DynamicList(),
     ),
     CupertinoPageScaffold(
-      // navigationBar: CupertinoNavigationBar(
-      //   middle: Text("资讯"),
-      // ),
-      child: Center(
-        child: NewsList(),
-      ),
+      child: NewsList(),
     ),
-    // CupertinoPageScaffold(
-    //   navigationBar: CupertinoNavigationBar(
-    //     backgroundColor: Colors.white,
-    //     border: Border(
-    //       top: BorderSide(
-    //         style: BorderStyle.none,
-    //       ),
-    //     ),
-    //     middle: Text(
-    //       '登录',
-    //       overflow: TextOverflow.ellipsis,
-    //       maxLines: 1,
-    //       style: new TextStyle(
-    //         fontSize: 20,
-    //       ),
-    //     ),
-    //   ),
-    //   child: UserPhoneLogin(),
-    // ),
     UserMe(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
-        tabBar: CupertinoTabBar(
-            items: [
-              BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text("动态")),
-              BottomNavigationBarItem(icon: Icon(CupertinoIcons.game_controller), title: Text("资讯")),
-              BottomNavigationBarItem(icon: Icon(CupertinoIcons.person), title: Text("设置")),
-            ],
-            currentIndex: 2,
-            // 隐藏CupertinoTabBar上边
-            border: Border(
-              top: BorderSide(
-                style: BorderStyle.none,
-              ),
-            )),
-        tabBuilder: (context, index) {
-          return CupertinoTabView(
-            builder: (context) {
-              return _widgetOptions[index];
-            },
-          );
+      tabBar: CupertinoTabBar(
+        currentIndex: 2,
+        border: Border(top: BorderSide(style: BorderStyle.none)),
+        items: [
+          BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text("动态")),
+          BottomNavigationBarItem(icon: Icon(CupertinoIcons.game_controller), title: Text("资讯")),
+          BottomNavigationBarItem(icon: Icon(CupertinoIcons.person), title: Text("设置")),
+        ],
+      ),
+      tabBuilder: (context, index) {
+        return CupertinoTabView(builder: (context) {
+          return _widgetOptions[index];
         });
+      },
+    );
   }
 }
