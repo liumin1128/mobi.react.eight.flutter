@@ -244,7 +244,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
             SizedBox(
               width: double.infinity,
               child: CupertinoButton(
-                  child: Text('立即登录2'),
+                  child: Text('立即登录'),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                   color: CupertinoTheme.of(context).primaryColor,
                   // onPressed: isPhoneNumber(_phone.text) && _code.text != ''
