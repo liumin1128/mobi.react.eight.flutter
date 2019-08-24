@@ -45,9 +45,17 @@ class UserMeState extends State<UserMe> {
     return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
         if (state is Uninitialized) {
-          return Center(child: CupertinoActivityIndicator());
+          return CupertinoPageScaffold(
+            child: Center(
+              child: CupertinoActivityIndicator(),
+            ),
+          );
         } else if (state is Unauthenticated) {
-          return Center(child: Text('Unauthenticated'));
+          return CupertinoPageScaffold(
+            child: Center(
+              child: Text('Unauthenticated'),
+            ),
+          );
         } else if (state is Authenticated) {
           return CupertinoPageScaffold(
             child: CustomScrollView(
@@ -73,6 +81,12 @@ class UserMeState extends State<UserMe> {
                               Text(state.userInfo['nickname'], style: CupertinoTheme.of(context).textTheme.textStyle),
                             ],
                           ),
+                        ),
+                        CupertinoButton(
+                          child: Text('退出登录'),
+                          onPressed: () {
+                            userBloc.dispatch(LoggedOut());
+                          },
                         )
                       ],
                     ),
@@ -82,7 +96,11 @@ class UserMeState extends State<UserMe> {
             ),
           );
         } else {
-          return Center(child: Text('Unauthenticated'));
+          return CupertinoPageScaffold(
+            child: Center(
+              child: Text('Unauthenticated'),
+            ),
+          );
         }
       },
     );
