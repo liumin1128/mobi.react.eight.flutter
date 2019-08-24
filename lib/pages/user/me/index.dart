@@ -67,7 +67,7 @@ class UserMeState extends State<UserMe> {
 
                     child: Column(children: <Widget>[
                       Text(state.userInfo['nickname']),
-                      Avatar(avatarUrl: state.userInfo['avatarUrl'],),
+                      Avatar(src: state.userInfo['avatarUrl'],),
                     ],)
                     
                   ),
