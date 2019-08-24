@@ -41,6 +41,10 @@ class UserMe extends StatelessWidget {
       child: Center(
           child: Column(
         children: <Widget>[
+          Text('1111'),
+          Text('1111'),
+          Text('1111'),
+          Text('1111'),
           Center(
             child: BlocBuilder<CounterBloc, int>(
               builder: (context, count) {
@@ -54,11 +58,11 @@ class UserMe extends StatelessWidget {
             ),
           ),
           Center(
-            child: BlocBuilder<UserBloc, Map>(
-              builder: (context, user) {
+            child: BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
                 return Center(
                   child: Text(
-                    user['token'] == null ? 'null' : user['token'],
+                    (state is Authenticated) ? state.token : 'no',
                     style: TextStyle(fontSize: 24.0),
                   ),
                 );

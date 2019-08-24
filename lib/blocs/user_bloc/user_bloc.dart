@@ -3,17 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:reactmobi/pages/user/login/phone/index.dart';
 import 'index.dart';
 
-class UserBloc extends Bloc<UserEvent, Map> {
+class UserBloc extends Bloc<UserEvent, UserState> {
   @override
-  Map get initialState => {};
+  UserState get initialState => Uninitialized();
 
   @override
-  Stream<Map> mapEventToState(UserEvent event) async* {
+  Stream<UserState> mapEventToState(UserEvent event) async* {
     if (event is SaveToken) {
-      yield {
-        'token': event.token
-      };
+      yield Authenticated(event.token);
     }
+
     if (event is LoginWithCode) {
       Navigator.of(event.context, rootNavigator: true).push(
         CupertinoPageRoute(
