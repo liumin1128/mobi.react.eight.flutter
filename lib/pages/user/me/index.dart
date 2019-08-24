@@ -53,8 +53,16 @@ class UserMeState extends State<UserMe> {
         } else if (state is Unauthenticated) {
           return CupertinoPageScaffold(
             child: Center(
-              child: Text('Unauthenticated'),
-            ),
+                child: Column(children: <Widget>[
+              Padding(padding: EdgeInsets.all(32)),
+              Text('Unauthenticated'),
+              CupertinoButton(
+                child: Text('立即登录'),
+                onPressed: () {
+                  userBloc.dispatch(LoginWithCode(context: context));
+                },
+              )
+            ])),
           );
         } else if (state is Authenticated) {
           return CupertinoPageScaffold(
