@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
-        currentIndex: 0,
+        currentIndex: 2,
         border: Border(top: BorderSide(style: BorderStyle.none)),
         items: [
           BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text("动态")),

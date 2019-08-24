@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:eight/graphql/schema/user.dart';
@@ -208,6 +209,10 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
               controller: _code,
               // autofocus: true,
               focusNode: focusNodeCode,
+              inputFormatters: <TextInputFormatter>[
+                WhitelistingTextInputFormatter.digitsOnly, //只输入数字
+                LengthLimitingTextInputFormatter(6) //限制长度
+              ],
               onChanged: (str) {
                 setState(() {
                   _code = TextEditingController.fromValue(
