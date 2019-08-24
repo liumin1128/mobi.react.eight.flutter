@@ -1,11 +1,12 @@
+import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:reactmobi/pages/user/login/phone/index.dart';
-import 'index.dart';
-import 'package:reactmobi/graphql/schema/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
+
+import 'package:reactmobi/pages/user/login/phone/index.dart';
+import 'package:reactmobi/graphql/schema/user.dart';
+import 'index.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final GraphQLClient client;
