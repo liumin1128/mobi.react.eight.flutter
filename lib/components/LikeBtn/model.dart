@@ -13,11 +13,9 @@ class DotColor {
     this.dotLastColor,
   });
 
-  Color get dotThirdColorReal =>
-      dotThirdColor == null ? dotPrimaryColor : dotThirdColor;
+  Color get dotThirdColorReal => dotThirdColor == null ? dotPrimaryColor : dotThirdColor;
 
-  Color get dotLastColorReal =>
-      dotLastColor == null ? dotSecondaryColor : dotLastColor;
+  Color get dotLastColorReal => dotLastColor == null ? dotSecondaryColor : dotLastColor;
 }
 
 class LikeIcon extends Icon {

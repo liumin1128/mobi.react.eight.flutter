@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 // import 'package:flutter_html/flutter_html.dart';
 // import 'package:flutter_redux/flutter_redux.dart';
@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:reactmobi/utils/common.dart';
 import 'package:reactmobi/components/Icons/Eva.dart';
 import 'package:reactmobi/components/Lazyload/Image.dart';
+import 'package:reactmobi/components/Ui/Avatar/avatar.dart';
 
 text2html(str) {
   return str;
@@ -32,7 +33,7 @@ class DynamicItem extends StatelessWidget {
     final createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])));
 
     return Container(
-        decoration: BoxDecoration(color: Colors.white),
+        decoration: BoxDecoration(color: CupertinoColors.white),
         // margin: const EdgeInsets.only(bottom: 8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -44,16 +45,14 @@ class DynamicItem extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(right: 16),
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(data['user']['avatarUrl']),
-                      ),
+                      child: Avatar(src: data['user']['avatarUrl']),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        Text(data['user']['nickname'], style: Theme.of(context).textTheme.body2),
-                        Text(createdAt, style: Theme.of(context).textTheme.caption),
+                        Text(data['user']['nickname'], style: CupertinoTheme.of(context).textTheme.actionTextStyle),
+                        Text(createdAt, style: CupertinoTheme.of(context).textTheme.actionTextStyle),
                       ],
                     )
                   ],
@@ -61,8 +60,8 @@ class DynamicItem extends StatelessWidget {
             Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 alignment: Alignment.topLeft,
-                child: Text(data['content'], style: Theme.of(context).textTheme.body1
-                    // .copyWith(color: Colors.black87)
+                child: Text(data['content'], style: CupertinoTheme.of(context).textTheme.actionTextStyle
+                    // .copyWith(color: CupertinoColors.black87)
                     )),
             data['pictures'].length > 0
                 ? Container(
@@ -80,19 +79,19 @@ class DynamicItem extends StatelessWidget {
               child: Wrap(children: <Widget>[
                 Icon(
                   EvaIcons.heartOutline,
-                  color: Colors.black38,
+                  color: CupertinoColors.black,
                   size: 16,
                 ),
                 Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                Text(data['zanCount'].toString(), style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black38, fontSize: 16)),
+                Text(data['zanCount'].toString(), style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: CupertinoColors.black, fontSize: 16)),
                 Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
                 Icon(
                   EvaIcons.messageCircleOutline,
-                  color: Colors.black38,
+                  color: CupertinoColors.black,
                   size: 16,
                 ),
                 Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                Text(data['commentCount'].toString(), style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black38, fontSize: 16)),
+                Text(data['commentCount'].toString(), style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: CupertinoColors.black, fontSize: 16)),
               ]),
             ),
             Container(

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+// // import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -74,7 +74,7 @@ class _NewsDetailState extends State<NewsDetail> {
                                           return ClipRRect(
                                               borderRadius: BorderRadius.circular(4),
                                               child: Container(
-                                                  decoration: BoxDecoration(color: Colors.black12),
+                                                  decoration: BoxDecoration(color: CupertinoColors.black),
                                                   child: FadeInImage.memoryNetwork(
                                                     placeholder: kTransparentImage,
                                                     image: node.attributes['src'],

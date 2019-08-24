@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:reactmobi/components/ListViewPro/index.dart';
@@ -43,7 +43,7 @@ class _NewsListState extends State<NewsList> {
                                       style: BorderStyle.none,
                                     ),
                                   ),
-                                  // backgroundColor: Colors.white,
+                                  // backgroundColor: CupertinoColors.white,
                                   // padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
                                   middle: Text(
                                     data['title'],
@@ -69,7 +69,7 @@ class _NewsListState extends State<NewsList> {
                                     child: ClipRRect(
                                         borderRadius: BorderRadius.circular(4),
                                         child: Container(
-                                            decoration: BoxDecoration(color: Colors.black12),
+                                            decoration: BoxDecoration(color: CupertinoColors.black),
                                             child: FadeInImage.memoryNetwork(
                                               placeholder: kTransparentImage,
                                               image: smallCover,
@@ -81,12 +81,12 @@ class _NewsListState extends State<NewsList> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: <Widget>[
-                                              Text(data['title'], maxLines: 2, softWrap: true, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.title.copyWith(fontWeight: FontWeight.normal)),
+                                              Text(data['title'], maxLines: 2, softWrap: true, overflow: TextOverflow.ellipsis, style: CupertinoTheme.of(context).textTheme.navActionTextStyle.copyWith(fontWeight: FontWeight.normal)),
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: <Widget>[
-                                                  Text(data['appName'], style: Theme.of(context).textTheme.caption),
-                                                  Text(createdAt, style: Theme.of(context).textTheme.caption),
+                                                  Text(data['appName'], style: CupertinoTheme.of(context).textTheme.actionTextStyle),
+                                                  Text(createdAt, style: CupertinoTheme.of(context).textTheme.actionTextStyle),
                                                 ],
                                               )
                                             ],

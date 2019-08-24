@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // ListViewPro 默认的实例
 class ListViewPro extends StatefulWidget {
-  ListViewPro({ Key key, this.onScrollToBottom, this.onRefresh, this.itemCount, this.itemBuilder }) : super(key: key);
+  ListViewPro({Key key, this.onScrollToBottom, this.onRefresh, this.itemCount, this.itemBuilder}) : super(key: key);
   final onScrollToBottom;
   final onRefresh;
   final itemCount;
@@ -13,7 +13,6 @@ class ListViewPro extends StatefulWidget {
 
 // ListViewPro 默认的实例,有状态
 class _ListViewProState extends State<ListViewPro> {
-
   ScrollController _scrollController = ScrollController(); //listview的控制器
 
   @override
@@ -35,26 +34,25 @@ class _ListViewProState extends State<ListViewPro> {
   Future<Null> _onRefresh() async {
     print('onRefresh');
     // if(widget.onRefresh != null) {
-      widget.onRefresh();
+    widget.onRefresh();
     // }
   }
 
   Future<Null> _onScrollToBottom() async {
     print('onScrollToBottom');
     // if(widget.onScrollToBottom != null) {
-      widget.onScrollToBottom();
+    widget.onScrollToBottom();
     // }
   }
 
   @override
   Widget build(BuildContext context) {
     return new RefreshIndicator(
-      onRefresh: _onRefresh,
-      child: ListView.builder(
-        controller: _scrollController,
-        itemCount: widget.itemCount,
-        itemBuilder: widget.itemBuilder,
-      )
-    );
+        onRefresh: _onRefresh,
+        child: ListView.builder(
+          controller: _scrollController,
+          itemCount: widget.itemCount,
+          itemBuilder: widget.itemBuilder,
+        ));
   }
 }

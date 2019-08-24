@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -172,13 +172,13 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
 
               style: new TextStyle(
                 fontSize: 22,
-                color: Colors.black87,
+                color: CupertinoColors.black,
               ),
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     style: BorderStyle.solid,
-                    color: Colors.black12,
+                    color: CupertinoColors.black,
                   ),
                 ),
               ),
@@ -229,13 +229,13 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
               // keyboardType: TextInputType.phone,
               style: new TextStyle(
                 fontSize: 22,
-                color: Colors.black87,
+                color: CupertinoColors.inactiveGray,
               ),
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     style: BorderStyle.solid,
-                    color: Colors.black12,
+                    color: CupertinoColors.black,
                   ),
                 ),
               ),

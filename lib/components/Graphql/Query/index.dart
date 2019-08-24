@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -6,13 +6,11 @@ typedef BoolCallback = bool Function();
 typedef FutureCallback = Future<void> Function();
 
 typedef QueryBuilder = Widget Function(
-  List list, 
-  bool loading,
-  {
-    FutureCallback refetch,
-    FutureCallback fetchMore,
-  }
-);
+  List list,
+  bool loading, {
+  FutureCallback refetch,
+  FutureCallback fetchMore,
+});
 
 class QueryPro extends StatefulWidget {
   const QueryPro({
@@ -30,22 +28,18 @@ class QueryPro extends StatefulWidget {
   _QueryProState createState() => _QueryProState();
 }
 
-
 class _QueryProState extends State<QueryPro> {
   @override
   Widget build(BuildContext context) {
-    return GraphQLConsumer(
-      builder: (GraphQLClient client) {
-        return QueryProWidthClient(
-          builder: widget.builder,
-          document: widget.document,
-          client: client,
-        );
-      }
-    );
+    return GraphQLConsumer(builder: (GraphQLClient client) {
+      return QueryProWidthClient(
+        builder: widget.builder,
+        document: widget.document,
+        client: client,
+      );
+    });
   }
 }
-
 
 // QueryPro 默认的实例
 class QueryProWidthClient extends StatefulWidget {
@@ -78,7 +72,7 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
     loading = true;
     page = page += 1;
     _streamController.sink.add(loading);
-    
+
     final QueryResult res = await widget.client.mutate(
       MutationOptions(
         document: widget.document,
@@ -89,7 +83,7 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
       ),
     );
     loading = false;
-    if(res.hasErrors) return;
+    if (res.hasErrors) return;
     list = list..addAll(res.data['list']);
     _streamController.sink.add(loading);
     _streamController.sink.add(list);
@@ -98,7 +92,7 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
   Future<void> _refresh() async {
     page = 0;
     loading = true;
-    _streamController.sink.add(loading); 
+    _streamController.sink.add(loading);
     print('11111');
     // await new Future<void>.delayed(const Duration(seconds: 5));
     final QueryResult res = await widget.client.mutate(
@@ -112,7 +106,7 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
     );
     print('22222');
     loading = false;
-    if(res.hasErrors) return;
+    if (res.hasErrors) return;
     list = res.data['list'];
     _streamController.sink.add(loading);
     _streamController.sink.add(list);
@@ -139,7 +133,7 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
         BuildContext buildContext,
         AsyncSnapshot snapshot,
       ) {
-        return widget?.builder(list, loading, refetch: _refresh, fetchMore: _fetchMore );
+        return widget?.builder(list, loading, refetch: _refresh, fetchMore: _fetchMore);
       },
     );
   }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
 class ScrollableDemoState extends State<ScrollableDemo> {
   ScrollController _controller;
@@ -26,12 +26,8 @@ class ScrollableDemoState extends State<ScrollableDemo> {
         body: new Container(
           child: new NotificationListener(
             onNotification: (notification) {
-              if (notification is ScrollUpdateNotification &&
-                  notification.depth == 0 &&
-                  !_isLoding &&
-                  !_isRefreshing) {
-                if (notification.metrics.pixels ==
-                    notification.metrics.maxScrollExtent) {
+              if (notification is ScrollUpdateNotification && notification.depth == 0 && !_isLoding && !_isRefreshing) {
+                if (notification.metrics.pixels == notification.metrics.maxScrollExtent) {
                   setState(() {
                     _isLoding = true;
                     loadingText = "加载中.....";
