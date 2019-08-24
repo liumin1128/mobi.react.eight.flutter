@@ -61,15 +61,11 @@ class UserMeState extends State<UserMe> {
                   border: Border(top: BorderSide(style: BorderStyle.none)),
                 ),
                 SliverSafeArea(
-                  // top: true, 
-                  bottom: true,
                   sliver: SliverToBoxAdapter(
-
                     child: Column(children: <Widget>[
-                      Text(state.userInfo['nickname']),
                       Avatar(src: state.userInfo['avatarUrl'],),
+                      Text(state.userInfo['nickname'], style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle),
                     ],)
-                    
                   ),
                 )
               ],
