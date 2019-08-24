@@ -116,6 +116,9 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
     if (data['status'] == 200) {
       print('登录成功');
       print(data['token']);
+
+      Navigator.pop(context, 1);
+
       _userLogin(context, data['token']);
     } else if (data['status'] == 403) {
       print('用户名密码错误');
@@ -125,7 +128,6 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
   }
 
   Future<void> _userLogin(BuildContext context, String token) async {
-    Navigator.pop(context, 1);
     final userBloc = BlocProvider.of<UserBloc>(context);
     userBloc.dispatch(GetUserInfo(token: token));
     return;
@@ -134,7 +136,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
   @override
   Widget build(BuildContext context) {
     // final counterBloc = BlocProvider.of<CounterBloc>(context);
-    // final userBloc = BlocProvider.of<UserBloc>(context);
+    final userBloc = BlocProvider.of<UserBloc>(context);
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -268,7 +270,8 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
 
                     // counterBloc.dispatch(CounterEvent.increment);
 
-                    // userBloc.dispatch(SaveToken(token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8'));
+                    // userBloc.dispatch(GetUserInfo(token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NjYwMzE0LCJleHAiOjE1NjcyNjUxMTR9.RJukMemk7wSiiMNktKBbmrwz75H32-ai8sh2YMVMBAs'));
+
                     // return;
 
                     if (!isPhoneNumber(_phone.text)) {

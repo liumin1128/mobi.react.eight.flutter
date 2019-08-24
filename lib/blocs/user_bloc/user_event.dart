@@ -42,6 +42,13 @@ class LoggedIn extends UserEvent {
 }
 
 class LoggedOut extends UserEvent {
+  final BuildContext context;
+
+  LoggedOut({@required this.context})
+      : super([
+          context
+        ]);
+
   @override
   String toString() => 'LoggedOut';
 }

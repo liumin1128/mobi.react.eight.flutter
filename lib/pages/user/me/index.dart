@@ -93,7 +93,7 @@ class UserMeState extends State<UserMe> {
                         CupertinoButton(
                           child: Text('退出登录'),
                           onPressed: () {
-                            userBloc.dispatch(LoggedOut());
+                            userBloc.dispatch(LoggedOut(context: context));
                           },
                         )
                       ],
