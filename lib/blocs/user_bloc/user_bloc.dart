@@ -26,9 +26,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       await prefs.setString('token', event.token);
 
       // 获取用户信息
-      final QueryResult res = await client.mutate(MutationOptions(
-        document: userInfo,
-      ));
+      final QueryResult res = await client.mutate(MutationOptions(document: userInfo));
 
       if (res.hasErrors) return;
 
