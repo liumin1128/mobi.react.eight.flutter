@@ -5,7 +5,6 @@ import 'package:reactmobi/blocs/theme_bloc.dart';
 import 'package:reactmobi/blocs/counter_bloc.dart';
 import 'package:reactmobi/blocs/user_bloc/index.dart';
 import 'package:reactmobi/pages/home/index.dart';
-import 'package:reactmobi/pages/user/me/index.dart';
 
 class App extends StatefulWidget {
   App({this.client});

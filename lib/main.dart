@@ -3,9 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'app.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
@@ -37,8 +35,6 @@ Future<void> main() async {
   final AuthLink authLink = AuthLink(getToken: () async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String _token = prefs.getString('token');
-    // print('111111111111111111');
-    // print(_token);
     return 'Bearer $_token';
   });
 
