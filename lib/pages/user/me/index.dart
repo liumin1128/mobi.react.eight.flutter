@@ -50,27 +50,37 @@ class UserMeState extends State<UserMe> {
           return Center(child: Text('Unauthenticated'));
         } else if (state is Authenticated) {
           return CupertinoPageScaffold(
-              child: CustomScrollView(
-            controller: _scrollController,
-            physics: ScrollPhysics(),
-            slivers: <Widget>[
-              // CupertinoSliverNavigationBar(
-              //   largeTitle: Text('个人中心'),
-              //   border: Border(top: BorderSide(style: BorderStyle.none)),
-              // ),
-              SliverSafeArea(
-                sliver: SliverToBoxAdapter(
+            child: CustomScrollView(
+              controller: _scrollController,
+              physics: ScrollPhysics(),
+              slivers: <Widget>[
+                // CupertinoSliverNavigationBar(
+                //   largeTitle: Text('个人中心'),
+                //   border: Border(top: BorderSide(style: BorderStyle.none)),
+                // ),
+                SliverSafeArea(
+                  sliver: SliverToBoxAdapter(
                     child: Column(
-                  children: <Widget>[
-                    Avatar(
-                      src: state.userInfo['avatarUrl'],
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(32),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Avatar(src: state.userInfo['avatarUrl'], size: 64),
+                              Padding(padding: EdgeInsets.all(16)),
+                              Text(state.userInfo['nickname'], style: CupertinoTheme.of(context).textTheme.textStyle),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
-                    Text(state.userInfo['nickname'], style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle),
-                  ],
-                )),
-              )
-            ],
-          ));
+                  ),
+                )
+              ],
+            ),
+          );
         } else {
           return Center(child: Text('Unauthenticated'));
         }
