@@ -11,6 +11,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   Stream<UserState> mapEventToState(UserEvent event) async* {
     if (event is SaveToken) {
       yield Authenticated(event.token);
+
+      // yield GetUserInfo(token: event.token);
     }
 
     if (event is LoginWithCode) {
@@ -40,6 +42,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           ),
         ),
       );
+    }
+
+    if (event is SetUserInfo) {
+      // final QueryResult r = await graphQLClientClient.mutate(MutationOptions(
+      //   document: uploadMutation,
+      //   variables: {},
+      // ));
+
+      // yield Authenticated(event.userInfo);
     }
   }
 }

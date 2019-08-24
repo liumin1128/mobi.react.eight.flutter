@@ -30,3 +30,27 @@ class SaveToken extends UserEvent {
   @override
   String toString() => 'SaveToken { token: $token }';
 }
+
+class GetUserInfo extends UserEvent {
+  final String token;
+
+  GetUserInfo({@required this.token})
+      : super([
+          token
+        ]);
+
+  @override
+  String toString() => 'SaveToken { token: $token }';
+}
+
+class SetUserInfo extends UserEvent {
+  final Map userInfo;
+
+  SetUserInfo({@required this.userInfo})
+      : super([
+          userInfo
+        ]);
+
+  @override
+  String toString() => 'SaveToken { userInfo: $userInfo }';
+}

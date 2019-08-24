@@ -21,13 +21,13 @@ class AppState extends State<App> {
       client: widget.client,
       child: BlocProvider<ThemeBloc>(
         builder: (context) => ThemeBloc(),
-        child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
-          builder: (context, theme) {
-            return BlocProvider<CounterBloc>(
-              builder: (context) => CounterBloc(),
-              child: BlocProvider<UserBloc>(
-                builder: (context) => UserBloc(),
-                child: CupertinoApp(
+        child: BlocProvider<CounterBloc>(
+          builder: (context) => CounterBloc(),
+          child: BlocProvider<UserBloc>(
+            builder: (context) => UserBloc(),
+            child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
+              builder: (context, theme) {
+                return CupertinoApp(
                   theme: theme,
                   routes: <String, WidgetBuilder>{
                     '/': (BuildContext context) => HomePage(),
@@ -35,10 +35,10 @@ class AppState extends State<App> {
                     // '/register': (BuildContext context) => UserLogin(),
                   },
                   initialRoute: '/',
-                ),
-              ),
-            );
-          },
+                );
+              },
+            ),
+          ),
         ),
       ),
     );
