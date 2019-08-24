@@ -12,9 +12,20 @@ class Avatar extends StatefulWidget {
 class _AvatarState extends State<Avatar> {
   @override
   Widget build(BuildContext context) {
-    return FadeInImage.memoryNetwork(
-      placeholder: kTransparentImage,
-      image: widget.avatarUrl,
+    return Container(
+      width: 100,
+      height: 100,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: Container(
+          decoration: BoxDecoration(color: CupertinoColors.activeGreen),
+          child: FadeInImage.memoryNetwork(
+            fit: BoxFit.cover,
+            placeholder: kTransparentImage,
+            image: widget.avatarUrl,
+          ),
+        ),
+      ),
     );
   }
 }
