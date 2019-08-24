@@ -21,12 +21,29 @@ class LoginWithCode extends UserEvent {
   String toString() => 'LoginWithCode';
 }
 
+class SaveToken extends UserEvent {
+  final String token;
+
+  SaveToken({@required this.token})
+      : super([
+          token
+        ]);
+
+  @override
+  String toString() => 'SaveToken { token: $token }';
+}
+
 class UserBloc extends Bloc<UserEvent, Map> {
   @override
   Map get initialState => {};
 
   @override
   Stream<Map> mapEventToState(UserEvent event) async* {
+    if (event is SaveToken) {
+      yield {
+        'token': event.token
+      };
+    }
     if (event is LoginWithCode) {
       Navigator.of(event.context, rootNavigator: true).push(
         CupertinoPageRoute(

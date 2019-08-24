@@ -39,17 +39,34 @@ class UserMe extends StatelessWidget {
       //   child: Text('1111'),
       // ),
       child: Center(
-        child: BlocBuilder<CounterBloc, int>(
-          builder: (context, count) {
-            return Center(
-              child: Text(
-                '$count',
-                style: TextStyle(fontSize: 24.0),
-              ),
-            );
-          },
-        ),
-      ),
+          child: Column(
+        children: <Widget>[
+          Center(
+            child: BlocBuilder<CounterBloc, int>(
+              builder: (context, count) {
+                return Center(
+                  child: Text(
+                    '$count',
+                    style: TextStyle(fontSize: 24.0),
+                  ),
+                );
+              },
+            ),
+          ),
+          Center(
+            child: BlocBuilder<UserBloc, Map>(
+              builder: (context, user) {
+                return Center(
+                  child: Text(
+                    user['token'] == null ? 'null' : user['token'],
+                    style: TextStyle(fontSize: 24.0),
+                  ),
+                );
+              },
+            ),
+          )
+        ],
+      )),
     );
   }
 }

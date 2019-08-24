@@ -9,7 +9,7 @@ import 'getPhoneCode.dart';
 import 'showCountryCodePicker.dart';
 
 import 'package:reactmobi/blocs/counter_bloc.dart';
-import 'package:reactmobi/blocs/theme_bloc.dart';
+import 'package:reactmobi/blocs/user_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserPhoneLogin extends StatefulWidget {
@@ -139,7 +139,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
   @override
   Widget build(BuildContext context) {
     final counterBloc = BlocProvider.of<CounterBloc>(context);
-    final themeBloc = BlocProvider.of<ThemeBloc>(context);
+    final userBloc = BlocProvider.of<UserBloc>(context);
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -272,6 +272,8 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     _saveToken(context, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8');
 
                     counterBloc.dispatch(CounterEvent.increment);
+
+                    userBloc.dispatch(SaveToken(token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8'));
                     return;
 
                     if (!isPhoneNumber(_phone.text)) {
