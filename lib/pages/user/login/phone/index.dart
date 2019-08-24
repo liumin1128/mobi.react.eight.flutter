@@ -264,12 +264,12 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     print(_phone.text);
                     print(_code.text);
                     print(_countryCode);
-                    _userLogin(context, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8');
+                    // _userLogin(context, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8');
 
                     // counterBloc.dispatch(CounterEvent.increment);
 
                     // userBloc.dispatch(SaveToken(token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8'));
-                    return;
+                    // return;
 
                     if (!isPhoneNumber(_phone.text)) {
                       alert(
@@ -289,7 +289,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                       return;
                     }
 
-                    // _loginWithCode(context, _countryCode, _phone.text, _code.text);
+                    _loginWithCode(context, _countryCode, _phone.text, _code.text);
                   }),
             ),
           ],
