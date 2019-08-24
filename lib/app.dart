@@ -24,7 +24,7 @@ class AppState extends State<App> {
           child: BlocProvider<CounterBloc>(
             builder: (context) => CounterBloc(),
             child: BlocProvider<UserBloc>(
-              builder: (context) => UserBloc(client: client),
+              builder: (context) => UserBloc(client: client)..dispatch(AppStarted()),
               child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
                 builder: (context, theme) {
                   return CupertinoApp(

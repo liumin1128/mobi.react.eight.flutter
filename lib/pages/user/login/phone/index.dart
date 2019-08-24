@@ -116,6 +116,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
     if (data['status'] == 200) {
       print('登录成功');
       print(data['token']);
+      _userLogin(context, data['token']);
     } else if (data['status'] == 403) {
       print('用户名密码错误');
     } else {

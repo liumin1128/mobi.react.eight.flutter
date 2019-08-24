@@ -30,3 +30,18 @@ class GetUserInfo extends UserEvent {
   @override
   String toString() => 'GetUserInfo { token: $token }';
 }
+
+class AppStarted extends UserEvent {
+  @override
+  String toString() => 'AppStarted';
+}
+
+class LoggedIn extends UserEvent {
+  @override
+  String toString() => 'LoggedIn';
+}
+
+class LoggedOut extends UserEvent {
+  @override
+  String toString() => 'LoggedOut';
+}
