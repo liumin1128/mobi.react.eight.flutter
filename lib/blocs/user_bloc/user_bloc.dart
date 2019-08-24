@@ -4,6 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:reactmobi/pages/user/login/phone/index.dart';
 import 'index.dart';
 import 'package:reactmobi/graphql/schema/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final GraphQLClient client;
@@ -15,15 +16,16 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
-    if (event is SaveToken) {
-      // yield Authenticated(event.token);
-      dispatch(GetUserInfo(token: event.token));
-    }
+    // if (event is SaveToken) {
+    //   dispatch(GetUserInfo(token: event.token));
+    // }
 
     if (event is GetUserInfo) {
-      print('GetUserInfo');
-      print(event.token);
+      // 设置token
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('token', event.token);
 
+      // 获取用户信息
       final QueryResult res = await client.mutate(MutationOptions(
         document: userInfo,
       ));

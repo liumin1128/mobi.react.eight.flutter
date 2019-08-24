@@ -123,23 +123,17 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
     }
   }
 
-  Future<void> _saveToken(BuildContext context, String token) async {
-    print(token);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    prefs.setString('token', token);
-    String _aaa = prefs.getString('token');
-    print(_aaa);
-
+  Future<void> _userLogin(BuildContext context, String token) async {
     Navigator.pop(context, 1);
-
+    final userBloc = BlocProvider.of<UserBloc>(context);
+    userBloc.dispatch(GetUserInfo(token: token));
     return;
   }
 
   @override
   Widget build(BuildContext context) {
-    final counterBloc = BlocProvider.of<CounterBloc>(context);
-    final userBloc = BlocProvider.of<UserBloc>(context);
+    // final counterBloc = BlocProvider.of<CounterBloc>(context);
+    // final userBloc = BlocProvider.of<UserBloc>(context);
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -269,11 +263,11 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     print(_phone.text);
                     print(_code.text);
                     print(_countryCode);
-                    _saveToken(context, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8');
+                    _userLogin(context, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8');
 
-                    counterBloc.dispatch(CounterEvent.increment);
+                    // counterBloc.dispatch(CounterEvent.increment);
 
-                    userBloc.dispatch(SaveToken(token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8'));
+                    // userBloc.dispatch(SaveToken(token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8'));
                     return;
 
                     if (!isPhoneNumber(_phone.text)) {

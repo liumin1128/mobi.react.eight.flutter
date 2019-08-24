@@ -19,18 +19,6 @@ class LoginWithCode extends UserEvent {
   String toString() => 'LoginWithCode';
 }
 
-class SaveToken extends UserEvent {
-  final String token;
-
-  SaveToken({@required this.token})
-      : super([
-          token
-        ]);
-
-  @override
-  String toString() => 'SaveToken { token: $token }';
-}
-
 class GetUserInfo extends UserEvent {
   final String token;
 
@@ -40,17 +28,5 @@ class GetUserInfo extends UserEvent {
         ]);
 
   @override
-  String toString() => 'SaveToken { token: $token }';
-}
-
-class SetUserInfo extends UserEvent {
-  final Map userInfo;
-
-  SetUserInfo({@required this.userInfo})
-      : super([
-          userInfo
-        ]);
-
-  @override
-  String toString() => 'SaveToken { userInfo: $userInfo }';
+  String toString() => 'GetUserInfo { token: $token }';
 }
