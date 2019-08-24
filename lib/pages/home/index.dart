@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 // import 'package:eight/pages/dynamic/list/index.dart';
 import 'package:eight/pages/user/me/index.dart';
-// import 'package:eight/pages/news/list/index.dart';
+import 'package:eight/pages/news/list/index.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
         middle: Text("动态"),
         border: Border(top: BorderSide(style: BorderStyle.none)),
       ),
-      child: Text('222'),
+      child: NewsList(),
     ),
 
     CupertinoPageScaffold(
