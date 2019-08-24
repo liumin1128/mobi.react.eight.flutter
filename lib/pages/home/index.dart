@@ -23,21 +23,9 @@ class _HomePageState extends State<HomePage> {
       child: Text('111'),
     ),
 
-    CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text("动态"),
-        border: Border(top: BorderSide(style: BorderStyle.none)),
-      ),
-      child: NewsList(),
-    ),
+    NewsList(),
 
-    CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text("动态"),
-        border: Border(top: BorderSide(style: BorderStyle.none)),
-      ),
-      child: UserMe(),
-    ),
+    UserMe(),
     // CupertinoPageScaffold(
     //   child: NewsList(),
     // ),
@@ -48,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
-        currentIndex: 2,
+        currentIndex: 1,
         border: Border(top: BorderSide(style: BorderStyle.none)),
         items: [
           BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text("动态")),
