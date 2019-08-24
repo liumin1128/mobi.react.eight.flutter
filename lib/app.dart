@@ -18,28 +18,30 @@ class AppState extends State<App> {
   Widget build(BuildContext context) {
     return GraphQLProvider(
       client: widget.client,
-      child: BlocProvider<ThemeBloc>(
-        builder: (context) => ThemeBloc(),
-        child: BlocProvider<CounterBloc>(
-          builder: (context) => CounterBloc(),
-          child: BlocProvider<UserBloc>(
-            builder: (context) => UserBloc(),
-            child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
-              builder: (context, theme) {
-                return CupertinoApp(
-                  theme: theme,
-                  routes: <String, WidgetBuilder>{
-                    '/': (BuildContext context) => HomePage(),
-                    // '/login': (BuildContext context) => UserLogin(),
-                    // '/register': (BuildContext context) => UserLogin(),
-                  },
-                  initialRoute: '/',
-                );
-              },
+      child: GraphQLConsumer(builder: (GraphQLClient client) {
+        return BlocProvider<ThemeBloc>(
+          builder: (context) => ThemeBloc(),
+          child: BlocProvider<CounterBloc>(
+            builder: (context) => CounterBloc(),
+            child: BlocProvider<UserBloc>(
+              builder: (context) => UserBloc(client: client),
+              child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
+                builder: (context, theme) {
+                  return CupertinoApp(
+                    theme: theme,
+                    routes: <String, WidgetBuilder>{
+                      '/': (BuildContext context) => HomePage(),
+                      // '/login': (BuildContext context) => UserLogin(),
+                      // '/register': (BuildContext context) => UserLogin(),
+                    },
+                    initialRoute: '/',
+                  );
+                },
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

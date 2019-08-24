@@ -18,12 +18,14 @@ class Unauthenticated extends UserState {
 
 class Authenticated extends UserState {
   final String token;
+  final Map userInfo;
 
-  Authenticated(this.token)
+  Authenticated(this.token, this.userInfo)
       : super([
-          token
+          token,
+          userInfo
         ]);
 
   @override
-  String toString() => 'Authenticated { token: $token }';
+  String toString() => 'Authenticated { token: $token, userInfo: $userInfo[\'nickname\'] }';
 }

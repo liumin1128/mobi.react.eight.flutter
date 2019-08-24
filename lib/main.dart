@@ -4,6 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
 
@@ -33,9 +34,13 @@ Future<void> main() async {
     uri: 'http://api.react.mobi/graphql',
   );
 
-  final AuthLink authLink = AuthLink(
-    getToken: () async => 'Bearer <YOUR_PERSONAL_ACCESS_TOKEN>',
-  );
+  final AuthLink authLink = AuthLink(getToken: () async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String _token = prefs.getString('token');
+    // print('111111111111111111');
+    // print(_token);
+    return 'Bearer $_token';
+  });
 
   final Link link = authLink.concat(httpLink as Link);
 

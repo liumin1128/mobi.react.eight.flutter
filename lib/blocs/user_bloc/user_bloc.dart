@@ -1,18 +1,38 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:reactmobi/pages/user/login/phone/index.dart';
 import 'index.dart';
+import 'package:reactmobi/graphql/schema/user.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
+  final GraphQLClient client;
+
+  UserBloc({@required this.client}) : assert(client != null);
+
   @override
   UserState get initialState => Uninitialized();
 
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
     if (event is SaveToken) {
-      yield Authenticated(event.token);
+      // yield Authenticated(event.token);
+      dispatch(GetUserInfo(token: event.token));
+    }
 
-      // yield GetUserInfo(token: event.token);
+    if (event is GetUserInfo) {
+      print('GetUserInfo');
+      print(event.token);
+
+      final QueryResult res = await client.mutate(MutationOptions(
+        document: userInfo,
+      ));
+
+      if (res.hasErrors) return;
+
+      var _userInfo = res.data['userInfo'];
+
+      yield Authenticated(event.token, _userInfo);
     }
 
     if (event is LoginWithCode) {
@@ -42,15 +62,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           ),
         ),
       );
-    }
-
-    if (event is SetUserInfo) {
-      // final QueryResult r = await graphQLClientClient.mutate(MutationOptions(
-      //   document: uploadMutation,
-      //   variables: {},
-      // ));
-
-      // yield Authenticated(event.userInfo);
     }
   }
 }

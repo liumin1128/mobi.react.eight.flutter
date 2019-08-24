@@ -68,6 +68,18 @@ class UserMe extends StatelessWidget {
                 );
               },
             ),
+          ),
+          Center(
+            child: BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                return Center(
+                  child: Text(
+                    (state is Authenticated) ? state.userInfo['nickname'] : 'no',
+                    style: TextStyle(fontSize: 24.0),
+                  ),
+                );
+              },
+            ),
           )
         ],
       )),
