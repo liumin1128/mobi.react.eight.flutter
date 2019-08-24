@@ -31,7 +31,7 @@ class AppState extends State<App> {
                   return CupertinoApp(
                     theme: theme,
                     routes: <String, WidgetBuilder>{
-                      '/': (BuildContext context) => UserMe(),
+                      '/': (BuildContext context) => HomePage(),
                       // '/login': (BuildContext context) => UserLogin(),
                       // '/register': (BuildContext context) => UserLogin(),
                     },
