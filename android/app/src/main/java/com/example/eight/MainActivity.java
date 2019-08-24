@@ -1,4 +1,4 @@
-package com.example.reactmobi;
+package com.example.eight;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

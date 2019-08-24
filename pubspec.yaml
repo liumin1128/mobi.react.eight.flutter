@@ -1,4 +1,4 @@
-name: reactmobi
+name: eight
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -14,36 +14,27 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.1.0 <3.0.0'
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  flutter_bloc: ^0.21.0
-  equatable: ^0.3.0
-  # redux: ^3.0.0
-  # flutter_redux: ^0.5.3
-  graphql_flutter: ^2.0.0
-  flutter_html: ^0.10.4
-  transparent_image: ^1.0.0
-
-  fish_redux: ^0.2.5
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
-  shared_preferences: ^0.5.3+4
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -76,14 +67,6 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-
-  assets:
-    - assets/config/countries.json
-
-  fonts:
-    - family: EvaIcons
-      fonts:
-        - asset: assets/fonts/EvaIcons.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
