@@ -3,13 +3,80 @@ import 'package:reactmobi/blocs/counter_bloc.dart';
 import 'package:reactmobi/blocs/theme_bloc.dart';
 import 'package:reactmobi/blocs/user_bloc/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reactmobi/components/Ui/Avatar/avatar.dart';
 
-class UserMe extends StatelessWidget {
+
+class UserMe extends StatefulWidget {
+  @override
+  UserMeState createState() => UserMeState();
+}
+
+class UserMeState extends State<UserMe> {
+  ScrollController _scrollController = ScrollController(); //listview的控制器
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+        _onScrollToBottom();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
+  Future<Null> _onScrollToBottom() async {
+    print('onScrollToBottom');
+    // if(widget.onScrollToBottom != null) {
+    // await widget.onScrollToBottom();
+    // }
+  }
+
   @override
   Widget build(BuildContext context) {
     final counterBloc = BlocProvider.of<CounterBloc>(context);
     final themeBloc = BlocProvider.of<ThemeBloc>(context);
     final userBloc = BlocProvider.of<UserBloc>(context);
+
+    return BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+      if (state is Uninitialized) {
+        return Center(child: CupertinoActivityIndicator());
+      }
+      if (state is Unauthenticated) {
+        return Center(child: Text('Unauthenticated'));
+      }
+      if(state is Authenticated) {
+        return CupertinoPageScaffold(
+            child: CustomScrollView(
+              controller: _scrollController,
+              physics: ScrollPhysics(),
+              slivers: <Widget>[
+                CupertinoSliverNavigationBar(
+                  largeTitle: Text('个人中心'),
+                  border: Border(top: BorderSide(style: BorderStyle.none)),
+                ),
+                SliverSafeArea(
+                  // top: true, 
+                  bottom: true,
+                  sliver: SliverToBoxAdapter(
+
+                    child: Column(children: <Widget>[
+                      Text(state.userInfo['nickname']),
+                      Avatar(avatarUrl: state.userInfo['avatarUrl'],),
+                    ],)
+                    
+                  ),
+                )
+              ],
+            )
+        );
+      }
+ 
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
@@ -27,7 +94,6 @@ class UserMe extends StatelessWidget {
         ),
         trailing: GestureDetector(
           onTap: () {
-            // themeBloc.dispatch(SetTheme(theme: 'dark1'));
             userBloc.dispatch(LoginWithCode(context: context));
           },
           child: Icon(CupertinoIcons.bell),
@@ -38,13 +104,9 @@ class UserMe extends StatelessWidget {
       // child: Center(
       //   child: Text('1111'),
       // ),
-      child: Center(
+      child: Container(
           child: Column(
         children: <Widget>[
-          Text('1111'),
-          Text('1111'),
-          Text('1111'),
-          Text('1111'),
           Center(
             child: BlocBuilder<CounterBloc, int>(
               builder: (context, count) {

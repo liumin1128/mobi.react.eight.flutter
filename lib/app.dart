@@ -5,6 +5,7 @@ import 'package:reactmobi/blocs/theme_bloc.dart';
 import 'package:reactmobi/blocs/counter_bloc.dart';
 import 'package:reactmobi/blocs/user_bloc/index.dart';
 import 'package:reactmobi/pages/home/index.dart';
+import 'package:reactmobi/pages/user/me/index.dart';
 
 class App extends StatefulWidget {
   App({this.client});
@@ -30,7 +31,7 @@ class AppState extends State<App> {
                   return CupertinoApp(
                     theme: theme,
                     routes: <String, WidgetBuilder>{
-                      '/': (BuildContext context) => HomePage(),
+                      '/': (BuildContext context) => UserMe(),
                       // '/login': (BuildContext context) => UserLogin(),
                       // '/register': (BuildContext context) => UserLogin(),
                     },
