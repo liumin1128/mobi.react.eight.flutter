@@ -9,7 +9,7 @@ import 'getPhoneCode.dart';
 import 'showCountryCodePicker.dart';
 
 import 'package:reactmobi/blocs/counter_bloc.dart';
-import 'package:reactmobi/blocs/user_bloc.dart';
+import 'package:reactmobi/blocs/user_bloc/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserPhoneLogin extends StatefulWidget {

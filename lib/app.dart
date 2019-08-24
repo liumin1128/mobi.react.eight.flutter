@@ -4,7 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 
 import 'package:reactmobi/blocs/theme_bloc.dart';
 import 'package:reactmobi/blocs/counter_bloc.dart';
-import 'package:reactmobi/blocs/user_bloc.dart';
+import 'package:reactmobi/blocs/user_bloc/index.dart';
 import 'package:reactmobi/pages/home/index.dart';
 
 class App extends StatefulWidget {
