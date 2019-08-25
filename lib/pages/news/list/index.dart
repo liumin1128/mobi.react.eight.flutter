@@ -67,7 +67,7 @@ class _NewsListState extends State<NewsList> {
                                         width: 80,
                                         height: 80,
                                         child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(4),
+                                            borderRadius: BorderRadius.circular(2),
                                             child: Container(
                                                 decoration: BoxDecoration(color: CupertinoColors.lightBackgroundGray),
                                                 child: FadeInImage.memoryNetwork(
