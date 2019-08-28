@@ -33,6 +33,7 @@ dev_dependencies:
   graphql_flutter: ^2.0.0
   flutter_html: ^0.10.4
   transparent_image: ^1.0.0
+  cached_network_image: ^1.1.1
   shared_preferences: ^0.5.3+4
 
 # For information on the generic Dart part of this file, see the
