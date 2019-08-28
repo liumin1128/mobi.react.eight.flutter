@@ -64,13 +64,18 @@ class DynamicItem extends StatelessWidget {
           data['pictures'].length > 0
               ? Container(
                   alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-                  child: Wrap(
-                    spacing: 4, //主轴上子控件的间距
-                    runSpacing: 4,
-                    children: getPicturesList(data['pictures']), //要显示的子控件集合 //交叉轴上子控件之间的间距
-                  ),
+                  padding: const EdgeInsets.only(top: 14, left: 14, right: 14),
+                  child: getPicturesList(data['pictures']),
                 )
+              // ? Container(
+              //     alignment: Alignment.topLeft,
+              //     padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+              //     child: Wrap(
+              //       spacing: 4, //主轴上子控件的间距
+              //       runSpacing: 4,
+              //       children: getPicturesList(data['pictures']), //要显示的子控件集合 //交叉轴上子控件之间的间距
+              //     ),
+              //   )
               : Container(),
 
           // 用户操作
