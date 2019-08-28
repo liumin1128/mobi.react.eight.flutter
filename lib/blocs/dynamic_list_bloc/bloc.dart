@@ -34,27 +34,37 @@ class DynamicListBloc extends Bloc<DynamicListEvent, DynamicListState> {
 
       var list = res.data['list'];
 
-      print('list');
-      print(list);
-
-      yield DynamicListFetchSuccessed(list);
+      yield DynamicListFetchSuccessed(list: list);
     } catch (_) {
-      print('_mapDynamicListFetchToState error');
+      print('_mapLoggedInToState出错');
       yield Unauthenticated();
     }
   }
 
   Stream<DynamicListState> _mapDynamicListFetchMoreToState() async* {
     try {
-      final QueryResult res = await client.mutate(MutationOptions(document: dynamicListSchema));
+      if (currentState is DynamicListFetchSuccessed) {
+        final _list = (currentState as DynamicListFetchSuccessed).list;
+        final skip = _list.length;
+        print(skip);
 
-      if (res.hasErrors) return;
+        final QueryResult res = await client.mutate(
+          MutationOptions(
+            document: dynamicListSchema,
+            variables: {
+              'skip': skip,
+            },
+          ),
+        );
 
-      var list = res.data['list'];
+        if (res.hasErrors) return;
 
-      yield DynamicListFetchSuccessed(list);
+        var list = res.data['list'];
+
+        yield DynamicListFetchSuccessed(list: _list + list);
+      }
     } catch (_) {
-      print('_mapLoggedInToState出错');
+      print('_mapDynamicListFetchToState error');
       yield Unauthenticated();
     }
   }

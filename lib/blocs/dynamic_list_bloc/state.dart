@@ -19,9 +19,9 @@ class Unauthenticated extends DynamicListState {
 class DynamicListFetchSuccessed extends DynamicListState {
   final List list;
 
-  DynamicListFetchSuccessed(this.list)
+  DynamicListFetchSuccessed({@required this.list})
       : super([
-          list,
+          list
         ]);
 
   @override
