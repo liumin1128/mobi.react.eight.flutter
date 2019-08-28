@@ -19,7 +19,17 @@ class _LazyloadImageState extends State<LazyloadImage> {
     return Container(
       width: widget.width,
       height: widget.height,
-      child: ClipRRect(borderRadius: widget.borderRadius, child: Container(decoration: BoxDecoration(color: widget.color), child: FadeInImage.memoryNetwork(placeholder: kTransparentImage, image: widget.image, fit: BoxFit.cover))),
+      child: ClipRRect(
+        borderRadius: widget.borderRadius,
+        child: Container(
+          decoration: BoxDecoration(color: widget.color),
+          child: FadeInImage.memoryNetwork(
+            placeholder: kTransparentImage,
+            image: widget.image,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
     );
   }
 }
