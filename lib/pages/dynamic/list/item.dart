@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:eight/utils/common.dart';
 import 'package:eight/components/Icons/Eva.dart';
 import 'package:eight/components/Lazyload/Image.dart';
-import 'package:eight/components/Ui/Avatar/avatar.dart';
+import 'package:eight/components/Avatar/avatar.dart';
 
 text2html(str) {
   return str;
@@ -45,7 +45,7 @@ class DynamicItem extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(right: 16),
-                      child: Avatar(src: data['user']['avatarUrl']),
+                      child: Avatar(src: data['user']['avatarUrl'], size: 48),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

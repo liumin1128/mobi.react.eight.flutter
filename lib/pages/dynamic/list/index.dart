@@ -25,7 +25,7 @@ class DynamicListPageState extends State<DynamicListPage> {
         builder: (context, state) {
           if (state is DynamicListFetchSuccessed) {
             return ListViewPro(
-              title: '资讯',
+              title: '动态',
               onRefresh: () {
                 dynamicListBloc.dispatch(DynamicListFetch());
               },
