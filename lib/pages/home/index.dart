@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 // import 'package:eight/pages/dynamic/list/index.dart';
 import 'package:eight/pages/user/me/index.dart';
 import 'package:eight/pages/news/list/index.dart';
+import 'package:eight/pages/dynamic/list/index.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -15,13 +16,14 @@ class _HomePageState extends State<HomePage> {
   // static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   static List<Widget> _widgetOptions = <Widget>[
-    CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text("动态"),
-        border: Border(top: BorderSide(style: BorderStyle.none)),
-      ),
-      child: Text('111'),
-    ),
+    // CupertinoPageScaffold(
+    //   navigationBar: CupertinoNavigationBar(
+    //     middle: Text("动态"),
+    //     border: Border(top: BorderSide(style: BorderStyle.none)),
+    //   ),
+    //   child: Text('111'),
+    // ),
+    DynamicList(),
 
     NewsList(),
 
@@ -36,7 +38,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
-        currentIndex: 1,
+        currentIndex: 0,
         border: Border(top: BorderSide(style: BorderStyle.none)),
         items: [
           BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text("动态")),
