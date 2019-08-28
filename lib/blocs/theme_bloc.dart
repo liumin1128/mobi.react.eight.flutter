@@ -12,6 +12,7 @@ final Map<String, CupertinoThemeData> themes = {
   'dark': CupertinoThemeData(
     brightness: Brightness.light,
     primaryColor: Color(0xFF000000),
+    // textTheme: CupertinoTextThemeData(testStyle: )
   ),
   'light': CupertinoThemeData(
     brightness: Brightness.light,

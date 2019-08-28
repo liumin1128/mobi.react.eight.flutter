@@ -31,75 +31,86 @@ class DynamicItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])));
-
     return Container(
-        decoration: BoxDecoration(color: CupertinoColors.white),
-        // margin: const EdgeInsets.only(bottom: 8),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
+      decoration: BoxDecoration(color: CupertinoColors.white),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Avatar(src: data['user']['avatarUrl'], size: 48),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(right: 16),
-                      child: Avatar(src: data['user']['avatarUrl'], size: 48),
+                    Text(
+                      data['user']['nickname'],
+                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontWeight: FontWeight.bold),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Text(data['user']['nickname'], style: CupertinoTheme.of(context).textTheme.actionTextStyle),
-                        Text(createdAt, style: CupertinoTheme.of(context).textTheme.actionTextStyle),
-                      ],
-                    )
+                    Text(
+                      createdAt,
+                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 14),
+                    ),
                   ],
-                )),
-            Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                alignment: Alignment.topLeft,
-                child: Text(data['content'], style: CupertinoTheme.of(context).textTheme.actionTextStyle
-                    // .copyWith(color: CupertinoColors.black87)
-                    )),
-            data['pictures'].length > 0
-                ? Container(
-                    alignment: Alignment.topLeft,
-                    padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-                    child: Wrap(
-                      spacing: 8, //主轴上子控件的间距
-                      runSpacing: 8,
-                      children: getPicturesList(data['pictures']), //要显示的子控件集合 //交叉轴上子控件之间的间距
-                    ))
-                : Container(),
-            Container(
-              alignment: Alignment.topLeft,
-              padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
-              child: Wrap(children: <Widget>[
-                Icon(
-                  EvaIcons.heartOutline,
-                  color: CupertinoColors.black,
-                  size: 16,
-                ),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                Text(data['zanCount'].toString(), style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: CupertinoColors.black, fontSize: 16)),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
-                Icon(
-                  EvaIcons.messageCircleOutline,
-                  color: CupertinoColors.black,
-                  size: 16,
-                ),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                Text(data['commentCount'].toString(), style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: CupertinoColors.black, fontSize: 16)),
-              ]),
+                )
+              ],
             ),
-            Container(
-              color: Color.fromRGBO(0, 0, 0, 0.05),
-              height: 1,
-              // margin: const EdgeInsets.only(top: 16),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              data['content'],
+              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(color: Color(0xFF666666)),
             ),
-          ],
-        ));
+          ),
+
+          // 图片组件
+          // data['pictures'].length > 0
+          //     ? Container(
+          //         alignment: Alignment.topLeft,
+          //         padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+          //         child: Wrap(
+          //           spacing: 8, //主轴上子控件的间距
+          //           runSpacing: 8,
+          //           children: getPicturesList(data['pictures']), //要显示的子控件集合 //交叉轴上子控件之间的间距
+          //         ))
+          //     : Container(),
+
+          // 用户操作
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
+            child: Wrap(children: <Widget>[
+              Icon(
+                EvaIcons.heartOutline,
+                color: CupertinoColors.black,
+                size: 16,
+              ),
+              Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+              Text(data['zanCount'].toString(), style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: CupertinoColors.black, fontSize: 16)),
+              Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
+              Icon(
+                EvaIcons.messageCircleOutline,
+                color: CupertinoColors.black,
+                size: 16,
+              ),
+              Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+              Text(data['commentCount'].toString(), style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: CupertinoColors.black, fontSize: 16)),
+            ]),
+          ),
+
+          Container(
+            color: Color.fromRGBO(0, 0, 0, 0.05),
+            height: 1,
+            // margin: const EdgeInsets.only(top: 16),
+          ),
+        ],
+      ),
+    );
   }
 }
