@@ -4,6 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:eight/blocs/theme_bloc.dart';
 import 'package:eight/blocs/counter_bloc.dart';
 import 'package:eight/blocs/user_bloc/index.dart';
+import 'package:eight/blocs/dynamic_list_bloc/index.dart';
 import 'package:eight/pages/home/index.dart';
 
 class App extends StatefulWidget {
@@ -25,18 +26,21 @@ class AppState extends State<App> {
             builder: (context) => CounterBloc(),
             child: BlocProvider<UserBloc>(
               builder: (context) => UserBloc(client: client)..dispatch(AppStarted()),
-              child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
-                builder: (context, theme) {
-                  return CupertinoApp(
-                    theme: theme,
-                    routes: <String, WidgetBuilder>{
-                      '/': (BuildContext context) => HomePage(),
-                      // '/login': (BuildContext context) => UserLogin(),
-                      // '/register': (BuildContext context) => UserLogin(),
-                    },
-                    initialRoute: '/',
-                  );
-                },
+              child: BlocProvider<DynamicListBloc>(
+                builder: (context) => DynamicListBloc(client: client),
+                child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
+                  builder: (context, theme) {
+                    return CupertinoApp(
+                      theme: theme,
+                      routes: <String, WidgetBuilder>{
+                        '/': (BuildContext context) => HomePage(),
+                        // '/login': (BuildContext context) => UserLogin(),
+                        // '/register': (BuildContext context) => UserLogin(),
+                      },
+                      initialRoute: '/',
+                    );
+                  },
+                ),
               ),
             ),
           ),

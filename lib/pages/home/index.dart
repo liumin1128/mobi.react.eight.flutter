@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     //   ),
     //   child: Text('111'),
     // ),
-    DynamicList(),
+    DynamicListPage(),
 
     NewsList(),
 
