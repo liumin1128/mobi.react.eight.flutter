@@ -4,6 +4,7 @@ import 'package:eight/blocs/dynamic_detail_bloc/index.dart';
 import 'package:eight/components/ListViewPro/index.dart';
 import 'package:eight/components/Avatar/index.dart';
 import 'package:eight/components/MultiPicturesView/index.dart';
+import 'package:eight/container/comment/list/index.dart';
 // import 'item.dart';
 
 class DynamicDetailPage extends StatefulWidget {
@@ -75,6 +76,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                               Text(state.data['content']),
                               Padding(padding: EdgeInsets.all(8)),
                               multiPictureView(state.data['pictures']),
+                              CommentList(session: state.data['_id'])
                             ]),
                           ),
                         ),

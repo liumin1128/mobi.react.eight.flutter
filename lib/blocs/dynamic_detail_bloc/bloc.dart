@@ -22,9 +22,6 @@ class DynamicDetailBloc extends Bloc<DynamicDetailEvent, DynamicDetailState> {
 
   Stream<DynamicDetailState> _mapDynamicDetailFetchToState(event) async* {
     try {
-      print('event.id');
-      print(event.id);
-
       final QueryResult res = await client.mutate(MutationOptions(document: dynamicDetailSchema, variables: {
         '_id': event.id
       }));
@@ -32,9 +29,6 @@ class DynamicDetailBloc extends Bloc<DynamicDetailEvent, DynamicDetailState> {
       if (res.hasErrors) return;
 
       var data = res.data['data'];
-
-      print('data');
-      print(data);
 
       yield DynamicDetailFetchSuccessed(data: data);
     } catch (_) {

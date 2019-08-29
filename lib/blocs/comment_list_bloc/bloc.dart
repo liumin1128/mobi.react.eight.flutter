@@ -16,15 +16,19 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
   @override
   Stream<CommentListState> mapEventToState(CommentListEvent event) async* {
     if (event is CommentListFetch) {
-      yield* _mapCommentListFetchToState();
+      yield* _mapCommentListFetchToState(event);
     } else if (event is CommentListFetchMore) {
       yield* _mapCommentListFetchMoreToState();
     }
   }
 
-  Stream<CommentListState> _mapCommentListFetchToState() async* {
+  Stream<CommentListState> _mapCommentListFetchToState(event) async* {
     try {
-      final QueryResult res = await client.mutate(MutationOptions(document: commentListSchema));
+      final QueryResult res = await client.mutate(
+        MutationOptions(document: commentListSchema, variables: {
+          'session': event.session
+        }),
+      );
 
       if (res.hasErrors) return;
 

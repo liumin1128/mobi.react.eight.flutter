@@ -8,6 +8,12 @@ abstract class CommentListEvent extends Equatable {
 }
 
 class CommentListFetch extends CommentListEvent {
+  final String session;
+
+  CommentListFetch({@required this.session})
+      : super([
+          session
+        ]);
   @override
   String toString() => 'CommentListFetch';
 }
