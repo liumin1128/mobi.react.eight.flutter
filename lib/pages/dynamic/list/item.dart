@@ -56,7 +56,7 @@ class DynamicItem extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               data['content'],
-              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 18, color: Color(0xFF333333)),
+              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 18, color: Color(0xFF666666)),
             ),
           ),
 
@@ -84,20 +84,26 @@ class DynamicItem extends StatelessWidget {
             padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
             child: Wrap(children: <Widget>[
               Icon(
-                EvaIcons.heartOutline,
-                color: CupertinoColors.black,
-                size: 16,
+                CupertinoIcons.heart,
+                color: Color(0xFF999999),
+                size: 20,
               ),
               Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-              Text(data['zanCount'].toString(), style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: CupertinoColors.black, fontSize: 16)),
+              Text(
+                data['zanCount'].toString(),
+                style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 20, fontWeight: FontWeight.w100),
+              ),
               Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
               Icon(
-                EvaIcons.messageCircleOutline,
-                color: CupertinoColors.black,
-                size: 16,
+                CupertinoIcons.bookmark,
+                color: Color(0xFF999999),
+                size: 20,
               ),
               Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-              Text(data['commentCount'].toString(), style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: CupertinoColors.black, fontSize: 16)),
+              Text(
+                data['commentCount'].toString(),
+                style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 20, fontWeight: FontWeight.w100),
+              ),
             ]),
           ),
 
