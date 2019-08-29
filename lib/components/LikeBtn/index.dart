@@ -9,6 +9,7 @@ typedef LikeCallback = void Function(bool isLike);
 class LikeButton extends StatefulWidget {
   final double width;
   final LikeIcon icon;
+  final LikedIcon likedIcon;
   final Duration duration;
   final DotColor dotColor;
   final Color circleStartColor;
@@ -20,6 +21,10 @@ class LikeButton extends StatefulWidget {
     @required this.width,
     this.icon = const LikeIcon(
       CupertinoIcons.heart,
+      iconColor: Color(0xFFfd4c86),
+    ),
+    this.likedIcon = const LikedIcon(
+      CupertinoIcons.heart_solid,
       iconColor: Color(0xFFfd4c86),
     ),
     this.duration = const Duration(milliseconds: 5000),
@@ -87,7 +92,7 @@ class _LikeButtonState extends State<LikeButton> with TickerProviderStateMixin {
             child: Transform.scale(
               scale: isLiked ? scale.value : 1.0,
               child: Icon(
-                widget.icon.icon,
+                isLiked ? widget.likedIcon.icon : widget.icon.icon,
                 color: isLiked ? widget.icon.color : CupertinoColors.inactiveGray,
                 size: widget.width * 0.4,
               ),

@@ -30,6 +30,18 @@ class LikeIcon extends Icon {
   Color get color => this.iconColor;
 }
 
+class LikedIcon extends Icon {
+  final Color iconColor;
+
+  const LikedIcon(
+    IconData icon, {
+    this.iconColor,
+  }) : super(icon);
+
+  @override
+  Color get color => this.iconColor;
+}
+
 class OvershootCurve extends Curve {
   const OvershootCurve([this.period = 2.5]);
 
