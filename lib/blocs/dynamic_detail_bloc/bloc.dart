@@ -39,7 +39,7 @@ class DynamicDetailBloc extends Bloc<DynamicDetailEvent, DynamicDetailState> {
       yield DynamicDetailFetchSuccessed(data: data);
     } catch (_) {
       print('_mapLoggedInToState出错');
-      yield Unauthenticated();
+      yield DynamicDetailFetchError();
     }
   }
 }

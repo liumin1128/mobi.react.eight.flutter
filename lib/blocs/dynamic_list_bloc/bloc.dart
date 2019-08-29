@@ -37,7 +37,7 @@ class DynamicListBloc extends Bloc<DynamicListEvent, DynamicListState> {
       yield DynamicListFetchSuccessed(list: list);
     } catch (_) {
       print('_mapLoggedInToState出错');
-      yield Unauthenticated();
+      yield DynamicListFetchError();
     }
   }
 
@@ -65,7 +65,7 @@ class DynamicListBloc extends Bloc<DynamicListEvent, DynamicListState> {
       }
     } catch (_) {
       print('_mapDynamicListFetchToState error');
-      yield Unauthenticated();
+      yield DynamicListFetchError();
     }
   }
 }

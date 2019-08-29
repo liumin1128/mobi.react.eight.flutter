@@ -36,7 +36,7 @@ String commentListSchema = """
         }
       }
     }
-    meta: _commentsMeta(session: $session) {
+    meta: _commentsMeta(session: \$session) {
       count
       commentCount
     }

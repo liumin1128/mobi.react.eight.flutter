@@ -5,6 +5,7 @@ import 'package:eight/blocs/theme_bloc.dart';
 import 'package:eight/blocs/user_bloc/index.dart';
 import 'package:eight/blocs/dynamic_list_bloc/index.dart';
 import 'package:eight/blocs/dynamic_detail_bloc/index.dart';
+import 'package:eight/blocs/comment_list_bloc/index.dart';
 import 'package:eight/pages/home/index.dart';
 
 class App extends StatefulWidget {
@@ -27,6 +28,7 @@ class AppState extends State<App> {
               BlocProvider<UserBloc>(builder: (context) => UserBloc(client: client)..dispatch(AppStarted())),
               BlocProvider<DynamicListBloc>(builder: (context) => DynamicListBloc(client: client)),
               BlocProvider<DynamicDetailBloc>(builder: (context) => DynamicDetailBloc(client: client)),
+              BlocProvider<CommentListBloc>(builder: (context) => CommentListBloc(client: client)),
             ],
             child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
               builder: (context, theme) {

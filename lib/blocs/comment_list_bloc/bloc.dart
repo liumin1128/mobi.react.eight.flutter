@@ -33,7 +33,7 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
       yield CommentListFetchSuccessed(list: list);
     } catch (_) {
       print('_mapLoggedInToState出错');
-      yield Unauthenticated();
+      yield CommentListFetchError();
     }
   }
 
@@ -61,7 +61,7 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
       }
     } catch (_) {
       print('_mapCommentListFetchToState error');
-      yield Unauthenticated();
+      yield CommentListFetchError();
     }
   }
 }
