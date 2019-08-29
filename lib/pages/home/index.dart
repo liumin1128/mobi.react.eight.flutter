@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:eight/pages/user/me/index.dart';
 import 'package:eight/pages/news/list/index.dart';
 import 'package:eight/pages/dynamic/list/index.dart';
+import 'package:eight/pages/dynamic/detail/index.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -23,6 +24,8 @@ class _HomePageState extends State<HomePage> {
     //   ),
     //   child: Text('111'),
     // ),
+    DynamicDetailPage(),
+
     DynamicListPage(),
 
     NewsList(),
