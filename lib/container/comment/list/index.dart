@@ -30,7 +30,10 @@ class _CommentListPageState extends State<CommentList> {
           return SliverList(
             delegate: SliverChildBuilderDelegate(
               (_, int index) {
-                return Text(state.list[index]['content']);
+                return Padding(
+                  padding: EdgeInsets.all(64),
+                  child: Text(state.list[index]['content']),
+                );
               },
               childCount: state.list.length,
             ),

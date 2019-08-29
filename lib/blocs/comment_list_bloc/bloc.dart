@@ -26,7 +26,8 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
     try {
       final QueryResult res = await client.mutate(
         MutationOptions(document: commentListSchema, variables: {
-          'session': event.session
+          'session': event.session,
+          'first': 10
         }),
       );
 
