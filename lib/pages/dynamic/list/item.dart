@@ -103,7 +103,7 @@ class DynamicItem extends StatelessWidget {
 
           Container(
             color: Color.fromRGBO(0, 0, 0, 0.05),
-            height: 1,
+            height: 8,
             // margin: const EdgeInsets.only(top: 16),
           ),
         ],
