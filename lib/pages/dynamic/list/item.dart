@@ -81,6 +81,7 @@ class DynamicItem extends StatelessWidget {
           Row(
             // alignment: Alignment.centerLeft,
             mainAxisAlignment: MainAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.center,
             // padding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
             children: <Widget>[
               // Icon(
@@ -88,7 +89,7 @@ class DynamicItem extends StatelessWidget {
               //   color: Color(0xFF999999),
               //   size: 20,
               // ),
-              LikeButton(width: 52, duration: Duration(milliseconds: 1000)),
+              LikeButton(width: 64, duration: Duration(milliseconds: 1000)),
 
               Transform(
                   transform: Matrix4.translationValues(-8, 0, 0),
@@ -96,18 +97,18 @@ class DynamicItem extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         data['zanCount'].toString(),
-                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 20, fontWeight: FontWeight.w100),
+                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
                       ),
                       Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
                       Icon(
-                        CupertinoIcons.bookmark,
+                        CupertinoIcons.search,
                         color: Color(0xFF999999),
-                        size: 20,
+                        size: 24,
                       ),
                       Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
                       Text(
                         data['commentCount'].toString(),
-                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 20, fontWeight: FontWeight.w100),
+                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
                       ),
                     ],
                   )),
