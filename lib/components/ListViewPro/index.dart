@@ -56,7 +56,7 @@ class _ListViewProState extends State<ListViewPro> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       controller: _scrollController,
-      physics: ScrollPhysics(),
+      // physics: ScrollPhysics(),
       slivers: <Widget>[
         widget.title != null
             ? CupertinoSliverNavigationBar(

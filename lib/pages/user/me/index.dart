@@ -68,7 +68,7 @@ class UserMeState extends State<UserMe> {
           return CupertinoPageScaffold(
             child: CustomScrollView(
               controller: _scrollController,
-              physics: ScrollPhysics(),
+              // physics: ScrollPhysics(),
               slivers: <Widget>[
                 // CupertinoSliverNavigationBar(
                 //   largeTitle: Text('个人中心'),
