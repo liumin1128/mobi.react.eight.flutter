@@ -51,7 +51,8 @@ class CommentItem extends StatelessWidget {
 
           // 文本部分
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.only(left: 72),
+            alignment: Alignment.topLeft,
             child: Text(
               data['content'],
               style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 18, color: Color(0xFF666666)),
@@ -59,41 +60,46 @@ class CommentItem extends StatelessWidget {
           ),
 
           // 用户操作
-          Row(
-            // alignment: Alignment.centerLeft,
-            mainAxisAlignment: MainAxisAlignment.start,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            // padding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
-            children: <Widget>[
-              // Icon(
-              //   CupertinoIcons.heart,
-              //   color: Color(0xFF999999),
-              //   size: 20,
-              // ),
-              LikeButton(width: 64, duration: Duration(milliseconds: 1000)),
+          Container(
+            padding: const EdgeInsets.only(left: 52),
+            alignment: Alignment.topLeft,
+            child: Row(
+              // alignment: Alignment.centerLeft,
+              mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              // padding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
+              children: <Widget>[
+                // Icon(
+                //   CupertinoIcons.heart,
+                //   color: Color(0xFF999999),
+                //   size: 20,
+                // ),
+                LikeButton(width: 64, duration: Duration(milliseconds: 1000)),
 
-              // Transform(
-              //     transform: Matrix4.translationValues(-8, 0, 0),
-              //     child: Row(
-              //       children: <Widget>[
-              //         Text(
-              //           data['zanCount'].toString(),
-              //           style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
-              //         ),
-              //         Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
-              //         Icon(
-              //           CupertinoIcons.search,
-              //           color: Color(0xFF999999),
-              //           size: 24,
-              //         ),
-              //         Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-              //         Text(
-              //           data['commentCount'].toString(),
-              //           style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
-              //         ),
-              //       ],
-              //     )),
-            ],
+                Transform(
+                  transform: Matrix4.translationValues(-8, 0, 0),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        data['zanCount'].toString(),
+                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
+                      ),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
+                      Icon(
+                        CupertinoIcons.search,
+                        color: Color(0xFF999999),
+                        size: 24,
+                      ),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text(
+                        data['replyCount'].toString(),
+                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
 
           Container(

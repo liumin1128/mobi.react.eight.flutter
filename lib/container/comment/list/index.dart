@@ -35,7 +35,7 @@ class _CommentListPageState extends State<CommentList> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: CupertinoButton(
-                      child: Text('xxxx'),
+                      child: Text('加载更多评论'),
                       onPressed: () {
                         commentListBloc.dispatch(CommentListFetchMore());
                       },

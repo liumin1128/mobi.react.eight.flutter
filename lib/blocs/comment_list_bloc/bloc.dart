@@ -55,7 +55,8 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
             document: commentListSchema,
             variables: {
               'skip': skip,
-              'session': _session
+              'session': _session,
+              'first': 10
             },
           ),
         );
