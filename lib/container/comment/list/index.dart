@@ -27,17 +27,26 @@ class _CommentListPageState extends State<CommentList> {
     return BlocBuilder<CommentListBloc, CommentListState>(
       builder: (context, state) {
         if (state is CommentListFetchSuccessed) {
-          return SliverList(
+          return SliverSafeArea(
+              sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (_, int index) {
-                return Padding(
-                  padding: EdgeInsets.all(64),
-                  child: Text(state.list[index]['content']),
-                );
+                if (index == state.list.length) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: CupertinoButton(
+                      child: Text('xxxx'),
+                      onPressed: () {
+                        commentListBloc.dispatch(CommentListFetchMore());
+                      },
+                    ),
+                  );
+                }
+                return CommentItem(data: state.list[index]);
               },
-              childCount: state.list.length,
+              childCount: state.list.length + 1,
             ),
-          );
+          ));
           // CupertinoButton(
           //   child: Text('more'),
           //   onPressed: () {

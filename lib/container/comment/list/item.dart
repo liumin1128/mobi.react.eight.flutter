@@ -16,7 +16,7 @@ class CommentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])));
+    // final createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])));
     return Container(
       decoration: BoxDecoration(color: CupertinoColors.white),
       child: Column(
@@ -40,7 +40,7 @@ class CommentItem extends StatelessWidget {
                       style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontWeight: FontWeight.bold, color: Color(0xFF333333)),
                     ),
                     Text(
-                      createdAt,
+                      '刚刚',
                       style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 16, color: Color(0xFF666666)),
                     ),
                   ],
@@ -72,27 +72,27 @@ class CommentItem extends StatelessWidget {
               // ),
               LikeButton(width: 64, duration: Duration(milliseconds: 1000)),
 
-              Transform(
-                  transform: Matrix4.translationValues(-8, 0, 0),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        data['zanCount'].toString(),
-                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
-                      ),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
-                      Icon(
-                        CupertinoIcons.search,
-                        color: Color(0xFF999999),
-                        size: 24,
-                      ),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                      Text(
-                        data['commentCount'].toString(),
-                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
-                      ),
-                    ],
-                  )),
+              // Transform(
+              //     transform: Matrix4.translationValues(-8, 0, 0),
+              //     child: Row(
+              //       children: <Widget>[
+              //         Text(
+              //           data['zanCount'].toString(),
+              //           style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
+              //         ),
+              //         Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
+              //         Icon(
+              //           CupertinoIcons.search,
+              //           color: Color(0xFF999999),
+              //           size: 24,
+              //         ),
+              //         Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+              //         Text(
+              //           data['commentCount'].toString(),
+              //           style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
+              //         ),
+              //       ],
+              //     )),
             ],
           ),
 

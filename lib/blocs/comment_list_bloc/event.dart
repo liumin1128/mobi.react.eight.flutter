@@ -19,13 +19,6 @@ class CommentListFetch extends CommentListEvent {
 }
 
 class CommentListFetchMore extends CommentListEvent {
-  // final BuildContext context;
-
-  // CommentListFetchMore({@required this.context})
-  //     : super([
-  //         context
-  //       ]);
-
   @override
   String toString() => 'CommentListFetchMore';
 }

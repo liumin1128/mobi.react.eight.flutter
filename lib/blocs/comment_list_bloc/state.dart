@@ -17,13 +17,17 @@ class CommentListFetchError extends CommentListState {
 }
 
 class CommentListFetchSuccessed extends CommentListState {
+  final String session;
   final List list;
 
-  CommentListFetchSuccessed({@required this.list})
-      : super([
-          list
+  CommentListFetchSuccessed({
+    @required this.list,
+    @required this.session,
+  }) : super([
+          list,
+          session
         ]);
 
   @override
-  String toString() => 'CommentListFetchSuccessed { list: $list, }';
+  String toString() => 'CommentListFetchSuccessed { session: $session, list: $list, }';
 }

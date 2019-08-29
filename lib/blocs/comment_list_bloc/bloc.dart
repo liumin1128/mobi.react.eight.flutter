@@ -35,7 +35,7 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
 
       var list = res.data['list'];
 
-      yield CommentListFetchSuccessed(list: list);
+      yield CommentListFetchSuccessed(list: list, session: event.session);
     } catch (_) {
       print('_mapLoggedInToState出错');
       yield CommentListFetchError();
@@ -46,6 +46,7 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
     try {
       if (currentState is CommentListFetchSuccessed) {
         final _list = (currentState as CommentListFetchSuccessed).list;
+        final _session = (currentState as CommentListFetchSuccessed).session;
         final skip = _list.length;
         print(skip);
 
@@ -54,6 +55,7 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
             document: commentListSchema,
             variables: {
               'skip': skip,
+              'session': _session
             },
           ),
         );
@@ -62,7 +64,7 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
 
         var list = res.data['list'];
 
-        yield CommentListFetchSuccessed(list: _list + list);
+        yield CommentListFetchSuccessed(list: _list + list, session: _session);
       }
     } catch (_) {
       print('_mapCommentListFetchToState error');
