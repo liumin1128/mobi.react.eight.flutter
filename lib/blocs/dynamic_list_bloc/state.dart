@@ -11,9 +11,9 @@ class Uninitialized extends DynamicListState {
   String toString() => 'Uninitialized';
 }
 
-class Unauthenticated extends DynamicListState {
+class DynamicListFetchError extends DynamicListState {
   @override
-  String toString() => 'Unauthenticated';
+  String toString() => 'DynamicListFetchError';
 }
 
 class DynamicListFetchSuccessed extends DynamicListState {

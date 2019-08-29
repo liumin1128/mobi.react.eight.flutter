@@ -11,9 +11,9 @@ class Uninitialized extends DynamicDetailState {
   String toString() => 'Uninitialized';
 }
 
-class Unauthenticated extends DynamicDetailState {
+class DynamicDetailFetchError extends DynamicDetailState {
   @override
-  String toString() => 'Unauthenticated';
+  String toString() => 'DynamicDetailFetchError';
 }
 
 class DynamicDetailFetchSuccessed extends DynamicDetailState {
