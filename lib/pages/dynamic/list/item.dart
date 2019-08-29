@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
-
 import 'package:eight/utils/common.dart';
-import 'package:eight/components/Icons/Eva.dart';
 import 'package:eight/components/Avatar/avatar.dart';
+import 'package:eight/components/LikeBtn/index.dart';
 import 'pictures.dart';
 
 text2html(str) {
@@ -79,32 +78,40 @@ class DynamicItem extends StatelessWidget {
               : Container(),
 
           // 用户操作
-          Container(
-            alignment: Alignment.topLeft,
-            padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
-            child: Wrap(children: <Widget>[
-              Icon(
-                CupertinoIcons.heart,
-                color: Color(0xFF999999),
-                size: 20,
-              ),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-              Text(
-                data['zanCount'].toString(),
-                style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 20, fontWeight: FontWeight.w100),
-              ),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
-              Icon(
-                CupertinoIcons.bookmark,
-                color: Color(0xFF999999),
-                size: 20,
-              ),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-              Text(
-                data['commentCount'].toString(),
-                style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 20, fontWeight: FontWeight.w100),
-              ),
-            ]),
+          Row(
+            // alignment: Alignment.centerLeft,
+            mainAxisAlignment: MainAxisAlignment.start,
+            // padding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
+            children: <Widget>[
+              // Icon(
+              //   CupertinoIcons.heart,
+              //   color: Color(0xFF999999),
+              //   size: 20,
+              // ),
+              LikeButton(width: 52, duration: Duration(milliseconds: 1000)),
+
+              Transform(
+                  transform: Matrix4.translationValues(-8, 0, 0),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        data['zanCount'].toString(),
+                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 20, fontWeight: FontWeight.w100),
+                      ),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
+                      Icon(
+                        CupertinoIcons.bookmark,
+                        color: Color(0xFF999999),
+                        size: 20,
+                      ),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text(
+                        data['commentCount'].toString(),
+                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 20, fontWeight: FontWeight.w100),
+                      ),
+                    ],
+                  )),
+            ],
           ),
 
           Container(
