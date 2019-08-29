@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:eight/utils/common.dart';
-import 'package:eight/components/Avatar/avatar.dart';
+import 'package:eight/components/Avatar/index.dart';
 import 'package:eight/components/LikeBtn/index.dart';
 import 'pictures.dart';
 

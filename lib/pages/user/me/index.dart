@@ -3,7 +3,7 @@ import 'package:eight/blocs/counter_bloc.dart';
 import 'package:eight/blocs/theme_bloc.dart';
 import 'package:eight/blocs/user_bloc/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:eight/components/Avatar/avatar.dart';
+import 'package:eight/components/Avatar/index.dart';
 
 class UserMe extends StatefulWidget {
   @override
