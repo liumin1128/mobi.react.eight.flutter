@@ -4,7 +4,7 @@ import 'package:eight/blocs/dynamic_detail_bloc/index.dart';
 import 'package:eight/blocs/comment_list_bloc/index.dart';
 // import 'package:eight/components/ListViewPro/index.dart';
 import 'package:eight/components/Avatar/index.dart';
-// import 'package:eight/components/MultiPicturesView/index.dart';
+import 'package:eight/components/MultiPicturesView/index.dart';
 import 'package:eight/container/comment/list/index.dart';
 // import 'package:eight/container/comment/list/item.dart';
 // import 'item.dart';
@@ -43,7 +43,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final dynamicDetailBloc = BlocProvider.of<DynamicDetailBloc>(context);
+    // final dynamicDetailBloc = BlocProvider.of<DynamicDetailBloc>(context);
     return BlocBuilder<DynamicDetailBloc, DynamicDetailState>(
       builder: (context, state) {
         if (state is DynamicDetailFetchSuccessed) {
@@ -81,7 +81,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                           child: Column(children: <Widget>[
                             Text(state.data['content']),
                             Padding(padding: EdgeInsets.all(8)),
-                            // state.data['pictures'].length > 0 ? multiPictureView(state.data['pictures']) : null,
+                            state.data['pictures'].length > 0 ? multiPictureView(state.data['pictures']) : Container(),
                           ]),
                         ),
                       ),

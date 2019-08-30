@@ -7,6 +7,7 @@ import 'package:eight/blocs/dynamic_list_bloc/index.dart';
 import 'package:eight/blocs/dynamic_detail_bloc/index.dart';
 import 'package:eight/blocs/comment_list_bloc/index.dart';
 import 'package:eight/pages/home/index.dart';
+import 'package:eight/pages/dynamic/detail/index.dart';
 
 class App extends StatefulWidget {
   App({this.client});
@@ -35,7 +36,7 @@ class AppState extends State<App> {
                 return CupertinoApp(
                   theme: theme,
                   routes: <String, WidgetBuilder>{
-                    '/': (BuildContext context) => HomePage(),
+                    '/': (BuildContext context) => DynamicDetailPage(),
                   },
                   initialRoute: '/',
                 );
