@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart' hide Action;
+import 'dart:ui' show ImageFilter;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eight/blocs/dynamic_detail_bloc/index.dart';
 import 'package:eight/blocs/comment_list_bloc/index.dart';
@@ -16,6 +17,8 @@ class DynamicDetailPage extends StatefulWidget {
 
 class DynamicDetailPageState extends State<DynamicDetailPage> {
   ScrollController _scrollController = ScrollController(); //listview的控制器
+  TextEditingController _contentTextEditingController;
+  FocusNode focusNodePhone = new FocusNode();
 
   @override
   void initState() {
@@ -24,6 +27,8 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {}
     });
+
+    _contentTextEditingController = TextEditingController(text: '111');
 
     _onRefresh();
   }
@@ -66,37 +71,111 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
               ),
               trailing: Avatar(src: state.data['user']['avatarUrl'], size: 30),
             ),
-            child: CustomScrollView(
-              controller: _scrollController,
-              slivers: <Widget>[
-                CupertinoSliverRefreshControl(onRefresh: _onRefresh),
-                // 内容
-                SliverSafeArea(
-                  sliver: SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: Center(
-                        child: Container(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(children: <Widget>[
-                            Text(state.data['content']),
-                            Padding(padding: EdgeInsets.all(8)),
-                            state.data['pictures'].length > 0 ? multiPictureView(state.data['pictures']) : Container(),
-                          ]),
+            child: Stack(
+              children: <Widget>[
+                CustomScrollView(
+                  controller: _scrollController,
+                  slivers: <Widget>[
+                    CupertinoSliverRefreshControl(onRefresh: _onRefresh),
+                    // 内容
+                    SliverSafeArea(
+                      sliver: SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 16),
+                          child: Center(
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              child: Column(children: <Widget>[
+                                Text(state.data['content']),
+                                Padding(padding: EdgeInsets.all(8)),
+                                state.data['pictures'].length > 0 ? multiPictureView(state.data['pictures']) : Container(),
+                              ]),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    CommentList(
+                      session: state.data['_id'],
+                    ),
+                    CupertinoSliverNavigationBar(
+                      largeTitle: Text('widget.title'),
+                      middle: Stack(
+                        children: <Widget>[
+                          Avatar(src: state.data['user']['avatarUrl'], size: 30),
+                        ],
+                      ),
+                    ),
+                    // 评论
+                  ],
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: ClipRect(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: CupertinoTheme.of(context).barBackgroundColor,
+                          // color: Color(0xCCF8F8F8),
+                          // color: Color(0xeeffffff),
+                          border: Border(
+                            top: BorderSide(
+                              style: BorderStyle.solid,
+                              color: Color(0x10000000),
+                            ),
+                          ),
+                        ),
+                        child: GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: () {
+                            // 触摸收起键盘
+                            FocusScope.of(context).requestFocus(FocusNode());
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(16),
+                            alignment: Alignment.topLeft,
+                            child: Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: CupertinoTextField(
+                                    padding: EdgeInsets.all(16),
+                                    maxLines: 4,
+                                    minLines: 1,
+                                    controller: _contentTextEditingController,
+                                    placeholder: '输入手机号',
+                                    // style: new TextStyle(
+                                    //   // fontSize: 22,
+                                    //   color: CupertinoColors.black,
+                                    // ),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        style: BorderStyle.solid,
+                                        color: Color(0x10000000),
+                                      ),
+                                      color: Color(0xffffffff),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    onChanged: (str) {
+                                      print(str);
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-                CommentList(
-                  session: state.data['_id'],
-                )
-                // 评论
               ],
             ),
           );
         } else {
-          return CupertinoActivityIndicator();
+          return CupertinoPageScaffold(child: CupertinoActivityIndicator());
         }
       },
     );
