@@ -36,8 +36,8 @@ class UserPhoneLoginWithClient extends StatefulWidget {
 class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
   TextEditingController _phone;
   TextEditingController _code;
-  FocusNode focusNodePhone = new FocusNode();
-  FocusNode focusNodeCode = new FocusNode();
+  FocusNode focusNodePhone = FocusNode();
+  FocusNode focusNodeCode = FocusNode();
 
   String _countryCode;
 
@@ -170,7 +170,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
 
               keyboardType: TextInputType.phone,
 
-              style: new TextStyle(
+              style: TextStyle(
                 fontSize: 22,
                 color: CupertinoColors.black,
               ),
@@ -184,7 +184,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
               ),
 
               // 设置国家
-              prefix: new GestureDetector(
+              prefix: GestureDetector(
                 onTap: () {
                   showCountryCodePicker(context, (val) {
                     setState(() {
@@ -192,11 +192,11 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     });
                   });
                 },
-                child: new Container(
+                child: Container(
                   padding: const EdgeInsets.only(right: 8),
-                  child: new Text(
+                  child: Text(
                     _countryCode,
-                    style: new TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 24),
                   ),
                 ),
               ),
@@ -231,7 +231,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                 });
               },
               // keyboardType: TextInputType.phone,
-              style: new TextStyle(
+              style: TextStyle(
                 fontSize: 22,
                 color: CupertinoColors.inactiveGray,
               ),

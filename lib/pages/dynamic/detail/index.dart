@@ -18,7 +18,9 @@ class DynamicDetailPage extends StatefulWidget {
 class DynamicDetailPageState extends State<DynamicDetailPage> {
   ScrollController _scrollController = ScrollController(); //listview的控制器
   TextEditingController _contentTextEditingController;
-  FocusNode focusNodePhone = new FocusNode();
+  FocusNode focusNodePhone = FocusNode();
+
+  String _placeholder = '发表评论';
 
   @override
   void initState() {
@@ -70,7 +72,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                 state.data['user']['nickname'],
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
-                style: new TextStyle(
+                style: TextStyle(
                   fontSize: 20,
                 ),
               ),
@@ -108,6 +110,15 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                       ),
                       CommentList(
                         session: state.data['_id'],
+                        onItemPressed: (obj) {
+                          print('xxxxx');
+                          print(obj['user']['_id']);
+                          final _nickname = obj['user']['nickname'];
+
+                          setState(() {
+                            _placeholder = '回复：$_nickname';
+                          });
+                        },
                       ),
                       CupertinoSliverNavigationBar(
                         largeTitle: Text('widget.title'),
@@ -152,7 +163,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                                     maxLines: 4,
                                     minLines: 1,
                                     controller: _contentTextEditingController,
-                                    placeholder: '发表评论',
+                                    placeholder: _placeholder,
                                     textInputAction: TextInputAction.send,
                                     placeholderStyle: TextStyle(
                                       fontWeight: FontWeight.w300,

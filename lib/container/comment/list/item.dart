@@ -11,8 +11,9 @@ text2html(str) {
 }
 
 class CommentItem extends StatelessWidget {
-  CommentItem({this.data});
+  CommentItem({@required this.data, this.onPressed});
   final data;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -49,15 +50,21 @@ class CommentItem extends StatelessWidget {
             ),
           ),
 
-          // 文本部分
-          Container(
-            padding: const EdgeInsets.only(left: 72),
-            alignment: Alignment.topLeft,
-            child: Text(
-              data['content'],
-              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 18, color: Color(0xFF666666)),
+          GestureDetector(
+            onTap: () {
+              onPressed(data);
+            },
+            child: Container(
+              decoration: BoxDecoration(),
+              padding: const EdgeInsets.only(left: 72),
+              alignment: Alignment.topLeft,
+              child: Text(
+                data['content'],
+                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 18, color: Color(0xFF666666)),
+              ),
             ),
           ),
+          // 文本部分
 
           // 用户操作
           Container(
@@ -104,7 +111,7 @@ class CommentItem extends StatelessWidget {
 
           Container(
             color: Color.fromRGBO(0, 0, 0, 0.05),
-            height: 8,
+            height: 1,
             // margin: const EdgeInsets.only(top: 16),
           ),
         ],

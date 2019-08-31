@@ -6,8 +6,9 @@ import 'item.dart';
 
 class CommentList extends StatefulWidget {
   final String session;
+  final Function onItemPressed;
 
-  CommentList({@required this.session}) : assert(session != null);
+  CommentList({@required this.session, this.onItemPressed}) : assert(session != null);
 
   @override
   _CommentListPageState createState() => _CommentListPageState();
@@ -42,7 +43,7 @@ class _CommentListPageState extends State<CommentList> {
                     ),
                   );
                 }
-                return CommentItem(data: state.list[index]);
+                return CommentItem(data: state.list[index], onPressed: widget.onItemPressed);
               },
               childCount: state.list.length + 1,
             ),
