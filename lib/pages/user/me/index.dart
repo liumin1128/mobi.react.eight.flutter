@@ -38,8 +38,7 @@ class UserMeState extends State<UserMe> {
 
   @override
   Widget build(BuildContext context) {
-    final counterBloc = BlocProvider.of<CounterBloc>(context);
-    final themeBloc = BlocProvider.of<ThemeBloc>(context);
+    // final themeBloc = BlocProvider.of<ThemeBloc>(context);
     final userBloc = BlocProvider.of<UserBloc>(context);
 
     return BlocBuilder<UserBloc, UserState>(

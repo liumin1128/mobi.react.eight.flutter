@@ -136,7 +136,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
   @override
   Widget build(BuildContext context) {
     // final counterBloc = BlocProvider.of<CounterBloc>(context);
-    final userBloc = BlocProvider.of<UserBloc>(context);
+    // final userBloc = BlocProvider.of<UserBloc>(context);
 
     return Container(
       padding: const EdgeInsets.all(24),

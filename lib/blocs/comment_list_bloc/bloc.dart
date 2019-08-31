@@ -97,6 +97,19 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
 
         if (result['status'] == 200) {
           final _list = (currentState as CommentListFetchSuccessed).list;
+          print('event.commentTo');
+          print(event.commentTo);
+
+          if (event.commentTo != '') {
+            print('idx11111111111');
+
+            final idx = _list.indexWhere((i) => (i['_id'] == event.commentTo));
+            print('idx');
+            print(idx);
+            _list[idx]['replys'].insert(0, result['data']);
+            yield CommentListFetchSuccessed(list: _list, session: event.session);
+            return;
+          }
 
           print('评论成功');
 

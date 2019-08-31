@@ -55,6 +55,17 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   Stream<UserState> _mapLoginWithCodeToState(event) async* {
     try {
+      //     Navigator.of(context)
+      // .pushNamed(
+      //   '/route1',
+      //   arguments: {
+      //     "name": 'hello'
+      //   }
+      //   ).then((data){
+      //   //接受返回的参数
+      //   print(data.toString());
+      //   };
+
       Navigator.of(event.context, rootNavigator: true).push(
         CupertinoPageRoute(
           fullscreenDialog: true,
@@ -67,7 +78,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
                 ),
               ),
               // leading: Icon(CupertinoIcons.back),
-              leading: CupertinoNavigationBarBackButton(),
+              // leading: CupertinoNavigationBarBackButton(),
               middle: Text(
                 '登录',
                 overflow: TextOverflow.ellipsis,
