@@ -21,11 +21,15 @@ class CommentListFetch extends CommentListEvent {
 class CommentListCreateComment extends CommentListEvent {
   final String session;
   final String content;
+  final String commentTo;
+  final String replyTo;
 
-  CommentListCreateComment({@required this.session, @required this.content})
+  CommentListCreateComment({@required this.session, @required this.content, this.commentTo, this.replyTo})
       : super([
           session,
           content,
+          commentTo,
+          replyTo,
         ]);
 
   @override

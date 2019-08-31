@@ -85,6 +85,8 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
             variables: {
               'session': event.session,
               'content': event.content,
+              'commentTo': event.commentTo,
+              'replyTo': event.replyTo
             },
           ),
         );

@@ -270,12 +270,10 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     print(_phone.text);
                     print(_code.text);
                     print(_countryCode);
+
                     // _userLogin(context, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8');
-
                     // counterBloc.dispatch(CounterEvent.increment);
-
                     // userBloc.dispatch(GetUserInfo(token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NjYwMzE0LCJleHAiOjE1NjcyNjUxMTR9.RJukMemk7wSiiMNktKBbmrwz75H32-ai8sh2YMVMBAs'));
-
                     // return;
 
                     if (!isPhoneNumber(_phone.text)) {

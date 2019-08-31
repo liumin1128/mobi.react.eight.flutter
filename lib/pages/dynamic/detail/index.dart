@@ -18,9 +18,11 @@ class DynamicDetailPage extends StatefulWidget {
 class DynamicDetailPageState extends State<DynamicDetailPage> {
   ScrollController _scrollController = ScrollController(); //listview的控制器
   TextEditingController _contentTextEditingController;
-  FocusNode focusNodePhone = FocusNode();
+  FocusNode _contentFocusNode = FocusNode();
 
   String _placeholder = '发表评论';
+  String _commentTo = '';
+  String _replyTo = '';
 
   @override
   void initState() {
@@ -47,8 +49,10 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
 
   Future<Null> _onSentComment(content) async {
     final commetListBloc = BlocProvider.of<CommentListBloc>(context);
-    commetListBloc.dispatch(CommentListCreateComment(session: '5d2d0527609ab51adc5b65ea', content: content));
-    _contentTextEditingController = TextEditingController(text: '');
+    commetListBloc.dispatch(CommentListCreateComment(session: '5d2d0527609ab51adc5b65ea', content: content, commentTo: _commentTo, replyTo: _replyTo));
+    print(_commentTo);
+    print(_replyTo);
+    // _contentTextEditingController = TextEditingController(text: '');
   }
 
   @override
@@ -80,7 +84,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
               behavior: HitTestBehavior.translucent,
               onTap: () {
                 // 触摸收起键盘
-                FocusScope.of(context).requestFocus(FocusNode());
+                // FocusScope.of(context).requestFocus(FocusNode());
               },
               child: Stack(
                 children: <Widget>[
@@ -108,13 +112,16 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                       ),
                       CommentList(
                         session: state.data['_id'],
-                        onItemPressed: (obj) {
+                        onItemPressed: (comment) {
                           print('xxxxx');
-                          print(obj['user']['_id']);
-                          final _nickname = obj['user']['nickname'];
-
+                          print(comment['user']['_id']);
+                          final _nickname = comment['user']['nickname'];
                           setState(() {
                             _placeholder = '回复：$_nickname';
+                            _commentTo = comment['_id'];
+                            _replyTo = comment['_id'];
+                            // _replyTo = comment['user']['_id'];
+                            FocusScope.of(context).requestFocus(_contentFocusNode);
                           });
                         },
                       ),
@@ -151,7 +158,6 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                           child: Container(
                             // padding: EdgeInsets.all(8),
                             padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-
                             alignment: Alignment.topLeft,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -162,6 +168,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                                     maxLines: 4,
                                     minLines: 1,
+                                    focusNode: _contentFocusNode,
                                     controller: _contentTextEditingController,
                                     placeholder: _placeholder,
                                     textInputAction: TextInputAction.send,
