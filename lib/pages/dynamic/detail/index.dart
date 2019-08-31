@@ -178,6 +178,9 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                                     onChanged: (str) {
                                       print(str);
                                     },
+                                    onSubmitted: (text) {
+                                      print('submit $text');
+                                    },
                                   ),
                                 ),
                                 Container(
