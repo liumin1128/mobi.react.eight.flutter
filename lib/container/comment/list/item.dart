@@ -10,6 +10,18 @@ text2html(str) {
   // .replace(/(.*?)\n(.*?)/ig, '$1<div>$2</div>');
 }
 
+showReplys(replys) {
+  List<Widget> list = [];
+  for (var i = 0; i < replys.length; i++) {
+    list.add(Row(children: <Widget>[
+      Text(replys[i]['user']['nickname']),
+      Text(':'),
+      Text(replys[i]['content']),
+    ]));
+  }
+  return list;
+}
+
 class CommentItem extends StatelessWidget {
   CommentItem({@required this.data, this.onPressed});
   final data;
@@ -83,29 +95,43 @@ class CommentItem extends StatelessWidget {
                 // ),
                 LikeButton(width: 64, duration: Duration(milliseconds: 1000)),
 
-                Transform(
-                  transform: Matrix4.translationValues(-8, 0, 0),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        data['zanCount'].toString(),
-                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
-                      ),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
-                      Icon(
-                        CupertinoIcons.search,
-                        color: Color(0xFF999999),
-                        size: 24,
-                      ),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                      Text(
-                        data['replyCount'].toString(),
-                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
-                      ),
-                    ],
-                  ),
-                ),
+                // Transform(
+                //   transform: Matrix4.translationValues(-8, 0, 0),
+                //   child: Row(
+                //     children: <Widget>[
+                //       Text(
+                //         data['zanCount'].toString(),
+                //         style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
+                //       ),
+                //       Padding(padding: EdgeInsets.symmetric(horizontal: 16)),
+                //       Icon(
+                //         CupertinoIcons.search,
+                //         color: Color(0xFF999999),
+                //         size: 24,
+                //       ),
+                //       Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                //       Text(
+                //         data['replyCount'].toString(),
+                //         style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
+            ),
+          ),
+
+          Container(
+            padding: const EdgeInsets.only(left: 72, right: 16, bottom: 16),
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Color(0xFFf8f8f8),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Column(
+                children: showReplys(data['replys']),
+              ),
             ),
           ),
 
