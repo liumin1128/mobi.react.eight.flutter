@@ -124,16 +124,16 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                         child: DecoratedBox(
                           decoration: BoxDecoration(
-                              // color: CupertinoTheme.of(context).barBackgroundColor,
-                              // // color: Color(0xCCF8F8F8),
-                              // // color: Color(0xeeffffff),
-                              // border: Border(
-                              //   top: BorderSide(
-                              //     style: BorderStyle.solid,
-                              //     color: Color(0x10000000),
-                              //   ),
-                              // ),
+                            // color: CupertinoTheme.of(context).barBackgroundColor,
+                            // // color: Color(0xCCF8F8F8),
+                            // // color: Color(0xeeffffff),
+                            border: Border(
+                              top: BorderSide(
+                                style: BorderStyle.solid,
+                                color: Color(0x33000000),
                               ),
+                            ),
+                          ),
                           child: Container(
                             // padding: EdgeInsets.all(16),
                             alignment: Alignment.topLeft,
@@ -148,11 +148,13 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                                     placeholder: '发表评论',
                                     placeholderStyle: TextStyle(
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 18,
+                                      fontSize: 17,
+                                      // height: 0.7,
                                       color: CupertinoColors.inactiveGray,
                                     ),
                                     style: TextStyle(
                                       fontSize: 20,
+                                      // height: 1.2,
                                       color: CupertinoColors.black,
                                     ),
                                     decoration: BoxDecoration(
