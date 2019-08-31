@@ -71,71 +71,71 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
               ),
               trailing: Avatar(src: state.data['user']['avatarUrl'], size: 30),
             ),
-            child: Stack(
-              children: <Widget>[
-                CustomScrollView(
-                  controller: _scrollController,
-                  slivers: <Widget>[
-                    CupertinoSliverRefreshControl(onRefresh: _onRefresh),
-                    // 内容
-                    SliverSafeArea(
-                      sliver: SliverToBoxAdapter(
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
-                          child: Center(
-                            child: Container(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(children: <Widget>[
-                                Text(state.data['content']),
-                                Padding(padding: EdgeInsets.all(8)),
-                                state.data['pictures'].length > 0 ? multiPictureView(state.data['pictures']) : Container(),
-                              ]),
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                // 触摸收起键盘
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              child: Stack(
+                children: <Widget>[
+                  CustomScrollView(
+                    controller: _scrollController,
+                    slivers: <Widget>[
+                      CupertinoSliverRefreshControl(onRefresh: _onRefresh),
+                      // 内容
+                      SliverSafeArea(
+                        sliver: SliverToBoxAdapter(
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: Center(
+                              child: Container(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(children: <Widget>[
+                                  Text(state.data['content']),
+                                  Padding(padding: EdgeInsets.all(8)),
+                                  state.data['pictures'].length > 0 ? multiPictureView(state.data['pictures']) : Container(),
+                                ]),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    CommentList(
-                      session: state.data['_id'],
-                    ),
-                    CupertinoSliverNavigationBar(
-                      largeTitle: Text('widget.title'),
-                      middle: Stack(
-                        children: <Widget>[
-                          Avatar(src: state.data['user']['avatarUrl'], size: 30),
-                        ],
+                      CommentList(
+                        session: state.data['_id'],
                       ),
-                    ),
-                    // 评论
-                  ],
-                ),
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: ClipRect(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: CupertinoTheme.of(context).barBackgroundColor,
-                          // color: Color(0xCCF8F8F8),
-                          // color: Color(0xeeffffff),
-                          border: Border(
-                            top: BorderSide(
-                              style: BorderStyle.solid,
-                              color: Color(0x10000000),
-                            ),
-                          ),
+                      CupertinoSliverNavigationBar(
+                        largeTitle: Text('widget.title'),
+                        middle: Stack(
+                          children: <Widget>[
+                            Avatar(src: state.data['user']['avatarUrl'], size: 30),
+                          ],
                         ),
-                        child: GestureDetector(
-                          behavior: HitTestBehavior.translucent,
-                          onTap: () {
-                            // 触摸收起键盘
-                            FocusScope.of(context).requestFocus(FocusNode());
-                          },
+                      ),
+                      // 评论
+                    ],
+                  ),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: ClipRect(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                              // color: CupertinoTheme.of(context).barBackgroundColor,
+                              // // color: Color(0xCCF8F8F8),
+                              // // color: Color(0xeeffffff),
+                              // border: Border(
+                              //   top: BorderSide(
+                              //     style: BorderStyle.solid,
+                              //     color: Color(0x10000000),
+                              //   ),
+                              // ),
+                              ),
                           child: Container(
-                            padding: EdgeInsets.all(16),
+                            // padding: EdgeInsets.all(16),
                             alignment: Alignment.topLeft,
                             child: Row(
                               children: <Widget>[
@@ -145,18 +145,31 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                                     maxLines: 4,
                                     minLines: 1,
                                     controller: _contentTextEditingController,
-                                    placeholder: '输入手机号',
-                                    // style: new TextStyle(
-                                    //   // fontSize: 22,
-                                    //   color: CupertinoColors.black,
-                                    // ),
+                                    placeholder: '发表评论',
+                                    placeholderStyle: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 18,
+                                      color: CupertinoColors.inactiveGray,
+                                    ),
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: CupertinoColors.black,
+                                    ),
                                     decoration: BoxDecoration(
-                                      border: Border.all(
-                                        style: BorderStyle.solid,
-                                        color: Color(0x10000000),
-                                      ),
-                                      color: Color(0xffffffff),
-                                      borderRadius: BorderRadius.circular(4),
+                                      // border: Border.all(
+                                      //   style: BorderStyle.solid,
+                                      //   color: Color(0x10000000),
+                                      // ),
+                                      // border: Border(
+                                      //   top: BorderSide(
+                                      //     style: BorderStyle.solid,
+                                      //     color: Color(0x10000000),
+                                      //   ),
+                                      // ),
+                                      // color: Color(0xffffffff),
+                                      color: CupertinoTheme.of(context).barBackgroundColor,
+
+                                      // borderRadius: BorderRadius.circular(4),
                                     ),
                                     onChanged: (str) {
                                       print(str);
@@ -170,8 +183,8 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         } else {
