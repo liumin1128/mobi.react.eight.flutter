@@ -30,7 +30,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {}
     });
 
-    _contentTextEditingController = TextEditingController(text: '111');
+    // _contentTextEditingController = TextEditingController(text: '');
 
     _onRefresh();
   }
@@ -43,14 +43,12 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
   Future<Null> _onRefresh() async {
     final dynamicDetailBloc = BlocProvider.of<DynamicDetailBloc>(context);
     dynamicDetailBloc.dispatch(DynamicDetailFetch(id: '5d2d0527609ab51adc5b65ea'));
-
-    // final commetListBloc = BlocProvider.of<CommentListBloc>(context);
-    // commetListBloc.dispatch(CommentListFetch(session: '5d2d0527609ab51adc5b65ea'));
   }
 
   Future<Null> _onSentComment(content) async {
     final commetListBloc = BlocProvider.of<CommentListBloc>(context);
     commetListBloc.dispatch(CommentListCreateComment(session: '5d2d0527609ab51adc5b65ea', content: content));
+    _contentTextEditingController = TextEditingController(text: '');
   }
 
   @override
@@ -151,7 +149,9 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                             ),
                           ),
                           child: Container(
-                            padding: EdgeInsets.all(8),
+                            // padding: EdgeInsets.all(8),
+                            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+
                             alignment: Alignment.topLeft,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
