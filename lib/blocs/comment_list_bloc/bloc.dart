@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart' hide Action;
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:eight/graphql/schema/comment.dart';
 import 'index.dart';
+// import 'package:eight/utils/action.dart';
 
 class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
   final GraphQLClient client;
@@ -19,6 +20,8 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
       yield* _mapCommentListFetchToState(event);
     } else if (event is CommentListFetchMore) {
       yield* _mapCommentListFetchMoreToState();
+    } else if (event is CommentListCreateComment) {
+      yield* _mapCommentListCreateCommentToState(event);
     }
   }
 
@@ -69,6 +72,48 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
       }
     } catch (_) {
       print('_mapCommentListFetchToState error');
+      yield CommentListFetchError();
+    }
+  }
+
+  Stream<CommentListState> _mapCommentListCreateCommentToState(event) async* {
+    try {
+      if (currentState is CommentListFetchSuccessed) {
+        final QueryResult res = await client.mutate(
+          MutationOptions(
+            document: createCommentSchema,
+            variables: {
+              'session': event.session,
+              'content': event.content,
+            },
+          ),
+        );
+
+        if (res.hasErrors) return;
+
+        var result = res.data['result'];
+
+        if (result['status'] == 200) {
+          final _list = (currentState as CommentListFetchSuccessed).list;
+
+          print('评论成功');
+
+          final list = [
+            result['data']
+          ];
+
+          yield CommentListFetchSuccessed(list: list + _list, session: event.session);
+        } else {
+          // alert(
+          //   context: '评论失败',
+          //   title: '验证码错误',
+          //   content: '验证码格式不正确，请重新输入',
+          // );
+        }
+      }
+    } catch (error) {
+      print('_mapCommentListFetchToState error');
+      print(error);
       yield CommentListFetchError();
     }
   }

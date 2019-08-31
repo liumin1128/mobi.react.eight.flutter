@@ -46,6 +46,11 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
     // commetListBloc.dispatch(CommentListFetch(session: '5d2d0527609ab51adc5b65ea'));
   }
 
+  Future<Null> _onSentComment(content) async {
+    final commetListBloc = BlocProvider.of<CommentListBloc>(context);
+    commetListBloc.dispatch(CommentListCreateComment(session: '5d2d0527609ab51adc5b65ea', content: content));
+  }
+
   @override
   Widget build(BuildContext context) {
     // final dynamicDetailBloc = BlocProvider.of<DynamicDetailBloc>(context);
@@ -180,6 +185,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                                     },
                                     onSubmitted: (text) {
                                       print('submit $text');
+                                      _onSentComment(text);
                                     },
                                   ),
                                 ),
