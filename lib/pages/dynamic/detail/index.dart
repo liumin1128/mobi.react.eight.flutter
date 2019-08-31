@@ -122,30 +122,33 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                     child: ClipRect(
                       child: BackdropFilter(
                         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                        child: DecoratedBox(
+                        child: Container(
                           decoration: BoxDecoration(
-                            // color: CupertinoTheme.of(context).barBackgroundColor,
+                            color: CupertinoTheme.of(context).barBackgroundColor,
                             // // color: Color(0xCCF8F8F8),
                             // // color: Color(0xeeffffff),
                             border: Border(
                               top: BorderSide(
                                 style: BorderStyle.solid,
-                                color: Color(0x33000000),
+                                color: Color(0x11000000),
                               ),
                             ),
                           ),
                           child: Container(
-                            // padding: EdgeInsets.all(16),
+                            padding: EdgeInsets.all(8),
                             alignment: Alignment.topLeft,
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Expanded(
                                   child: CupertinoTextField(
-                                    padding: EdgeInsets.all(16),
+                                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                                     maxLines: 4,
                                     minLines: 1,
                                     controller: _contentTextEditingController,
                                     placeholder: '发表评论',
+                                    textInputAction: TextInputAction.send,
                                     placeholderStyle: TextStyle(
                                       fontWeight: FontWeight.w300,
                                       fontSize: 17,
@@ -154,7 +157,6 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                                     ),
                                     style: TextStyle(
                                       fontSize: 20,
-                                      // height: 1.2,
                                       color: CupertinoColors.black,
                                     ),
                                     decoration: BoxDecoration(
@@ -168,16 +170,25 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                                       //     color: Color(0x10000000),
                                       //   ),
                                       // ),
-                                      // color: Color(0xffffffff),
-                                      color: CupertinoTheme.of(context).barBackgroundColor,
+                                      color: Color(0xffeeeeee),
+                                      // color: CupertinoTheme.of(context).barBackgroundColor,
 
-                                      // borderRadius: BorderRadius.circular(4),
+                                      borderRadius: BorderRadius.circular(4),
                                     ),
                                     onChanged: (str) {
                                       print(str);
                                     },
                                   ),
                                 ),
+                                Container(
+                                  padding: EdgeInsets.all(4),
+                                  margin: EdgeInsets.only(left: 8),
+                                  child: Icon(
+                                    CupertinoIcons.folder,
+                                    color: Color(0xFF999999),
+                                    size: 32,
+                                  ),
+                                )
                               ],
                             ),
                           ),

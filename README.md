@@ -36,3 +36,6 @@ https://segmentfault.com/a/1190000019750283
 tab 页切换，tab 隐藏
 
 https://www.jianshu.com/p/1b02cbb32bdc?utm_source=desktop&utm_medium=timeline
+
+Flutter 支持图片以及特殊文字的输入框
+https://juejin.im/post/5ccc62d6518825420112bc08
