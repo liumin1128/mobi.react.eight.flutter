@@ -104,10 +104,27 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
             print('idx11111111111');
 
             final idx = _list.indexWhere((i) => (i['_id'] == event.commentTo));
-            print('idx');
-            print(idx);
-            _list[idx]['replys'].insert(0, result['data']);
-            yield CommentListFetchSuccessed(list: _list, session: event.session);
+
+            final list = [
+              result['data']
+            ];
+
+            // _list[idx]['replys'] = list + _list[idx]['replys'];
+
+            // print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+            // print(_list[idx]['replys'].length);
+
+            final List newList = List.from(_list).map((i) {
+              if (i['_id'] == event.commentTo) {
+                // i['replys'] = list + i['replys'];
+                return i.copyWith(replys: list + i['replys']);
+              }
+              return i;
+              // return i['_id'] == event.commentTo ? i.copyWith(replys: list + i['replys']) : i;
+            }).toList();
+
+            // _list[idx]['replys'].insert(0, result['data']);
+            yield CommentListFetchSuccessed(list: newList, session: event.session);
             return;
           }
 

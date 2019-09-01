@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     //   ),
     //   child: Text('111'),
     // ),
-    // DynamicDetailPage(),
+    DynamicDetailPage(),
 
     DynamicListPage(),
 
