@@ -60,11 +60,6 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
   }
 
   Future<Null> _onSentComment(content) async {
-    print('_onSentComment -');
-    print(content);
-    print(_commentTo);
-    print(_replyTo);
-    print('_onSentComment +');
     final commetListBloc = BlocProvider.of<CommentListBloc>(context);
     commetListBloc.dispatch(
       CommentListCreateComment(
@@ -140,10 +135,6 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                           var _nickname = reply != null ? reply.user.nickname : comment.user.nickname;
 
                           setState(() {
-                            print('comment.replyTo');
-                            print(comment);
-                            print(reply);
-
                             _placeholder = '回复：$_nickname';
                             _commentTo = comment.id;
                             _replyTo = reply != null ? reply.id : comment.id;

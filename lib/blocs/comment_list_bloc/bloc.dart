@@ -110,11 +110,6 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
 
         if (result['status'] == 200) {
           final _list = (currentState as CommentListFetchSuccessed).list;
-          print('event.commentTo');
-          print(event.commentTo);
-
-          print('event.replyTo');
-          print(event.replyTo);
 
           // 评论回复
           if (event.commentTo != '') {
