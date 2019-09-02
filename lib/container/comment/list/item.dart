@@ -13,11 +13,34 @@ text2html(str) {
 showReplys(replys) {
   List<Widget> list = [];
   for (var i = 0; i < replys.length; i++) {
-    list.add(Row(children: <Widget>[
-      Text(replys[i].user.nickname),
-      Text(':'),
-      Text(replys[i].content),
-    ]));
+    list.add(
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            child: RichText(
+              text: TextSpan(
+                // text: 'This is ',
+                style: TextStyle(color: Color(0xFF000000)),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: replys[i].user.nickname,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextSpan(text: ': '),
+                  TextSpan(
+                    text: replys[i].content,
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
   return list;
 }

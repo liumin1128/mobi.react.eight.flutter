@@ -33,7 +33,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
     });
 
     _contentFocusNode.addListener(() {
-      print(_contentFocusNode.hasFocus);
+      // print(_contentFocusNode.hasFocus);
       if (!_contentFocusNode.hasFocus) {
         setState(() {
           _placeholder = '发表评论';
@@ -129,9 +129,10 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                         onItemPressed: (comment) {
                           // print('xxxxx');
                           // print(comment['user']['_id']);
-                          // final _nickname = comment.user['nickname'];
+                          final _nickname = comment.user.nickname;
+
                           setState(() {
-                            _placeholder = '回复：\$_nickname';
+                            _placeholder = '回复：$_nickname';
                             _commentTo = comment.id;
                             _replyTo = comment.id;
                             // _replyTo = comment['user']['_id'];
