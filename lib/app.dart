@@ -37,7 +37,10 @@ class AppState extends State<App> {
                   theme: theme,
                   routes: <String, WidgetBuilder>{
                     '/': (BuildContext context) => HomePage(),
-                    '/dynamic/detail': (BuildContext context) => DynamicDetailPage(),
+                    '/dynamic/detail': (BuildContext context) {
+                      final Map query = ModalRoute.of(context).settings.arguments;
+                      return DynamicDetailPage(session: query['session']);
+                    }
                     // '/detail': (BuildContext context) => DynamicDetailPage(context: context),
                   },
                   initialRoute: '/',

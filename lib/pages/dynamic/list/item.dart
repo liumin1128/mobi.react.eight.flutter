@@ -56,7 +56,12 @@ class DynamicItem extends StatelessWidget {
             onTap: () {
               // Navigator.of(context).pushNamed('/dynamic/detail');
               // Navigator.pushNamed(context, "/news");
-              Navigator.of(context, rootNavigator: true).pushNamed('/dynamic/detail');
+              Navigator.of(context, rootNavigator: true).pushNamed(
+                '/dynamic/detail',
+                arguments: {
+                  'session': data['_id']
+                },
+              );
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),

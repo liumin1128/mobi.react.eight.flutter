@@ -11,11 +11,19 @@ import 'package:eight/container/comment/list/index.dart';
 // import 'item.dart';
 
 class DynamicDetailPage extends StatefulWidget {
+  final String session;
+  DynamicDetailPage({Key key, this.session}) : super(key: key);
+
   @override
   DynamicDetailPageState createState() => DynamicDetailPageState();
 }
 
 class DynamicDetailPageState extends State<DynamicDetailPage> {
+  // dynamic obj = ModalRoute.of(context).settings.arguments;
+  // if (obj != null && isNotEmpty(obj["name"])) {
+  //   name = obj["name"];
+  // }
+
   ScrollController _scrollController = ScrollController(); //listview的控制器
   TextEditingController _contentTextEditingController;
   FocusNode _contentFocusNode = FocusNode();
@@ -27,6 +35,9 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
   @override
   void initState() {
     super.initState();
+
+    print('widget.session');
+    print(widget.session);
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {}
@@ -56,14 +67,14 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
 
   Future<Null> _onRefresh() async {
     final dynamicDetailBloc = BlocProvider.of<DynamicDetailBloc>(context);
-    dynamicDetailBloc.dispatch(DynamicDetailFetch(id: '5d66017f13b71b52f7f5a95b'));
+    dynamicDetailBloc.dispatch(DynamicDetailFetch(id: widget.session));
   }
 
   Future<Null> _onSentComment(content) async {
     final commetListBloc = BlocProvider.of<CommentListBloc>(context);
     commetListBloc.dispatch(
       CommentListCreateComment(
-        session: '5d66017f13b71b52f7f5a95b',
+        session: widget.session,
         content: content,
         commentTo: _commentTo,
         replyTo: _replyTo,
@@ -74,6 +85,8 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    var args = ModalRoute.of(context).settings.arguments;
+
     // final dynamicDetailBloc = BlocProvider.of<DynamicDetailBloc>(context);
     return BlocBuilder<DynamicDetailBloc, DynamicDetailState>(
       builder: (context, state) {
