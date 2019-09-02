@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:eight/utils/common.dart';
 import 'package:eight/components/Avatar/index.dart';
 import 'package:eight/components/LikeBtn/index.dart';
@@ -10,9 +11,16 @@ text2html(str) {
   // .replace(/(.*?)\n(.*?)/ig, '$1<div>$2</div>');
 }
 
-showReplys(replys) {
+showReplys(replys, onReply) {
   List<Widget> list = [];
   for (var i = 0; i < replys.length; i++) {
+    final reply = replys[i];
+    final TapGestureRecognizer recognizer = TapGestureRecognizer();
+
+    recognizer.onTap = () {
+      onReply(reply);
+    };
+
     list.add(
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -25,14 +33,28 @@ showReplys(replys) {
                 style: TextStyle(color: Color(0xFF000000)),
                 children: <TextSpan>[
                   TextSpan(
-                    text: replys[i].user.nickname,
+                    text: reply.user.nickname,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  reply.replyTo != null
+                      ? TextSpan(
+                          text: ' 回复 ',
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: reply.replyTo.user.nickname,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        )
+                      : TextSpan(),
                   TextSpan(text: ': '),
                   TextSpan(
-                    text: replys[i].content,
+                    text: reply.content,
+                    recognizer: recognizer,
                   ),
                 ],
               ),
@@ -87,7 +109,7 @@ class CommentItem extends StatelessWidget {
 
           GestureDetector(
             onTap: () {
-              onPressed(data);
+              onPressed(data, null);
             },
             child: Container(
               decoration: BoxDecoration(),
@@ -154,7 +176,9 @@ class CommentItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Column(
-                      children: showReplys(data.replys),
+                      children: showReplys(data.replys, (reply) {
+                        onPressed(data, reply);
+                      }),
                     ),
                   ),
                 )

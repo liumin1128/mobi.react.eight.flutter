@@ -113,15 +113,21 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
           print('event.commentTo');
           print(event.commentTo);
 
+          print('event.replyTo');
+          print(event.replyTo);
+
           // 评论回复
           if (event.commentTo != '') {
             print('评论回复成功');
             final List<Item> newList = List<Item>.from(_list).map((i) {
               if (i.id == event.commentTo) {
+                var sas = result['data'];
+                print(sas);
                 return i.pushReply(reply: getReplyItem(result['data']));
               }
               return i;
             }).toList();
+
             yield CommentListFetchSuccessed(list: newList, session: event.session);
             return;
           }

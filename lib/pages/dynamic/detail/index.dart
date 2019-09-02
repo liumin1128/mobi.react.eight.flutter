@@ -60,12 +60,20 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
   }
 
   Future<Null> _onSentComment(content) async {
+    print('_onSentComment -');
     print(content);
     print(_commentTo);
     print(_replyTo);
+    print('_onSentComment +');
     final commetListBloc = BlocProvider.of<CommentListBloc>(context);
-    commetListBloc.dispatch(CommentListCreateComment(session: '5d2d0527609ab51adc5b65ea', content: content, commentTo: _commentTo, replyTo: _replyTo));
-
+    commetListBloc.dispatch(
+      CommentListCreateComment(
+        session: '5d2d0527609ab51adc5b65ea',
+        content: content,
+        commentTo: _commentTo,
+        replyTo: _replyTo,
+      ),
+    );
     _contentTextEditingController = TextEditingController(text: '');
   }
 
@@ -126,16 +134,20 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                       ),
                       CommentList(
                         session: state.data['_id'],
-                        onItemPressed: (comment) {
+                        onItemPressed: (comment, reply) {
                           // print('xxxxx');
                           // print(comment['user']['_id']);
-                          final _nickname = comment.user.nickname;
+                          var _nickname = reply != null ? reply.user.nickname : comment.user.nickname;
 
                           setState(() {
+                            print('comment.replyTo');
+                            print(comment);
+                            print(reply);
+
                             _placeholder = '回复：$_nickname';
                             _commentTo = comment.id;
-                            _replyTo = comment.id;
-                            // _replyTo = comment['user']['_id'];
+                            _replyTo = reply != null ? reply.id : comment.id;
+
                             FocusScope.of(context).requestFocus(_contentFocusNode);
                           });
                         },

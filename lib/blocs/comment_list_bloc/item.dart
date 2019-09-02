@@ -20,6 +20,22 @@ class User extends Equatable {
   String toString() => 'CommentItemUser { id: $id, nickname: $nickname }';
 }
 
+class ReplyTo extends Equatable {
+  final String id;
+  final User user;
+
+  ReplyTo({
+    @required this.id,
+    @required this.user,
+  }) : super([
+          id,
+          user,
+        ]);
+
+  @override
+  String toString() => 'ReplyTo { id: $id, nickname: $user }';
+}
+
 class Item extends Equatable {
   final String createdAt;
   final String id;
@@ -28,6 +44,7 @@ class Item extends Equatable {
   final int zanCount;
   final bool zanStatus;
   final int replyCount;
+  final ReplyTo replyTo;
   final User user;
   final List<Item> replys;
 
@@ -39,6 +56,7 @@ class Item extends Equatable {
     this.zanCount,
     this.zanStatus,
     this.replyCount,
+    this.replyTo,
     this.user,
     this.replys,
   }) : super([
@@ -49,6 +67,7 @@ class Item extends Equatable {
           zanCount,
           zanStatus,
           replyCount,
+          replyTo,
           user,
           replys,
         ]);
@@ -61,6 +80,7 @@ class Item extends Equatable {
     int zanCount,
     bool zanStatus,
     int replyCount,
+    ReplyTo replyTo,
     User user,
     List replys,
   }) {
@@ -72,6 +92,7 @@ class Item extends Equatable {
       zanCount: zanCount ?? this.zanCount,
       zanStatus: zanStatus ?? this.zanStatus,
       replyCount: replyCount ?? this.replyCount,
+      replyTo: replyTo ?? this.replyTo,
       user: user ?? this.user,
       replys: replys ?? this.replys,
     );
@@ -88,6 +109,7 @@ class Item extends Equatable {
       zanCount: this.zanCount,
       zanStatus: this.zanStatus,
       replyCount: this.replyCount,
+      replyTo: this.replyTo,
       user: this.user,
       replys: [
             reply
@@ -108,8 +130,18 @@ Item getReplyItem(data) {
     zanCount: data['zanCount'],
     zanStatus: data['zanStatus'],
     replyCount: data['replyCount'],
+    replyTo: data['replyTo'] != null
+        ? ReplyTo(
+            id: data['replyTo']['_id'],
+            user: User(
+              id: data['replyTo']['user']['_id'],
+              nickname: data['replyTo']['user']['nickname'],
+              avatarUrl: data['replyTo']['user']['avatarUrl'],
+            ),
+          )
+        : null,
     user: User(
-      id: data['user']['id'],
+      id: data['user']['_id'],
       nickname: data['user']['nickname'],
       avatarUrl: data['user']['avatarUrl'],
     ),
@@ -131,7 +163,7 @@ Item getCommentItem(data) {
     replyCount: data['replyCount'],
     replys: _replys,
     user: User(
-      id: data['user']['id'],
+      id: data['user']['_id'],
       nickname: data['user']['nickname'],
       avatarUrl: data['user']['avatarUrl'],
     ),
