@@ -56,14 +56,14 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
 
   Future<Null> _onRefresh() async {
     final dynamicDetailBloc = BlocProvider.of<DynamicDetailBloc>(context);
-    dynamicDetailBloc.dispatch(DynamicDetailFetch(id: '5d2d0527609ab51adc5b65ea'));
+    dynamicDetailBloc.dispatch(DynamicDetailFetch(id: '5d66017f13b71b52f7f5a95b'));
   }
 
   Future<Null> _onSentComment(content) async {
     final commetListBloc = BlocProvider.of<CommentListBloc>(context);
     commetListBloc.dispatch(
       CommentListCreateComment(
-        session: '5d2d0527609ab51adc5b65ea',
+        session: '5d66017f13b71b52f7f5a95b',
         content: content,
         commentTo: _commentTo,
         replyTo: _replyTo,
@@ -112,28 +112,27 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                       // 内容
                       SliverSafeArea(
                         sliver: SliverToBoxAdapter(
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 16),
-                            child: Center(
-                              child: Container(
-                                padding: const EdgeInsets.all(16),
-                                child: Column(children: <Widget>[
-                                  Text(state.data['content']),
-                                  Padding(padding: EdgeInsets.all(8)),
-                                  state.data['pictures'].length > 0 ? multiPictureView(state.data['pictures']) : Container(),
-                                ]),
-                              ),
-                            ),
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(children: <Widget>[
+                              Text(state.data['content']),
+                              Padding(padding: EdgeInsets.all(8)),
+                              state.data['pictures'].length > 0 ? multiPictureView(state.data['pictures']) : Container(),
+                            ]),
                           ),
+                        ),
+                      ),
+
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 16, top: 16),
+                          child: Text('全部评论', style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 20)),
                         ),
                       ),
                       CommentList(
                         session: state.data['_id'],
                         onItemPressed: (comment, reply) {
-                          // print('xxxxx');
-                          // print(comment['user']['_id']);
                           var _nickname = reply != null ? reply.user.nickname : comment.user.nickname;
-
                           setState(() {
                             _placeholder = '回复：$_nickname';
                             _commentTo = comment.id;
@@ -143,14 +142,22 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                           });
                         },
                       ),
-                      CupertinoSliverNavigationBar(
-                        largeTitle: Text('widget.title'),
-                        middle: Stack(
-                          children: <Widget>[
-                            Avatar(src: state.data['user']['avatarUrl'], size: 30),
-                          ],
+                      SliverSafeArea(
+                        sliver: SliverToBoxAdapter(
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 64),
+                            child: Text('111111111'),
+                          ),
                         ),
-                      ),
+                      )
+                      // CupertinoSliverNavigationBar(
+                      //   largeTitle: Text('widget.title'),
+                      //   middle: Stack(
+                      //     children: <Widget>[
+                      //       Avatar(src: state.data['user']['avatarUrl'], size: 30),
+                      //     ],
+                      //   ),
+                      // ),
                       // 评论
                     ],
                   ),

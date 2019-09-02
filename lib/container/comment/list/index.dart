@@ -28,8 +28,7 @@ class _CommentListPageState extends State<CommentList> {
     return BlocBuilder<CommentListBloc, CommentListState>(
       builder: (context, state) {
         if (state is CommentListFetchSuccessed) {
-          return SliverSafeArea(
-              sliver: SliverList(
+          return SliverList(
             delegate: SliverChildBuilderDelegate(
               (_, int index) {
                 if (index == state.list.length) {
@@ -47,21 +46,19 @@ class _CommentListPageState extends State<CommentList> {
               },
               childCount: state.list.length + 1,
             ),
-          ));
+          );
         } else {
-          return SliverSafeArea(
-            sliver: SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Center(
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(children: <Widget>[
-                      Text('评论加载中'),
-                      Padding(padding: EdgeInsets.all(8)),
-                      // state.data['pictures'].length > 0 ? multiPictureView(state.data['pictures']) : null,
-                    ]),
-                  ),
+          return SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(children: <Widget>[
+                    Text('评论加载中'),
+                    Padding(padding: EdgeInsets.all(8)),
+                    // state.data['pictures'].length > 0 ? multiPictureView(state.data['pictures']) : null,
+                  ]),
                 ),
               ),
             ),
