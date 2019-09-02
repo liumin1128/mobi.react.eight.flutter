@@ -32,6 +32,17 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {}
     });
 
+    _contentFocusNode.addListener(() {
+      print(_contentFocusNode.hasFocus);
+      if (!_contentFocusNode.hasFocus) {
+        setState(() {
+          _placeholder = '发表评论';
+          _commentTo = '';
+          _replyTo = '';
+        });
+      }
+    });
+
     // _contentTextEditingController = TextEditingController(text: '');
 
     _onRefresh();
@@ -40,6 +51,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
   void dispose() {
     super.dispose();
     _scrollController.dispose();
+    _contentFocusNode.dispose();
   }
 
   Future<Null> _onRefresh() async {
@@ -48,11 +60,13 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
   }
 
   Future<Null> _onSentComment(content) async {
-    final commetListBloc = BlocProvider.of<CommentListBloc>(context);
-    commetListBloc.dispatch(CommentListCreateComment(session: '5d2d0527609ab51adc5b65ea', content: content, commentTo: _commentTo, replyTo: _replyTo));
+    print(content);
     print(_commentTo);
     print(_replyTo);
-    // _contentTextEditingController = TextEditingController(text: '');
+    final commetListBloc = BlocProvider.of<CommentListBloc>(context);
+    commetListBloc.dispatch(CommentListCreateComment(session: '5d2d0527609ab51adc5b65ea', content: content, commentTo: _commentTo, replyTo: _replyTo));
+
+    _contentTextEditingController = TextEditingController(text: '');
   }
 
   @override
@@ -84,7 +98,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
               behavior: HitTestBehavior.translucent,
               onTap: () {
                 // 触摸收起键盘
-                // FocusScope.of(context).requestFocus(FocusNode());
+                FocusScope.of(context).requestFocus(FocusNode());
               },
               child: Stack(
                 children: <Widget>[
