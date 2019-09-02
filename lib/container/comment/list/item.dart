@@ -121,19 +121,21 @@ class CommentItem extends StatelessWidget {
             ),
           ),
 
-          Container(
-            padding: const EdgeInsets.only(left: 72, right: 16, bottom: 16),
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Color(0xFFf8f8f8),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Column(
-                children: showReplys(data.replys),
-              ),
-            ),
-          ),
+          data.replys.length > 0
+              ? Container(
+                  padding: const EdgeInsets.only(left: 72, right: 16, bottom: 16),
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFf8f8f8),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Column(
+                      children: showReplys(data.replys),
+                    ),
+                  ),
+                )
+              : Container(),
 
           Container(
             color: Color.fromRGBO(0, 0, 0, 0.05),

@@ -100,24 +100,26 @@ class Item extends Equatable {
   String toString() => 'Item { id: $id, content: $content }';
 }
 
+Item getReplyItem(data) {
+  return Item(
+    id: data['_id'],
+    session: data['session'],
+    content: data['content'],
+    zanCount: data['zanCount'],
+    zanStatus: data['zanStatus'],
+    replyCount: data['replyCount'],
+    user: User(
+      id: data['user']['id'],
+      nickname: data['user']['nickname'],
+      avatarUrl: data['user']['avatarUrl'],
+    ),
+  );
+}
+
 Item getCommentItem(data) {
   List<Item> _replys = [];
-
   for (int jdx = 0; jdx < data['replys'].length; jdx++) {
-    final temp = data['replys'][jdx];
-    _replys.add(Item(
-      id: temp['_id'],
-      session: temp['session'],
-      content: temp['content'],
-      zanCount: temp['zanCount'],
-      zanStatus: temp['zanStatus'],
-      replyCount: temp['replyCount'],
-      user: User(
-        id: temp['user']['id'],
-        nickname: temp['user']['nickname'],
-        avatarUrl: temp['user']['avatarUrl'],
-      ),
-    ));
+    _replys.add(getReplyItem(data['replys'][jdx]));
   }
 
   return Item(

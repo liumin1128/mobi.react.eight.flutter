@@ -113,30 +113,15 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
           print('event.commentTo');
           print(event.commentTo);
 
+          // 评论回复
           if (event.commentTo != '') {
-            print('idx11111111111');
-
-            final newReply = Item(
-              id: result['data']['_id'],
-              session: result['data']['session'],
-              content: result['data']['content'],
-              zanCount: result['data']['zanCount'],
-              zanStatus: result['data']['zanStatus'],
-              replyCount: result['data']['replyCount'],
-              user: User(
-                id: result['data']['user']['id'],
-                nickname: result['data']['user']['nickname'],
-                avatarUrl: result['data']['user']['avatarUrl'],
-              ),
-            );
-
+            print('评论回复成功');
             final List<Item> newList = List<Item>.from(_list).map((i) {
               if (i.id == event.commentTo) {
-                return i.pushReply(reply: newReply);
+                return i.pushReply(reply: getReplyItem(result['data']));
               }
               return i;
             }).toList();
-
             yield CommentListFetchSuccessed(list: newList, session: event.session);
             return;
           }
@@ -144,7 +129,7 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
           print('评论成功');
 
           final list = [
-            result['data']
+            getCommentItem(result['data'])
           ];
 
           yield CommentListFetchSuccessed(list: list + _list, session: event.session);
