@@ -27,7 +27,7 @@ class _CommentListPageState extends State<CommentList> {
     final commentListBloc = BlocProvider.of<CommentListBloc>(context);
     return BlocBuilder<CommentListBloc, CommentListState>(
       builder: (context, state) {
-        if (state is CommentListFetchSuccessed) {
+        if (state is CommentListFetchSuccessed && state.session == widget.session) {
           return SliverList(
             delegate: SliverChildBuilderDelegate(
               (_, int index) {

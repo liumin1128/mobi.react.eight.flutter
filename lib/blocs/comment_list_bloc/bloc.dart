@@ -29,6 +29,10 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
   }
 
   Stream<CommentListState> _mapCommentListFetchToState(event) async* {
+    print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+    print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+    print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+    print(event.session);
     try {
       final QueryResult res = await client.mutate(
         MutationOptions(document: commentListSchema, variables: {

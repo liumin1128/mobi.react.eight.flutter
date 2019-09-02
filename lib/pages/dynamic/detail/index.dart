@@ -36,9 +36,6 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
   void initState() {
     super.initState();
 
-    print('widget.session');
-    print(widget.session);
-
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {}
     });
@@ -85,12 +82,10 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    var args = ModalRoute.of(context).settings.arguments;
-
     // final dynamicDetailBloc = BlocProvider.of<DynamicDetailBloc>(context);
     return BlocBuilder<DynamicDetailBloc, DynamicDetailState>(
       builder: (context, state) {
-        if (state is DynamicDetailFetchSuccessed) {
+        if (state is DynamicDetailFetchSuccessed && widget.session == state.data['_id']) {
           return CupertinoPageScaffold(
             navigationBar: CupertinoNavigationBar(
               // backgroundColor: CupertinoColors.white,
@@ -269,7 +264,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
             ),
           );
         } else {
-          return CupertinoPageScaffold(child: CupertinoActivityIndicator());
+          return CupertinoPageScaffold(child: Center(child: CupertinoActivityIndicator()));
         }
       },
     );
