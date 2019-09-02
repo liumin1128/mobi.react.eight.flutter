@@ -10,11 +10,11 @@ class Item extends Equatable {
   final bool zanStatus;
   final int replyCount;
   final Map user;
-  final List replys;
+  final List<Item> replys;
 
   Item({
     @required this.id,
-    @required this.session,
+    this.session,
     this.createdAt,
     this.content,
     this.zanCount,
@@ -30,19 +30,20 @@ class Item extends Equatable {
           zanCount,
           zanStatus,
           replyCount,
+          user,
           replys,
         ]);
 
   Item copyWith({
-    final String createdAt,
-    final String id,
-    final String session,
-    final String content,
-    final int zanCount,
-    final bool zanStatus,
-    final int replyCount,
-    final Map user,
-    final List replys,
+    String createdAt,
+    String id,
+    String session,
+    String content,
+    int zanCount,
+    bool zanStatus,
+    int replyCount,
+    Map user,
+    List replys,
   }) {
     return Item(
       id: id ?? this.id,

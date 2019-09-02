@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart' hide Action;
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -38,8 +39,41 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
 
       var list = res.data['list'];
 
-      yield CommentListFetchSuccessed(list: list, session: event.session);
-    } catch (_) {
+      List<Item> _comments = [];
+
+      list.map((i) {
+        List<Item> _replys = [];
+
+        for (int jdx = 0; jdx < i['replys'].length; jdx++) {
+          final temp = i['replys'][jdx];
+
+          _replys.add(Item(
+            id: temp['_id'],
+            session: temp['session'],
+            content: temp['content'],
+            zanCount: temp['zanCount'],
+            zanStatus: temp['zanStatus'],
+            replyCount: temp['replyCount'],
+            user: temp['user'],
+          ));
+        }
+
+        _comments.add(Item(
+          id: i['_id'],
+          session: i['session'],
+          content: i['content'],
+          zanCount: i['zanCount'],
+          zanStatus: i['zanStatus'],
+          replyCount: i['replyCount'],
+          user: i['user'],
+          replys: _replys,
+        ));
+      }).toList();
+
+      yield CommentListFetchSuccessed(list: _comments, session: event.session);
+    } catch (error) {
+      print('error');
+      print(error);
       print('_mapLoggedInToState出错');
       yield CommentListFetchError();
     }
@@ -103,21 +137,31 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
           if (event.commentTo != '') {
             print('idx11111111111');
 
-            final idx = _list.indexWhere((i) => (i['_id'] == event.commentTo));
+            // final idx = _list.indexWhere((i) => (i['_id'] == event.commentTo));
 
-            final list = [
-              result['data']
-            ];
+            final newReply = Item(
+              id: result['data']['_id'],
+              session: result['data']['session'],
+              content: result['data']['content'],
+              zanCount: result['data']['zanCount'],
+              zanStatus: result['data']['zanStatus'],
+              replyCount: result['data']['replyCount'],
+              user: result['data']['user'],
+            );
 
             // _list[idx]['replys'] = list + _list[idx]['replys'];
 
             // print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
             // print(_list[idx]['replys'].length);
 
-            final List newList = List.from(_list).map((i) {
-              if (i['_id'] == event.commentTo) {
+            final List<Item> newList = List<Item>.from(_list).map((i) {
+              if (i.id == event.commentTo) {
                 // i['replys'] = list + i['replys'];
-                return i.copyWith(replys: list + i['replys']);
+                return i.copyWith(
+                    replys: [
+                          newReply
+                        ] +
+                        i.replys);
               }
               return i;
               // return i['_id'] == event.commentTo ? i.copyWith(replys: list + i['replys']) : i;

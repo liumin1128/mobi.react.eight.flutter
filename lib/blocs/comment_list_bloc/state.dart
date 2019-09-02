@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'index.dart';
 
 @immutable
 abstract class CommentListState extends Equatable {
@@ -18,15 +19,29 @@ class CommentListFetchError extends CommentListState {
 
 class CommentListFetchSuccessed extends CommentListState {
   final String session;
-  final List list;
+  final List<Item> list;
+  final bool isEnd;
 
   CommentListFetchSuccessed({
     @required this.list,
     @required this.session,
+    this.isEnd,
   }) : super([
           list,
-          session
+          session,
+          isEnd
         ]);
+
+  CommentListFetchSuccessed copyWith({
+    List<Item> list,
+    bool isEnd,
+  }) {
+    return CommentListFetchSuccessed(
+      session: session ?? this.session,
+      list: list ?? this.list,
+      isEnd: isEnd ?? this.isEnd,
+    );
+  }
 
   @override
   String toString() => 'CommentListFetchSuccessed { session: $session, list: $list, }';

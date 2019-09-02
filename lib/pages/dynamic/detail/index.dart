@@ -113,13 +113,13 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                       CommentList(
                         session: state.data['_id'],
                         onItemPressed: (comment) {
-                          print('xxxxx');
-                          print(comment['user']['_id']);
-                          final _nickname = comment['user']['nickname'];
+                          // print('xxxxx');
+                          // print(comment['user']['_id']);
+                          // final _nickname = comment.user['nickname'];
                           setState(() {
-                            _placeholder = '回复：$_nickname';
-                            _commentTo = comment['_id'];
-                            _replyTo = comment['_id'];
+                            _placeholder = '回复：\$_nickname';
+                            _commentTo = comment.id;
+                            _replyTo = comment.id;
                             // _replyTo = comment['user']['_id'];
                             FocusScope.of(context).requestFocus(_contentFocusNode);
                           });

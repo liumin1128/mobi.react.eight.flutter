@@ -1,3 +1,4 @@
+export 'item.dart';
 export 'bloc.dart';
 export 'event.dart';
 export 'state.dart';
