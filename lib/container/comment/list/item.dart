@@ -14,8 +14,8 @@ showReplys(replys) {
   List<Widget> list = [];
   for (var i = 0; i < replys.length; i++) {
     list.add(Row(children: <Widget>[
-      // Text(replys[i].user['nickname']),
-      // Text(':'),
+      Text(replys[i].user.nickname),
+      Text(':'),
       Text(replys[i].content),
     ]));
   }
@@ -36,31 +36,31 @@ class CommentItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           // 用户信息
-          // Padding(
-          //   padding: const EdgeInsets.all(16),
-          //   child: Row(
-          //     children: <Widget>[
-          //       Padding(
-          //         padding: const EdgeInsets.only(right: 16),
-          //         child: Avatar(src: data['user']['avatarUrl'], size: 40),
-          //       ),
-          //       Column(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         mainAxisAlignment: MainAxisAlignment.start,
-          //         children: <Widget>[
-          //           Text(
-          //             data['user']['nickname'],
-          //             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontWeight: FontWeight.bold, color: Color(0xFF333333)),
-          //           ),
-          //           Text(
-          //             '刚刚',
-          //             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 16, color: Color(0xFF666666)),
-          //           ),
-          //         ],
-          //       )
-          //     ],
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Avatar(src: data.user.avatarUrl, size: 40),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      data.user.nickname,
+                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontWeight: FontWeight.bold, color: Color(0xFF333333)),
+                    ),
+                    Text(
+                      '刚刚',
+                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 16, color: Color(0xFF666666)),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
 
           GestureDetector(
             onTap: () {

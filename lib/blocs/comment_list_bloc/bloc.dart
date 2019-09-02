@@ -40,35 +40,9 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
       var list = res.data['list'];
 
       List<Item> _comments = [];
-
-      list.map((i) {
-        List<Item> _replys = [];
-
-        for (int jdx = 0; jdx < i['replys'].length; jdx++) {
-          final temp = i['replys'][jdx];
-
-          _replys.add(Item(
-            id: temp['_id'],
-            session: temp['session'],
-            content: temp['content'],
-            zanCount: temp['zanCount'],
-            zanStatus: temp['zanStatus'],
-            replyCount: temp['replyCount'],
-            user: temp['user'],
-          ));
-        }
-
-        _comments.add(Item(
-          id: i['_id'],
-          session: i['session'],
-          content: i['content'],
-          zanCount: i['zanCount'],
-          zanStatus: i['zanStatus'],
-          replyCount: i['replyCount'],
-          user: i['user'],
-          replys: _replys,
-        ));
-      }).toList();
+      for (var i = 0; i < list.length; i++) {
+        _comments.add(getCommentItem(list[i]));
+      }
 
       yield CommentListFetchSuccessed(list: _comments, session: event.session);
     } catch (error) {
@@ -102,7 +76,12 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
 
         var list = res.data['list'];
 
-        yield CommentListFetchSuccessed(list: _list + list, session: _session);
+        List<Item> _comments = [];
+        for (var i = 0; i < list.length; i++) {
+          _comments.add(getCommentItem(list[i]));
+        }
+
+        yield CommentListFetchSuccessed(list: _list + _comments, session: _session);
       }
     } catch (_) {
       print('_mapCommentListFetchToState error');
@@ -144,7 +123,11 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
               zanCount: result['data']['zanCount'],
               zanStatus: result['data']['zanStatus'],
               replyCount: result['data']['replyCount'],
-              user: result['data']['user'],
+              user: User(
+                id: result['data']['user']['id'],
+                nickname: result['data']['user']['nickname'],
+                avatarUrl: result['data']['user']['avatarUrl'],
+              ),
             );
 
             final List<Item> newList = List<Item>.from(_list).map((i) {

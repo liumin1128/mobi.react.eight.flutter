@@ -1,6 +1,25 @@
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
+class User extends Equatable {
+  final String id;
+  final String nickname;
+  final String avatarUrl;
+
+  User({
+    @required this.id,
+    @required this.nickname,
+    @required this.avatarUrl,
+  }) : super([
+          id,
+          nickname,
+          avatarUrl,
+        ]);
+
+  @override
+  String toString() => 'CommentItemUser { id: $id, nickname: $nickname }';
+}
+
 class Item extends Equatable {
   final String createdAt;
   final String id;
@@ -9,7 +28,7 @@ class Item extends Equatable {
   final int zanCount;
   final bool zanStatus;
   final int replyCount;
-  final Map user;
+  final User user;
   final List<Item> replys;
 
   Item({
@@ -42,7 +61,7 @@ class Item extends Equatable {
     int zanCount,
     bool zanStatus,
     int replyCount,
-    Map user,
+    User user,
     List replys,
   }) {
     return Item(
@@ -79,4 +98,40 @@ class Item extends Equatable {
 
   @override
   String toString() => 'Item { id: $id, content: $content }';
+}
+
+Item getCommentItem(data) {
+  List<Item> _replys = [];
+
+  for (int jdx = 0; jdx < data['replys'].length; jdx++) {
+    final temp = data['replys'][jdx];
+    _replys.add(Item(
+      id: temp['_id'],
+      session: temp['session'],
+      content: temp['content'],
+      zanCount: temp['zanCount'],
+      zanStatus: temp['zanStatus'],
+      replyCount: temp['replyCount'],
+      user: User(
+        id: temp['user']['id'],
+        nickname: temp['user']['nickname'],
+        avatarUrl: temp['user']['avatarUrl'],
+      ),
+    ));
+  }
+
+  return Item(
+    id: data['_id'],
+    session: data['session'],
+    content: data['content'],
+    zanCount: data['zanCount'],
+    zanStatus: data['zanStatus'],
+    replyCount: data['replyCount'],
+    replys: _replys,
+    user: User(
+      id: data['user']['id'],
+      nickname: data['user']['nickname'],
+      avatarUrl: data['user']['avatarUrl'],
+    ),
+  );
 }
