@@ -21,7 +21,8 @@ class DynamicItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(color: CupertinoColors.white),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           // 用户信息
           Padding(
@@ -51,11 +52,18 @@ class DynamicItem extends StatelessWidget {
           ),
 
           // 文本部分
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              data['content'],
-              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 18, color: Color(0xFF666666)),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed('/dynamic/detail');
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              // color: Color(0xFF666666),
+              child: Text(
+                data['content'],
+                textAlign: TextAlign.left,
+                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 18, color: Color(0xFF666666)),
+              ),
             ),
           ),
 
