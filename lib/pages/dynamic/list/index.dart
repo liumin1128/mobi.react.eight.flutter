@@ -38,7 +38,9 @@ class DynamicListPageState extends State<DynamicListPage> {
               },
             );
           } else {
-            return Text('loading');
+            return Center(
+              child: CupertinoActivityIndicator(),
+            );
           }
         },
       ),
