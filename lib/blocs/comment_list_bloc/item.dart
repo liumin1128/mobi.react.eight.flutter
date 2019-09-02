@@ -58,6 +58,25 @@ class Item extends Equatable {
     );
   }
 
+  Item pushReply({
+    @required Item reply,
+  }) {
+    return Item(
+      id: this.id,
+      session: this.session,
+      createdAt: this.createdAt,
+      content: this.content,
+      zanCount: this.zanCount,
+      zanStatus: this.zanStatus,
+      replyCount: this.replyCount,
+      user: this.user,
+      replys: [
+            reply
+          ] +
+          this.replys,
+    );
+  }
+
   @override
   String toString() => 'Item { id: $id, content: $content }';
 }

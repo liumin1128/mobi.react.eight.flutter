@@ -137,8 +137,6 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
           if (event.commentTo != '') {
             print('idx11111111111');
 
-            // final idx = _list.indexWhere((i) => (i['_id'] == event.commentTo));
-
             final newReply = Item(
               id: result['data']['_id'],
               session: result['data']['session'],
@@ -149,25 +147,13 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
               user: result['data']['user'],
             );
 
-            // _list[idx]['replys'] = list + _list[idx]['replys'];
-
-            // print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-            // print(_list[idx]['replys'].length);
-
             final List<Item> newList = List<Item>.from(_list).map((i) {
               if (i.id == event.commentTo) {
-                // i['replys'] = list + i['replys'];
-                return i.copyWith(
-                    replys: [
-                          newReply
-                        ] +
-                        i.replys);
+                return i.pushReply(reply: newReply);
               }
               return i;
-              // return i['_id'] == event.commentTo ? i.copyWith(replys: list + i['replys']) : i;
             }).toList();
 
-            // _list[idx]['replys'].insert(0, result['data']);
             yield CommentListFetchSuccessed(list: newList, session: event.session);
             return;
           }
