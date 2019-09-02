@@ -7,6 +7,8 @@ import 'package:eight/graphql/schema/comment.dart';
 import 'index.dart';
 // import 'package:eight/utils/action.dart';
 
+final int fist = 10;
+
 class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
   final GraphQLClient client;
 
@@ -31,7 +33,7 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
       final QueryResult res = await client.mutate(
         MutationOptions(document: commentListSchema, variables: {
           'session': event.session,
-          'first': 10
+          'first': fist
         }),
       );
 
@@ -44,7 +46,12 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
         _comments.add(getCommentItem(list[i]));
       }
 
-      yield CommentListFetchSuccessed(list: _comments, session: event.session);
+      final isEnd = res.data['meta']['commentCount'] <= _comments.length;
+
+      print('isEnd');
+      print(isEnd);
+
+      yield CommentListFetchSuccessed(list: _comments, session: event.session, isEnd: isEnd);
     } catch (error) {
       print('error');
       print(error);
@@ -67,21 +74,23 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
             variables: {
               'skip': skip,
               'session': _session,
-              'first': 10
+              'first': fist
             },
           ),
         );
 
         if (res.hasErrors) return;
 
-        var list = res.data['list'];
-
         List<Item> _comments = [];
-        for (var i = 0; i < list.length; i++) {
-          _comments.add(getCommentItem(list[i]));
+        for (var i = 0; i < res.data['list'].length; i++) {
+          _comments.add(getCommentItem(res.data['list'][i]));
         }
 
-        yield CommentListFetchSuccessed(list: _list + _comments, session: _session);
+        final list = _list + _comments;
+
+        final isEnd = res.data['meta']['commentCount'] <= list.length;
+
+        yield CommentListFetchSuccessed(list: list, session: _session, isEnd: isEnd);
       }
     } catch (_) {
       print('_mapCommentListFetchToState error');

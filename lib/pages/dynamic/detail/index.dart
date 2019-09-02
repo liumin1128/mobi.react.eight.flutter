@@ -146,7 +146,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                         sliver: SliverToBoxAdapter(
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 64),
-                            child: Text('111111111'),
+                            child: Text(''),
                           ),
                         ),
                       )

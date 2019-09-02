@@ -32,6 +32,16 @@ class _CommentListPageState extends State<CommentList> {
             delegate: SliverChildBuilderDelegate(
               (_, int index) {
                 if (index == state.list.length) {
+                  if (state.isEnd) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: Text(
+                        '~ 我是有底线的 ~',
+                        textAlign: TextAlign.center,
+                        style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(color: Color(0xFF999999)),
+                      ),
+                    );
+                  }
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: CupertinoButton(
