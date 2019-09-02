@@ -127,11 +127,14 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
                         sliver: SliverToBoxAdapter(
                           child: Container(
                             padding: const EdgeInsets.all(16),
-                            child: Column(children: <Widget>[
-                              Text(state.data['content']),
-                              Padding(padding: EdgeInsets.all(8)),
-                              state.data['pictures'].length > 0 ? multiPictureView(state.data['pictures']) : Container(),
-                            ]),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(state.data['content']),
+                                Padding(padding: EdgeInsets.all(8)),
+                                state.data['pictures'].length > 0 ? multiPictureView(state.data['pictures']) : Container(),
+                              ],
+                            ),
                           ),
                         ),
                       ),
