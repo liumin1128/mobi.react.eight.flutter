@@ -76,35 +76,38 @@ class CommentItem extends StatelessWidget {
   Widget build(BuildContext context) {
     // final createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])));
     return Container(
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(color: CupertinoColors.white),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           // 用户信息
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: Avatar(src: data.user.avatarUrl, size: 40),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: Avatar(src: data.user.avatarUrl, size: 40),
+              ),
+              Expanded(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        data.user.nickname,
+                        style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontWeight: FontWeight.bold, color: Color(0xFF333333)),
+                      ),
+                      Text(
+                        '刚刚',
+                        style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 16, color: Color(0xFF666666)),
+                      ),
+                    ],
+                  ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      data.user.nickname,
-                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontWeight: FontWeight.bold, color: Color(0xFF333333)),
-                    ),
-                    Text(
-                      '刚刚',
-                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 16, color: Color(0xFF666666)),
-                    ),
-                  ],
-                )
-              ],
-            ),
+              ),
+              LikeButton(width: 64, duration: Duration(milliseconds: 1000)),
+            ],
           ),
 
           GestureDetector(
@@ -113,7 +116,7 @@ class CommentItem extends StatelessWidget {
             },
             child: Container(
               decoration: BoxDecoration(),
-              padding: const EdgeInsets.only(left: 72),
+              padding: const EdgeInsets.only(left: 56, bottom: 16),
               alignment: Alignment.topLeft,
               child: Text(
                 data.content,
@@ -125,7 +128,7 @@ class CommentItem extends StatelessWidget {
 
           // 用户操作
           Container(
-            padding: const EdgeInsets.only(left: 52),
+            padding: const EdgeInsets.only(left: 0),
             alignment: Alignment.topLeft,
             child: Row(
               // alignment: Alignment.centerLeft,
@@ -138,7 +141,6 @@ class CommentItem extends StatelessWidget {
                 //   color: Color(0xFF999999),
                 //   size: 20,
                 // ),
-                LikeButton(width: 64, duration: Duration(milliseconds: 1000)),
 
                 // Transform(
                 //   transform: Matrix4.translationValues(-8, 0, 0),
@@ -168,7 +170,7 @@ class CommentItem extends StatelessWidget {
 
           data.replys.length > 0
               ? Container(
-                  padding: const EdgeInsets.only(left: 72, right: 16, bottom: 16),
+                  padding: const EdgeInsets.only(left: 56, right: 16, bottom: 16),
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
