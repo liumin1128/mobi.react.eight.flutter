@@ -36,11 +36,11 @@ class AppState extends State<App> {
                 return CupertinoApp(
                   theme: theme,
                   routes: <String, WidgetBuilder>{
-                    '/': (BuildContext context) => HomePage(context: context),
+                    '/': (BuildContext context) => HomePage(),
                     '/dynamic/detail': (BuildContext context) => DynamicDetailPage(),
                     // '/detail': (BuildContext context) => DynamicDetailPage(context: context),
                   },
-                  initialRoute: '/detail',
+                  initialRoute: '/',
                 );
               },
             ),

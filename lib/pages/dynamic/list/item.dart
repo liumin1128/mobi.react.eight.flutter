@@ -54,7 +54,9 @@ class DynamicItem extends StatelessWidget {
           // 文本部分
           GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamed('/detail');
+              // Navigator.of(context).pushNamed('/dynamic/detail');
+              // Navigator.pushNamed(context, "/news");
+              Navigator.of(context, rootNavigator: true).pushNamed('/dynamic/detail');
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
