@@ -48,12 +48,6 @@ class _CommentListPageState extends State<CommentList> {
               childCount: state.list.length + 1,
             ),
           ));
-          // CupertinoButton(
-          //   child: Text('more'),
-          //   onPressed: () {
-          //     commentListBloc.dispatch(CommentListFetchMore());
-          //   },
-          // )
         } else {
           return SliverSafeArea(
             sliver: SliverToBoxAdapter(

@@ -175,7 +175,7 @@ class CommentItem extends StatelessWidget {
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: Color(0xFFf8f8f8),
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     child: Column(
                       children: showReplys(data.replys, (reply) {
