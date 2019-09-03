@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:eight/utils/common.dart';
 
 class Avatar extends StatefulWidget {
   Avatar({Key key, this.src, this.size = 100}) : super(key: key);
@@ -24,7 +25,7 @@ class _AvatarState extends State<Avatar> {
           child: FadeInImage.memoryNetwork(
             fit: BoxFit.cover,
             placeholder: kTransparentImage,
-            image: widget.src,
+            image: getSmallImg(widget.src, widget.size * 2, widget.size * 2),
           ),
         ),
       ),
