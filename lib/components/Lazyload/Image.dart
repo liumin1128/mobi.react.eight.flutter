@@ -17,27 +17,25 @@ class LazyloadImage extends StatefulWidget {
 class _LazyloadImageState extends State<LazyloadImage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.width,
-      height: widget.height,
-      child: ClipRRect(
-        borderRadius: widget.borderRadius,
-        child: Container(
-          decoration: BoxDecoration(color: widget.color),
-          // child: FadeInImage.memoryNetwork(
-          //   placeholder: kTransparentImage,
-          //   image: widget.image,
-          //   fit: BoxFit.cover,
-          // ),
-          child: CachedNetworkImage(
-            imageUrl: widget.image,
-            placeholder: (context, url) => CupertinoActivityIndicator(),
-            errorWidget: (context, url, error) => new Icon(CupertinoIcons.bookmark),
-            fit: BoxFit.cover,
-          ),
+    return ClipRRect(
+      borderRadius: widget.borderRadius,
+      child: Container(
+        decoration: BoxDecoration(color: widget.color),
+        // child: FadeInImage.memoryNetwork(
+        //   placeholder: kTransparentImage,
+        //   image: widget.image,
+        //   fit: BoxFit.cover,
+        // ),
+        child: CachedNetworkImage(
+          width: widget.width,
+          height: widget.height,
+          imageUrl: widget.image,
+          placeholder: (context, url) => CupertinoActivityIndicator(),
+          errorWidget: (context, url, error) => new Icon(CupertinoIcons.bookmark),
+          fit: BoxFit.cover,
         ),
-        // child: Text('xxxx')),
       ),
+      // child: Text('xxxx')),
     );
   }
 }
