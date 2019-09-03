@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:eight/components/Lazyload/Image.dart';
 import 'package:vector_math/vector_math_64.dart' as Vector;
-import 'package:eight/utils/common.dart';
-
-int width = 200;
 
 class TestFlowDelegate extends FlowDelegate {
   EdgeInsets margin = EdgeInsets.zero;
@@ -85,7 +82,7 @@ getPicturesList(pictures) {
         child: LazyloadImage(
           borderRadius: BorderRadius.circular(4),
           color: Color(0x05000000),
-          image: getSmallImg(pictures[0], width * 3, width * 3),
+          image: pictures[0],
         ),
       ),
     );
@@ -149,7 +146,7 @@ getPicturesList(pictures) {
                 child: LazyloadImage(
                   borderRadius: BorderRadius.circular(4),
                   color: Color(0x05000000),
-                  image: getSmallImg(pictures[0], width * 1.5, width * 3),
+                  image: pictures[0],
                 ),
               ),
             ),
@@ -164,7 +161,7 @@ getPicturesList(pictures) {
                   child: LazyloadImage(
                     borderRadius: BorderRadius.circular(4),
                     color: Color(0x05000000),
-                    image: getSmallImg(pictures[1], width * 1.5, width * 1.5),
+                    image: pictures[1],
                   ),
                 ),
               ),
@@ -175,7 +172,7 @@ getPicturesList(pictures) {
                   child: LazyloadImage(
                     borderRadius: BorderRadius.circular(4),
                     color: Color(0x05000000),
-                    image: getSmallImg(pictures[2], width * 1.5, width * 1.5),
+                    image: pictures[2],
                   ),
                 ),
               ),
@@ -268,7 +265,7 @@ getPicturesList(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: getSmallImg(pictures[0], width * 2, width * 2),
+                      image: pictures[0],
                     ),
                   ),
                 ),
@@ -283,7 +280,7 @@ getPicturesList(pictures) {
                       child: LazyloadImage(
                         borderRadius: BorderRadius.circular(4),
                         color: Color(0x05000000),
-                        image: getSmallImg(pictures[1], width, width * 2),
+                        image: pictures[1],
                       ),
                     ),
                   ),
@@ -303,7 +300,7 @@ getPicturesList(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: getSmallImg(pictures[2], width, width),
+                      image: pictures[2],
                     ),
                   ),
                 ),
@@ -317,7 +314,7 @@ getPicturesList(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: getSmallImg(pictures[3], width, width),
+                      image: pictures[3],
                     ),
                   ),
                 ),
@@ -331,7 +328,7 @@ getPicturesList(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: getSmallImg(pictures[4], width, width),
+                      image: pictures[4],
                     ),
                   ),
                 ),
