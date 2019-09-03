@@ -77,6 +77,7 @@ class DynamicItem extends StatelessWidget {
           // 图片组件
           data['pictures'].length > 0
               ? Container(
+                  width: 300,
                   alignment: Alignment.topLeft,
                   padding: const EdgeInsets.only(top: 14, left: 14, right: 14),
                   child: getPicturesList(data['pictures']),
