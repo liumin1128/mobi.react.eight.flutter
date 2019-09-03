@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:eight/components/Lazyload/Image.dart';
+import 'package:eight/utils/common.dart';
+
+int width = 200;
 
 multiPictureView(pictures) {
   // Transform(
@@ -15,7 +18,7 @@ multiPictureView(pictures) {
         LazyloadImage(
           borderRadius: BorderRadius.circular(4),
           color: Color(0x05000000),
-          image: i,
+          image: getSmallImg(i, width, width),
         ),
       );
     }
@@ -44,7 +47,7 @@ multiPictureView(pictures) {
         child: LazyloadImage(
           borderRadius: BorderRadius.circular(4),
           color: Color(0x05000000),
-          image: pictures[0],
+          image: getSmallImg(pictures[0], width * 3, width * 3),
         ),
       ),
     );
@@ -66,7 +69,7 @@ multiPictureView(pictures) {
                 child: LazyloadImage(
                   borderRadius: BorderRadius.circular(4),
                   color: Color(0x05000000),
-                  image: pictures[0],
+                  image: getSmallImg(pictures[0], width * 1.5, width * 3),
                 ),
               ),
             ),
@@ -81,7 +84,7 @@ multiPictureView(pictures) {
                   child: LazyloadImage(
                     borderRadius: BorderRadius.circular(4),
                     color: Color(0x05000000),
-                    image: pictures[1],
+                    image: getSmallImg(pictures[1], width * 1.5, width * 3),
                   ),
                 ),
               ),
@@ -108,7 +111,7 @@ multiPictureView(pictures) {
                 child: LazyloadImage(
                   borderRadius: BorderRadius.circular(4),
                   color: Color(0x05000000),
-                  image: pictures[0],
+                  image: getSmallImg(pictures[0], width * 1.5, width * 3),
                 ),
               ),
             ),
@@ -123,7 +126,7 @@ multiPictureView(pictures) {
                   child: LazyloadImage(
                     borderRadius: BorderRadius.circular(4),
                     color: Color(0x05000000),
-                    image: pictures[1],
+                    image: getSmallImg(pictures[1], width * 1.5, width * 1.5),
                   ),
                 ),
               ),
@@ -134,7 +137,7 @@ multiPictureView(pictures) {
                   child: LazyloadImage(
                     borderRadius: BorderRadius.circular(4),
                     color: Color(0x05000000),
-                    image: pictures[2],
+                    image: getSmallImg(pictures[2], width * 1.5, width * 1.5),
                   ),
                 ),
               ),
@@ -161,7 +164,7 @@ multiPictureView(pictures) {
                 child: LazyloadImage(
                   borderRadius: BorderRadius.circular(4),
                   color: Color(0x05000000),
-                  image: pictures[0],
+                  image: getSmallImg(pictures[0], width * 2, width * 3),
                 ),
               ),
             ),
@@ -176,7 +179,7 @@ multiPictureView(pictures) {
                   child: LazyloadImage(
                     borderRadius: BorderRadius.circular(4),
                     color: Color(0x05000000),
-                    image: pictures[1],
+                    image: getSmallImg(pictures[1], width, width),
                   ),
                 ),
               ),
@@ -187,7 +190,7 @@ multiPictureView(pictures) {
                   child: LazyloadImage(
                     borderRadius: BorderRadius.circular(4),
                     color: Color(0x05000000),
-                    image: pictures[2],
+                    image: getSmallImg(pictures[2], width, width),
                   ),
                 ),
               ),
@@ -198,7 +201,7 @@ multiPictureView(pictures) {
                   child: LazyloadImage(
                     borderRadius: BorderRadius.circular(4),
                     color: Color(0x05000000),
-                    image: pictures[3],
+                    image: getSmallImg(pictures[3], width, width),
                   ),
                 ),
               ),
@@ -227,7 +230,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[0],
+                      image: getSmallImg(pictures[0], width * 2, width * 2),
                     ),
                   ),
                 ),
@@ -242,7 +245,7 @@ multiPictureView(pictures) {
                       child: LazyloadImage(
                         borderRadius: BorderRadius.circular(4),
                         color: Color(0x05000000),
-                        image: pictures[1],
+                        image: getSmallImg(pictures[1], width, width * 2),
                       ),
                     ),
                   ),
@@ -262,7 +265,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[2],
+                      image: getSmallImg(pictures[2], width, width),
                     ),
                   ),
                 ),
@@ -276,7 +279,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[3],
+                      image: getSmallImg(pictures[3], width, width),
                     ),
                   ),
                 ),
@@ -290,7 +293,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[4],
+                      image: getSmallImg(pictures[4], width, width),
                     ),
                   ),
                 ),
@@ -320,7 +323,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[0],
+                      image: getSmallImg(pictures[0], width * 2, width * 2),
                     ),
                   ),
                 ),
@@ -335,7 +338,7 @@ multiPictureView(pictures) {
                       child: LazyloadImage(
                         borderRadius: BorderRadius.circular(4),
                         color: Color(0x05000000),
-                        image: pictures[1],
+                        image: getSmallImg(pictures[1], width, width),
                       ),
                     ),
                   ),
@@ -346,7 +349,7 @@ multiPictureView(pictures) {
                       child: LazyloadImage(
                         borderRadius: BorderRadius.circular(4),
                         color: Color(0x05000000),
-                        image: pictures[2],
+                        image: getSmallImg(pictures[2], width, width),
                       ),
                     ),
                   ),
@@ -366,7 +369,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[3],
+                      image: getSmallImg(pictures[3], width, width),
                     ),
                   ),
                 ),
@@ -380,7 +383,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[4],
+                      image: getSmallImg(pictures[4], width, width),
                     ),
                   ),
                 ),
@@ -394,7 +397,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[5],
+                      image: getSmallImg(pictures[5], width, width),
                     ),
                   ),
                 ),
@@ -429,7 +432,7 @@ multiPictureView(pictures) {
                           child: LazyloadImage(
                             borderRadius: BorderRadius.circular(4),
                             color: Color(0x05000000),
-                            image: pictures[0],
+                            image: getSmallImg(pictures[0], width, width * 2),
                           ),
                         ),
                       ),
@@ -443,7 +446,7 @@ multiPictureView(pictures) {
                           child: LazyloadImage(
                             borderRadius: BorderRadius.circular(4),
                             color: Color(0x05000000),
-                            image: pictures[1],
+                            image: getSmallImg(pictures[1], width, width * 2),
                           ),
                         ),
                       ),
@@ -461,7 +464,7 @@ multiPictureView(pictures) {
                       child: LazyloadImage(
                         borderRadius: BorderRadius.circular(4),
                         color: Color(0x05000000),
-                        image: pictures[2],
+                        image: getSmallImg(pictures[2], width, width),
                       ),
                     ),
                   ),
@@ -472,7 +475,7 @@ multiPictureView(pictures) {
                       child: LazyloadImage(
                         borderRadius: BorderRadius.circular(4),
                         color: Color(0x05000000),
-                        image: pictures[3],
+                        image: getSmallImg(pictures[3], width, width),
                       ),
                     ),
                   ),
@@ -492,7 +495,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[4],
+                      image: getSmallImg(pictures[4], width, width),
                     ),
                   ),
                 ),
@@ -506,7 +509,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[5],
+                      image: getSmallImg(pictures[5], width, width),
                     ),
                   ),
                 ),
@@ -520,7 +523,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[6],
+                      image: getSmallImg(pictures[6], width, width),
                     ),
                   ),
                 ),
@@ -555,7 +558,7 @@ multiPictureView(pictures) {
                           child: LazyloadImage(
                             borderRadius: BorderRadius.circular(4),
                             color: Color(0x05000000),
-                            image: pictures[0],
+                            image: getSmallImg(pictures[0], width, width * 2),
                           ),
                         ),
                       ),
@@ -570,7 +573,7 @@ multiPictureView(pictures) {
                             child: LazyloadImage(
                               borderRadius: BorderRadius.circular(4),
                               color: Color(0x05000000),
-                              image: pictures[1],
+                              image: getSmallImg(pictures[1], width, width),
                             ),
                           ),
                         ),
@@ -581,7 +584,7 @@ multiPictureView(pictures) {
                             child: LazyloadImage(
                               borderRadius: BorderRadius.circular(4),
                               color: Color(0x05000000),
-                              image: pictures[2],
+                              image: getSmallImg(pictures[2], width, width),
                             ),
                           ),
                         ),
@@ -600,7 +603,7 @@ multiPictureView(pictures) {
                       child: LazyloadImage(
                         borderRadius: BorderRadius.circular(4),
                         color: Color(0x05000000),
-                        image: pictures[3],
+                        image: getSmallImg(pictures[3], width, width),
                       ),
                     ),
                   ),
@@ -611,7 +614,7 @@ multiPictureView(pictures) {
                       child: LazyloadImage(
                         borderRadius: BorderRadius.circular(4),
                         color: Color(0x05000000),
-                        image: pictures[4],
+                        image: getSmallImg(pictures[4], width, width),
                       ),
                     ),
                   ),
@@ -631,7 +634,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[5],
+                      image: getSmallImg(pictures[5], width, width),
                     ),
                   ),
                 ),
@@ -645,7 +648,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[6],
+                      image: getSmallImg(pictures[6], width, width),
                     ),
                   ),
                 ),
@@ -659,7 +662,7 @@ multiPictureView(pictures) {
                     child: LazyloadImage(
                       borderRadius: BorderRadius.circular(4),
                       color: Color(0x05000000),
-                      image: pictures[7],
+                      image: getSmallImg(pictures[7], width, width),
                     ),
                   ),
                 ),

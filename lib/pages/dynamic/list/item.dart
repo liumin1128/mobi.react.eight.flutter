@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:eight/utils/common.dart';
 import 'package:eight/components/Avatar/index.dart';
 import 'package:eight/components/LikeBtn/index.dart';
-import 'pictures.dart';
+import 'package:eight/components/MultiPicturesView/index.dart';
 
 text2html(str) {
   return str;
@@ -77,10 +77,10 @@ class DynamicItem extends StatelessWidget {
           // 图片组件
           data['pictures'].length > 0
               ? Container(
-                  width: 300,
+                  // width: 300,
                   alignment: Alignment.topLeft,
                   padding: const EdgeInsets.only(top: 14, left: 14, right: 14),
-                  child: getPicturesList(data['pictures']),
+                  child: multiPictureView(data['pictures']),
                 )
               // ? Container(
               //     alignment: Alignment.topLeft,
@@ -88,7 +88,7 @@ class DynamicItem extends StatelessWidget {
               //     child: Wrap(
               //       spacing: 4, //主轴上子控件的间距
               //       runSpacing: 4,
-              //       children: getPicturesList(data['pictures']), //要显示的子控件集合 //交叉轴上子控件之间的间距
+              //       children: multiPictureView(data['pictures']), //要显示的子控件集合 //交叉轴上子控件之间的间距
               //     ),
               //   )
               : Container(),
