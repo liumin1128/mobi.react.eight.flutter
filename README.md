@@ -62,3 +62,7 @@ flutter 启动参数
   ]
 }
 ```
+
+A valid provisioning profile for this executable was not found.
+
+Project Settings -> Legacy Build System
