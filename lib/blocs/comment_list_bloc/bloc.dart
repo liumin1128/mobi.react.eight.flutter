@@ -119,9 +119,6 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
           ),
         );
 
-        print('res');
-        print(res);
-
         if (res.hasErrors) return;
 
         var result = res.data['result'];
