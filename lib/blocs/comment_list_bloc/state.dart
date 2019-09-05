@@ -25,7 +25,7 @@ class CommentListFetchSuccessed extends CommentListState {
   CommentListFetchSuccessed({
     @required this.list,
     @required this.session,
-    this.isEnd,
+    @required this.isEnd,
   }) : super([
           list,
           session,
@@ -40,6 +40,37 @@ class CommentListFetchSuccessed extends CommentListState {
       session: session ?? this.session,
       list: list ?? this.list,
       isEnd: isEnd ?? this.isEnd,
+    );
+  }
+
+  CommentListFetchSuccessed pushComment({
+    @required Item comment,
+  }) {
+    return CommentListFetchSuccessed(
+      session: this.session,
+      isEnd: this.isEnd,
+      list: [
+            comment
+          ] +
+          this.list,
+    );
+  }
+
+  CommentListFetchSuccessed pushReply({
+    @required Item reply,
+    @required String commentTo,
+  }) {
+    final List<Item> _list = List<Item>.from(this.list).map((i) {
+      if (i.id == commentTo) {
+        return i.pushReply(reply: reply);
+      }
+      return i;
+    }).toList();
+
+    return CommentListFetchSuccessed(
+      session: this.session,
+      isEnd: this.isEnd,
+      list: _list,
     );
   }
 

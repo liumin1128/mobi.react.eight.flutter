@@ -69,23 +69,25 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
 
   Future<Null> _onSentComment(content) async {
     final commetListBloc = BlocProvider.of<CommentListBloc>(context);
-    commetListBloc.dispatch(
-      CommentListCreateComment(
-        context: context,
-        session: widget.session,
-        content: content,
-      ),
-    );
-
-    // commetListBloc.dispatch(
-    //   CommentListCreateComment(
-    //     context: context,
-    //     session: widget.session,
-    //     content: content,
-    //     commentTo: _commentTo,
-    //     replyTo: _replyTo,
-    //   ),
-    // );
+    if (_commentTo == '') {
+      commetListBloc.dispatch(
+        CommentListCreateComment(
+          context: context,
+          session: widget.session,
+          content: content,
+        ),
+      );
+    } else {
+      commetListBloc.dispatch(
+        CommentListCreateReply(
+          context: context,
+          session: widget.session,
+          content: content,
+          commentTo: _commentTo,
+          replyTo: _replyTo,
+        ),
+      );
+    }
 
     _contentTextEditingController = TextEditingController(text: '');
   }

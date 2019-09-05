@@ -25,6 +25,8 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
       yield* _mapCommentListFetchMoreToState();
     } else if (event is CommentListCreateComment) {
       yield* _mapCommentListCreateCommentToState(event);
+    } else if (event is CommentListCreateReply) {
+      yield* _mapCommentListCreateReplyToState(event);
     }
   }
 
@@ -124,15 +126,11 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
         var result = res.data['result'];
 
         if (result['status'] == 200) {
-          final _list = (currentState as CommentListFetchSuccessed).list;
-
           print('评论成功');
 
-          final list = [
-            getCommentItem(result['data'])
-          ];
-
-          yield CommentListFetchSuccessed(list: list + _list, session: event.session);
+          yield (currentState as CommentListFetchSuccessed).pushComment(
+            comment: getCommentItem(result['data']),
+          );
         } else if (result['status'] == 403) {
           print('尚未登录');
 
@@ -154,7 +152,7 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
   Stream<CommentListState> _mapCommentListCreateReplyToState(event) async* {
     try {
       if (currentState is CommentListFetchSuccessed) {
-        print('event');
+        print('event _mapCommentListCreateReplyToState');
         print(event.session);
         print(event.content);
         print(event.commentTo);
@@ -180,31 +178,11 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
         var result = res.data['result'];
 
         if (result['status'] == 200) {
-          final _list = (currentState as CommentListFetchSuccessed).list;
-
           // 评论回复
-          if (event.commentTo != '') {
-            print('评论回复成功');
-            final List<Item> newList = List<Item>.from(_list).map((i) {
-              if (i.id == event.commentTo) {
-                var sas = result['data'];
-                print(sas);
-                return i.pushReply(reply: getReplyItem(result['data']));
-              }
-              return i;
-            }).toList();
-
-            yield CommentListFetchSuccessed(list: newList, session: event.session);
-            return;
-          }
-
-          print('评论成功');
-
-          final list = [
-            getCommentItem(result['data'])
-          ];
-
-          yield CommentListFetchSuccessed(list: list + _list, session: event.session);
+          yield (currentState as CommentListFetchSuccessed).pushReply(
+            commentTo: event.commentTo,
+            reply: getReplyItem(result['data']),
+          );
         } else if (result['status'] == 403) {
           print('尚未登录');
 
