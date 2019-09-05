@@ -19,13 +19,15 @@ class CommentListFetch extends CommentListEvent {
 }
 
 class CommentListCreateComment extends CommentListEvent {
+  final BuildContext context;
   final String session;
   final String content;
   final String commentTo;
   final String replyTo;
 
-  CommentListCreateComment({@required this.session, @required this.content, this.commentTo, this.replyTo})
+  CommentListCreateComment({@required this.context, @required this.session, @required this.content, this.commentTo, this.replyTo})
       : super([
+          context,
           session,
           content,
           commentTo,

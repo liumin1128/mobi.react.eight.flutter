@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart' hide Action;
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:eight/graphql/schema/comment.dart';
 import 'index.dart';
-// import 'package:eight/utils/action.dart';
+import 'package:eight/utils/action.dart';
 
 final int fist = 10;
 
@@ -147,12 +147,14 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
           ];
 
           yield CommentListFetchSuccessed(list: list + _list, session: event.session);
-        } else {
-          // alert(
-          //   context: '评论失败',
-          //   title: '验证码错误',
-          //   content: '验证码格式不正确，请重新输入',
-          // );
+        } else if (result['status'] == 403) {
+          print('尚未登录');
+
+          alert(
+            context: event.context,
+            title: '验证码错误',
+            content: '验证码格式不正确，请重新输入',
+          );
         }
       }
     } catch (error) {

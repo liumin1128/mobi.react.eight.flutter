@@ -71,6 +71,7 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
     final commetListBloc = BlocProvider.of<CommentListBloc>(context);
     commetListBloc.dispatch(
       CommentListCreateComment(
+        context: context,
         session: widget.session,
         content: content,
         commentTo: _commentTo,
