@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart' hide Action;
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
-import 'package:eight/pages/user/login/phone/index.dart';
+// import 'package:eight/pages/user/login/phone/index.dart';
 import 'package:eight/graphql/schema/user.dart';
 import 'index.dart';
 import 'package:eight/utils/action.dart';
@@ -66,32 +66,35 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       //   print(data.toString());
       //   };
 
-      Navigator.of(event.context, rootNavigator: true).push(
-        CupertinoPageRoute(
-          fullscreenDialog: true,
-          builder: (context) => CupertinoPageScaffold(
-            navigationBar: CupertinoNavigationBar(
-              backgroundColor: CupertinoColors.white,
-              border: Border(
-                top: BorderSide(
-                  style: BorderStyle.none,
-                ),
-              ),
-              // leading: Icon(CupertinoIcons.back),
-              // leading: CupertinoNavigationBarBackButton(),
-              middle: Text(
-                '登录',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: new TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-            ),
-            child: UserPhoneLogin(),
-          ),
-        ),
-      );
+      Navigator.of(event.context, rootNavigator: true).pushNamed('/user/login/phone');
+
+      // Navigator.of(event.context, rootNavigator: true).push(
+      //   CupertinoPageRoute(
+      //     fullscreenDialog: true,
+      //     builder: (context) => CupertinoPageScaffold(
+      //       navigationBar: CupertinoNavigationBar(
+      //         backgroundColor: CupertinoColors.white,
+      //         border: Border(
+      //           top: BorderSide(
+      //             style: BorderStyle.none,
+      //           ),
+      //         ),
+      //         // leading: Icon(CupertinoIcons.back),
+      //         // leading: CupertinoNavigationBarBackButton(),
+      //         middle: Text(
+      //           '登录',
+      //           overflow: TextOverflow.ellipsis,
+      //           maxLines: 1,
+      //           style: new TextStyle(
+      //             fontSize: 20,
+      //           ),
+      //         ),
+      //       ),
+      //       child: UserPhoneLogin(),
+      //     ),
+      //   ),
+      // );
+
     } catch (_) {
       yield Unauthenticated();
     }
