@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eight/graphql/schema/user.dart';
 import 'package:eight/utils/common.dart';
 import 'package:eight/utils/action.dart';
+import 'package:eight/blocs/user_bloc/index.dart';
 
 class UserPasswordLogin extends StatefulWidget {
   @override
@@ -36,7 +38,7 @@ class _UserPasswordLoginWithClientState extends State<UserPasswordLoginWithClien
   void initState() {
     super.initState();
     _username = TextEditingController(text: '18629974148');
-    _password = TextEditingController(text: '123456');
+    _password = TextEditingController(text: '123123123');
   }
 
   Future<void> _loginWithPassword(String username, String password) async {
@@ -54,6 +56,12 @@ class _UserPasswordLoginWithClientState extends State<UserPasswordLoginWithClien
 
     if (data['status'] == 200) {
       print('登录成功');
+      print('登录成功');
+      print(data['token']);
+
+      Navigator.pop(context, 1);
+
+      _userLogin(context, data['token']);
     } else if (data['status'] == 403) {
       print('用户名密码错误');
     } else {
@@ -61,7 +69,12 @@ class _UserPasswordLoginWithClientState extends State<UserPasswordLoginWithClien
     }
   }
 
-  @override
+  Future<void> _userLogin(BuildContext context, String token) async {
+    final userBloc = BlocProvider.of<UserBloc>(context);
+    userBloc.dispatch(GetUserInfo(token: token));
+    return;
+  }
+
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(),
@@ -115,10 +128,7 @@ class _UserPasswordLoginWithClientState extends State<UserPasswordLoginWithClien
                 controller: _password,
                 // autofocus: true,
                 focusNode: focusNodeCode,
-                inputFormatters: <TextInputFormatter>[
-                  WhitelistingTextInputFormatter.digitsOnly, //只输入数字
-                  LengthLimitingTextInputFormatter(6) //限制长度
-                ],
+
                 onChanged: (str) {
                   setState(() {
                     _password = TextEditingController.fromValue(
@@ -180,7 +190,7 @@ class _UserPasswordLoginWithClientState extends State<UserPasswordLoginWithClien
                       return;
                     }
 
-                    if (_password.text == '' || _password.text.length != 6) {
+                    if (_password.text == '') {
                       alert(
                         context: context,
                         title: '验证码错误',
