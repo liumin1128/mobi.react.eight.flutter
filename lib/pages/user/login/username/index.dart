@@ -1,52 +1,42 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:eight/graphql/schema/user.dart';
 import 'package:eight/utils/common.dart';
 import 'package:eight/utils/action.dart';
-import 'getPhoneCode.dart';
-import 'showCountryCodePicker.dart';
 
-import 'package:eight/blocs/counter_bloc.dart';
-import 'package:eight/blocs/user_bloc/index.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-class UserPhoneLogin extends StatefulWidget {
+class UserPasswordLogin extends StatefulWidget {
   @override
-  _UserPhoneLoginState createState() => _UserPhoneLoginState();
+  _UserPasswordLoginState createState() => _UserPasswordLoginState();
 }
 
-class _UserPhoneLoginState extends State<UserPhoneLogin> {
+class _UserPasswordLoginState extends State<UserPasswordLogin> {
   @override
   Widget build(BuildContext context) {
     return GraphQLConsumer(builder: (GraphQLClient client) {
-      return UserPhoneLoginWithClient(client: client);
+      return UserPasswordLoginWithClient(client: client);
     });
   }
 }
 
-class UserPhoneLoginWithClient extends StatefulWidget {
-  UserPhoneLoginWithClient({Key key, this.client}) : super(key: key);
+class UserPasswordLoginWithClient extends StatefulWidget {
+  UserPasswordLoginWithClient({Key key, this.client}) : super(key: key);
   final GraphQLClient client;
   @override
-  _UserPhoneLoginWithClientState createState() => _UserPhoneLoginWithClientState();
+  _UserPasswordLoginWithClientState createState() => _UserPasswordLoginWithClientState();
 }
 
-class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
-  TextEditingController _phone;
-  TextEditingController _code;
+class _UserPasswordLoginWithClientState extends State<UserPasswordLoginWithClient> {
+  TextEditingController _username;
+  TextEditingController _password;
   FocusNode focusNodePhone = FocusNode();
   FocusNode focusNodeCode = FocusNode();
-
-  String _countryCode;
 
   @override
   void initState() {
     super.initState();
-    _phone = TextEditingController(text: '');
-    _code = TextEditingController(text: '');
-    _countryCode = '+86';
+    _username = TextEditingController(text: '18629974148');
+    _password = TextEditingController(text: '123456');
   }
 
   Future<void> _loginWithPassword(String username, String password) async {
@@ -71,73 +61,8 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
     }
   }
 
-  Future<void> _getPhoneCode(String purePhoneNumber, String countryCode) async {
-    print(purePhoneNumber);
-    print(countryCode);
-    final QueryResult res = await widget.client.mutate(MutationOptions(
-      document: getPhoneNumberCode,
-      variables: {
-        'purePhoneNumber': purePhoneNumber,
-        'countryCode': countryCode
-      },
-    ));
-
-    if (res.hasErrors) return;
-
-    final data = res.data['result'];
-
-    if (data['status'] == 200) {
-      // showCupertinoAlert()
-      print('获取验证码成功');
-    } else {
-      print('获取验证码失败');
-    }
-  }
-
-  Future<void> _loginWithCode(BuildContext context, String countryCode, String purePhoneNumber, String code) async {
-    if (countryCode == '') return;
-    if (purePhoneNumber == '') {
-      return;
-    }
-    if (code == '') return;
-    final QueryResult res = await widget.client.mutate(MutationOptions(
-      document: userLoginByPhonenumberCode,
-      variables: {
-        'countryCode': countryCode,
-        'purePhoneNumber': purePhoneNumber,
-        'code': code,
-      },
-    ));
-
-    if (res.hasErrors) return;
-
-    final data = res.data['result'];
-
-    if (data['status'] == 200) {
-      print('登录成功');
-      print(data['token']);
-
-      Navigator.pop(context, 1);
-
-      _userLogin(context, data['token']);
-    } else if (data['status'] == 403) {
-      print('用户名密码错误');
-    } else {
-      print(data['message']);
-    }
-  }
-
-  Future<void> _userLogin(BuildContext context, String token) async {
-    final userBloc = BlocProvider.of<UserBloc>(context);
-    userBloc.dispatch(GetUserInfo(token: token));
-    return;
-  }
-
   @override
   Widget build(BuildContext context) {
-    // final counterBloc = BlocProvider.of<CounterBloc>(context);
-    // final userBloc = BlocProvider.of<UserBloc>(context);
-
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(),
       child: Container(
@@ -146,15 +71,13 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // 输入手机号
               CupertinoTextField(
-                controller: _phone,
-                placeholder: '手机号',
-                // autofocus: true,
+                controller: _username,
+                placeholder: '手机号或邮箱',
                 focusNode: focusNodePhone,
                 onChanged: (str) {
                   setState(() {
-                    _phone = TextEditingController.fromValue(
+                    _username = TextEditingController.fromValue(
                       TextEditingValue(
                         // 设置内容
                         text: str,
@@ -169,9 +92,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     );
                   });
                 },
-
                 keyboardType: TextInputType.phone,
-
                 style: TextStyle(
                   fontSize: 22,
                   color: CupertinoColors.black,
@@ -184,24 +105,6 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     ),
                   ),
                 ),
-
-                // 设置国家
-                prefix: GestureDetector(
-                  onTap: () {
-                    showCountryCodePicker(context, (val) {
-                      setState(() {
-                        _countryCode = val;
-                      });
-                    });
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: Text(
-                      _countryCode,
-                      style: TextStyle(fontSize: 24),
-                    ),
-                  ),
-                ),
               ),
 
               Padding(padding: EdgeInsets.all(16)),
@@ -209,7 +112,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
               // 输入验证码
               CupertinoTextField(
                 placeholder: "验证码",
-                controller: _code,
+                controller: _password,
                 // autofocus: true,
                 focusNode: focusNodeCode,
                 inputFormatters: <TextInputFormatter>[
@@ -218,7 +121,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                 ],
                 onChanged: (str) {
                   setState(() {
-                    _code = TextEditingController.fromValue(
+                    _password = TextEditingController.fromValue(
                       TextEditingValue(
                         // 设置内容
                         text: str,
@@ -246,16 +149,6 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                     ),
                   ),
                 ),
-                suffix: GetPhoneCodeButton(
-                  enabled: isPhoneNumber(_phone.text),
-                  onPress: () {
-                    setState(() {
-                      _getPhoneCode(_phone.text, _countryCode);
-                      focusNodePhone.unfocus();
-                      FocusScope.of(context).requestFocus(focusNodeCode);
-                    });
-                  },
-                ),
               ),
 
               Padding(padding: EdgeInsets.all(16)),
@@ -267,19 +160,18 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                   child: Text('立即登录'),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                   color: CupertinoTheme.of(context).primaryColor,
-                  // onPressed: isPhoneNumber(_phone.text) && _code.text != ''
+                  // onPressed: isPhoneNumber(_username.text) && _password.text != ''
                   onPressed: () {
                     print('phone.text111111');
-                    print(_phone.text);
-                    print(_code.text);
-                    print(_countryCode);
+                    print(_username.text);
+                    print(_password.text);
 
                     // _userLogin(context, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NTQ0MDgyLCJleHAiOjE1NjcxNDg4ODJ9.jjxfsENlqWMGn9z70Yap3YXPJCEZUgkvqKRyhJ8eCl8');
                     // counterBloc.dispatch(CounterEvent.increment);
                     // userBloc.dispatch(GetUserInfo(token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiNWJlOTQ0MTRhZWI2NzgwMjZjMGEwNmNiIiwiaWF0IjoxNTY2NjYwMzE0LCJleHAiOjE1NjcyNjUxMTR9.RJukMemk7wSiiMNktKBbmrwz75H32-ai8sh2YMVMBAs'));
                     // return;
 
-                    if (!isPhoneNumber(_phone.text)) {
+                    if (!isPhoneNumber(_username.text)) {
                       alert(
                         context: context,
                         title: '电话号码错误',
@@ -288,7 +180,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                       return;
                     }
 
-                    if (_code.text == '' || _code.text.length != 6) {
+                    if (_password.text == '' || _password.text.length != 6) {
                       alert(
                         context: context,
                         title: '验证码错误',
@@ -297,14 +189,14 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                       return;
                     }
 
-                    _loginWithCode(context, _countryCode, _phone.text, _code.text);
+                    _loginWithPassword(_username.text, _password.text);
                   },
                 ),
               ),
               CupertinoButton(
-                child: Text('账号密码登录'),
+                child: Text('手机号登录'),
                 onPressed: () {
-                  Navigator.of(context, rootNavigator: true).pushNamed('/user/login/password');
+                  Navigator.of(context, rootNavigator: true).pushNamed('/user/login/phone');
                 },
               )
             ],

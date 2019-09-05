@@ -8,6 +8,8 @@ import 'package:eight/blocs/dynamic_detail_bloc/index.dart';
 import 'package:eight/blocs/comment_list_bloc/index.dart';
 import 'package:eight/pages/home/index.dart';
 import 'package:eight/pages/dynamic/detail/index.dart';
+import 'package:eight/pages/user/login/phone/index.dart';
+import 'package:eight/pages/user/login/username/index.dart';
 
 class App extends StatefulWidget {
   App({this.client});
@@ -40,8 +42,9 @@ class AppState extends State<App> {
                     '/dynamic/detail': (BuildContext context) {
                       final Map query = ModalRoute.of(context).settings.arguments;
                       return DynamicDetailPage(session: query['session']);
-                    }
-                    // '/detail': (BuildContext context) => DynamicDetailPage(context: context),
+                    },
+                    '/user/login/phone': (BuildContext context) => UserPhoneLogin(),
+                    '/user/login/password': (BuildContext context) => UserPasswordLogin(),
                   },
                   initialRoute: '/',
                 );
