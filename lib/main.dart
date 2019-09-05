@@ -27,8 +27,8 @@ class SimpleBlocDelegate extends BlocDelegate {
 
 Future<void> main() async {
   final HttpLink httpLink = HttpLink(
-    uri: 'http://192.168.1.242:3101/graphql',
-    // uri: 'http://api.react.mobi/graphql',
+    // uri: 'http://192.168.1.242:3101/graphql',
+    uri: 'http://api.react.mobi/graphql',
   );
 
   final AuthLink authLink = AuthLink(getToken: () async {
