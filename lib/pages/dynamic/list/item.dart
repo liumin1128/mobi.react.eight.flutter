@@ -122,9 +122,22 @@ class DynamicItem extends StatelessWidget {
                         size: 24,
                       ),
                       Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                      Text(
-                        data['commentCount'].toString(),
-                        style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context, rootNavigator: true).pushNamed(
+                            '/dynamic/detail',
+                            arguments: {
+                              'session': data['_id']
+                            },
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(),
+                          child: Text(
+                            data['commentCount'].toString(),
+                            style: CupertinoTheme.of(context).textTheme.actionTextStyle.copyWith(color: Color(0xFF999999), fontSize: 16, fontWeight: FontWeight.w100),
+                          ),
+                        ),
                       ),
                     ],
                   )),
