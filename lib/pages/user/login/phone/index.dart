@@ -147,7 +147,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
             // 输入手机号
             CupertinoTextField(
               controller: _phone,
-              placeholder: '输入手机号',
+              placeholder: '手机号',
               // autofocus: true,
               focusNode: focusNodePhone,
               onChanged: (str) {
@@ -178,7 +178,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
                 border: Border(
                   bottom: BorderSide(
                     style: BorderStyle.solid,
-                    color: CupertinoColors.black,
+                    color: CupertinoColors.extraLightBackgroundGray,
                   ),
                 ),
               ),
@@ -206,6 +206,7 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
 
             // 输入验证码
             CupertinoTextField(
+              placeholder: "验证码",
               controller: _code,
               // autofocus: true,
               focusNode: focusNodeCode,
@@ -233,13 +234,13 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
               // keyboardType: TextInputType.phone,
               style: TextStyle(
                 fontSize: 22,
-                color: CupertinoColors.inactiveGray,
+                color: CupertinoColors.black,
               ),
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     style: BorderStyle.solid,
-                    color: CupertinoColors.black,
+                    color: CupertinoColors.extraLightBackgroundGray,
                   ),
                 ),
               ),
