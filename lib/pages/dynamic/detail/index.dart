@@ -74,10 +74,19 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
         context: context,
         session: widget.session,
         content: content,
-        commentTo: _commentTo,
-        replyTo: _replyTo,
       ),
     );
+
+    // commetListBloc.dispatch(
+    //   CommentListCreateComment(
+    //     context: context,
+    //     session: widget.session,
+    //     content: content,
+    //     commentTo: _commentTo,
+    //     replyTo: _replyTo,
+    //   ),
+    // );
+
     _contentTextEditingController = TextEditingController(text: '');
   }
 

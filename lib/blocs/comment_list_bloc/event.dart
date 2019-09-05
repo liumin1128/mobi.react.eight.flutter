@@ -22,10 +22,26 @@ class CommentListCreateComment extends CommentListEvent {
   final BuildContext context;
   final String session;
   final String content;
+
+  CommentListCreateComment({@required this.context, @required this.session, @required this.content})
+      : super([
+          context,
+          session,
+          content,
+        ]);
+
+  @override
+  String toString() => 'CommentListCreateComment';
+}
+
+class CommentListCreateReply extends CommentListEvent {
+  final BuildContext context;
+  final String session;
+  final String content;
   final String commentTo;
   final String replyTo;
 
-  CommentListCreateComment({@required this.context, @required this.session, @required this.content, this.commentTo, this.replyTo})
+  CommentListCreateReply({@required this.context, @required this.session, @required this.content, this.commentTo, this.replyTo})
       : super([
           context,
           session,
@@ -35,7 +51,7 @@ class CommentListCreateComment extends CommentListEvent {
         ]);
 
   @override
-  String toString() => 'CommentListCreateComment';
+  String toString() => 'CommentListCreateReply';
 }
 
 class CommentListFetchMore extends CommentListEvent {

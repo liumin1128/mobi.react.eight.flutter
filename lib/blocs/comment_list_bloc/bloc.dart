@@ -105,6 +105,64 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
   Stream<CommentListState> _mapCommentListCreateCommentToState(event) async* {
     try {
       if (currentState is CommentListFetchSuccessed) {
+        print('event');
+        print(event.session);
+        print(event.content);
+
+        final QueryResult res = await client.mutate(
+          MutationOptions(
+            document: createCommentSchema,
+            variables: {
+              'session': event.session,
+              'content': event.content,
+            },
+          ),
+        );
+
+        print('res');
+        print(res);
+
+        if (res.hasErrors) return;
+
+        var result = res.data['result'];
+
+        if (result['status'] == 200) {
+          final _list = (currentState as CommentListFetchSuccessed).list;
+
+          print('评论成功');
+
+          final list = [
+            getCommentItem(result['data'])
+          ];
+
+          yield CommentListFetchSuccessed(list: list + _list, session: event.session);
+        } else if (result['status'] == 403) {
+          print('尚未登录');
+
+          alert(
+            context: event.context,
+            title: '评论失败',
+            content: result['message'],
+            showCancel: false,
+          );
+        }
+      }
+    } catch (error) {
+      print('_mapCommentListFetchToState error');
+      print(error);
+      yield CommentListFetchError();
+    }
+  }
+
+  Stream<CommentListState> _mapCommentListCreateReplyToState(event) async* {
+    try {
+      if (currentState is CommentListFetchSuccessed) {
+        print('event');
+        print(event.session);
+        print(event.content);
+        print(event.commentTo);
+        print(event.replyTo);
+
         final QueryResult res = await client.mutate(
           MutationOptions(
             document: createCommentSchema,
@@ -116,6 +174,9 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
             },
           ),
         );
+
+        print('res');
+        print(res);
 
         if (res.hasErrors) return;
 
