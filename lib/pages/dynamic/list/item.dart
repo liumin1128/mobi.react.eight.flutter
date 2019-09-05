@@ -31,14 +31,14 @@ class DynamicItem extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(right: 16),
-                  child: Avatar(src: data['user']['avatarUrl'], size: 40),
+                  child: Avatar(src: data['user'] != null ? data['user']['avatarUrl'] : '', size: 40),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      data['user']['nickname'],
+                      data['user'] != null ? data['user']['nickname'] : '消失在虚空的用户',
                       style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontWeight: FontWeight.bold, color: Color(0xFF333333)),
                     ),
                     Text(
@@ -52,27 +52,29 @@ class DynamicItem extends StatelessWidget {
           ),
 
           // 文本部分
-          GestureDetector(
-            onTap: () {
-              // Navigator.of(context).pushNamed('/dynamic/detail');
-              // Navigator.pushNamed(context, "/news");
-              Navigator.of(context, rootNavigator: true).pushNamed(
-                '/dynamic/detail',
-                arguments: {
-                  'session': data['_id']
-                },
-              );
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              // color: Color(0xFF666666),
-              child: Text(
-                data['content'],
-                textAlign: TextAlign.left,
-                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 18, color: Color(0xFF666666)),
-              ),
-            ),
-          ),
+          data['content'] != null && data['content'] != ''
+              ? GestureDetector(
+                  onTap: () {
+                    // Navigator.of(context).pushNamed('/dynamic/detail');
+                    // Navigator.pushNamed(context, "/news");
+                    Navigator.of(context, rootNavigator: true).pushNamed(
+                      '/dynamic/detail',
+                      arguments: {
+                        'session': data['_id']
+                      },
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    // color: Color(0xFF666666),
+                    child: Text(
+                      data['content'],
+                      textAlign: TextAlign.left,
+                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 18, color: Color(0xFF666666)),
+                    ),
+                  ),
+                )
+              : Container(),
 
           // 图片组件
           data['pictures'].length > 0
