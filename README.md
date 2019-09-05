@@ -66,3 +66,7 @@ flutter 启动参数
 A valid provisioning profile for this executable was not found.
 
 Project Settings -> Legacy Build System
+
+修改 app 显示名
+
+https://blog.csdn.net/BADAO_LIUMANG_QIZHI/article/details/83345122
