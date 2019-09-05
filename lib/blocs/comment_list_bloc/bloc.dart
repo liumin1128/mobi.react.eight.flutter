@@ -152,8 +152,9 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
 
           alert(
             context: event.context,
-            title: '验证码错误',
-            content: '验证码格式不正确，请重新输入',
+            title: '评论失败',
+            content: result['message'],
+            showCancel: false,
           );
         }
       }

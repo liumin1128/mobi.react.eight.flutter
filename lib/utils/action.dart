@@ -17,10 +17,9 @@ Future alert({
   final action = await showCupertinoDialog(
     context: context,
     builder: (context) {
-      return CupertinoAlertDialog(
-        title: title == null ? null : Text(title),
-        content: contentBuilder == null ? (content == null ? null : Text(content)) : contentBuilder,
-        actions: <Widget>[
+      List<Widget> list = [];
+      if (showCancel) {
+        list.add(
           Container(
             decoration: BoxDecoration(
               border: Border(
@@ -28,31 +27,37 @@ Future alert({
                 top: BorderSide(color: Color(0xFFdddddd), width: 0.5),
               ),
             ),
-            child: showCancel
-                ? CupertinoDialogAction(
-                    onPressed: () {
-                      Navigator.pop(context, Action.Cancel);
-                    },
-                    child: Text('取消'),
-                  )
-                : null,
+            child: CupertinoDialogAction(
+              onPressed: () {
+                Navigator.pop(context, Action.Cancel);
+              },
+              child: Text('取消'),
+            ),
           ),
+        );
+      }
+
+      if (showConfirm) {
+        list.add(
           Container(
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(color: Color(0xFFdddddd), width: 0.5),
               ),
             ),
-            child: showConfirm
-                ? CupertinoDialogAction(
-                    onPressed: () {
-                      Navigator.pop(context, Action.Ok);
-                    },
-                    child: Text('确定'),
-                  )
-                : null,
-          )
-        ],
+            child: CupertinoDialogAction(
+              onPressed: () {
+                Navigator.pop(context, Action.Ok);
+              },
+              child: Text('确定'),
+            ),
+          ),
+        );
+      }
+      return CupertinoAlertDialog(
+        title: title == null ? null : Text(title),
+        content: contentBuilder == null ? (content == null ? null : Text(content)) : contentBuilder,
+        actions: list,
       );
     },
   );
