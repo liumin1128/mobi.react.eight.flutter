@@ -56,10 +56,7 @@ class _UserPasswordLoginWithClientState extends State<UserPasswordLoginWithClien
 
     if (data['status'] == 200) {
       print('登录成功');
-      print('登录成功');
       print(data['token']);
-
-      Navigator.pop(context, 1);
 
       _userLogin(context, data['token']);
     } else if (data['status'] == 403) {
@@ -70,6 +67,8 @@ class _UserPasswordLoginWithClientState extends State<UserPasswordLoginWithClien
   }
 
   Future<void> _userLogin(BuildContext context, String token) async {
+    Navigator.of(context, rootNavigator: true).popAndPushNamed('/');
+
     final userBloc = BlocProvider.of<UserBloc>(context);
     userBloc.dispatch(GetUserInfo(token: token));
     return;

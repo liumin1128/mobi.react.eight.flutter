@@ -117,8 +117,6 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
       print('登录成功');
       print(data['token']);
 
-      Navigator.pop(context, 1);
-
       _userLogin(context, data['token']);
     } else if (data['status'] == 403) {
       print('用户名密码错误');
@@ -128,6 +126,8 @@ class _UserPhoneLoginWithClientState extends State<UserPhoneLoginWithClient> {
   }
 
   Future<void> _userLogin(BuildContext context, String token) async {
+    Navigator.of(context, rootNavigator: true).popAndPushNamed('/');
+
     final userBloc = BlocProvider.of<UserBloc>(context);
     userBloc.dispatch(GetUserInfo(token: token));
     return;
