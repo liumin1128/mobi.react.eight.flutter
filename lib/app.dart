@@ -10,6 +10,7 @@ import 'package:eight/pages/home/index.dart';
 import 'package:eight/pages/dynamic/detail/index.dart';
 import 'package:eight/pages/user/login/phone/index.dart';
 import 'package:eight/pages/user/login/username/index.dart';
+import 'package:eight/pages/dynamic/create/index.dart';
 
 class App extends StatefulWidget {
   App({this.client});
@@ -38,13 +39,15 @@ class AppState extends State<App> {
                 return CupertinoApp(
                   theme: theme,
                   routes: <String, WidgetBuilder>{
-                    '/': (BuildContext context) => HomePage(),
+                    // '/': (BuildContext context) => HomePage(),
+                    '/': (BuildContext context) => DynamicCreatePage(),
                     '/dynamic/detail': (BuildContext context) {
                       final Map query = ModalRoute.of(context).settings.arguments;
                       return DynamicDetailPage(session: query['session']);
                     },
                     '/user/login/phone': (BuildContext context) => UserPhoneLogin(),
                     '/user/login/password': (BuildContext context) => UserPasswordLogin(),
+                    '/dynamic/create': (BuildContext context) => DynamicCreatePage(),
                   },
                   initialRoute: '/',
                 );
