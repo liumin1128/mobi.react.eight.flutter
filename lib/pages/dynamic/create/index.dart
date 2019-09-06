@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart' hide Action;
 import 'dart:io';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:eight/utils/image.dart';
 
 class DynamicCreatePage extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
   File _image;
 
   Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       _image = image;
@@ -62,8 +63,9 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
       child: Container(
         child: Center(
           child: CupertinoButton(
-            onPressed: () {
-              getImage();
+            onPressed: () async {
+              File image = await pickerPicture();
+              var sss = await uploadPicture(image: image);
             },
             child: Text('getImage'),
           ),
