@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart' hide Action;
+import 'dart:io';
 // import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class DynamicCreatePage extends StatefulWidget {
   @override
@@ -9,6 +11,16 @@ class DynamicCreatePage extends StatefulWidget {
 class DynamicCreatePageState extends State<DynamicCreatePage> {
   ScrollController _scrollController = ScrollController(); //listview的控制器
   FocusNode _contentFocusNode = FocusNode();
+
+  File _image;
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = image;
+    });
+  }
 
   @override
   void initState() {
@@ -47,8 +59,15 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
         ),
         middle: Text('创建'),
       ),
-      child: Center(
-        child: Text('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'),
+      child: Container(
+        child: Center(
+          child: CupertinoButton(
+            onPressed: () {
+              getImage();
+            },
+            child: Text('getImage'),
+          ),
+        ),
       ),
     );
   }

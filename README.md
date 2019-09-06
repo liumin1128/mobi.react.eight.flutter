@@ -70,3 +70,11 @@ Project Settings -> Legacy Build System
 修改 app 显示名
 
 https://blog.csdn.net/BADAO_LIUMANG_QIZHI/article/details/83345122
+
+
+<key>NSPhotoLibraryUsageDescription</key>
+<string>访问相册</string>
+<key>NSCameraUsageDescription</key>
+<string>访问相机</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>使用麦克风</string>
