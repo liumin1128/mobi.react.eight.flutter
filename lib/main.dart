@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bloc/bloc.dart';
 import 'app.dart';
+import 'package:eight/utils/graphql.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
@@ -26,35 +25,7 @@ class SimpleBlocDelegate extends BlocDelegate {
 }
 
 Future<void> main() async {
-  final HttpLink httpLink = HttpLink(
-    // uri: 'http://192.168.1.242:3101/graphql',
-    uri: 'http://api.react.mobi/graphql',
-  );
-
-  final AuthLink authLink = AuthLink(getToken: () async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String _token = prefs.getString('token');
-    return 'Bearer $_token';
-  });
-
-  final Link link = authLink.concat(httpLink as Link);
-
-  String typenameDataIdFromObject(Object object) {
-    if (object is Map<String, Object> && object.containsKey('__typename') && object.containsKey('_id')) {
-      return "${object['__typename']}/${object['_id']}";
-    }
-    return null;
-  }
-
-  final ValueNotifier<GraphQLClient> client = ValueNotifier(
-    GraphQLClient(
-      cache: NormalizedInMemoryCache(
-        dataIdFromObject: typenameDataIdFromObject,
-      ),
-      // cache: InMemoryCache(),
-      link: link,
-    ),
-  );
+  final client = getClient();
 
   BlocSupervisor.delegate = SimpleBlocDelegate();
 

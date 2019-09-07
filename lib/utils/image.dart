@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<File> pickerPicture() async {
   File image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -12,6 +13,9 @@ Future uploadPicture({@required File image}) async {
   String path = image.path;
   var name = path.substring(path.lastIndexOf("/") + 1, path.length);
   var suffix = name.substring(name.lastIndexOf(".") + 1, name.length);
+  Dio dio = new Dio();
+
+  // var respone = await dio.post<String>("https://upload-z1.qiniup.com");
 
   FormData formData = new FormData.from(
     {
@@ -20,7 +24,9 @@ Future uploadPicture({@required File image}) async {
     },
   );
 
-  Dio dio = new Dio();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  // prefs.setString(key, value)
   var respone = await dio.post<String>("https://upload-z1.qiniup.com", data: formData);
   print('respone');
   print(respone);
