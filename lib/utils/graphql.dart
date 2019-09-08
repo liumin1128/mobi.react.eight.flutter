@@ -23,15 +23,17 @@ getClient() {
     return null;
   }
 
-  final ValueNotifier<GraphQLClient> client = ValueNotifier(
-    GraphQLClient(
-      cache: NormalizedInMemoryCache(
-        dataIdFromObject: typenameDataIdFromObject,
-      ),
-      // cache: InMemoryCache(),
-      link: link,
+  final GraphQLClient client = GraphQLClient(
+    cache: NormalizedInMemoryCache(
+      dataIdFromObject: typenameDataIdFromObject,
     ),
+    // cache: InMemoryCache(),
+    link: link,
   );
 
   return client;
+
+  // final ValueNotifier<GraphQLClient> valueNotifier = ValueNotifier(client);
+
+  // return valueNotifier;
 }

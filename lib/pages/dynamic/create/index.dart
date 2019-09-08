@@ -66,6 +66,10 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
             onPressed: () async {
               File image = await pickerPicture();
               var sss = await uploadPicture(image: image);
+              print(sss);
+              print(sss);
+              print(sss);
+              print(sss);
             },
             child: Text('getImage'),
           ),
