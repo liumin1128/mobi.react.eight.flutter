@@ -40,7 +40,7 @@ Future<String> getQiniuToken() async {
   return token;
 }
 
-Future<String> uploadPicture({@required File image}) async {
+Future<String> uploadToQiniu({@required File image}) async {
   String path = image.path;
   var name = path.substring(path.lastIndexOf("/") + 1, path.length);
   var suffix = name.substring(name.lastIndexOf(".") + 1, name.length);

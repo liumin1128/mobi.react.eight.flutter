@@ -65,7 +65,7 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
           child: CupertinoButton(
             onPressed: () async {
               File image = await pickerPicture();
-              var sss = await uploadPicture(image: image);
+              var sss = await uploadToQiniu(image: image);
               print(sss);
               print(sss);
               print(sss);
