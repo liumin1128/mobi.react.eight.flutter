@@ -64,12 +64,14 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
         child: Center(
           child: CupertinoButton(
             onPressed: () async {
-              File image = await pickerPicture();
-              var sss = await uploadToQiniu(image: image);
-              print(sss);
-              print(sss);
-              print(sss);
-              print(sss);
+              // File image = await pickerPicture();
+              // var sss = await uploadToQiniu(image: image);
+              // print(sss);
+              // print(sss);
+              // print(sss);
+              // print(sss);
+              var list = await loadAssets();
+              print(list);
             },
             child: Text('getImage'),
           ),

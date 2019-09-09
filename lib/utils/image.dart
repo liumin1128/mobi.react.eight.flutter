@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'dart:convert';
+import 'dart:async';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'graphql.dart';
 import 'package:eight/graphql/schema/qiniu.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
+import 'graphql.dart';
 
 Future<File> pickerPicture() async {
   File image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -68,4 +70,17 @@ Future<String> uploadToQiniu({@required File image}) async {
     return 'https://imgs.react.mobi/' + key;
   }
   return null;
+}
+
+Future<List<Asset>> loadAssets() async {
+  List<Asset> resultList;
+  try {
+    resultList = await MultiImagePicker.pickImages(
+      maxImages: 300,
+    );
+  } on Exception catch (e) {
+    print(e);
+    // error = e.message;
+  }
+  return resultList;
 }

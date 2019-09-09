@@ -193,6 +193,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.9.6+3"
+  multi_image_picker:
+    dependency: "direct dev"
+    description:
+      name: multi_image_picker
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.5.3"
   path:
     dependency: transitive
     description:
@@ -354,4 +361,4 @@ packages:
     version: "0.0.5"
 sdks:
   dart: ">=2.2.2 <3.0.0"
-  flutter: ">=1.5.0 <2.0.0"
+  flutter: ">=1.7.8 <2.0.0"
