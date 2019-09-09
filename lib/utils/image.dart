@@ -77,7 +77,19 @@ Future<List<Asset>> loadAssets() async {
   try {
     resultList = await MultiImagePicker.pickImages(
       maxImages: 300,
+      enableCamera: true,
+      cupertinoOptions: CupertinoOptions(
+        backgroundColor: '#dddddd',
+        selectionFillColor: '#ff11ab',
+        // selectionShadowColor: '#333333',
+        // selectionStrokeColor: '#333333',
+        selectionTextColor: '#ff00a5',
+        // selectionCharacter: 'X',
+        // takePhotoIcon: 'chat',
+      ),
     );
+  } on NoImagesSelectedException catch (e) {
+    // User pressed cancel, update ui or show alert
   } on Exception catch (e) {
     print(e);
     // error = e.message;
