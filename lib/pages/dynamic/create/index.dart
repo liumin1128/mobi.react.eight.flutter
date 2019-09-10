@@ -15,7 +15,7 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
   ScrollController _scrollController = ScrollController(); //listview的控制器
   FocusNode _contentFocusNode = FocusNode();
 
-  List images = [];
+  List<Asset> images = [];
 
   File _image;
 
@@ -63,36 +63,7 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
         Asset asset = images[index];
         return GestureDetector(
           onTap: () {
-            showCupertinoModalPopup<int>(
-              context: context,
-              builder: (context) {
-                return CupertinoActionSheet(
-                  // title: Text("This is Title"),
-                  // message: Text('Chose a item !'),
-                  cancelButton: CupertinoActionSheetAction(
-                    onPressed: () {
-                      Navigator.pop(context, 1);
-                    },
-                    child: Text("取消"),
-                  ),
-                  actions: <Widget>[
-                    CupertinoActionSheetAction(
-                      onPressed: () {
-                        Navigator.pop(context, 1);
-                        alert(title: '暂不支持', context: context, showCancel: false);
-                      },
-                      child: Text('编辑图片'),
-                    ),
-                    CupertinoActionSheetAction(
-                      onPressed: () {
-                        Navigator.pop(context, 1);
-                      },
-                      child: Text('删除图片', style: CupertinoTheme.of(context).textTheme.actionTextStyle),
-                    ),
-                  ],
-                );
-              },
-            );
+            _onTapItem(index);
           },
           child: AssetThumb(
             asset: asset,
@@ -108,6 +79,44 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
           ),
         );
       }),
+    );
+  }
+
+  void _onTapItem(index) {
+    showCupertinoModalPopup<int>(
+      context: context,
+      builder: (context) {
+        return CupertinoActionSheet(
+          // title: Text("This is Title"),
+          // message: Text('Chose a item !'),
+          cancelButton: CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.pop(context, 1);
+            },
+            child: Text("取消"),
+          ),
+          actions: <Widget>[
+            CupertinoActionSheetAction(
+              onPressed: () {
+                Navigator.pop(context, 1);
+                alert(title: '暂不支持', context: context, showCancel: false);
+              },
+              child: Text('编辑图片'),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () {
+                Navigator.pop(context, 1);
+                images.removeAt(index);
+                print(images);
+                setState(() {
+                  images = images;
+                });
+              },
+              child: Text('删除图片', style: CupertinoTheme.of(context).textTheme.actionTextStyle),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -137,7 +146,7 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
               // print(sss);
               // print(sss);
               // print(sss);
-              var list = await loadAssets();
+              List<Asset> list = await loadAssets();
               print(list);
 
               setState(() {
