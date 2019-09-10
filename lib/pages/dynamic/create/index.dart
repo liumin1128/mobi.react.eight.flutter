@@ -90,7 +90,7 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
                     border: Border.all(color: Color(0x33000000)),
                   ),
                   child: Icon(
-                    CupertinoIcons.add,
+                    CupertinoIcons.photo_camera_solid,
                     size: 36,
                     color: Color(0x33000000),
                   ),
@@ -183,29 +183,21 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
           children: <Widget>[
             Padding(padding: EdgeInsets.only(top: 64)),
             CupertinoTextField(
-              padding: EdgeInsets.all(16),
-              placeholder: "想要说些什么？",
-              // controller: _code,
-              // autofocus: true,
-              // focusNode: focusNodeCode,
-              maxLines: 8,
-              // minLines: 8,
-              onChanged: (str) {
-                setState(() {});
-              },
-              // style: TextStyle(
-              //   fontSize: 22,
-              //   color: CupertinoColors.black,
-              // ),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    style: BorderStyle.solid,
-                    color: CupertinoColors.extraLightBackgroundGray,
-                  ),
-                ),
-              ),
-            ),
+                padding: EdgeInsets.all(16),
+                placeholder: "想要说些什么？",
+                // controller: _code,
+                // autofocus: true,
+                // focusNode: focusNodeCode,
+                maxLines: 8,
+                // minLines: 8,
+                onChanged: (str) {
+                  setState(() {});
+                },
+                // style: TextStyle(
+                //   fontSize: 22,
+                //   color: CupertinoColors.black,
+                // ),
+                decoration: BoxDecoration(border: Border(bottom: BorderSide(style: BorderStyle.solid, color: Color(0x33000000))))),
             // buildGridViewImages(),
 
             Expanded(
