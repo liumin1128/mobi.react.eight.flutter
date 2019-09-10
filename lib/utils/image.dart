@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
-import 'dart:typed_data';
-import 'package:http/http.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,11 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:eight/graphql/schema/qiniu.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'graphql.dart';
-
-Future<File> pickerPicture() async {
-  File image = await ImagePicker.pickImage(source: ImageSource.gallery);
-  return image;
-}
 
 Future<String> getQiniuToken() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -70,11 +63,24 @@ Future<String> uploadToQiniu({@required String name, @required String path, @req
   return null;
 }
 
+Future<File> pickerPicture() async {
+  File image = await ImagePicker.pickImage(source: ImageSource.gallery);
+  return image;
+}
+
 Future<String> uploadFileToQiniu({@required File image}) async {
   String path = image.path;
   var name = path.substring(path.lastIndexOf("/") + 1, path.length);
   var suffix = name.substring(name.lastIndexOf(".") + 1, name.length);
   return uploadToQiniu(name: name, path: path, suffix: suffix);
+}
+
+Future<List<String>> uploadMultiFileToQiniu(List<File> images) {
+  return Future.wait(
+    List.generate(images.length, (idx) {
+      return uploadFileToQiniu(image: images[idx]);
+    }),
+  );
 }
 
 Future<List<Asset>> loadAssets() async {
@@ -108,4 +114,12 @@ Future<String> uploadAssetsToQiniu({@required Asset asset}) async {
   var name = path.substring(path.lastIndexOf("/") + 1, path.length);
   var suffix = name.substring(name.lastIndexOf(".") + 1, name.length);
   return uploadToQiniu(name: name, path: path, suffix: suffix);
+}
+
+Future<List<String>> uploadMultiAssetsToQiniu(List<Asset> assets) {
+  return Future.wait(
+    List.generate(assets.length, (idx) {
+      return uploadAssetsToQiniu(asset: assets[idx]);
+    }),
+  );
 }
