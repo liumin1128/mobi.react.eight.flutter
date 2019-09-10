@@ -80,7 +80,11 @@ class UserMeState extends State<UserMe> {
                   sliver: SliverToBoxAdapter(
                     child: Container(
                       padding: EdgeInsets.all(24),
-                      decoration: BoxDecoration(),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: Color(0xFFdddddd), width: 0.5),
+                        ),
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +138,7 @@ class UserMeState extends State<UserMe> {
                               ),
                             ],
                           ),
-                          Padding(padding: EdgeInsets.all(24)),
+                          Padding(padding: EdgeInsets.all(16)),
 
                           Row(
                             children: <Widget>[
@@ -187,14 +191,14 @@ class UserMeState extends State<UserMe> {
                             ],
                           ),
 
-                          Padding(padding: EdgeInsets.all(8)),
+                          // Padding(padding: EdgeInsets.all(8)),
 
-                          CupertinoButton(
-                            child: Text('退出登录'),
-                            onPressed: () {
-                              userBloc.dispatch(LoggedOut(context: context));
-                            },
-                          ),
+                          // CupertinoButton(
+                          //   child: Text('退出登录'),
+                          //   onPressed: () {
+                          //     userBloc.dispatch(LoggedOut(context: context));
+                          //   },
+                          // ),
                         ],
                       ),
                     ),
