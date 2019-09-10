@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'model.dart';
 import 'dot_painter.dart';
 import 'circle_painter.dart';
+import 'package:flutter/services.dart';
 
 typedef LikeCallback = void Function(bool isLike);
 
@@ -109,6 +110,7 @@ class _LikeButtonState extends State<LikeButton> with TickerProviderStateMixin {
     if (isLiked) {
       _controller.reset();
       _controller.forward();
+      HapticFeedback.selectionClick();
     } else {
       setState(() {});
     }

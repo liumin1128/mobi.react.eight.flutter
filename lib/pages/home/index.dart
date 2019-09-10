@@ -4,6 +4,7 @@ import 'package:eight/pages/user/me/index.dart';
 import 'package:eight/pages/news/list/index.dart';
 import 'package:eight/pages/dynamic/list/index.dart';
 // import 'package:eight/pages/dynamic/detail/index.dart';
+import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -27,6 +28,10 @@ class _HomePageState extends State<HomePage> {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         currentIndex: 0,
+        onTap: (idx) {
+          HapticFeedback.lightImpact();
+          return idx;
+        },
         border: Border(top: BorderSide(style: BorderStyle.none)),
         items: [
           BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text("动态")),
