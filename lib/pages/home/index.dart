@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
-        currentIndex: 0,
+        currentIndex: 4,
         onTap: (idx) {
           HapticFeedback.lightImpact();
           if (idx == 2) {

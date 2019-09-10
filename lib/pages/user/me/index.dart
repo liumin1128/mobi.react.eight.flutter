@@ -75,27 +75,69 @@ class UserMeState extends State<UserMe> {
                 // ),
                 SliverSafeArea(
                   sliver: SliverToBoxAdapter(
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(32),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                    child: Container(
+                      padding: EdgeInsets.all(24),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          // Padding(padding: EdgeInsets.all(16)),
+                          Avatar(src: state.userInfo['avatarUrl'], size: 64),
+                          Padding(padding: EdgeInsets.all(8)),
+                          Text(
+                            state.userInfo['nickname'],
+                            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+                          ),
+                          Padding(padding: EdgeInsets.all(2)),
+                          Text(
+                            '用户Id：970568830',
+                            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(color: Color(0xFF999999)),
+                          ),
+                          Padding(padding: EdgeInsets.all(2)),
+                          Text(
+                            // state.userInfo['sign'],
+                            '不因过去而悲伤',
+                            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(color: Color(0xFF666666)),
+                          ),
+                          Padding(padding: EdgeInsets.all(8)),
+                          Row(
                             children: <Widget>[
-                              Avatar(src: state.userInfo['avatarUrl'], size: 64),
-                              Padding(padding: EdgeInsets.all(16)),
-                              Text(state.userInfo['nickname'], style: CupertinoTheme.of(context).textTheme.textStyle),
+                              Container(
+                                child: Text('90后', style: TextStyle(color: Color(0xFF999999))),
+                                padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                                decoration: BoxDecoration(
+                                  color: Color(0xffeeeeee),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                              Padding(padding: EdgeInsets.all(4)),
+                              Container(
+                                child: Text('技术宅', style: TextStyle(color: Color(0xFF999999))),
+                                padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                                decoration: BoxDecoration(
+                                  color: Color(0xffeeeeee),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                              Padding(padding: EdgeInsets.all(4)),
+                              Container(
+                                child: Text('北京市', style: TextStyle(color: Color(0xFF999999))),
+                                padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+                                decoration: BoxDecoration(
+                                  color: Color(0xffeeeeee),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
                             ],
                           ),
-                        ),
-                        CupertinoButton(
-                          child: Text('退出登录'),
-                          onPressed: () {
-                            userBloc.dispatch(LoggedOut(context: context));
-                          },
-                        )
-                      ],
+                          CupertinoButton(
+                            child: Text('退出登录'),
+                            onPressed: () {
+                              userBloc.dispatch(LoggedOut(context: context));
+                            },
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 )

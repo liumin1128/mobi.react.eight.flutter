@@ -17,10 +17,18 @@ mutation userLogin(\$username: String!, \$password: String!) {
 String userInfo = """
 query userInfo {
   userInfo: userInfo {
-      __typename
-      _id
-      nickname
-      avatarUrl
+    __typename
+    _id
+    nickname
+    avatarUrl
+    sign
+    sex
+    birthday
+    email
+    unverified_email
+    countryCode
+    purePhoneNumber
+    phoneNumber
   }
 }
 """;
