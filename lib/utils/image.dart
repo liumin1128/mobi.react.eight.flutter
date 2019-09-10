@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
+import 'dart:typed_data';
+import 'package:http/http.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
@@ -42,11 +44,7 @@ Future<String> getQiniuToken() async {
   return token;
 }
 
-Future<String> uploadFileToQiniu({@required File image}) async {
-  String path = image.path;
-  var name = path.substring(path.lastIndexOf("/") + 1, path.length);
-  var suffix = name.substring(name.lastIndexOf(".") + 1, name.length);
-
+Future<String> uploadToQiniu({@required String name, @required String path, @required String suffix}) async {
   Dio dio = Dio();
 
   String token = await getQiniuToken();
@@ -70,6 +68,13 @@ Future<String> uploadFileToQiniu({@required File image}) async {
     return 'https://imgs.react.mobi/' + key;
   }
   return null;
+}
+
+Future<String> uploadFileToQiniu({@required File image}) async {
+  String path = image.path;
+  var name = path.substring(path.lastIndexOf("/") + 1, path.length);
+  var suffix = name.substring(name.lastIndexOf(".") + 1, name.length);
+  return uploadToQiniu(name: name, path: path, suffix: suffix);
 }
 
 Future<List<Asset>> loadAssets() async {
@@ -96,4 +101,11 @@ Future<List<Asset>> loadAssets() async {
     // error = e.message;
   }
   return resultList;
+}
+
+Future<String> uploadAssetsToQiniu({@required Asset asset}) async {
+  String path = await asset.filePath;
+  var name = path.substring(path.lastIndexOf("/") + 1, path.length);
+  var suffix = name.substring(name.lastIndexOf(".") + 1, name.length);
+  return uploadToQiniu(name: name, path: path, suffix: suffix);
 }

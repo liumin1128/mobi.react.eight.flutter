@@ -180,9 +180,11 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
           borderRadius: BorderRadius.circular(16),
           minSize: 0,
           child: Text('发布', style: TextStyle(fontSize: 20)),
-          onPressed: () {
+          onPressed: () async {
             print(_contentTextEditingController.text);
             print(_images);
+            final String sss = await uploadAssetsToQiniu(asset: _images[0]);
+            print(sss);
           },
         ),
       ),
