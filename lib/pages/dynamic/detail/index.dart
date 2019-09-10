@@ -246,9 +246,9 @@ class DynamicDetailPageState extends State<DynamicDetailPage> {
 
                                       borderRadius: BorderRadius.circular(4),
                                     ),
-                                    onChanged: (str) {
-                                      print(str);
-                                    },
+                                    // onChanged: (str) {
+                                    //   print(str);
+                                    // },
                                     onSubmitted: (text) {
                                       print('submit $text');
                                       _onSentComment(text);

@@ -16,6 +16,7 @@ class DynamicCreatePage extends StatefulWidget {
 class DynamicCreatePageState extends State<DynamicCreatePage> {
   ScrollController _scrollController = ScrollController(); //listview的控制器
   FocusNode _contentFocusNode = FocusNode();
+  TextEditingController _contentTextEditingController = TextEditingController();
 
   List<Asset> _images = [];
 
@@ -78,9 +79,9 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
     //   tilt: 0.05,
     // );
     return GridView.count(
-      crossAxisCount: 4,
-      mainAxisSpacing: 4,
-      crossAxisSpacing: 4,
+      crossAxisCount: 3,
+      mainAxisSpacing: 8,
+      crossAxisSpacing: 8,
       padding: EdgeInsets.all(16),
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
@@ -166,12 +167,24 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
     return CupertinoPageScaffold(
       backgroundColor: Color(0xFFf8f8f8),
       navigationBar: CupertinoNavigationBar(
-        border: Border(
-          top: BorderSide(
-            style: BorderStyle.none,
-          ),
+        // border: Border(
+        //   top: BorderSide(
+        //     style: BorderStyle.none,
+        //   ),
+        // ),
+        // leading: Text('创建'),
+        // middle: Text('创建'),
+        trailing: CupertinoButton(
+          color: CupertinoTheme.of(context).primaryColor,
+          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+          borderRadius: BorderRadius.circular(16),
+          minSize: 0,
+          child: Text('发布', style: TextStyle(fontSize: 20)),
+          onPressed: () {
+            print(_contentTextEditingController.text);
+            print(_images);
+          },
         ),
-        middle: Text('创建'),
       ),
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
@@ -183,21 +196,29 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
           children: <Widget>[
             Padding(padding: EdgeInsets.only(top: 64)),
             CupertinoTextField(
-                padding: EdgeInsets.all(16),
-                placeholder: "想要说些什么？",
-                // controller: _code,
-                // autofocus: true,
-                // focusNode: focusNodeCode,
-                maxLines: 8,
-                // minLines: 8,
-                onChanged: (str) {
-                  setState(() {});
-                },
-                // style: TextStyle(
-                //   fontSize: 22,
-                //   color: CupertinoColors.black,
-                // ),
-                decoration: BoxDecoration(border: Border(bottom: BorderSide(style: BorderStyle.solid, color: Color(0x33000000))))),
+              padding: EdgeInsets.all(16),
+              placeholder: "想要说些什么？",
+              controller: _contentTextEditingController,
+              // autofocus: true,
+              // focusNode: focusNodeCode,
+              maxLines: 8,
+              // minLines: 8,
+              onChanged: (str) {
+                setState(() {});
+              },
+              // style: TextStyle(
+              //   fontSize: 22,
+              //   color: CupertinoColors.black,
+              // ),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    style: BorderStyle.solid,
+                    color: Color(0x33000000),
+                  ),
+                ),
+              ),
+            ),
             // buildGridViewImages(),
 
             Expanded(
