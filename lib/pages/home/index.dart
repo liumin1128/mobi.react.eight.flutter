@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:eight/pages/user/me/index.dart';
 import 'package:eight/pages/news/list/index.dart';
 import 'package:eight/pages/dynamic/list/index.dart';
+import 'package:eight/pages/bxgif/list/index.dart';
 // import 'package:eight/pages/dynamic/detail/index.dart';
 import 'package:flutter/services.dart';
 
@@ -20,6 +21,8 @@ class _HomePageState extends State<HomePage> {
   static List<Widget> _widgetOptions = <Widget>[
     DynamicListPage(),
     NewsList(),
+    BxgifListPage(),
+    BxgifListPage(),
     UserMe(),
   ];
 
