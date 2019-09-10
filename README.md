@@ -78,3 +78,6 @@ https://blog.csdn.net/BADAO_LIUMANG_QIZHI/article/details/83345122
 <string>访问相机</string>
 <key>NSMicrophoneUsageDescription</key>
 <string>使用麦克风</string>
+
+multi_image_picker
+https://sh1d0w.github.io/multi_image_picker/#/basicusage
