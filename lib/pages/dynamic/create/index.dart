@@ -49,7 +49,7 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
     });
   }
 
-  Widget buildGridView() {
+  Widget buildGridViewImages() {
     // return DragAndDropList<Asset>(
     //   _images,
     //   itemBuilder: (BuildContext context, asset) {
@@ -78,17 +78,21 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
     //   tilt: 0.05,
     // );
     return GridView.count(
-      crossAxisCount: 3,
+      crossAxisCount: 4,
       mainAxisSpacing: 4,
       crossAxisSpacing: 4,
+      padding: EdgeInsets.all(16),
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
             GestureDetector(
                 child: Container(
-                  color: Color(0x10000000),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Color(0x33000000)),
+                  ),
                   child: Icon(
                     CupertinoIcons.add,
                     size: 36,
+                    color: Color(0x33000000),
                   ),
                 ),
                 onTap: _pickeImage)
@@ -169,17 +173,46 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
         ),
         middle: Text('创建'),
       ),
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            child: buildGridView(),
-          ),
-          // buildGridView(),
-          CupertinoButton(
-            onPressed: _pickeImage,
-            child: Text('getImage'),
-          ),
-        ],
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          // 触摸收起键盘
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Column(
+          children: <Widget>[
+            Padding(padding: EdgeInsets.only(top: 64)),
+            CupertinoTextField(
+              padding: EdgeInsets.all(16),
+              placeholder: "想要说些什么？",
+              // controller: _code,
+              // autofocus: true,
+              // focusNode: focusNodeCode,
+              maxLines: 8,
+              // minLines: 8,
+              onChanged: (str) {
+                setState(() {});
+              },
+              // style: TextStyle(
+              //   fontSize: 22,
+              //   color: CupertinoColors.black,
+              // ),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    style: BorderStyle.solid,
+                    color: CupertinoColors.extraLightBackgroundGray,
+                  ),
+                ),
+              ),
+            ),
+            // buildGridViewImages(),
+
+            Expanded(
+              child: buildGridViewImages(),
+            ),
+          ],
+        ),
       ),
     );
   }
