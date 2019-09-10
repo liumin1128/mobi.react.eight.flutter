@@ -39,8 +39,8 @@ class AppState extends State<App> {
                 return CupertinoApp(
                   theme: theme,
                   routes: <String, WidgetBuilder>{
-                    // '/': (BuildContext context) => HomePage(),
-                    '/': (BuildContext context) => DynamicCreatePage(),
+                    '/': (BuildContext context) => HomePage(),
+                    // '/': (BuildContext context) => DynamicCreatePage(),
                     '/dynamic/detail': (BuildContext context) {
                       final Map query = ModalRoute.of(context).settings.arguments;
                       return DynamicDetailPage(session: query['session']);

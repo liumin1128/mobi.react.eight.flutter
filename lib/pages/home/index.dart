@@ -36,7 +36,9 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text("动态")),
           BottomNavigationBarItem(icon: Icon(CupertinoIcons.game_controller), title: Text("资讯")),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.person), title: Text("设置")),
+          BottomNavigationBarItem(icon: Icon(CupertinoIcons.add_circled, size: 36)),
+          BottomNavigationBarItem(icon: Icon(CupertinoIcons.news), title: Text("囧图")),
+          BottomNavigationBarItem(icon: Icon(CupertinoIcons.person), title: Text("我")),
         ],
       ),
       tabBuilder: (context, index) {
