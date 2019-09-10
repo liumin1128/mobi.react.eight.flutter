@@ -17,17 +17,7 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
   ScrollController _scrollController = ScrollController(); //listview的控制器
   FocusNode _contentFocusNode = FocusNode();
 
-  List<Asset> images = [];
-
-  File _image;
-
-  Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      _image = image;
-    });
-  }
+  List<Asset> _images = [];
 
   @override
   void initState() {
@@ -51,33 +41,17 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
     _contentFocusNode.dispose();
   }
 
-  Future<Null> _onSentComment(content) async {
-    // _contentTextEditingController = TextEditingController(text: '');
-  }
-
   Future<Null> _pickeImage() async {
-// HapticFeedback.lightImpact();
-    // HapticFeedback.mediumImpact();
-    // HapticFeedback.heavyImpact();
     HapticFeedback.selectionClick();
-    // HapticFeedback.vibrate();
-    // File image = await pickerPicture();
-    // var sss = await uploadToQiniu(image: image);
-    // print(sss);
-    // print(sss);
-    // print(sss);
-    // print(sss);
     List<Asset> list = await loadAssets();
-    print(list);
-
     setState(() {
-      images = list;
+      _images = _images + list;
     });
   }
 
   Widget buildGridView() {
     // return DragAndDropList<Asset>(
-    //   images,
+    //   _images,
     //   itemBuilder: (BuildContext context, asset) {
     //     return new SizedBox(
     //       child: AssetThumb(
@@ -95,9 +69,9 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
     //     );
     //   },
     //   onDragFinish: (before, after) {
-    //     Asset data = images[before];
-    //     images.removeAt(before);
-    //     images.insert(after, data);
+    //     Asset data = _images[before];
+    //     _images.removeAt(before);
+    //     _images.insert(after, data);
     //   },
     //   canBeDraggedTo: (one, two) => true,
     //   dragElevation: 8.0,
@@ -120,9 +94,9 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
                 onTap: _pickeImage)
           ] +
           List.generate(
-            images.length,
+            _images.length,
             (index) {
-              Asset asset = images[index];
+              Asset asset = _images[index];
               return GestureDetector(
                 onTap: () {
                   _onTapItem(index);
@@ -169,10 +143,10 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
             CupertinoActionSheetAction(
               onPressed: () {
                 Navigator.pop(context, 1);
-                images.removeAt(index);
-                print(images);
+                _images.removeAt(index);
+                print(_images);
                 setState(() {
-                  images = images;
+                  _images = _images;
                 });
               },
               child: Text('删除图片', style: CupertinoTheme.of(context).textTheme.actionTextStyle),
