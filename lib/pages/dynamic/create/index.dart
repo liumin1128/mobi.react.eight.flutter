@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:eight/utils/index.dart';
 import 'dart:async';
 import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:eight/components/Drag/index.dart';
 
 class DynamicCreatePage extends StatefulWidget {
   @override
@@ -54,6 +55,33 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
   }
 
   Widget buildGridView() {
+    return DragAndDropList<Asset>(
+      images,
+      itemBuilder: (BuildContext context, asset) {
+        return new SizedBox(
+          child: AssetThumb(
+            asset: asset,
+            width: 300,
+            height: 300,
+            spinner: Center(
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: CupertinoActivityIndicator(),
+              ),
+            ),
+          ),
+        );
+      },
+      onDragFinish: (before, after) {
+        Asset data = images[before];
+        images.removeAt(before);
+        images.insert(after, data);
+      },
+      canBeDraggedTo: (one, two) => true,
+      dragElevation: 8.0,
+      tilt: 0.05,
+    );
     return GridView.count(
       crossAxisCount: 3,
       mainAxisSpacing: 4,
