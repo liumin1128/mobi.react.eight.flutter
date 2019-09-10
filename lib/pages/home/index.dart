@@ -4,7 +4,7 @@ import 'package:eight/pages/user/me/index.dart';
 import 'package:eight/pages/news/list/index.dart';
 import 'package:eight/pages/dynamic/list/index.dart';
 import 'package:eight/pages/bxgif/list/index.dart';
-// import 'package:eight/pages/dynamic/detail/index.dart';
+import 'package:eight/pages/dynamic/create/index.dart';
 import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,6 +33,10 @@ class _HomePageState extends State<HomePage> {
         currentIndex: 0,
         onTap: (idx) {
           HapticFeedback.lightImpact();
+          if (idx == 2) {
+            Navigator.of(context, rootNavigator: true).pushNamed('/dynamic/create');
+            return 0;
+          }
           return idx;
         },
         border: Border(top: BorderSide(style: BorderStyle.none)),
