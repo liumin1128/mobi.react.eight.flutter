@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart' hide Action;
 import 'dart:io';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:eight/utils/image.dart';
+import 'package:eight/utils/index.dart';
 import 'dart:async';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
@@ -56,18 +56,54 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
   Widget buildGridView() {
     return GridView.count(
       crossAxisCount: 3,
+      mainAxisSpacing: 4,
+      crossAxisSpacing: 4,
       physics: NeverScrollableScrollPhysics(),
       children: List.generate(images.length, (index) {
         Asset asset = images[index];
-        return AssetThumb(
-          asset: asset,
-          width: 300,
-          height: 300,
-          spinner: Center(
-            child: SizedBox(
-              width: 50,
-              height: 50,
-              child: CupertinoActivityIndicator(),
+        return GestureDetector(
+          onTap: () {
+            showCupertinoModalPopup<int>(
+              context: context,
+              builder: (context) {
+                return CupertinoActionSheet(
+                  // title: Text("This is Title"),
+                  // message: Text('Chose a item !'),
+                  cancelButton: CupertinoActionSheetAction(
+                    onPressed: () {
+                      Navigator.pop(context, 1);
+                    },
+                    child: Text("取消"),
+                  ),
+                  actions: <Widget>[
+                    CupertinoActionSheetAction(
+                      onPressed: () {
+                        Navigator.pop(context, 1);
+                        alert(title: '暂不支持', context: context, showCancel: false);
+                      },
+                      child: Text('编辑图片'),
+                    ),
+                    CupertinoActionSheetAction(
+                      onPressed: () {
+                        Navigator.pop(context, 1);
+                      },
+                      child: Text('删除图片', style: CupertinoTheme.of(context).textTheme.actionTextStyle),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          child: AssetThumb(
+            asset: asset,
+            width: 300,
+            height: 300,
+            spinner: Center(
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: CupertinoActivityIndicator(),
+              ),
             ),
           ),
         );
