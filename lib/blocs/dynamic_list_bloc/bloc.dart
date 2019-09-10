@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart' hide Action;
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:eight/graphql/schema/dynamic.dart';
+import 'package:eight/utils/index.dart';
 import 'index.dart';
 
 class DynamicListBloc extends Bloc<DynamicListEvent, DynamicListState> {
@@ -85,6 +86,17 @@ class DynamicListBloc extends Bloc<DynamicListEvent, DynamicListState> {
 
       print('res');
       print(res);
+
+      if (res.hasErrors) {
+        alert(context: event.context, content: '系统错误');
+        return;
+      }
+
+      if (res.data['result']['status'] == 200) {
+        Navigator.of(event.context, rootNavigator: true).popAndPushNamed('/');
+      } else {
+        alert(context: event.context, content: res.data['result']['message']);
+      }
     } catch (_) {
       print('_mapDynamicListFetchToState error');
     }
