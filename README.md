@@ -33,6 +33,15 @@ flutter 导入 icon
 
 https://segmentfault.com/a/1190000019750283
 
+(function (speed) {
+  var icons = document.querySelectorAll('span[title=\'添加入库\']');
+  var i = 0,add = setInterval(() => {icons[i].click();i < icons.length - 1?i++:clearInterval(add)},speed);
+})(20)
+
+
+
+
+
 tab 页切换，tab 隐藏
 
 https://www.jianshu.com/p/1b02cbb32bdc?utm_source=desktop&utm_medium=timeline

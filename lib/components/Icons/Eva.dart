@@ -486,5 +486,4 @@ class EvaIcons {
   static const IconData unlockOutline = IconData(0xe73c, fontFamily: 'EvaIcons');
 
   static const IconData umbrellaOutline = IconData(0xe73d, fontFamily: 'EvaIcons');
-
 }

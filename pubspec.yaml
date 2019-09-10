@@ -89,3 +89,7 @@ flutter:
     - family: EvaIcons
       fonts:
         - asset: assets/fonts/EvaIcons.ttf
+    - family: TaobaoIcons
+      fonts:
+        - asset: assets/fonts/TaobaoIcons.ttf
+

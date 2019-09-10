@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:eight/blocs/counter_bloc.dart';
 import 'package:eight/blocs/theme_bloc.dart';
 import 'package:eight/blocs/user_bloc/index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eight/components/Avatar/index.dart';
+import 'package:eight/components/Icons/Taobao.dart';
+import 'package:eight/components/Icons/Eva.dart';
 
 class UserMe extends StatefulWidget {
   @override
@@ -77,6 +80,7 @@ class UserMeState extends State<UserMe> {
                   sliver: SliverToBoxAdapter(
                     child: Container(
                       padding: EdgeInsets.all(24),
+                      decoration: BoxDecoration(),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +90,7 @@ class UserMeState extends State<UserMe> {
                           Padding(padding: EdgeInsets.all(8)),
                           Text(
                             state.userInfo['nickname'],
-                            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+                            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 32, fontWeight: FontWeight.bold),
                           ),
                           Padding(padding: EdgeInsets.all(2)),
                           Text(
@@ -130,12 +134,67 @@ class UserMeState extends State<UserMe> {
                               ),
                             ],
                           ),
+                          Padding(padding: EdgeInsets.all(24)),
+
+                          Row(
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.only(right: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text('1', style: TextStyle(color: Color(0xFF333333), fontSize: 30)),
+                                    Padding(padding: EdgeInsets.all(4)),
+                                    Text('动态', style: TextStyle(color: Color(0xFF999999))),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text('0', style: TextStyle(color: Color(0xFF333333), fontSize: 28)),
+                                    Padding(padding: EdgeInsets.all(4)),
+                                    Text('粉丝', style: TextStyle(color: Color(0xFF999999))),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text('2', style: TextStyle(color: Color(0xFF333333), fontSize: 28)),
+                                    Padding(padding: EdgeInsets.all(4)),
+                                    Text('关注', style: TextStyle(color: Color(0xFF999999))),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                // margin: EdgeInsets.only(right: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text('G5FGHF', style: TextStyle(color: Color(0xFF333333), fontSize: 28, letterSpacing: -1, fontFamily: "Helvetica Neue")),
+                                    Padding(padding: EdgeInsets.all(4)),
+                                    Text('邀请码', style: TextStyle(color: Color(0xFF999999))),
+                                  ],
+                                ),
+                              ),
+                              Icon(TaobaoIcons.qr_code, size: 40, color: Color(0xFF666666)),
+                              // Text('11')
+                            ],
+                          ),
+
+                          Padding(padding: EdgeInsets.all(8)),
+
                           CupertinoButton(
                             child: Text('退出登录'),
                             onPressed: () {
                               userBloc.dispatch(LoggedOut(context: context));
                             },
-                          )
+                          ),
                         ],
                       ),
                     ),
