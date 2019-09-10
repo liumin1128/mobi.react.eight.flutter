@@ -73,7 +73,7 @@ Future<String> uploadToQiniu({@required File image}) async {
 }
 
 Future<List<Asset>> loadAssets() async {
-  List<Asset> resultList;
+  List<Asset> resultList = [];
   try {
     resultList = await MultiImagePicker.pickImages(
       maxImages: 300,
@@ -90,6 +90,7 @@ Future<List<Asset>> loadAssets() async {
     );
   } on NoImagesSelectedException catch (e) {
     // User pressed cancel, update ui or show alert
+    print(e);
   } on Exception catch (e) {
     print(e);
     // error = e.message;

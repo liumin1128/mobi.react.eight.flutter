@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:eight/utils/index.dart';
 import 'dart:async';
 import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:eight/components/Drag/index.dart';
+// import 'package:eight/components/Drag/index.dart';
 
 class DynamicCreatePage extends StatefulWidget {
   @override
@@ -55,59 +55,93 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
     // _contentTextEditingController = TextEditingController(text: '');
   }
 
+  Future<Null> _pickeImage() async {
+// HapticFeedback.lightImpact();
+    // HapticFeedback.mediumImpact();
+    // HapticFeedback.heavyImpact();
+    HapticFeedback.selectionClick();
+    // HapticFeedback.vibrate();
+    // File image = await pickerPicture();
+    // var sss = await uploadToQiniu(image: image);
+    // print(sss);
+    // print(sss);
+    // print(sss);
+    // print(sss);
+    List<Asset> list = await loadAssets();
+    print(list);
+
+    setState(() {
+      images = list;
+    });
+  }
+
   Widget buildGridView() {
-    return DragAndDropList<Asset>(
-      images,
-      itemBuilder: (BuildContext context, asset) {
-        return new SizedBox(
-          child: AssetThumb(
-            asset: asset,
-            width: 300,
-            height: 300,
-            spinner: Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: CupertinoActivityIndicator(),
-              ),
-            ),
-          ),
-        );
-      },
-      onDragFinish: (before, after) {
-        Asset data = images[before];
-        images.removeAt(before);
-        images.insert(after, data);
-      },
-      canBeDraggedTo: (one, two) => true,
-      dragElevation: 8.0,
-      tilt: 0.05,
-    );
+    // return DragAndDropList<Asset>(
+    //   images,
+    //   itemBuilder: (BuildContext context, asset) {
+    //     return new SizedBox(
+    //       child: AssetThumb(
+    //         asset: asset,
+    //         width: 300,
+    //         height: 300,
+    //         spinner: Center(
+    //           child: SizedBox(
+    //             width: 50,
+    //             height: 50,
+    //             child: CupertinoActivityIndicator(),
+    //           ),
+    //         ),
+    //       ),
+    //     );
+    //   },
+    //   onDragFinish: (before, after) {
+    //     Asset data = images[before];
+    //     images.removeAt(before);
+    //     images.insert(after, data);
+    //   },
+    //   canBeDraggedTo: (one, two) => true,
+    //   dragElevation: 8.0,
+    //   tilt: 0.05,
+    // );
     return GridView.count(
       crossAxisCount: 3,
       mainAxisSpacing: 4,
       crossAxisSpacing: 4,
       physics: NeverScrollableScrollPhysics(),
-      children: List.generate(images.length, (index) {
-        Asset asset = images[index];
-        return GestureDetector(
-          onTap: () {
-            _onTapItem(index);
-          },
-          child: AssetThumb(
-            asset: asset,
-            width: 300,
-            height: 300,
-            spinner: Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: CupertinoActivityIndicator(),
-              ),
-            ),
+      children: <Widget>[
+            GestureDetector(
+                child: Container(
+                  color: Color(0x10000000),
+                  child: Icon(
+                    CupertinoIcons.add,
+                    size: 36,
+                  ),
+                ),
+                onTap: _pickeImage)
+          ] +
+          List.generate(
+            images.length,
+            (index) {
+              Asset asset = images[index];
+              return GestureDetector(
+                onTap: () {
+                  _onTapItem(index);
+                },
+                child: AssetThumb(
+                  asset: asset,
+                  width: 300,
+                  height: 300,
+                  spinner: Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CupertinoActivityIndicator(),
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
-        );
-      }),
     );
   }
 
@@ -168,25 +202,7 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
           ),
           // buildGridView(),
           CupertinoButton(
-            onPressed: () async {
-              // HapticFeedback.lightImpact();
-              // HapticFeedback.mediumImpact();
-              // HapticFeedback.heavyImpact();
-              HapticFeedback.selectionClick();
-              // HapticFeedback.vibrate();
-              // File image = await pickerPicture();
-              // var sss = await uploadToQiniu(image: image);
-              // print(sss);
-              // print(sss);
-              // print(sss);
-              // print(sss);
-              List<Asset> list = await loadAssets();
-              print(list);
-
-              setState(() {
-                images = list;
-              });
-            },
+            onPressed: _pickeImage,
             child: Text('getImage'),
           ),
         ],
