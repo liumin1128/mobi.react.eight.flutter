@@ -7,7 +7,7 @@ int width = 200;
 multiPictureView(pictures) {
   // Transform(
   //     transform: Matrix4.translationValues(10, -10, 0),
-  //     child: new Container(),
+  //     child: Container(),
   //   );
 
   if (pictures.length >= 9) {

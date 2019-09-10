@@ -42,19 +42,19 @@ Future<String> getQiniuToken() async {
   return token;
 }
 
-Future<String> uploadToQiniu({@required File image}) async {
+Future<String> uploadFileToQiniu({@required File image}) async {
   String path = image.path;
   var name = path.substring(path.lastIndexOf("/") + 1, path.length);
   var suffix = name.substring(name.lastIndexOf(".") + 1, name.length);
 
-  Dio dio = new Dio();
+  Dio dio = Dio();
 
   String token = await getQiniuToken();
 
-  FormData formData = new FormData.from({
+  FormData formData = FormData.from({
     'token': token,
-    "file": new UploadFileInfo(
-      new File(path),
+    "file": UploadFileInfo(
+      File(path),
       name,
       contentType: ContentType.parse("image/$suffix"),
     ),

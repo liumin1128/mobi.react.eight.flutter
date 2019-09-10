@@ -31,7 +31,7 @@ class _LazyloadImageState extends State<LazyloadImage> {
           height: widget.height,
           imageUrl: widget.image,
           placeholder: (context, url) => CupertinoActivityIndicator(),
-          errorWidget: (context, url, error) => new Icon(CupertinoIcons.bookmark),
+          errorWidget: (context, url, error) => Icon(CupertinoIcons.bookmark),
           fit: BoxFit.cover,
         ),
       ),

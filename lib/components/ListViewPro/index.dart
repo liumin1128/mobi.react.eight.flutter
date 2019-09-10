@@ -60,7 +60,7 @@ class _ListViewProState extends State<ListViewPro> {
       slivers: <Widget>[
         widget.title != null
             ? CupertinoSliverNavigationBar(
-                largeTitle: new Text(widget.title),
+                largeTitle: Text(widget.title),
                 border: Border(
                   top: BorderSide(
                     style: BorderStyle.none,

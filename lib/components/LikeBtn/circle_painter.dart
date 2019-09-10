@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'like_button_util.dart';
 
 class CirclePainter extends CustomPainter {
-  Paint circlePaint = new Paint();
-  Paint maskPaint = new Paint();
+  Paint circlePaint = Paint();
+  Paint maskPaint = Paint();
 
   final double outerCircleRadiusProgress;
   final double innerCircleRadiusProgress;

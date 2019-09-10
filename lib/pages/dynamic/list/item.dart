@@ -6,7 +6,7 @@ import 'package:eight/components/MultiPicturesView/index.dart';
 
 text2html(str) {
   return str;
-  // .replaceAll(new RegExp(r"(.*?)\[(.*?)_(.*?)]"), '\$1<img src="https://imgs.react.mobi/emoticon/\$2/\$3.gif" class="emoji" alt="[\$2_\$3]">');
+  // .replaceAll(RegExp(r"(.*?)\[(.*?)_(.*?)]"), '\$1<img src="https://imgs.react.mobi/emoticon/\$2/\$3.gif" class="emoji" alt="[\$2_\$3]">');
   // .replace(/(.*?)\[(.*?)_(.*?)]/ig, )
   // .replace(/(.*?)\n(.*?)/ig, '$1<div>$2</div>');
 }
@@ -17,7 +17,7 @@ class DynamicItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final createdAt = RelativeDateFormat.format(new DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])));
+    final createdAt = RelativeDateFormat.format(DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])));
     return Container(
       decoration: BoxDecoration(color: CupertinoColors.white),
       child: Column(
@@ -59,9 +59,7 @@ class DynamicItem extends StatelessWidget {
                     // Navigator.pushNamed(context, "/news");
                     Navigator.of(context, rootNavigator: true).pushNamed(
                       '/dynamic/detail',
-                      arguments: {
-                        'session': data['_id']
-                      },
+                      arguments: {'session': data['_id']},
                     );
                   },
                   child: Container(
@@ -128,9 +126,7 @@ class DynamicItem extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context, rootNavigator: true).pushNamed(
                             '/dynamic/detail',
-                            arguments: {
-                              'session': data['_id']
-                            },
+                            arguments: {'session': data['_id']},
                           );
                         },
                         child: Container(

@@ -15,7 +15,7 @@ class TestFlowDelegate extends FlowDelegate {
     for (int i = 0; i < context.childCount; i++) {
       var w = context.getChildSize(i).width + x + margin.right;
       if (w < context.size.width) {
-        context.paintChild(i, transform: new Matrix4.compose(Vector.Vector3(x, y, 0.0), Vector.Quaternion(0.0, 0.0, 0.3, 0.1), Vector.Vector3(1.0, 1.0, 1.0)));
+        context.paintChild(i, transform: Matrix4.compose(Vector.Vector3(x, y, 0.0), Vector.Quaternion(0.0, 0.0, 0.3, 0.1), Vector.Vector3(1.0, 1.0, 1.0)));
         x = w + margin.left;
       } else {
         x = margin.left;
@@ -42,7 +42,7 @@ class TestFlowDelegate extends FlowDelegate {
 getPicturesList(pictures) {
   // Transform(
   //     transform: Matrix4.translationValues(10, -10, 0),
-  //     child: new Container(),
+  //     child: Container(),
   //   );
 
   if (pictures.length >= 9) {

@@ -76,10 +76,7 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
     final QueryResult res = await widget.client.mutate(
       MutationOptions(
         document: widget.document,
-        variables: {
-          'skip': page * first,
-          'first': first
-        },
+        variables: {'skip': page * first, 'first': first},
       ),
     );
     loading = false;
@@ -94,14 +91,11 @@ class _QueryProWidthClientState extends State<QueryProWidthClient> {
     loading = true;
     _streamController.sink.add(loading);
     print('11111');
-    // await new Future<void>.delayed(const Duration(seconds: 5));
+    // await Future<void>.delayed(const Duration(seconds: 5));
     final QueryResult res = await widget.client.mutate(
       MutationOptions(
         document: widget.document,
-        variables: {
-          'skip': page * first,
-          'first': first
-        },
+        variables: {'skip': page * first, 'first': first},
       ),
     );
     print('22222');

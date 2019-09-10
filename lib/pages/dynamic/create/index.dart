@@ -54,7 +54,7 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
     // return DragAndDropList<Asset>(
     //   _images,
     //   itemBuilder: (BuildContext context, asset) {
-    //     return new SizedBox(
+    //     return SizedBox(
     //       child: AssetThumb(
     //         asset: asset,
     //         width: 300,

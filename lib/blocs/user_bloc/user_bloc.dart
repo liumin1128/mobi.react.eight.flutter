@@ -85,7 +85,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       //           '登录',
       //           overflow: TextOverflow.ellipsis,
       //           maxLines: 1,
-      //           style: new TextStyle(
+      //           style: TextStyle(
       //             fontSize: 20,
       //           ),
       //         ),

@@ -25,7 +25,7 @@ void showCountryCodePicker(BuildContext context, onChange) {
             for (var i in countries) {
               list.add(Text(
                 i['name'] + ' ' + i['code'],
-                style: new TextStyle(fontSize: 20, height: 1.5),
+                style: TextStyle(fontSize: 20, height: 1.5),
               ));
             }
 
@@ -38,32 +38,32 @@ void showCountryCodePicker(BuildContext context, onChange) {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        new GestureDetector(
+                        GestureDetector(
                           onTap: () {
                             Navigator.pop(context, 1);
                           },
-                          child: new Container(
+                          child: Container(
                             color: CupertinoColors.white,
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                            child: new Text(
+                            child: Text(
                               '取消',
-                              style: new TextStyle(fontSize: 20, color: CupertinoColors.inactiveGray),
+                              style: TextStyle(fontSize: 20, color: CupertinoColors.inactiveGray),
                             ),
                           ),
                         ),
                         Text(''),
-                        new GestureDetector(
+                        GestureDetector(
                           onTap: () {
                             final value = countries[val]['code'];
                             onChange(value);
                             Navigator.pop(context, 1);
                           },
-                          child: new Container(
+                          child: Container(
                             color: CupertinoColors.white,
                             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                            child: new Text(
+                            child: Text(
                               '确认',
-                              style: new TextStyle(fontSize: 20, color: CupertinoTheme.of(context).primaryColor),
+                              style: TextStyle(fontSize: 20, color: CupertinoTheme.of(context).primaryColor),
                             ),
                           ),
                         )

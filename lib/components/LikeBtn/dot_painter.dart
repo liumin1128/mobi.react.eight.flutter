@@ -39,7 +39,7 @@ class DotPainter extends CustomPainter {
   }) {
     outerDotsPositionAngle = 360.0 / dotCount;
     for (int i = 0; i < circlePaints.length; i++) {
-      circlePaints[i] = new Paint()..style = PaintingStyle.fill;
+      circlePaints[i] = Paint()..style = PaintingStyle.fill;
     }
   }
 

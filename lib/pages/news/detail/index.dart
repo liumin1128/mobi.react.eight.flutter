@@ -21,9 +21,7 @@ class _NewsDetailState extends State<NewsDetail> {
         child: Query(
       options: QueryOptions(
         document: newsDetailSchema, // this is the query string you just created
-        variables: {
-          '_id': widget.id
-        },
+        variables: {'_id': widget.id},
         // pollInterval: 10,
       ),
       builder: (QueryResult result, {VoidCallback refetch, FetchMore fetchMore}) {
@@ -51,8 +49,8 @@ class _NewsDetailState extends State<NewsDetail> {
               bottom: true,
               sliver: SliverPadding(
                 padding: const EdgeInsets.all(16.0),
-                sliver: new SliverList(
-                  delegate: new SliverChildListDelegate(
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate(
                     <Widget>[
                       // 文章主体
                       Container(

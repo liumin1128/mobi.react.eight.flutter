@@ -28,7 +28,7 @@ class _GetPhoneCodeButtonState extends State<GetPhoneCodeButton> {
       _countdownNum = 59;
       _str = '${_countdownNum--} 重新获取';
 
-      _timer = new Timer.periodic(new Duration(seconds: 1), (timer) {
+      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
         setState(() {
           if (_countdownNum > 0) {
             _str = '${_countdownNum--} 重新获取';

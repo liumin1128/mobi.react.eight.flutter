@@ -79,13 +79,13 @@ isPhoneNumber(text) {
 }
 
 // sleep(ss) {
-//   return new Future<void>.delayed(const Duration(seconds: ss));
+//   return Future<void>.delayed(const Duration(seconds: ss));
 // }
 
 // await Future<void>.delayed(Duration(milliseconds: 1000));
 
-//  new CupertinoRefreshControl(onRefresh: () {
-//           return new Future<void>.delayed(const Duration(seconds: 1))
+//  CupertinoRefreshControl(onRefresh: () {
+//           return Future<void>.delayed(const Duration(seconds: 1))
 //             ..then((_) => setState(() {
 //               if (flag) {
 //                 flag = false;
