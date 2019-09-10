@@ -23,6 +23,8 @@ class DynamicListBloc extends Bloc<DynamicListEvent, DynamicListState> {
       yield* _mapDynamicListFetchToState();
     } else if (event is DynamicListFetchMore) {
       yield* _mapDynamicListFetchMoreToState();
+    } else if (event is DynamicListCreate) {
+      yield* _mapDynamicListCreateToState(event);
     }
   }
 
@@ -66,6 +68,25 @@ class DynamicListBloc extends Bloc<DynamicListEvent, DynamicListState> {
     } catch (_) {
       print('_mapDynamicListFetchToState error');
       yield DynamicListFetchError();
+    }
+  }
+
+  Stream<DynamicListState> _mapDynamicListCreateToState(event) async* {
+    try {
+      final QueryResult res = await client.mutate(MutationOptions(
+        document: dynamicCreateSchema,
+        variables: {
+          'input': {
+            'content': event.content,
+            'pictures': event.pictures,
+          }
+        },
+      ));
+
+      print('res');
+      print(res);
+    } catch (_) {
+      print('_mapDynamicListFetchToState error');
     }
   }
 }

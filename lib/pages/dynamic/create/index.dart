@@ -7,6 +7,8 @@ import 'package:eight/utils/index.dart';
 import 'dart:async';
 import 'package:multi_image_picker/multi_image_picker.dart';
 // import 'package:eight/components/Drag/index.dart';
+import 'package:eight/blocs/dynamic_list_bloc/index.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DynamicCreatePage extends StatefulWidget {
   @override
@@ -183,10 +185,17 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
           onPressed: () async {
             print(_contentTextEditingController.text);
 
-            List sss = await uploadMultiAssetsToQiniu(_images);
+            final String content = _contentTextEditingController.text;
 
-            print('sss');
-            print(sss);
+            List pictures = await uploadMultiAssetsToQiniu(_images);
+
+            final dynamicListBloc = BlocProvider.of<DynamicListBloc>(context);
+
+            dynamicListBloc.dispatch(DynamicListCreate(
+              context: context,
+              content: content,
+              pictures: pictures,
+            ));
           },
         ),
       ),

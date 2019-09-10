@@ -50,3 +50,32 @@ query DynamicDetail(\$_id: String!) {
   }
 }
 """;
+
+String dynamicCreateSchema = """
+mutation DynamicCreate(\$input: DynamicInput) {
+  result: DynamicCreate(input: \$input) {
+    status
+    message
+    data {
+      __typename
+      _id
+      content
+      pictures
+      iframe
+      zanCount
+      zanStatus
+      commentCount
+      topics {
+        _id
+        title
+        number
+      }
+      createdAt
+      user {
+        nickname
+        avatarUrl
+      }
+    }
+  }
+}
+""";

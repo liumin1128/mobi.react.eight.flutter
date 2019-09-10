@@ -13,12 +13,24 @@ class DynamicListFetch extends DynamicListEvent {
 }
 
 class DynamicListFetchMore extends DynamicListEvent {
-  // final BuildContext context;
+  @override
+  String toString() => 'DynamicListFetchMore';
+}
 
-  // DynamicListFetchMore({@required this.context})
-  //     : super([
-  //         context
-  //       ]);
+class DynamicListCreate extends DynamicListEvent {
+  final BuildContext context;
+  final String content;
+  final List<String> pictures;
+
+  DynamicListCreate({
+    @required this.context,
+    this.content,
+    this.pictures,
+  }) : super([
+          context,
+          content,
+          pictures,
+        ]);
 
   @override
   String toString() => 'DynamicListFetchMore';
