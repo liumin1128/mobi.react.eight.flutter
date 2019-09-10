@@ -182,9 +182,19 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
           child: Text('发布', style: TextStyle(fontSize: 20)),
           onPressed: () async {
             print(_contentTextEditingController.text);
-            print(_images);
-            final String sss = await uploadAssetsToQiniu(asset: _images[0]);
-            print(sss);
+
+            try {
+              Future.wait(
+                List.generate(_images.length, (idx) {
+                  return uploadAssetsToQiniu(asset: _images[idx]);
+                }),
+              ).then((values) {
+                //这里values是个数组，分别是每一个任务返回的结果,
+                print(values); //打印第一个任务的结果
+              });
+            } catch (e) {
+              print(e);
+            }
           },
         ),
       ),
