@@ -15,13 +15,15 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     @required this.minHeight,
     @required this.maxHeight,
     @required this.child,
-    @required this.child2,
+    @required this.nickname,
+    @required this.avatar,
   });
 
   final double minHeight;
   final double maxHeight;
   final Widget child;
-  final Widget child2;
+  final Widget nickname;
+  final Widget avatar;
 
   @override
   double get minExtent => minHeight;
@@ -31,11 +33,6 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    // print(shrinkOffset);
-    // print((shrinkOffset) / (maxHeight - minHeight) );
-    // if (shrinkOffset > 200) {
-    //   return SizedBox.expand(child: child2);
-    // }
     double progress = 0;
 
     if (shrinkOffset < 0) {
@@ -44,8 +41,6 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
       progress = progress > 1 ? 1 : progress;
       progress = progress < 0 ? 0 : progress;
     }
-
-    print(progress);
 
     return Stack(
       children: <Widget>[
@@ -60,7 +55,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
             //   child: BackdropFilter(
             //     filter: ImageFilter.blur(sigmaX: opacity * 30, sigmaY: opacity * 30),
             child: Container(
-              child: child2,
+              child: nickname,
               color: Color(0xFFFFFFFF),
             ),
             //   ),
@@ -69,28 +64,13 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         ),
         Container(
           alignment: Alignment.bottomLeft,
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: SizedBox(
             width: 80 * (1 - progress * 0.5),
             height: 80 * (1 - progress * 0.5),
-            child: Avatar(
-              src: 'https://imgs.react.mobi/FqeTQ2RLaZfEbaqlsYK0qjIXCUcX',
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(64),
-                border: Border.all(style: BorderStyle.solid, color: Color(0xFFFFFFFF), width: 2),
-              ),
-            ),
+            child: avatar,
           ),
         ),
-        // Container(
-        //   padding: EdgeInsets.only(top: 0, left: 16),
-        //   child: SizedBox(
-        //     child: Text(
-        //       '本王今年八岁',
-        //       style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 32, fontWeight: FontWeight.bold),
-        //     ),
-        //   ),
-        // ),
       ],
     );
   }
@@ -170,8 +150,24 @@ class UserMeState extends State<UserMe> {
                   pinned: true,
                   delegate: _SliverAppBarDelegate(
                     minHeight: 80,
-                    maxHeight: 180,
-                    child2: Center(child: Text(state.userInfo['nickname'], style: TextStyle(fontWeight: FontWeight.bold))),
+                    maxHeight: 248,
+                    nickname: Center(
+                      child: Text(
+                        state.userInfo['nickname'],
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    avatar: Avatar(
+                      src: 'https://imgs.react.mobi/FqeTQ2RLaZfEbaqlsYK0qjIXCUcX',
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(64),
+                        border: Border.all(
+                          style: BorderStyle.solid,
+                          color: Color(0xFFFFFFFF),
+                          width: 2,
+                        ),
+                      ),
+                    ),
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
