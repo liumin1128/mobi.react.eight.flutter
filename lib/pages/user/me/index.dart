@@ -36,19 +36,26 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     // if (shrinkOffset > 200) {
     //   return SizedBox.expand(child: child2);
     // }
+    double progress = 0;
 
-    double opacity = (shrinkOffset) / (maxHeight - minHeight);
-    opacity = opacity > 1 ? 1 : opacity;
-    opacity = opacity < 0 ? 0 : opacity;
+    if (shrinkOffset < 0) {
+    } else {
+      progress = (shrinkOffset - 0) / (maxHeight - minHeight);
+      progress = progress > 1 ? 1 : progress;
+      progress = progress < 0 ? 0 : progress;
+    }
 
-    print(opacity);
+    print(progress);
 
     return Stack(
       children: <Widget>[
-        SizedBox.expand(child: child),
+        Container(
+          child: SizedBox.expand(child: child),
+          // padding: EdgeInsets.only(bottom: paddingBottom),
+        ),
         SizedBox.expand(
           child: Opacity(
-            opacity: opacity,
+            opacity: progress,
             // child: ClipRect(
             //   child: BackdropFilter(
             //     filter: ImageFilter.blur(sigmaX: opacity * 30, sigmaY: opacity * 30),
@@ -60,6 +67,24 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
             // ),
           ),
         ),
+        Container(
+          alignment: Alignment.bottomLeft,
+          padding: EdgeInsets.all(16),
+          child: SizedBox(
+            width: 80 * (1 - progress * 0.5),
+            height: 80 * (1 - progress * 0.5),
+            child: Avatar(src: 'https://imgs.react.mobi/FqeTQ2RLaZfEbaqlsYK0qjIXCUcX'),
+          ),
+        ),
+        // Container(
+        //   padding: EdgeInsets.only(top: 0, left: 16),
+        //   child: SizedBox(
+        //     child: Text(
+        //       '本王今年八岁',
+        //       style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 32, fontWeight: FontWeight.bold),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
@@ -135,6 +160,7 @@ class UserMeState extends State<UserMe> {
               // physics: ScrollPhysics(),
               slivers: <Widget>[
                 SliverPersistentHeader(
+                  // floating: true,
                   pinned: true,
                   delegate: _SliverAppBarDelegate(
                     minHeight: 80,
@@ -155,7 +181,7 @@ class UserMeState extends State<UserMe> {
                 SliverSafeArea(
                   sliver: SliverToBoxAdapter(
                     child: Container(
-                      // padding: EdgeInsets.all(24),
+                      padding: EdgeInsets.all(24),
                       decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(color: Color(0xFFdddddd), width: 0.5),
@@ -165,8 +191,8 @@ class UserMeState extends State<UserMe> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Avatar(src: state.userInfo['avatarUrl'], size: 80),
-                          Padding(padding: EdgeInsets.all(8)),
+                          // Avatar(src: state.userInfo['avatarUrl'], size: 80),
+                          // Padding(padding: EdgeInsets.all(8)),
                           Text(
                             state.userInfo['nickname'],
                             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 32, fontWeight: FontWeight.bold),
