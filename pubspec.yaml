@@ -84,6 +84,7 @@ flutter:
 
   assets:
     - assets/config/countries.json
+    - assets/images/user_bg.jpg
 
   fonts:
     - family: EvaIcons
