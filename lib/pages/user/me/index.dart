@@ -90,7 +90,7 @@ class UserMeState extends State<UserMe> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           // Padding(padding: EdgeInsets.all(16)),
-                          Avatar(src: state.userInfo['avatarUrl'], size: 64),
+                          Avatar(src: state.userInfo['avatarUrl'], size: 80),
                           Padding(padding: EdgeInsets.all(8)),
                           Text(
                             state.userInfo['nickname'],
@@ -149,7 +149,7 @@ class UserMeState extends State<UserMe> {
                                   children: <Widget>[
                                     Text('1', style: TextStyle(color: Color(0xFF333333), fontSize: 30)),
                                     Padding(padding: EdgeInsets.all(4)),
-                                    Text('动态', style: TextStyle(color: Color(0xFF999999))),
+                                    Text('动态', style: TextStyle(fontSize: 14, color: Color(0xFF999999))),
                                   ],
                                 ),
                               ),
@@ -160,7 +160,7 @@ class UserMeState extends State<UserMe> {
                                   children: <Widget>[
                                     Text('0', style: TextStyle(color: Color(0xFF333333), fontSize: 28)),
                                     Padding(padding: EdgeInsets.all(4)),
-                                    Text('粉丝', style: TextStyle(color: Color(0xFF999999))),
+                                    Text('粉丝', style: TextStyle(fontSize: 14, color: Color(0xFF999999))),
                                   ],
                                 ),
                               ),
@@ -171,7 +171,7 @@ class UserMeState extends State<UserMe> {
                                   children: <Widget>[
                                     Text('2', style: TextStyle(color: Color(0xFF333333), fontSize: 28)),
                                     Padding(padding: EdgeInsets.all(4)),
-                                    Text('关注', style: TextStyle(color: Color(0xFF999999))),
+                                    Text('关注', style: TextStyle(fontSize: 14, color: Color(0xFF999999))),
                                   ],
                                 ),
                               ),
@@ -182,7 +182,7 @@ class UserMeState extends State<UserMe> {
                                   children: <Widget>[
                                     Text('G5FGHF', style: TextStyle(color: Color(0xFF333333), fontSize: 28, letterSpacing: -1, fontFamily: "Helvetica Neue")),
                                     Padding(padding: EdgeInsets.all(4)),
-                                    Text('邀请码', style: TextStyle(color: Color(0xFF999999))),
+                                    Text('邀请码', style: TextStyle(fontSize: 14, color: Color(0xFF999999))),
                                   ],
                                 ),
                               ),
