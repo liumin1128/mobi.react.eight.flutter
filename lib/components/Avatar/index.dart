@@ -3,10 +3,11 @@ import 'package:transparent_image/transparent_image.dart';
 import 'package:eight/utils/common.dart';
 
 class Avatar extends StatefulWidget {
-  Avatar({Key key, this.src, this.size = 100}) : super(key: key);
+  Avatar({Key key, this.src, this.size = 100, this.decoration}) : super(key: key);
   final String src;
 
   final double size;
+  final BoxDecoration decoration;
 
   @override
   _AvatarState createState() => _AvatarState();
@@ -18,6 +19,7 @@ class _AvatarState extends State<Avatar> {
     return Container(
       width: widget.size,
       height: widget.size,
+      decoration: widget.decoration,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: Container(

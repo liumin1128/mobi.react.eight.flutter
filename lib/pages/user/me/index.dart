@@ -73,7 +73,13 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
           child: SizedBox(
             width: 80 * (1 - progress * 0.5),
             height: 80 * (1 - progress * 0.5),
-            child: Avatar(src: 'https://imgs.react.mobi/FqeTQ2RLaZfEbaqlsYK0qjIXCUcX'),
+            child: Avatar(
+              src: 'https://imgs.react.mobi/FqeTQ2RLaZfEbaqlsYK0qjIXCUcX',
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(64),
+                border: Border.all(style: BorderStyle.solid, color: Color(0xFFFFFFFF), width: 2),
+              ),
+            ),
           ),
         ),
         // Container(
