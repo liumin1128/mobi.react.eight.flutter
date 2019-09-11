@@ -4,9 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 getClient() {
   final HttpLink httpLink = HttpLink(
-    uri: 'http://192.168.1.242:3101/graphql',
+    // uri: 'http://192.168.1.242:3101/graphql',
     // uri: 'http://192.168.1.101:3101/graphql',
-    // uri: 'http://api.react.mobi/graphql',
+    uri: 'http://api.react.mobi/graphql',
   );
 
   final AuthLink authLink = AuthLink(getToken: () async {
