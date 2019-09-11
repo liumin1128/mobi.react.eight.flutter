@@ -23,7 +23,7 @@ class _AvatarState extends State<Avatar> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: Container(
-          decoration: BoxDecoration(color: CupertinoColors.inactiveGray),
+          decoration: BoxDecoration(color: CupertinoColors.lightBackgroundGray),
           child: FadeInImage.memoryNetwork(
             fit: BoxFit.cover,
             placeholder: kTransparentImage,

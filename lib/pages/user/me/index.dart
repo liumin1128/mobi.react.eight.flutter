@@ -10,6 +10,28 @@ import 'package:eight/components/Avatar/index.dart';
 import 'package:eight/components/Icons/Taobao.dart';
 import 'package:eight/components/Icons/Eva.dart';
 
+class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
+  final CupertinoTabBar child;
+
+  StickyTabBarDelegate({@required this.child});
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return this.child;
+  }
+
+  @override
+  double get maxExtent => this.child.preferredSize.height;
+
+  @override
+  double get minExtent => this.child.preferredSize.height;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return true;
+  }
+}
+
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   _SliverAppBarDelegate({
     @required this.minHeight,
@@ -158,7 +180,7 @@ class UserMeState extends State<UserMe> {
                       ),
                     ),
                     avatar: Avatar(
-                      src: 'https://imgs.react.mobi/FqeTQ2RLaZfEbaqlsYK0qjIXCUcX',
+                      src: state.userInfo['avatarUrl'],
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(64),
                         border: Border.all(
@@ -176,7 +198,6 @@ class UserMeState extends State<UserMe> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      child: Container(width: 80, child: Text('23333,')),
                     ),
                   ),
                 ),
@@ -302,37 +323,43 @@ class UserMeState extends State<UserMe> {
                           //     userBloc.dispatch(LoggedOut(context: context));
                           //   },
                           // ),
-                          Text('11111'),
-                          Padding(padding: EdgeInsets.all(64)),
-                          Text('11111'),
-                          Padding(padding: EdgeInsets.all(64)),
-                          Text('11111'),
-                          Padding(padding: EdgeInsets.all(64)),
-                          Text('11111'),
-                          Padding(padding: EdgeInsets.all(64)),
-                          Text('11111'),
-                          Padding(padding: EdgeInsets.all(64)),
-                          Text('11111'),
-                          Padding(padding: EdgeInsets.all(64)),
-                          Text('11111'),
-                          Padding(padding: EdgeInsets.all(64)),
-                          Text('11111'),
-                          Padding(padding: EdgeInsets.all(64)),
                         ],
                       ),
                     ),
                   ),
                 ),
-                SliverFixedExtentList(
-                  itemExtent: 50.0,
+                SliverPersistentHeader(
+                  // floating: true,
+                  pinned: true,
+                  delegate: StickyTabBarDelegate(
+                    child: CupertinoTabBar(
+                      items: [
+                        BottomNavigationBarItem(icon: Icon(CupertinoIcons.home, size: 36)),
+                        BottomNavigationBarItem(icon: Icon(CupertinoIcons.home, size: 36)),
+                        BottomNavigationBarItem(icon: Icon(CupertinoIcons.home, size: 36)),
+                        BottomNavigationBarItem(icon: Icon(CupertinoIcons.home, size: 36)),
+                        BottomNavigationBarItem(icon: Icon(CupertinoIcons.home, size: 36)),
+                      ],
+                    ),
+                  ),
+                ),
+                SliverGrid(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 8.0,
+                    mainAxisSpacing: 8.0,
+                    childAspectRatio: 1.0,
+                  ),
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       return Container(
-                        alignment: Alignment.center,
-                        color: CupertinoColors.activeBlue,
-                        child: Text('list item $index'),
+                        color: Color(0xFFf8f8f8),
+                        child: Center(
+                          child: Text('loading'),
+                        ),
                       );
                     },
+                    childCount: 200,
                   ),
                 ),
               ],
