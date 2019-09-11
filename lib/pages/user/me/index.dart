@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'dart:ui' show ImageFilter;
 import 'package:flutter/cupertino.dart';
 import 'package:eight/blocs/counter_bloc.dart';
 import 'package:eight/blocs/theme_bloc.dart';
@@ -14,11 +15,13 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     @required this.minHeight,
     @required this.maxHeight,
     @required this.child,
+    @required this.child2,
   });
 
   final double minHeight;
   final double maxHeight;
   final Widget child;
+  final Widget child2;
 
   @override
   double get minExtent => minHeight;
@@ -28,7 +31,37 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new SizedBox.expand(child: child);
+    // print(shrinkOffset);
+    // print((shrinkOffset) / (maxHeight - minHeight) );
+    // if (shrinkOffset > 200) {
+    //   return SizedBox.expand(child: child2);
+    // }
+
+    double opacity = (shrinkOffset) / (maxHeight - minHeight);
+    opacity = opacity > 1 ? 1 : opacity;
+    opacity = opacity < 0 ? 0 : opacity;
+
+    print(opacity);
+
+    return Stack(
+      children: <Widget>[
+        SizedBox.expand(child: child),
+        SizedBox.expand(
+          child: Opacity(
+            opacity: opacity,
+            // child: ClipRect(
+            //   child: BackdropFilter(
+            //     filter: ImageFilter.blur(sigmaX: opacity * 30, sigmaY: opacity * 30),
+            child: Container(
+              child: child2,
+              color: Color(0xFFFFFFFF),
+            ),
+            //   ),
+            // ),
+          ),
+        ),
+      ],
+    );
   }
 
   @override
@@ -101,97 +134,28 @@ class UserMeState extends State<UserMe> {
               controller: _scrollController,
               // physics: ScrollPhysics(),
               slivers: <Widget>[
-                // CupertinoSliverNavigationBar(
-                //   largeTitle: Text('个人中心'),
-                //   border: Border(top: BorderSide(style: BorderStyle.none)),
-                // ),
-                // CupertinoSliverNavigationBar(
-                //   largeTitle: Text('SliverAppBar'),
-                //   leading: Text('leading'),
-                //   middle: Text('middle'),
-                //   trailing: Text('trailing'),
-                // ),
-                SliverPersistentHeader(
-                  delegate: _SliverAppBarDelegate(
-                    child: Text('_SliverAppBarDelegate'),
-                    minHeight: 0,
-                    maxHeight: 300,
-                  ),
-                ),
-
                 SliverPersistentHeader(
                   pinned: true,
                   delegate: _SliverAppBarDelegate(
-                    child: Text('_SliverAppBarDelegate'),
-                    minHeight: 100,
-                    maxHeight: 300,
+                    minHeight: 80,
+                    maxHeight: 180,
+                    child2: Center(child: Text(state.userInfo['nickname'], style: TextStyle(fontWeight: FontWeight.bold))),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/user_bg.jpg"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Container(width: 80, child: Text('23333,')),
+                    ),
                   ),
                 ),
-
-                // SliverPersistentHeader(
-                //   pinned: true,
-                //   delegate: StickyTabBarDelegate(
-                //     child: CupertinoTabBar(
-                //       items: [
-                //         BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text("动态")),
-                //         BottomNavigationBarItem(icon: Icon(CupertinoIcons.game_controller), title: Text("资讯")),
-                //         BottomNavigationBarItem(icon: Icon(CupertinoIcons.add_circled, size: 36)),
-                //         BottomNavigationBarItem(icon: Icon(CupertinoIcons.news), title: Text("囧图")),
-                //         BottomNavigationBarItem(icon: Icon(CupertinoIcons.person), title: Text("我")),
-                //       ],
-                //     ),
-                //   ),
-                // ),
-
-                // SliverFixedExtentList(
-                //   itemExtent: 50.0,
-                //   delegate: new SliverChildBuilderDelegate(
-                //     (BuildContext context, int index) {
-                //       return new Container(
-                //         alignment: Alignment.center,
-                //         color: Color(0xFF999999),
-                //         child: new Text('list item $index'),
-                //       );
-                //     },
-                //   ),
-                // ),
-
-                // SliverGrid(
-                //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                //     maxCrossAxisExtent: 200.0,
-                //     mainAxisSpacing: 10.0,
-                //     crossAxisSpacing: 10.0,
-                //     childAspectRatio: 4.0,
-                //   ),
-                //   delegate: SliverChildBuilderDelegate(
-                //     (BuildContext context, int index) {
-                //       return Container(
-                //         alignment: Alignment.center,
-                //         color: Color(0xFFdddddd),
-                //         child: Text('grid item $index'),
-                //       );
-                //     },
-                //     childCount: 20,
-                //   ),
-                // ),
-
-                SliverFixedExtentList(
-                  itemExtent: 50.0,
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return Container(
-                        alignment: Alignment.center,
-                        color: CupertinoColors.activeBlue,
-                        child: Text('list item $index'),
-                      );
-                    },
-                  ),
-                ),
-
                 SliverSafeArea(
                   sliver: SliverToBoxAdapter(
                     child: Container(
-                      padding: EdgeInsets.all(24),
+                      // padding: EdgeInsets.all(24),
                       decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(color: Color(0xFFdddddd), width: 0.5),
@@ -201,17 +165,7 @@ class UserMeState extends State<UserMe> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          // Padding(padding: EdgeInsets.all(16)),
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("assets/images/user_bg.jpg"),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            child: Avatar(src: state.userInfo['avatarUrl'], size: 80),
-                          ),
+                          Avatar(src: state.userInfo['avatarUrl'], size: 80),
                           Padding(padding: EdgeInsets.all(8)),
                           Text(
                             state.userInfo['nickname'],
@@ -281,7 +235,7 @@ class UserMeState extends State<UserMe> {
                                   children: <Widget>[
                                     Text('0', style: TextStyle(color: Color(0xFF333333), fontSize: 28)),
                                     Padding(padding: EdgeInsets.all(4)),
-                                    Text('粉��', style: TextStyle(fontSize: 14, color: Color(0xFF999999))),
+                                    Text('粉丝', style: TextStyle(fontSize: 14, color: Color(0xFF999999))),
                                   ],
                                 ),
                               ),
@@ -340,7 +294,19 @@ class UserMeState extends State<UserMe> {
                       ),
                     ),
                   ),
-                )
+                ),
+                SliverFixedExtentList(
+                  itemExtent: 50.0,
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return Container(
+                        alignment: Alignment.center,
+                        color: CupertinoColors.activeBlue,
+                        child: Text('list item $index'),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           );
