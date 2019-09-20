@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'dart:ui' show ImageFilter;
+import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:eight/blocs/counter_bloc.dart';
 import 'package:eight/blocs/theme_bloc.dart';
@@ -333,7 +334,13 @@ class UserMeState extends State<UserMe> {
                   pinned: true,
                   delegate: _StickyTabBarDelegate(
                     child: CupertinoTabBar(
+                      currentIndex: 0,
                       backgroundColor: Color(0xFFFFFFFF),
+                      onTap: (idx) {
+                        print(idx);
+                        HapticFeedback.lightImpact();
+                        return idx;
+                      },
                       border: Border(
                         top: BorderSide.none,
                         bottom: BorderSide(
@@ -343,9 +350,9 @@ class UserMeState extends State<UserMe> {
                         ),
                       ),
                       items: [
-                        BottomNavigationBarItem(icon: Icon(EvaIcons.castOutline, size: 36)),
-                        BottomNavigationBarItem(icon: Icon(EvaIcons.shakeOutline, size: 36)),
-                        BottomNavigationBarItem(icon: Icon(EvaIcons.arrowCircleRightOutline, size: 36)),
+                        BottomNavigationBarItem(icon: Icon(EvaIcons.castOutline, size: 28)),
+                        BottomNavigationBarItem(icon: Icon(EvaIcons.shakeOutline, size: 28)),
+                        BottomNavigationBarItem(icon: Icon(EvaIcons.arrowCircleRightOutline, size: 28)),
                       ],
                     ),
                   ),

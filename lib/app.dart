@@ -6,6 +6,7 @@ import 'package:eight/blocs/user_bloc/index.dart';
 import 'package:eight/blocs/dynamic_list_bloc/index.dart';
 import 'package:eight/blocs/dynamic_detail_bloc/index.dart';
 import 'package:eight/blocs/comment_list_bloc/index.dart';
+import 'package:eight/blocs/bxgif_list_bloc/index.dart';
 import 'package:eight/pages/home/index.dart';
 import 'package:eight/pages/dynamic/detail/index.dart';
 import 'package:eight/pages/user/login/phone/index.dart';
@@ -33,6 +34,7 @@ class AppState extends State<App> {
               BlocProvider<DynamicListBloc>(builder: (context) => DynamicListBloc(client: client)),
               BlocProvider<DynamicDetailBloc>(builder: (context) => DynamicDetailBloc(client: client)),
               BlocProvider<CommentListBloc>(builder: (context) => CommentListBloc(client: client)),
+              BlocProvider<BxgifListBloc>(builder: (context) => BxgifListBloc(client: client)),
             ],
             child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
               builder: (context, theme) {
