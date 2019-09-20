@@ -60,44 +60,46 @@ class _NewsDetailState extends State<NewsDetail> {
                           children: <Widget>[
                             Text(data['title'], textAlign: TextAlign.left),
                             Html(
-                                data: data['html'],
-                                // useRichText: false,
-                                customRender: (node, children) {
-                                  if (node is dom.Element) {
-                                    switch (node.localName) {
-                                      case 'img':
-                                        {
-                                          return ClipRRect(
-                                              borderRadius: BorderRadius.circular(4),
-                                              child: Container(
-                                                  decoration: BoxDecoration(color: CupertinoColors.black),
-                                                  child: FadeInImage.memoryNetwork(
-                                                    placeholder: kTransparentImage,
-                                                    image: node.attributes['src'],
-                                                  )));
-                                        }
-                                      // case "video": return Chewie(...);
-                                      // case "custom_tag": return CustomWidget(...);
-                                    }
+                              data: data['html'],
+                              // useRichText: false,
+                              customRender: (node, children) {
+                                if (node is dom.Element) {
+                                  switch (node.localName) {
+                                    case 'img':
+                                      {
+                                        return ClipRRect(
+                                          borderRadius: BorderRadius.circular(4),
+                                          child: Container(
+                                              decoration: BoxDecoration(color: CupertinoColors.black),
+                                              child: FadeInImage.memoryNetwork(
+                                                placeholder: kTransparentImage,
+                                                image: node.attributes['src'],
+                                              )),
+                                        );
+                                      }
+                                    // case "video": return Chewie(...);
+                                    // case "custom_tag": return CustomWidget(...);
                                   }
-                                },
-                                customTextAlign: (dom.Node node) {
-                                  if (node is dom.Element) {
-                                    switch (node.localName) {
-                                      case "p":
-                                        return TextAlign.justify;
-                                    }
+                                }
+                              },
+                              customTextAlign: (dom.Node node) {
+                                if (node is dom.Element) {
+                                  switch (node.localName) {
+                                    case "p":
+                                      return TextAlign.justify;
                                   }
-                                },
-                                customTextStyle: (dom.Node node, TextStyle baseStyle) {
-                                  if (node is dom.Element) {
-                                    switch (node.localName) {
-                                      case "p":
-                                        return baseStyle.merge(TextStyle(height: 1.25, fontSize: 14));
-                                    }
+                                }
+                              },
+                              customTextStyle: (dom.Node node, TextStyle baseStyle) {
+                                if (node is dom.Element) {
+                                  switch (node.localName) {
+                                    case "p":
+                                      return baseStyle.merge(TextStyle(height: 1.25, fontSize: 14));
                                   }
-                                  return baseStyle;
-                                })
+                                }
+                                return baseStyle;
+                              },
+                            )
                           ],
                         ),
                       )

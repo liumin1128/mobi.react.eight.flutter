@@ -31,7 +31,7 @@ dev_dependencies:
   flutter_bloc: ^0.21.0
   equatable: ^0.3.0
   graphql_flutter: ^2.0.0
-  flutter_html: ^0.10.4
+  flutter_html: ^0.11.0
   transparent_image: ^1.0.0
   cached_network_image: ^1.1.1
   shared_preferences: ^0.5.3+4
