@@ -1,14 +1,9 @@
 import 'package:flutter/cupertino.dart' hide Action;
-// import 'dart:ui' show ImageFilter;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eight/blocs/bxgif_detail_bloc/index.dart';
-// import 'package:eight/blocs/comment_list_bloc/index.dart';
-// // import 'package:eight/components/ListViewPro/index.dart';
-// import 'package:eight/components/Avatar/index.dart';
-// import 'package:eight/components/MultiPicturesView/index.dart';
-// import 'package:eight/container/comment/list/index.dart';
-// // import 'package:eight/container/comment/list/item.dart';
-// // import 'item.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
+// import 'package:eight/components/Lazyload/Image.dart';
 
 class BxgifDetailPage extends StatefulWidget {
   final String id;
@@ -24,9 +19,6 @@ class BxgifDetailPageState extends State<BxgifDetailPage> {
   @override
   void initState() {
     super.initState();
-
-    // final bxgifListBloc = BlocProvider.of<BxgifListBloc>(context);
-    // bxgifListBloc.dispatch(BxgifListFetch());
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {}
@@ -52,38 +44,81 @@ class BxgifDetailPageState extends State<BxgifDetailPage> {
       builder: (context, state) {
         if (state is BxgifDetailFetchSuccessed && widget.id == state.data['_id']) {
           return CupertinoPageScaffold(
-            child: CustomScrollView(
-              controller: _scrollController,
-              slivers: <Widget>[
-                CupertinoSliverNavigationBar(
-                  largeTitle: Text(state.data['title'].substring(14)),
-                  border: Border(
-                    top: BorderSide(
-                      style: BorderStyle.none,
-                    ),
-                  ),
+            navigationBar: CupertinoNavigationBar(middle: Text(state.data['title'].substring(14))),
+            child: Container(
+              child: PhotoViewGallery.builder(
+                scrollDirection: Axis.vertical,
+                scrollPhysics: const BouncingScrollPhysics(),
+                builder: (BuildContext context, int index) {
+                  return PhotoViewGalleryPageOptions(
+                    imageProvider: NetworkImage(state.data['list'][index]['url']),
+                    // initialScale: PhotoViewComputedScale.contained * 0.8,
+                    heroAttributes: PhotoViewHeroAttributes(tag: 'xxxxx'),
+                  );
+                },
+                itemCount: state.data['list'].length,
+                loadingChild: Center(
+                  child: CupertinoActivityIndicator(),
                 ),
-                CupertinoSliverRefreshControl(onRefresh: _onRefresh),
-                // 内容
-                SliverSafeArea(
-                  sliver: SliverToBoxAdapter(
-                    child: Container(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(state.data['title'])
-                          // Text(state.data['content']),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                backgroundDecoration: BoxDecoration(color: Color(0xFFFFFFF)),
+                // pageController: widget.pageController,
+                // onPageChanged: onPageChanged,
+              ),
             ),
           );
+
+          // child: CustomScrollView(
+          //   controller: _scrollController,
+          //   slivers: <Widget>[
+          //     SliverFillViewport(
+          //       viewportFraction: 1.0,
+          //       delegate: SliverChildBuilderDelegate(
+          //         (_, index) => Container(
+          //           child: Text('Item $index'),
+          //           alignment: Alignment.center,
+          //           color: Color(0x55000000),
+          //         ),
+          //         childCount: 10,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // child: CustomScrollView(
+          //   controller: _scrollController,
+          //   slivers: <Widget>[
+          //     CupertinoSliverNavigationBar(
+          //       largeTitle: Text(state.data['title'].substring(14)),
+          //       border: Border(
+          //         top: BorderSide(
+          //           style: BorderStyle.none,
+          //         ),
+          //       ),
+          //     ),
+          //     CupertinoSliverRefreshControl(onRefresh: _onRefresh),
+          //     // 内容
+          //     SliverSafeArea(
+          //       sliver: SliverToBoxAdapter(
+          //         child: Container(
+          //           padding: const EdgeInsets.all(16),
+          //           child: Column(
+          //             crossAxisAlignment: CrossAxisAlignment.start,
+          //             children: <Widget>[
+          //               Text(state.data['title'])
+          //               // Text(state.data['content']),
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // );
         } else {
-          return CupertinoPageScaffold(child: Center(child: CupertinoActivityIndicator()));
+          return CupertinoPageScaffold(
+            child: Center(
+              child: CupertinoActivityIndicator(),
+            ),
+          );
         }
       },
     );
