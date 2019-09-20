@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:eight/blocs/bxgif_list_bloc/index.dart';
-// import 'package:eight/components/ListViewPro/index.dart';
-// import 'item.dart';
 import 'package:eight/components/Lazyload/Image.dart';
 
 class BxgifListPage extends StatefulWidget {
@@ -34,7 +32,6 @@ class BxgifListPageState extends State<BxgifListPage> {
   }
 
   Future<Null> _onScrollToBottom() async {
-    print('onScrollToBottom');
     final bxgifListBloc = BlocProvider.of<BxgifListBloc>(context);
     bxgifListBloc.dispatch(BxgifListFetchMore());
   }
@@ -48,7 +45,6 @@ class BxgifListPageState extends State<BxgifListPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final bxgifListBloc = BlocProvider.of<BxgifListBloc>(context);
     return CupertinoPageScaffold(
       backgroundColor: Color(0xFFF8F8F8),
       child: BlocBuilder<BxgifListBloc, BxgifListState>(
@@ -57,19 +53,16 @@ class BxgifListPageState extends State<BxgifListPage> {
             print(state.list.length.toString());
             return StaggeredGridView.countBuilder(
                 controller: _scrollController,
-                padding: EdgeInsets.all(8),
+                padding: EdgeInsets.all(12),
                 crossAxisCount: 2,
-                // itemCount: 8,
                 itemCount: state.list.length,
                 staggeredTileBuilder: (int index) {
                   return StaggeredTile.count(1, (state.list[index].height + 100) / 195);
                 },
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
                 itemBuilder: (BuildContext context, int index) {
                   final Item item = state.list[index];
-                  print('$index');
-                  print(item.height);
                   return Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
@@ -82,8 +75,10 @@ class BxgifListPageState extends State<BxgifListPage> {
                         ),
                       ],
                     ),
-                    child: Center(
+                    child: Container(
+                      alignment: Alignment.topLeft,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Expanded(
                             child: LazyloadImage(
@@ -93,17 +88,20 @@ class BxgifListPageState extends State<BxgifListPage> {
                                 bottomLeft: Radius.zero,
                                 bottomRight: Radius.zero,
                               ),
-                              // color: Color(0x05000000),
                               image: item.cover,
                             ),
                           ),
                           Padding(
                             padding: EdgeInsets.all(12),
                             child: Text(
-                              item.title,
+                              item.title.substring(14),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
-                              style: TextStyle(color: Color(0xFF666666), fontSize: 16),
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                color: Color(0xFF666666),
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         ],
