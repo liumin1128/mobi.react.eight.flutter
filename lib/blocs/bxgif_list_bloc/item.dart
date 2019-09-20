@@ -46,7 +46,7 @@ Item getItem(data) {
     // comment: int.parse(RegExp(r"^[0-9]*$").firstMatch(data['comment']) ?? '0'),
     createdAt: data['createdAt'],
     total: 99,
-    height: data['height'],
+    height: data['height'] ?? 100,
     // width: data['width'],
   );
 }

@@ -31,7 +31,14 @@ class BxgifListBloc extends Bloc<BxgifListEvent, BxgifListState> {
 
   Stream<BxgifListState> _mapBxgifListFetchToState() async* {
     try {
-      final QueryResult res = await client.mutate(MutationOptions(document: bxgifListSchema));
+      final QueryResult res = await client.mutate(
+        MutationOptions(
+          document: bxgifListSchema,
+          variables: {
+            'first': 10,
+          },
+        ),
+      );
 
       if (res.hasErrors) return;
 
@@ -39,7 +46,7 @@ class BxgifListBloc extends Bloc<BxgifListEvent, BxgifListState> {
 
       List<Item> _list = [];
       for (var i = 0; i < _temp.length; i++) {
-        print(_temp[i]);
+        print('$i');
         _list.add(getItem(_temp[i]));
       }
 
@@ -63,6 +70,7 @@ class BxgifListBloc extends Bloc<BxgifListEvent, BxgifListState> {
             document: bxgifListSchema,
             variables: {
               'skip': skip,
+              'first': 10,
             },
           ),
         );
