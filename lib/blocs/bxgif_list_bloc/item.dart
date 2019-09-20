@@ -8,6 +8,7 @@ class Item extends Equatable {
   final String createdAt;
   final int total;
   final int height;
+  // final int width;
   final int comment;
 
   Item({
@@ -17,6 +18,7 @@ class Item extends Equatable {
     @required this.createdAt,
     @required this.total,
     @required this.height,
+    // @required this.width,
     @required this.comment,
   }) : super([
           id,
@@ -26,6 +28,7 @@ class Item extends Equatable {
           createdAt,
           total,
           height,
+          // width,
         ]);
 
   @override
@@ -33,6 +36,8 @@ class Item extends Equatable {
 }
 
 Item getItem(data) {
+  print('xxxxxxx');
+  // print(data['width']);
   return Item(
     id: data['_id'],
     title: data['title'],
@@ -42,5 +47,6 @@ Item getItem(data) {
     createdAt: data['createdAt'],
     total: 99,
     height: data['height'],
+    // width: data['width'],
   );
 }
