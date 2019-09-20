@@ -52,63 +52,64 @@ class BxgifListPageState extends State<BxgifListPage> {
           if (state is BxgifListFetchSuccessed) {
             print(state.list.length.toString());
             return StaggeredGridView.countBuilder(
-                controller: _scrollController,
-                padding: EdgeInsets.all(12),
-                crossAxisCount: 2,
-                itemCount: state.list.length,
-                staggeredTileBuilder: (int index) {
-                  return StaggeredTile.count(1, (state.list[index].height + 100) / 195);
-                },
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                itemBuilder: (BuildContext context, int index) {
-                  final Item item = state.list[index];
-                  return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: Color(0xFFFFFFFF),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x11000000),
-                          blurRadius: 8.0,
-                          offset: Offset.fromDirection(8),
+              controller: _scrollController,
+              padding: EdgeInsets.all(12),
+              crossAxisCount: 2,
+              itemCount: state.list.length,
+              staggeredTileBuilder: (int index) {
+                return StaggeredTile.count(1, (state.list[index].height + 100) / 195);
+              },
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              itemBuilder: (BuildContext context, int index) {
+                final Item item = state.list[index];
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: Color(0xFFFFFFFF),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0x11000000),
+                        blurRadius: 8.0,
+                        offset: Offset.fromDirection(8),
+                      ),
+                    ],
+                  ),
+                  child: Container(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: LazyloadImage(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(4),
+                              topRight: Radius.circular(4),
+                              bottomLeft: Radius.zero,
+                              bottomRight: Radius.zero,
+                            ),
+                            image: item.cover,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(12),
+                          child: Text(
+                            item.title.substring(14),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: Color(0xFF666666),
+                              fontSize: 18,
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                    child: Container(
-                      alignment: Alignment.topLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Expanded(
-                            child: LazyloadImage(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(4),
-                                topRight: Radius.circular(4),
-                                bottomLeft: Radius.zero,
-                                bottomRight: Radius.zero,
-                              ),
-                              image: item.cover,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(12),
-                            child: Text(
-                              item.title.substring(14),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                color: Color(0xFF666666),
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                });
+                  ),
+                );
+              },
+            );
             // return ListViewPro(
             //   title: '动态',
             //   onRefresh: () {
