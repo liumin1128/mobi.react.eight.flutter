@@ -34,10 +34,8 @@ class BxgifListPageState extends State<BxgifListPage> {
               },
               itemCount: state.list.length,
               itemBuilder: (_, int index) {
-                final sss = state.list[index];
-                print('sss');
-                print(sss);
-                return Text(sss['title']);
+                final Item item = state.list[index];
+                return Text(item.title);
                 // return Text('$index');
                 // return BxgifItem(data: state.list[index]);
               },

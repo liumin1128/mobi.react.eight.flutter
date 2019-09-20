@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'index.dart';
 
 @immutable
 abstract class BxgifListState extends Equatable {
@@ -17,7 +18,7 @@ class BxgifListFetchError extends BxgifListState {
 }
 
 class BxgifListFetchSuccessed extends BxgifListState {
-  final List list;
+  final List<Item> list;
 
   BxgifListFetchSuccessed({@required this.list}) : super([list]);
 

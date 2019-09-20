@@ -35,11 +35,18 @@ class BxgifListBloc extends Bloc<BxgifListEvent, BxgifListState> {
 
       if (res.hasErrors) return;
 
-      var list = res.data['list'];
+      var _temp = res.data['list'];
 
-      yield BxgifListFetchSuccessed(list: list);
-    } catch (_) {
-      print('_mapLoggedInToState出错');
+      List<Item> _list = [];
+      for (var i = 0; i < _temp.length; i++) {
+        print(_temp[i]);
+        _list.add(getItem(_temp[i]));
+      }
+
+      yield BxgifListFetchSuccessed(list: _list);
+    } catch (e) {
+      print('BxgifListFetch出错');
+      print(e);
       yield BxgifListFetchError();
     }
   }
@@ -62,9 +69,14 @@ class BxgifListBloc extends Bloc<BxgifListEvent, BxgifListState> {
 
         if (res.hasErrors) return;
 
-        var list = res.data['list'];
+        var _temp = res.data['list'];
 
-        yield BxgifListFetchSuccessed(list: _list + list);
+        List<Item> _newlist = [];
+        for (var i = 0; i < _temp.length; i++) {
+          _newlist.add(getItem(_temp[i]));
+        }
+
+        yield BxgifListFetchSuccessed(list: _list + _newlist);
       }
     } catch (_) {
       print('_mapBxgifListFetchToState error');
