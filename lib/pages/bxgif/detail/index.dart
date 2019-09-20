@@ -46,7 +46,10 @@ class BxgifDetailPageState extends State<BxgifDetailPage> {
         if (state is BxgifDetailFetchSuccessed && widget.id == state.data['_id']) {
           final int length = state.data['list'].length;
           return CupertinoPageScaffold(
-            navigationBar: CupertinoNavigationBar(middle: Text(state.data['title'].substring(0, 13))),
+            backgroundColor: Color(0xFF000000),
+            navigationBar: CupertinoNavigationBar(
+              middle: Text(state.data['title'].substring(0, 13)),
+            ),
             child: Stack(
               alignment: Alignment.bottomRight,
               children: <Widget>[
@@ -132,6 +135,7 @@ class BxgifDetailPageState extends State<BxgifDetailPage> {
           );
         } else {
           return CupertinoPageScaffold(
+            backgroundColor: Color(0xFF000000),
             child: Center(
               child: CupertinoActivityIndicator(),
             ),

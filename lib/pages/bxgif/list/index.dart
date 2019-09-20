@@ -46,11 +46,14 @@ class BxgifListPageState extends State<BxgifListPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('囧图'),
+      ),
       backgroundColor: Color(0xFFF8F8F8),
       child: BlocBuilder<BxgifListBloc, BxgifListState>(
         builder: (context, state) {
           if (state is BxgifListFetchSuccessed) {
-            print(state.list.length.toString());
+            // print(state.list.length.toString());
             return StaggeredGridView.countBuilder(
               controller: _scrollController,
               padding: EdgeInsets.all(12),
