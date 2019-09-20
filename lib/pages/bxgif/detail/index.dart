@@ -116,12 +116,16 @@ class BxgifDetailPageState extends State<BxgifDetailPage> {
                 Container(
                   padding: const EdgeInsets.all(20.0),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
-                        "$title ",
-                        style: const TextStyle(color: Color(0xFFFFFFFF), fontSize: 17.0, decoration: null),
+                      Expanded(
+                        child: Text(
+                          "$title ",
+                          style: const TextStyle(color: Color(0xFFFFFFFF), fontSize: 17.0, decoration: null),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
                       ),
                       Text(
                         "$currentIndex / $length",
