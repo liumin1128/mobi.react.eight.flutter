@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eight/blocs/bxgif_detail_bloc/index.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-// import 'package:eight/components/Lazyload/Image.dart';
+import 'package:eight/components/Lazyload/Image.dart';
 
 class BxgifDetailPage extends StatefulWidget {
   final String id;
@@ -15,7 +15,8 @@ class BxgifDetailPage extends StatefulWidget {
 
 class BxgifDetailPageState extends State<BxgifDetailPage> {
   ScrollController _scrollController = ScrollController(); //listview的控制器
-
+  int currentIndex = 1;
+  String title = "";
   @override
   void initState() {
     super.initState();
@@ -43,76 +44,92 @@ class BxgifDetailPageState extends State<BxgifDetailPage> {
     return BlocBuilder<BxgifDetailBloc, BxgifDetailState>(
       builder: (context, state) {
         if (state is BxgifDetailFetchSuccessed && widget.id == state.data['_id']) {
+          final int length = state.data['list'].length;
           return CupertinoPageScaffold(
-            navigationBar: CupertinoNavigationBar(middle: Text(state.data['title'].substring(14))),
-            child: Container(
-              child: PhotoViewGallery.builder(
-                scrollDirection: Axis.vertical,
-                scrollPhysics: const BouncingScrollPhysics(),
-                builder: (BuildContext context, int index) {
-                  return PhotoViewGalleryPageOptions(
-                    imageProvider: NetworkImage(state.data['list'][index]['url']),
-                    // initialScale: PhotoViewComputedScale.contained * 0.8,
-                    heroAttributes: PhotoViewHeroAttributes(tag: 'xxxxx'),
-                  );
-                },
-                itemCount: state.data['list'].length,
-                loadingChild: Center(
-                  child: CupertinoActivityIndicator(),
+            navigationBar: CupertinoNavigationBar(middle: Text(state.data['title'].substring(0, 13))),
+            child: Stack(
+              alignment: Alignment.bottomRight,
+              children: <Widget>[
+                Container(
+                  child: PhotoViewGallery.builder(
+                    scrollDirection: Axis.vertical,
+                    scrollPhysics: const BouncingScrollPhysics(),
+                    onPageChanged: (int index) {
+                      setState(() {
+                        currentIndex = index + 1;
+                        title = state.data['list'][index]['title'];
+                      });
+                    },
+                    builder: (BuildContext context, int index) {
+                      final data = state.data['list'][index];
+                      // setState(() {
+                      //   title = data['title'];
+                      // });
+                      return PhotoViewGalleryPageOptions.customChild(
+                        // child: Stack(
+                        //   alignment: Alignment.bottomRight,
+                        //   children: <Widget>[
+                        child: LazyloadImage(
+                          image: data['url'],
+                          borderRadius: BorderRadius.zero,
+                        ),
+                        // ),
+                        // Container(
+                        //   padding: const EdgeInsets.all(20.0),
+                        //   child: Text(
+                        //     "xxxxxxx",
+                        //     style: const TextStyle(color: Color(0xFFFFFFFF), fontSize: 17.0, decoration: null),
+                        //   ),
+                        // )
+                        // ],
+                        // ),
+                        childSize: Size(
+                          double.parse(data['width']),
+                          double.parse(data['height']),
+                        ),
+                        // initialScale: PhotoViewComputedScale.contained,
+                        // minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
+                        // maxScale: PhotoViewComputedScale.covered * 1.1,
+                        // heroAttributes: PhotoViewHeroAttributes(tag: 'xxx'),
+                      );
+                      return PhotoViewGalleryPageOptions(
+                        imageProvider: NetworkImage(data['url']),
+                        // initialScale: PhotoViewComputedScale.contained * 0.8,
+                        heroAttributes: PhotoViewHeroAttributes(tag: 'xxxxx'),
+                      );
+                    },
+                    itemCount: state.data['list'].length,
+                    loadingChild: Container(
+                      color: Color(0xFF000000),
+                      child: Center(
+                        child: CupertinoActivityIndicator(),
+                      ),
+                    ),
+                    backgroundDecoration: BoxDecoration(
+                      color: Color(0xFF000000),
+                    ),
+                  ),
                 ),
-                backgroundDecoration: BoxDecoration(color: Color(0xFFFFFFF)),
-                // pageController: widget.pageController,
-                // onPageChanged: onPageChanged,
-              ),
+                Container(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "$title ",
+                        style: const TextStyle(color: Color(0xFFFFFFFF), fontSize: 17.0, decoration: null),
+                      ),
+                      Text(
+                        "$currentIndex / $length",
+                        style: const TextStyle(color: Color(0xFFFFFFFF), fontSize: 17.0, decoration: null),
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
           );
-
-          // child: CustomScrollView(
-          //   controller: _scrollController,
-          //   slivers: <Widget>[
-          //     SliverFillViewport(
-          //       viewportFraction: 1.0,
-          //       delegate: SliverChildBuilderDelegate(
-          //         (_, index) => Container(
-          //           child: Text('Item $index'),
-          //           alignment: Alignment.center,
-          //           color: Color(0x55000000),
-          //         ),
-          //         childCount: 10,
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // child: CustomScrollView(
-          //   controller: _scrollController,
-          //   slivers: <Widget>[
-          //     CupertinoSliverNavigationBar(
-          //       largeTitle: Text(state.data['title'].substring(14)),
-          //       border: Border(
-          //         top: BorderSide(
-          //           style: BorderStyle.none,
-          //         ),
-          //       ),
-          //     ),
-          //     CupertinoSliverRefreshControl(onRefresh: _onRefresh),
-          //     // 内容
-          //     SliverSafeArea(
-          //       sliver: SliverToBoxAdapter(
-          //         child: Container(
-          //           padding: const EdgeInsets.all(16),
-          //           child: Column(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: <Widget>[
-          //               Text(state.data['title'])
-          //               // Text(state.data['content']),
-          //             ],
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // );
         } else {
           return CupertinoPageScaffold(
             child: Center(
