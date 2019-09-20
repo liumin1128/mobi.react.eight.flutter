@@ -62,49 +62,57 @@ class BxgifListPageState extends State<BxgifListPage> {
               mainAxisSpacing: 12,
               crossAxisSpacing: 12,
               itemBuilder: (BuildContext context, int index) {
-                final Item item = state.list[index];
-                return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    color: Color(0xFFFFFFFF),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x11000000),
-                        blurRadius: 8.0,
-                        offset: Offset.fromDirection(8),
-                      ),
-                    ],
-                  ),
+                final Item data = state.list[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context, rootNavigator: true).pushNamed(
+                      '/bxgif/detail',
+                      arguments: {'id': data.id},
+                    );
+                  },
                   child: Container(
-                    alignment: Alignment.topLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Expanded(
-                          child: LazyloadImage(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(4),
-                              topRight: Radius.circular(4),
-                              bottomLeft: Radius.zero,
-                              bottomRight: Radius.zero,
-                            ),
-                            image: item.cover,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(12),
-                          child: Text(
-                            item.title.substring(14),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              color: Color(0xFF666666),
-                              fontSize: 18,
-                            ),
-                          ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: Color(0xFFFFFFFF),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0x11000000),
+                          blurRadius: 8.0,
+                          offset: Offset.fromDirection(8),
                         ),
                       ],
+                    ),
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: LazyloadImage(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(4),
+                                topRight: Radius.circular(4),
+                                bottomLeft: Radius.zero,
+                                bottomRight: Radius.zero,
+                              ),
+                              image: data.cover,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(12),
+                            child: Text(
+                              data.title.substring(14),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                color: Color(0xFF666666),
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

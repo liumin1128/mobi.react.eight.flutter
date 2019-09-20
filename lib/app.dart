@@ -7,11 +7,14 @@ import 'package:eight/blocs/dynamic_list_bloc/index.dart';
 import 'package:eight/blocs/dynamic_detail_bloc/index.dart';
 import 'package:eight/blocs/comment_list_bloc/index.dart';
 import 'package:eight/blocs/bxgif_list_bloc/index.dart';
+import 'package:eight/blocs/bxgif_detail_bloc/index.dart';
+
 import 'package:eight/pages/home/index.dart';
 import 'package:eight/pages/dynamic/detail/index.dart';
+import 'package:eight/pages/dynamic/create/index.dart';
 import 'package:eight/pages/user/login/phone/index.dart';
 import 'package:eight/pages/user/login/username/index.dart';
-import 'package:eight/pages/dynamic/create/index.dart';
+import 'package:eight/pages/bxgif/detail/index.dart';
 
 class App extends StatefulWidget {
   App({this.client});
@@ -35,6 +38,8 @@ class AppState extends State<App> {
               BlocProvider<DynamicDetailBloc>(builder: (context) => DynamicDetailBloc(client: client)),
               BlocProvider<CommentListBloc>(builder: (context) => CommentListBloc(client: client)),
               BlocProvider<BxgifListBloc>(builder: (context) => BxgifListBloc(client: client)),
+              BlocProvider<BxgifListBloc>(builder: (context) => BxgifListBloc(client: client)),
+              BlocProvider<BxgifDetailBloc>(builder: (context) => BxgifDetailBloc(client: client)),
             ],
             child: BlocBuilder<ThemeBloc, CupertinoThemeData>(
               builder: (context, theme) {
@@ -43,13 +48,19 @@ class AppState extends State<App> {
                   routes: <String, WidgetBuilder>{
                     '/': (BuildContext context) => HomePage(),
                     // '/': (BuildContext context) => DynamicCreatePage(),
+
+                    '/user/login/phone': (BuildContext context) => UserPhoneLogin(),
+                    '/user/login/password': (BuildContext context) => UserPasswordLogin(),
+                    '/dynamic/create': (BuildContext context) => DynamicCreatePage(),
+
                     '/dynamic/detail': (BuildContext context) {
                       final Map query = ModalRoute.of(context).settings.arguments;
                       return DynamicDetailPage(session: query['session']);
                     },
-                    '/user/login/phone': (BuildContext context) => UserPhoneLogin(),
-                    '/user/login/password': (BuildContext context) => UserPasswordLogin(),
-                    '/dynamic/create': (BuildContext context) => DynamicCreatePage(),
+                    '/bxgif/detail': (BuildContext context) {
+                      final Map query = ModalRoute.of(context).settings.arguments;
+                      return BxgifDetailPage(id: query['id']);
+                    },
                   },
                   initialRoute: '/',
                 );

@@ -15,7 +15,7 @@ String bxgifListSchema = """
 
 String bxgifDetailSchema = """
   query bxgifDetail(\$_id: String!) {
-    detail: bxgifDetail(_id: \$_id) {
+    data: bxgifDetail(_id: \$_id) {
       __typename
       _id
       title
