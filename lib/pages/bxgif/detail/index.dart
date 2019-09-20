@@ -55,6 +55,14 @@ class BxgifDetailPageState extends State<BxgifDetailPage> {
             child: CustomScrollView(
               controller: _scrollController,
               slivers: <Widget>[
+                CupertinoSliverNavigationBar(
+                  largeTitle: Text(state.data['title'].substring(14)),
+                  border: Border(
+                    top: BorderSide(
+                      style: BorderStyle.none,
+                    ),
+                  ),
+                ),
                 CupertinoSliverRefreshControl(onRefresh: _onRefresh),
                 // 内容
                 SliverSafeArea(
