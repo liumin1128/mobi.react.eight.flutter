@@ -20,7 +20,7 @@ class _ScaleState extends State<Scale> with SingleTickerProviderStateMixin {
   @override
   initState() {
     super.initState();
-    controller = new AnimationController(duration: const Duration(milliseconds: 1000), vsync: this);
+    controller = new AnimationController(duration: const Duration(milliseconds: 500), vsync: this);
     curve = CurvedAnimation(parent: controller, curve: Curves.elasticOut);
 
     // animation = Tween(begin: 50.0, end: 30.0).animate(controller)
