@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
-// import 'package:eight/pages/dynamic/list/index.dart';
 import 'package:eight/pages/user/me/index.dart';
 import 'package:eight/pages/news/list/index.dart';
 import 'package:eight/pages/dynamic/list/index.dart';
 import 'package:eight/pages/bxgif/list/index.dart';
-import 'package:eight/pages/dynamic/create/index.dart';
 import 'package:flutter/services.dart';
+import 'package:eight/components/Animate/Scale/index.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -14,9 +13,9 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  // int _selectedIndex = 1;
-  // static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+  int currentIndex = 0;
+  bool changed = false;
 
   static List<Widget> _widgetOptions = <Widget>[
     DynamicListPage(),
@@ -30,22 +29,43 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
-        currentIndex: 3,
+        currentIndex: currentIndex,
         onTap: (idx) {
-          HapticFeedback.lightImpact();
+          HapticFeedback.selectionClick();
+
           if (idx == 2) {
             Navigator.of(context, rootNavigator: true).pushNamed('/dynamic/create');
             return 0;
           }
+
+          setState(() {
+            currentIndex = idx;
+            changed = true;
+          });
+
           return idx;
         },
         border: Border(top: BorderSide(style: BorderStyle.none)),
         items: [
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text("动态")),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.game_controller), title: Text("资讯")),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.add_circled, size: 36)),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.news), title: Text("囧图")),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.person), title: Text("我")),
+          BottomNavigationBarItem(
+            icon: (changed && currentIndex == 0) ? Scale(child: Icon(CupertinoIcons.home)) : Icon(CupertinoIcons.home),
+            title: Text("动态"),
+          ),
+          BottomNavigationBarItem(
+            icon: (changed && currentIndex == 1) ? Scale(child: Icon(CupertinoIcons.game_controller)) : Icon(CupertinoIcons.game_controller),
+            title: Text("资讯"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.add_circled, size: 36),
+          ),
+          BottomNavigationBarItem(
+            icon: (changed && currentIndex == 3) ? Scale(child: Icon(CupertinoIcons.news)) : Icon(CupertinoIcons.news),
+            title: Text("囧图"),
+          ),
+          BottomNavigationBarItem(
+            icon: (changed && currentIndex == 4) ? Scale(child: Icon(CupertinoIcons.person)) : Icon(CupertinoIcons.person),
+            title: Text("我"),
+          ),
         ],
       ),
       tabBuilder: (context, index) {
