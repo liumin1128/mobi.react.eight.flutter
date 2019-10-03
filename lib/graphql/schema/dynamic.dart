@@ -15,6 +15,7 @@ query DynamicList(\$first: Int, \$skip: Int, \$topic: String, \$user: String) {
       number
     }
     user {
+      _id
       nickname
       avatarUrl
     }
@@ -43,6 +44,7 @@ query DynamicDetail(\$_id: String!) {
       number
     }
     user {
+      _id
       nickname
       avatarUrl
       sign
@@ -72,6 +74,7 @@ mutation DynamicCreate(\$input: DynamicInput) {
       }
       createdAt
       user {
+        _id
         nickname
         avatarUrl
       }
