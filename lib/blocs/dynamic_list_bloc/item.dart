@@ -6,14 +6,10 @@ class Item extends Equatable {
   final String id;
   final User user;
   final String content;
+  final String createdAt;
   final List<String> pictures;
 
-  Item({
-    @required this.id,
-    this.user,
-    this.content,
-    this.pictures,
-  });
+  Item({@required this.id, this.user, this.content, this.pictures, this.createdAt});
 
   @override
   String toString() {
@@ -31,6 +27,7 @@ class Item extends Equatable {
       content: (json["content"] as String) ?? "",
       user: user,
       pictures: pictures,
+      createdAt: json["createdAt"] as String,
     );
   }
 

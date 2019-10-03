@@ -3,6 +3,7 @@ import 'package:eight/utils/common.dart';
 import 'package:eight/components/Avatar/index.dart';
 import 'package:eight/components/LikeBtn/index.dart';
 import 'package:eight/components/MultiPicturesView/index.dart';
+import 'package:eight/utils/common.dart';
 
 text2html(str) {
   return str;
@@ -17,11 +18,10 @@ class DynamicItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final createdAt = RelativeDateFormat.format(DateTime.fromMicrosecondsSinceEpoch(int.parse(data['createdAt'])));
-    final createdAt = 'xxx';
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(color: CupertinoColors.white),
+      margin: const EdgeInsets.only(bottom: 8),
       child: Column(
         // mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +46,7 @@ class DynamicItem extends StatelessWidget {
                         ),
                   ),
                   Text(
-                    createdAt,
+                    getTimeAgo(data.createdAt),
                     style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                           fontSize: 18,
                           color: Color(0xFF666666),
@@ -77,7 +77,10 @@ class DynamicItem extends StatelessWidget {
                           child: Text(
                             data.content,
                             textAlign: TextAlign.left,
-                            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 18, color: Color(0xFF666666)),
+                            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                                  fontSize: 20,
+                                  color: Color(0xFF666666),
+                                ),
                           ),
                         ),
                       )

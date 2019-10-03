@@ -21,6 +21,7 @@ class DynamicListPageState extends State<DynamicListPage> {
   Widget build(BuildContext context) {
     final dynamicListBloc = BlocProvider.of<DynamicListBloc>(context);
     return CupertinoPageScaffold(
+      backgroundColor: Color(0xFFeeeeee),
       child: BlocBuilder<DynamicListBloc, DynamicListState>(
         builder: (context, state) {
           if (state is DynamicListFetchSuccessed) {
