@@ -17,20 +17,20 @@ class ListViewPro extends StatefulWidget {
 class _ListViewProState extends State<ListViewPro> {
   ScrollController _scrollController = ScrollController(); //listview的控制器
 
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-        _onScrollToBottom();
-      }
-      print('widget.initState');
-      print(widget.initState);
-      // if (widget.initState is Function) {
-      //   widget.initState();
-      // }
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _scrollController.addListener(() {
+  //     if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+  //       _onScrollToBottom();
+  //     }
+  //     print('widget.initState');
+  //     print(widget.initState);
+  //     // if (widget.initState is Function) {
+  //     //   widget.initState();
+  //     // }
+  //   });
+  // }
 
   @override
   void dispose() {
@@ -70,25 +70,25 @@ class _ListViewProState extends State<ListViewPro> {
         CupertinoSliverRefreshControl(onRefresh: _onRefresh),
         SliverList(
           delegate: SliverChildBuilderDelegate(
-            widget.itemBuilder,
-            childCount: widget.itemCount,
+            (_, int index) {
+              if (index == widget.itemCount) {
+                _onScrollToBottom();
+                return Padding(
+                  padding: const EdgeInsets.only(top: 16, bottom: 16),
+                  child: Center(
+                    child: Container(
+                      width: 16,
+                      height: 16,
+                      child: CupertinoActivityIndicator(),
+                    ),
+                  ),
+                );
+              }
+              return widget.itemBuilder(_, index);
+            },
+            childCount: widget.itemCount + 1,
           ),
         ),
-        SliverSafeArea(
-          bottom: true,
-          sliver: SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Center(
-                child: Container(
-                  width: 16,
-                  height: 16,
-                  child: CupertinoActivityIndicator(),
-                ),
-              ),
-            ),
-          ),
-        )
       ],
     );
   }
