@@ -48,8 +48,8 @@ class DynamicItem extends StatelessWidget {
                   Text(
                     getTimeAgo(data.createdAt),
                     style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                          fontSize: 18,
-                          color: Color(0xFF666666),
+                          fontSize: 12,
+                          color: Color(0xFF999999),
                         ),
                   ),
                 ],
@@ -78,7 +78,7 @@ class DynamicItem extends StatelessWidget {
                             data.content,
                             textAlign: TextAlign.left,
                             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   color: Color(0xFF666666),
                                 ),
                           ),
