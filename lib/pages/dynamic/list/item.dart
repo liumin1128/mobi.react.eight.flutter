@@ -18,10 +18,12 @@ actionButton(icon, text) {
   return Container(
     // padding: const EdgeInsets.only(right: 32),
     child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Icon(icon, color: Color(0xFF999999), size: 20),
+        Icon(icon, color: Color(0xFFaaaaaa), size: 20),
         Padding(padding: EdgeInsets.all(2)),
-        Text(text, style: TextStyle(fontSize: 16, color: Color(0xFF999999))),
+        Text(text, style: TextStyle(fontSize: 14, color: Color(0xFFaaaaaa))),
       ],
     ),
   );
@@ -92,8 +94,6 @@ class DynamicItem extends StatelessWidget {
                         },
                         child: Container(
                           alignment: Alignment.topLeft,
-                          // padding: const EdgeInsets.symmetric(horizontal: 16),
-                          // color: Color(0xFF666666),
                           child: Text(
                             data.content,
                             textAlign: TextAlign.left,
@@ -111,7 +111,7 @@ class DynamicItem extends StatelessWidget {
                     ? Container(
                         // width: 300,
                         alignment: Alignment.topLeft,
-                        padding: const EdgeInsets.only(top: 16),
+                        padding: const EdgeInsets.only(top: 12),
                         child: multiPictureView(data.pictures),
                       )
                     : Container(),
