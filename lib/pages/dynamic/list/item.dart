@@ -98,7 +98,7 @@ class DynamicItem extends StatelessWidget {
           ),
 
           Container(
-            padding: const EdgeInsets.only(left: 72, top: 8, right: 16, bottom: 4),
+            padding: const EdgeInsets.only(left: 72, top: 8, right: 16),
             // color: Color(0xFF888888),
             child: Column(
               children: <Widget>[
@@ -137,7 +137,7 @@ class DynamicItem extends StatelessWidget {
                     : Container(),
 
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 16),
+                  padding: EdgeInsets.symmetric(vertical: 20),
                   child: Row(
                     // alignment: Alignment.centerLeft,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
