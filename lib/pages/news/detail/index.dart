@@ -15,11 +15,22 @@ class NewsDetailPage extends StatefulWidget {
 }
 
 class NewsDetailPageState extends State<NewsDetailPage> {
+  bool loading;
+
   @override
   void initState() {
     super.initState();
     final newsDetailBloc = BlocProvider.of<NewsDetailBloc>(context);
     newsDetailBloc.dispatch(NewsDetailFetch(id: widget.id));
+
+    setState(() {
+      loading = true;
+    });
+    Future<void>.delayed(Duration(milliseconds: 500), () {
+      setState(() {
+        loading = false;
+      });
+    });
   }
 
   @override
@@ -29,7 +40,7 @@ class NewsDetailPageState extends State<NewsDetailPage> {
       navigationBar: CupertinoNavigationBar(),
       child: BlocBuilder<NewsDetailBloc, NewsDetailState>(
         builder: (context, state) {
-          if (state is NewsDetailFetchSuccessed) {
+          if (state is NewsDetailFetchSuccessed && state.detail.id == widget.id && !loading) {
             final detail = state.detail;
             return CustomScrollView(
               slivers: <Widget>[
