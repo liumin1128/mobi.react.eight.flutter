@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:eight/blocs/dynamic_list_bloc/index.dart';
+import 'package:eight/blocs/dynamic_list/index.dart';
 import 'package:eight/components/ListViewPro/index.dart';
 import 'item.dart';
 

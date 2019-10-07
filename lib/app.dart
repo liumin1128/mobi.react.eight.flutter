@@ -4,7 +4,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 // blocs
 import 'package:eight/blocs/theme_bloc.dart';
 // import 'package:eight/blocs/user_bloc/index.dart';
-import 'package:eight/blocs/dynamic_list_bloc/index.dart';
+import 'package:eight/blocs/dynamic_list/index.dart';
 // import 'package:eight/blocs/dynamic_detail_bloc/index.dart';
 // import 'package:eight/blocs/comment_list_bloc/index.dart';
 // pages
