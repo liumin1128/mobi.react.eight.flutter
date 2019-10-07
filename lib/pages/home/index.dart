@@ -3,6 +3,7 @@ import 'package:eight/pages/dynamic/list/index.dart';
 import 'package:flutter/services.dart';
 import 'package:eight/components/Animate/Scale/index.dart';
 import 'package:eight/components/Icons/Eva.dart';
+import 'package:eight/components/Icons/Taobao.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -26,13 +27,13 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   Widget _getIcon(int index, IconData icon) {
     return (changed && currentIndex == index)
         ? Scale(
-            child: Icon(icon),
+            child: Icon(icon, size: 28),
           )
-        : Icon(icon);
+        : Icon(icon, size: 24);
   }
 
   _onTap(int idx) {
-    HapticFeedback.selectionClick();
+    // HapticFeedback.selectionClick();
 
     if (idx == 2) {
       Navigator.of(context, rootNavigator: true).pushNamed('/dynamic/create');
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             icon: Icon(EvaIcons.plusCircleOutline, size: 36),
           ),
           BottomNavigationBarItem(
-            icon: _getIcon(3, EvaIcons.messageCircleOutline),
+            icon: _getIcon(3, EvaIcons.messageSquareOutline),
             title: Text("囧图"),
           ),
           BottomNavigationBarItem(
