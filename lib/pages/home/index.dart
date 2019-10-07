@@ -19,9 +19,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   bool changed = false;
 
   static List<Widget> _widgetOptions = <Widget>[
-    UserMe(),
-    NewsListPage(),
     DynamicListPage(),
+    NewsListPage(),
+    UserMe(),
+    UserMe(),
     // BxgifListPage(),
     // BxgifListPage(),
   ];

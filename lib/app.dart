@@ -14,7 +14,7 @@ import 'package:eight/pages/home/index.dart';
 import 'package:eight/pages/news/detail/index.dart';
 // import 'package:eight/pages/user/index.dart';
 // import 'package:eight/pages/dynamic/list/index.dart';
-// import 'package:eight/pages/dynamic/create/index.dart';
+import 'package:eight/pages/dynamic/create/index.dart';
 import 'package:eight/pages/user/login/phone/index.dart';
 import 'package:eight/pages/user/login/username/index.dart';
 
@@ -50,7 +50,7 @@ class AppState extends State<App> {
                     '/': (BuildContext context) => HomePage(),
                     '/user/login/phone': (BuildContext context) => UserPhoneLogin(),
                     '/user/login/password': (BuildContext context) => UserPasswordLogin(),
-                    // '/dynamic/create': (BuildContext context) => DynamicCreatePage(),
+                    '/dynamic/create': (BuildContext context) => DynamicCreatePage(),
                     // '/dynamic/detail': (BuildContext context) {
                     //   final Map query = ModalRoute.of(context).settings.arguments;
                     //   return DynamicDetailPage(session: query['session']);
