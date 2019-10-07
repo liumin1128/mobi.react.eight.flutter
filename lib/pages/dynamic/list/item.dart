@@ -1,24 +1,12 @@
-import 'package:eight/graphql/schema/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:eight/utils/common.dart';
 import 'package:eight/components/Avatar/index.dart';
-// import 'package:eight/components/LikeBtn/index.dart';
 import 'package:eight/components/MultiPicturesView/index.dart';
-// import 'package:eight/utils/common.dart';
-// import 'package:eight/components/Icons/Eva.dart';
 import 'package:eight/components/Icons/Taobao.dart';
 import 'package:eight/components/Button/index.dart';
 
-text2html(str) {
-  return str;
-  // .replaceAll(RegExp(r"(.*?)\[(.*?)_(.*?)]"), '\$1<img src="https://imgs.react.mobi/emoticon/\$2/\$3.gif" class="emoji" alt="[\$2_\$3]">');
-  // .replace(/(.*?)\[(.*?)_(.*?)]/ig, )
-  // .replace(/(.*?)\n(.*?)/ig, '$1<div>$2</div>');
-}
-
 actionButton(icon, text) {
   return Container(
-    // padding: const EdgeInsets.only(right: 32),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,

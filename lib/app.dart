@@ -5,6 +5,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:eight/blocs/theme_bloc.dart';
 // import 'package:eight/blocs/user_bloc/index.dart';
 import 'package:eight/blocs/dynamic_list/index.dart';
+import 'package:eight/blocs/news_list/index.dart';
 // import 'package:eight/blocs/dynamic_detail_bloc/index.dart';
 // import 'package:eight/blocs/comment_list_bloc/index.dart';
 // pages
@@ -34,6 +35,7 @@ class AppState extends State<App> {
               BlocProvider<ThemeBloc>(builder: (context) => ThemeBloc()),
               // BlocProvider<UserBloc>(builder: (context) => UserBloc(client: client)..dispatch(AppStarted())),
               BlocProvider<DynamicListBloc>(builder: (context) => DynamicListBloc(client: client)),
+              BlocProvider<NewsListBloc>(builder: (context) => NewsListBloc(client: client)),
               // BlocProvider<DynamicDetailBloc>(builder: (context) => DynamicDetailBloc(client: client)),
               // BlocProvider<CommentListBloc>(builder: (context) => CommentListBloc(client: client)),
             ],

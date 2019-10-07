@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:eight/pages/dynamic/list/index.dart';
-import 'package:flutter/services.dart';
+import 'package:eight/pages/news/list/index.dart';
 import 'package:eight/components/Animate/Scale/index.dart';
 import 'package:eight/components/Icons/Eva.dart';
-import 'package:eight/components/Icons/Taobao.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -17,8 +16,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   bool changed = false;
 
   static List<Widget> _widgetOptions = <Widget>[
+    NewsListPage(),
     DynamicListPage(),
-    // NewsList(),
     // BxgifListPage(),
     // BxgifListPage(),
     // UserMe(),

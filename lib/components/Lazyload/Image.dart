@@ -3,7 +3,14 @@ import 'package:transparent_image/transparent_image.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class LazyloadImage extends StatefulWidget {
-  LazyloadImage({Key key, this.image, this.width, this.height, this.color, this.borderRadius}) : super(key: key);
+  LazyloadImage({
+    Key key,
+    this.image,
+    this.width,
+    this.height,
+    this.color,
+    this.borderRadius = const BorderRadius.all(Radius.circular(8.0)),
+  }) : super(key: key);
   final String image;
   final double width;
   final double height;
@@ -20,6 +27,8 @@ class _LazyloadImageState extends State<LazyloadImage> {
     return ClipRRect(
       borderRadius: widget.borderRadius,
       child: Container(
+        width: widget.width,
+        height: widget.height,
         decoration: BoxDecoration(color: widget.color),
         // child: FadeInImage.memoryNetwork(
         //   placeholder: kTransparentImage,
@@ -31,7 +40,7 @@ class _LazyloadImageState extends State<LazyloadImage> {
           height: widget.height,
           imageUrl: widget.image,
           placeholder: (context, url) => CupertinoActivityIndicator(),
-          errorWidget: (context, url, error) => Icon(CupertinoIcons.bookmark),
+          errorWidget: (context, url, error) => Text('error'),
           fit: BoxFit.cover,
         ),
       ),
