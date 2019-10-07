@@ -7,6 +7,32 @@ import 'package:eight/components/Avatar/index.dart';
 import 'package:eight/components/Icons/Taobao.dart';
 import 'package:eight/components/Icons/Eva.dart';
 
+infoItem(String value, String label) {
+  return Container(
+    margin: EdgeInsets.only(right: 20),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(value, style: TextStyle(color: Color(0xFF333333), fontSize: 24)),
+        Padding(padding: EdgeInsets.all(4)),
+        Text(label, style: TextStyle(fontSize: 14, color: Color(0xFF999999))),
+      ],
+    ),
+  );
+}
+
+tag(String text) {
+  return Container(
+    child: Text(text, style: TextStyle(color: Color(0xFF999999))),
+    margin: EdgeInsets.only(right: 8),
+    padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+    decoration: BoxDecoration(
+      color: Color(0xffeeeeee),
+      borderRadius: BorderRadius.circular(4),
+    ),
+  );
+}
+
 class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
   final CupertinoTabBar child;
 
@@ -74,6 +100,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
             //   child: BackdropFilter(
             //     filter: ImageFilter.blur(sigmaX: opacity * 30, sigmaY: opacity * 30),
             child: Container(
+              padding: EdgeInsets.only(top: 12),
               child: nickname,
               color: Color(0xFFFFFFFF),
             ),
@@ -83,11 +110,34 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         ),
         Container(
           alignment: Alignment.bottomLeft,
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
           child: SizedBox(
-            width: 80 * (1 - progress * 0.5),
-            height: 80 * (1 - progress * 0.5),
+            width: 80 * (1 - progress * 0.6),
+            height: 80 * (1 - progress * 0.6),
             child: avatar,
+          ),
+        ),
+        SizedBox.expand(
+          child: Opacity(
+            opacity: (1 - progress),
+            child: Container(
+              alignment: Alignment.topRight,
+              padding: const EdgeInsets.all(24),
+              child: Container(
+                // width: 100,
+                // height: 100,
+                // color: Color(0xFFFFFFFF),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    GestureDetector(
+                      child: Icon(TaobaoIcons.settings),
+                    )
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ],
@@ -165,6 +215,7 @@ class UserMeState extends State<UserMe> {
               controller: _scrollController,
               // physics: ScrollPhysics(),
               slivers: <Widget>[
+                // 可伸缩头部
                 SliverPersistentHeader(
                   pinned: true,
                   delegate: _SliverAppBarDelegate(
@@ -183,7 +234,7 @@ class UserMeState extends State<UserMe> {
                         border: Border.all(
                           style: BorderStyle.solid,
                           color: Color(0xFFFFFFFF),
-                          width: 2,
+                          width: 1,
                         ),
                       ),
                     ),
@@ -198,12 +249,12 @@ class UserMeState extends State<UserMe> {
                     ),
                   ),
                 ),
+                // 用户信息
                 SliverToBoxAdapter(
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                     margin: EdgeInsets.only(bottom: 16),
                     decoration: BoxDecoration(
-                      // color: Color(0xFF999999),
                       border: Border(
                         bottom: BorderSide(color: Color(0xFFdddddd), width: 0.5),
                       ),
@@ -212,8 +263,6 @@ class UserMeState extends State<UserMe> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        // Avatar(src: state.userInfo['avatarUrl'], size: 80),
-                        // Padding(padding: EdgeInsets.all(8)),
                         Text(
                           state.userInfo.nickname,
                           style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 32, fontWeight: FontWeight.bold),
@@ -225,106 +274,33 @@ class UserMeState extends State<UserMe> {
                         ),
                         Padding(padding: EdgeInsets.all(2)),
                         Text(
-                          // state.userInfo['sign'],
-                          '不因过去而悲伤,因为还有现在和未来',
+                          state.userInfo.sign,
                           style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(color: Color(0xFF666666)),
                         ),
                         Padding(padding: EdgeInsets.all(8)),
                         Row(
                           children: <Widget>[
-                            Container(
-                              child: Text('90后', style: TextStyle(color: Color(0xFF999999))),
-                              padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
-                              decoration: BoxDecoration(
-                                color: Color(0xffeeeeee),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
-                            Padding(padding: EdgeInsets.all(4)),
-                            Container(
-                              child: Text('技术宅', style: TextStyle(color: Color(0xFF999999))),
-                              padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
-                              decoration: BoxDecoration(
-                                color: Color(0xffeeeeee),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
-                            Padding(padding: EdgeInsets.all(4)),
-                            Container(
-                              child: Text('北京市', style: TextStyle(color: Color(0xFF999999))),
-                              padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
-                              decoration: BoxDecoration(
-                                color: Color(0xffeeeeee),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
+                            tag("90后"),
+                            tag("技术宅"),
+                            tag("北京市"),
                           ],
                         ),
                         Padding(padding: EdgeInsets.all(12)),
-
                         Row(
                           children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(right: 20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text('1', style: TextStyle(color: Color(0xFF333333), fontSize: 24)),
-                                  Padding(padding: EdgeInsets.all(4)),
-                                  Text('动态', style: TextStyle(fontSize: 14, color: Color(0xFF999999))),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(right: 20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text('0', style: TextStyle(color: Color(0xFF333333), fontSize: 24)),
-                                  Padding(padding: EdgeInsets.all(4)),
-                                  Text('粉丝', style: TextStyle(fontSize: 14, color: Color(0xFF999999))),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(right: 20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text('2', style: TextStyle(color: Color(0xFF333333), fontSize: 24)),
-                                  Padding(padding: EdgeInsets.all(4)),
-                                  Text('关注', style: TextStyle(fontSize: 14, color: Color(0xFF999999))),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              // margin: EdgeInsets.only(right: 20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text('G5FGHF', style: TextStyle(color: Color(0xFF333333), fontSize: 24, letterSpacing: -1, fontFamily: "Helvetica Neue")),
-                                  Padding(padding: EdgeInsets.all(4)),
-                                  Text('邀请码', style: TextStyle(fontSize: 14, color: Color(0xFF999999))),
-                                ],
-                              ),
-                            ),
-                            Icon(TaobaoIcons.qr_code, size: 40, color: Color(0xFF666666)),
+                            infoItem('233', '动态'),
+                            infoItem('233', '粉丝'),
+                            infoItem('233', '关注'),
+                            Expanded(child: Container()),
+                            Icon(TaobaoIcons.qr_code, size: 32, color: Color(0xFF666666)),
                             // Text('11')
                           ],
                         ),
-
-                        // Padding(padding: EdgeInsets.all(8)),
-
-                        // CupertinoButton(
-                        //   child: Text('退出登录'),
-                        //   onPressed: () {
-                        //     userBloc.dispatch(LoggedOut(context: context));
-                        //   },
-                        // ),
                       ],
                     ),
                   ),
                 ),
+                // 吸顶tabs
                 SliverPersistentHeader(
                   // floating: true,
                   pinned: true,
@@ -353,6 +329,7 @@ class UserMeState extends State<UserMe> {
                     ),
                   ),
                 ),
+                //
                 SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
