@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
+
 import 'package:eight/pages/dynamic/list/index.dart';
 import 'package:eight/pages/news/list/index.dart';
+import 'package:eight/pages/user/me/index.dart';
+
 import 'package:eight/components/Animate/Scale/index.dart';
 import 'package:eight/components/Icons/Eva.dart';
 
@@ -16,11 +19,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   bool changed = false;
 
   static List<Widget> _widgetOptions = <Widget>[
+    UserMe(),
     NewsListPage(),
     DynamicListPage(),
     // BxgifListPage(),
     // BxgifListPage(),
-    // UserMe(),
   ];
 
   Widget _getIcon(int index, IconData icon) {
@@ -28,7 +31,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ? Scale(
             child: Icon(icon, size: 28),
           )
-        : Icon(icon, size: 24);
+        : Icon(icon, size: 28);
   }
 
   _onTap(int idx) {
