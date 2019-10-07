@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:eight/components/Lazyload/Image.dart';
 import 'package:eight/components/Icons/Taobao.dart';
+import 'package:eight/utils/common.dart';
 
 actionButton(icon, text) {
   return Container(
@@ -60,10 +61,12 @@ class NewsListItem extends StatelessWidget {
                           child: Row(
                             children: <Widget>[
                               actionButton(TaobaoIcons.attention, '233'),
-                              Padding(padding: EdgeInsets.all(4)),
-                              actionButton(TaobaoIcons.comment, '233'),
+                              // Padding(padding: EdgeInsets.all(4)),
+                              // actionButton(TaobaoIcons.comment, '233'),
                               Padding(padding: EdgeInsets.all(4)),
                               Text(data.appName, style: TextStyle(fontSize: 14, color: Color(0xFFaaaaaa))),
+                              Padding(padding: EdgeInsets.all(4)),
+                              Text(getTimeAgo(data.createdAt), style: TextStyle(fontSize: 14, color: Color(0xFFaaaaaa))),
                             ],
                           ),
                         ),

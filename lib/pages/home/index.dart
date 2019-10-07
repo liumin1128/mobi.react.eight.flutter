@@ -37,10 +37,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   _onTap(int idx) {
     // HapticFeedback.selectionClick();
 
-    if (idx == 2) {
-      Navigator.of(context, rootNavigator: true).pushNamed('/dynamic/create');
-      return 0;
-    }
+    // if (idx == 2) {
+    //   Navigator.of(context, rootNavigator: true).pushNamed('/dynamic/create');
+    //   return 0;
+    // }
 
     setState(() {
       currentIndex = idx;
@@ -68,11 +68,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             icon: _getIcon(1, EvaIcons.gridOutline),
             title: Text("资讯"),
           ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(EvaIcons.plusCircleOutline, size: 36),
+          // ),
           BottomNavigationBarItem(
-            icon: Icon(EvaIcons.plusCircleOutline, size: 36),
-          ),
-          BottomNavigationBarItem(
-            icon: _getIcon(3, EvaIcons.messageSquareOutline),
+            icon: _getIcon(2, EvaIcons.messageSquareOutline),
             title: Text("囧图"),
           ),
           BottomNavigationBarItem(

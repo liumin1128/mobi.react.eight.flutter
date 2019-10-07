@@ -26,7 +26,7 @@ class NewsListPageState extends State<NewsListPage> {
         builder: (context, state) {
           if (state is NewsListFetchSuccessed) {
             return ListViewPro(
-              title: '动态',
+              title: '推荐',
               onRefresh: () {
                 newsListBloc.dispatch(NewsListFetch());
               },

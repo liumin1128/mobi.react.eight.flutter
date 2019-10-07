@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eight/blocs/news/detail/index.dart';
 import 'package:eight/components/Avatar/index.dart';
 import 'package:eight/components/String2Html/index.dart';
+import 'package:eight/utils/common.dart';
 
 // import 'item.dart';
 
@@ -97,7 +98,7 @@ class NewsDetailPageState extends State<NewsDetailPage> {
                                       ),
                                       Text(
                                         // getTimeAgo(data.createdAt),
-                                        detail.appName,
+                                        getTimeAgo(detail.createdAt),
                                         maxLines: 1,
                                         // softWrap: true,
                                         overflow: TextOverflow.ellipsis,
