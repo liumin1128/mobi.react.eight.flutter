@@ -1,3 +1,4 @@
+import 'package:eight/graphql/schema/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:eight/utils/common.dart';
 import 'package:eight/components/Avatar/index.dart';
@@ -6,6 +7,7 @@ import 'package:eight/components/MultiPicturesView/index.dart';
 // import 'package:eight/utils/common.dart';
 // import 'package:eight/components/Icons/Eva.dart';
 import 'package:eight/components/Icons/Taobao.dart';
+import 'package:eight/components/Button/index.dart';
 
 text2html(str) {
   return str;
@@ -45,35 +47,52 @@ class DynamicItem extends StatelessWidget {
           // 用户信息
 
           Container(
-            padding: EdgeInsets.only(top: 16),
+            padding: EdgeInsets.only(top: 16, left: 12, right: 12),
             child: Row(
               children: <Widget>[
+                // 用户头像
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  padding: EdgeInsets.only(right: 12),
                   child: Avatar(src: data.user.avatarUrl, size: 48),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      data.user.nickname,
-                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF333333),
-                          ),
-                    ),
-                    Text(
-                      getTimeAgo(data.createdAt),
-                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                            fontSize: 14,
-                            // fontWeight: FontWeight.w300,
-                            color: Color(0xFFaaaaaa),
-                          ),
-                    ),
-                  ],
-                )
+                // 用户信息
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        data.user.nickname,
+                        style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF333333),
+                            ),
+                      ),
+                      Text(
+                        // getTimeAgo(data.createdAt),
+                        data.user.sign,
+                        maxLines: 1,
+                        // softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                              fontSize: 16,
+                              // fontWeight: FontWeight.w300,
+                              color: Color(0xFFaaaaaa),
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+                // 关注按钮
+                Button(
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                  color: CupertinoTheme.of(context).primaryColor,
+                  child: Text('关注', style: TextStyle(color: CupertinoTheme.of(context).primaryColor)),
+                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                  minSize: 12,
+                  onPressed: () {},
+                ),
               ],
             ),
           ),

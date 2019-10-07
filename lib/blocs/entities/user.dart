@@ -44,6 +44,7 @@ class User extends Equatable {
       id: json["_id"] as String,
       nickname: (json["nickname"] as String) ?? "",
       avatarUrl: (json["avatarUrl"] as String) ?? "",
+      sign: (json["sign"] as String) ?? "什么都没说～",
       // sign: (json["sign"] as String) ?? "",
       // birthday: (json["birthday"] as String) ?? "",
       // email: (json["email"] as String) ?? "",

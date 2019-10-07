@@ -18,6 +18,7 @@ query DynamicList(\$first: Int, \$skip: Int, \$topic: String, \$user: String) {
       _id
       nickname
       avatarUrl
+      sign
     }
   }
   meta: _dynamicsMeta {
@@ -77,6 +78,7 @@ mutation DynamicCreate(\$input: DynamicInput) {
         _id
         nickname
         avatarUrl
+        sign
       }
     }
   }
