@@ -185,21 +185,39 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
           minSize: 0,
           child: Text('发布', style: TextStyle(fontSize: 16)),
           onPressed: () async {
-            print(_contentTextEditingController.text);
-
-            final String content = _contentTextEditingController.text;
+            showCupertinoDialog(
+              context: context,
+              builder: (context) {
+                return CupertinoAlertDialog(
+                  content: Container(
+                    color: Color(0xFFcccccc),
+                    width: 100,
+                    child: CupertinoActivityIndicator(),
+                  ),
+                );
+              },
+            );
 
             List pictures = await uploadMultiAssetsToQiniu(_images);
-
             final dynamicListBloc = BlocProvider.of<DynamicListBloc>(context);
+            final String content = _contentTextEditingController.text;
 
-            dynamicListBloc.dispatch(
-              DynamicListCreate(
-                context: context,
-                content: content,
-                pictures: pictures,
-              ),
-            );
+            print(pictures);
+
+            Navigator.pop(context);
+
+            print('pictures');
+            print('pictures');
+            print('pictures');
+            print('pictures');
+
+            // dynamicListBloc.dispatch(
+            //   DynamicListCreate(
+            //     context: context,
+            //     content: content,
+            //     pictures: pictures,
+            //   ),
+            // );
           },
         ),
       ),
