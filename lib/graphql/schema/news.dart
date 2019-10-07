@@ -20,6 +20,7 @@ String newsDetailSchema = """
   query NewsDetail(\$_id: String!) {
     data: NewsDetail(_id: \$_id) {
       __typename
+      _id
       title
       createdAt
       content

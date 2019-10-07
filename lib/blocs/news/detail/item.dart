@@ -28,6 +28,8 @@ class Item extends Equatable {
   }
 
   static Item fromJson(Map<String, Object> json) {
+    print(json["_id"]);
+    print(json["title"]);
     // user
     return Item(
       id: json["_id"] as String,
@@ -41,5 +43,5 @@ class Item extends Equatable {
   }
 
   @override
-  List<Object> get props => [id];
+  List<String> get props => [id];
 }
