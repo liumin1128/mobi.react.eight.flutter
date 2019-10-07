@@ -52,7 +52,7 @@ class _String2HtmlState extends State<String2Html> with SingleTickerProviderStat
         if (node is dom.Element) {
           switch (node.localName) {
             case "p":
-              return baseStyle.merge(TextStyle(height: 1.25, fontSize: 14));
+              return baseStyle.merge(TextStyle(height: 1.5, fontSize: 16));
           }
         }
         return baseStyle;

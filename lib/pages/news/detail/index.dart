@@ -34,72 +34,85 @@ class NewsDetailPageState extends State<NewsDetailPage> {
             return CustomScrollView(
               slivers: <Widget>[
                 SliverSafeArea(
-                  sliver: SliverToBoxAdapter(
-                    child: Text(
-                      detail.title,
-                      maxLines: 2,
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                            fontSize: 32,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF333333),
-                          ),
-                    ),
-                  ),
-                ),
-                SliverSafeArea(
+                  bottom: false,
                   sliver: SliverToBoxAdapter(
                     child: Container(
-                      padding: EdgeInsets.only(top: 16, left: 12, right: 12),
-                      child: Row(
-                        children: <Widget>[
-                          // 用户头像
-                          Container(
-                            padding: EdgeInsets.only(right: 12),
-                            child: Avatar(
-                              placeholder: detail.appName,
-                              size: 48,
+                      // color: Color(0xFF000000),
+                      padding: EdgeInsets.all(16),
+                      // decoration: BoxDecoration(
+                      //   border: Border(
+                      //     bottom: BorderSide(color: Color(0xFFdddddd), width: 0.5),
+                      //   ),
+                      // ),
+                      // margin: EdgeInsets.all(16),
+                      child: Container(
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              detail.title,
+                              maxLines: 2,
+                              softWrap: true,
+                              overflow: TextOverflow.ellipsis,
+                              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xFF333333),
+                                  ),
                             ),
-                          ),
-                          // 用户信息
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
+                            Padding(padding: EdgeInsets.all(4)),
+                            Row(
                               children: <Widget>[
-                                Text(
-                                  detail.appName,
-                                  style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xFF333333),
-                                      ),
+                                // 用户头像
+                                Container(
+                                  padding: EdgeInsets.only(right: 12),
+                                  child: Avatar(
+                                    placeholder: detail.appName,
+                                    size: 48,
+                                  ),
                                 ),
-                                Text(
-                                  // getTimeAgo(data.createdAt),
-                                  detail.appName,
-                                  maxLines: 1,
-                                  // softWrap: true,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                                        fontSize: 16,
-                                        // fontWeight: FontWeight.w300,
-                                        color: Color(0xFFbbaaaa),
+                                // 用户信息
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        detail.appName,
+                                        style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF333333),
+                                            ),
                                       ),
+                                      Text(
+                                        // getTimeAgo(data.createdAt),
+                                        detail.appName,
+                                        maxLines: 1,
+                                        // softWrap: true,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                                              fontSize: 16,
+                                              // fontWeight: FontWeight.w300,
+                                              color: Color(0xFFbbaaaa),
+                                            ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
+                                // 关注按钮
                               ],
-                            ),
-                          ),
-                          // 关注按钮
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
                 SliverSafeArea(
+                  top: false,
                   sliver: SliverToBoxAdapter(
                     child: Container(
+                      padding: EdgeInsets.all(16),
                       child: String2Html(html: detail.html),
                     ),
                   ),
