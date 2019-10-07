@@ -8,9 +8,9 @@ import 'package:eight/blocs/dynamic_list_bloc/index.dart';
 // import 'package:eight/blocs/dynamic_detail_bloc/index.dart';
 // import 'package:eight/blocs/comment_list_bloc/index.dart';
 // pages
-// import 'package:eight/pages/home/index.dart';
+import 'package:eight/pages/home/index.dart';
 // import 'package:eight/pages/dynamic/detail/index.dart';
-import 'package:eight/pages/dynamic/list/index.dart';
+// import 'package:eight/pages/dynamic/list/index.dart';
 // import 'package:eight/pages/dynamic/create/index.dart';
 // import 'package:eight/pages/user/login/phone/index.dart';
 // import 'package:eight/pages/user/login/username/index.dart';
@@ -42,7 +42,7 @@ class AppState extends State<App> {
                 return CupertinoApp(
                   theme: theme,
                   routes: <String, WidgetBuilder>{
-                    '/': (BuildContext context) => DynamicListPage(),
+                    '/': (BuildContext context) => HomePage(),
                     // '/user/login/phone': (BuildContext context) => UserPhoneLogin(),
                     // '/user/login/password': (BuildContext context) => UserPasswordLogin(),
                     // '/dynamic/create': (BuildContext context) => DynamicCreatePage(),
