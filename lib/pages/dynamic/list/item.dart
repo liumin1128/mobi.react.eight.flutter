@@ -33,7 +33,6 @@ class DynamicItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           // 用户信息
-
           Container(
             padding: EdgeInsets.only(top: 16, left: 12, right: 12),
             child: Row(
@@ -153,13 +152,6 @@ class DynamicItem extends StatelessWidget {
               ],
             ),
           ),
-
-          // 用户操作
-          // Container(
-          //   color: Color.fromRGBO(0, 0, 0, 0.05),
-          //   height: 8,
-          //   // margin: const EdgeInsets.only(top: 16),
-          // ),
         ],
       ),
     );

@@ -6,10 +6,12 @@ import 'package:eight/blocs/theme_bloc.dart';
 // import 'package:eight/blocs/user_bloc/index.dart';
 import 'package:eight/blocs/dynamic_list/index.dart';
 import 'package:eight/blocs/news/list/index.dart';
+import 'package:eight/blocs/news/detail/index.dart';
 // import 'package:eight/blocs/dynamic_detail_bloc/index.dart';
 // import 'package:eight/blocs/comment_list_bloc/index.dart';
 // pages
 import 'package:eight/pages/home/index.dart';
+import 'package:eight/pages/news/detail/index.dart';
 // import 'package:eight/pages/dynamic/detail/index.dart';
 // import 'package:eight/pages/dynamic/list/index.dart';
 // import 'package:eight/pages/dynamic/create/index.dart';
@@ -36,6 +38,7 @@ class AppState extends State<App> {
               // BlocProvider<UserBloc>(builder: (context) => UserBloc(client: client)..dispatch(AppStarted())),
               BlocProvider<DynamicListBloc>(builder: (context) => DynamicListBloc(client: client)),
               BlocProvider<NewsListBloc>(builder: (context) => NewsListBloc(client: client)),
+              BlocProvider<NewsDetailBloc>(builder: (context) => NewsDetailBloc(client: client)),
               // BlocProvider<DynamicDetailBloc>(builder: (context) => DynamicDetailBloc(client: client)),
               // BlocProvider<CommentListBloc>(builder: (context) => CommentListBloc(client: client)),
             ],
@@ -52,6 +55,10 @@ class AppState extends State<App> {
                     //   final Map query = ModalRoute.of(context).settings.arguments;
                     //   return DynamicDetailPage(session: query['session']);
                     // },
+                    '/news/detail': (BuildContext context) {
+                      final Map query = ModalRoute.of(context).settings.arguments;
+                      return NewsDetailPage(id: query['id']);
+                    },
                   },
                   initialRoute: '/',
                 );
