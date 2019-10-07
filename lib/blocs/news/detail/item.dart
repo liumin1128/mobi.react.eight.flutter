@@ -6,9 +6,10 @@ class Item extends Equatable {
   final String title;
   final String content;
   final String cover;
-  final String createdAt;
+  final int createdAt;
   final String appName;
   final String appCode;
+  final String html;
 
   Item({
     @required this.id,
@@ -18,6 +19,7 @@ class Item extends Equatable {
     this.cover,
     this.appName,
     this.appCode,
+    this.html,
   });
 
   @override
@@ -33,6 +35,8 @@ class Item extends Equatable {
       cover: (json["cover"] as String) ?? ((json["photos"] as List)[0] as String) ?? 'https://imgs.react.mobi/Fq79WFgZh2HDJNrtKTkdzMIOpGu7',
       appName: (json["appName"] as String) ?? "",
       appCode: (json["appCode"] as String) ?? "",
+      html: (json["html"] as String) ?? "",
+      createdAt: json["createdAt"] as int,
     );
   }
 

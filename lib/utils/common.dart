@@ -68,7 +68,7 @@ class RelativeDateFormat {
 }
 
 getTimeAgo(createdAt) {
-  return RelativeDateFormat.format(DateTime.fromMillisecondsSinceEpoch(int.parse(createdAt)));
+  return RelativeDateFormat.format(DateTime.fromMillisecondsSinceEpoch(createdAt));
 }
 
 getSmallImg(url, propsX, propsY) {

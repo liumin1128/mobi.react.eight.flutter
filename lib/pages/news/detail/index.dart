@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eight/blocs/news/detail/index.dart';
 import 'package:eight/components/Avatar/index.dart';
+import 'package:eight/components/String2Html/index.dart';
 
 // import 'item.dart';
 
@@ -93,6 +94,13 @@ class NewsDetailPageState extends State<NewsDetailPage> {
                           // 关注按钮
                         ],
                       ),
+                    ),
+                  ),
+                ),
+                SliverSafeArea(
+                  sliver: SliverToBoxAdapter(
+                    child: Container(
+                      child: String2Html(html: detail.html),
                     ),
                   ),
                 ),
