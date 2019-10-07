@@ -23,7 +23,7 @@ actionButton(icon, text) {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Icon(icon, color: Color(0xFFaaaaaa), size: 20),
+        Icon(icon, color: Color(0xFFaaaaaa), size: 22),
         Padding(padding: EdgeInsets.all(2)),
         Text(text, style: TextStyle(fontSize: 14, color: Color(0xFFaaaaaa))),
       ],
@@ -78,7 +78,7 @@ class DynamicItem extends StatelessWidget {
                         style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                               fontSize: 16,
                               // fontWeight: FontWeight.w300,
-                              color: Color(0xFFaaaaaa),
+                              color: Color(0xFFbbaaaa),
                             ),
                       ),
                     ],
@@ -98,7 +98,7 @@ class DynamicItem extends StatelessWidget {
           ),
 
           Container(
-            padding: const EdgeInsets.only(left: 72, top: 8, right: 16, bottom: 8),
+            padding: const EdgeInsets.only(left: 72, top: 8, right: 16, bottom: 4),
             // color: Color(0xFF888888),
             child: Column(
               children: <Widget>[
@@ -117,8 +117,9 @@ class DynamicItem extends StatelessWidget {
                             data.content,
                             textAlign: TextAlign.left,
                             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                                  fontSize: 18,
-                                  color: Color(0xFF666666),
+                                  fontSize: 20,
+                                  color: Color(0xFF333333),
+                                  height: 1.5,
                                 ),
                           ),
                         ),
@@ -143,10 +144,19 @@ class DynamicItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     // padding: EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 16),
                     children: <Widget>[
-                      actionButton(TaobaoIcons.forward, '233'),
+                      actionButton(TaobaoIcons.like, '233'),
                       actionButton(TaobaoIcons.comment, '233'),
-                      actionButton(TaobaoIcons.appreciate, '233'),
-                      actionButton(TaobaoIcons.share, '分享'),
+                      actionButton(TaobaoIcons.forward, '233'),
+
+                      // actionButton(TaobaoIcons.share, '分享'),
+                      Text(
+                        getTimeAgo(data.createdAt),
+                        style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                              fontSize: 14,
+                              // fontWeight: FontWeight.w300,
+                              color: Color(0xFFaaaaaa),
+                            ),
+                      )
                     ],
                   ),
                 )
