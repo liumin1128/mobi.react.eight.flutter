@@ -190,8 +190,6 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
               builder: (context) {
                 return CupertinoAlertDialog(
                   content: Container(
-                    color: Color(0xFFcccccc),
-                    width: 100,
                     child: CupertinoActivityIndicator(),
                   ),
                 );
@@ -202,22 +200,15 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
             final dynamicListBloc = BlocProvider.of<DynamicListBloc>(context);
             final String content = _contentTextEditingController.text;
 
-            print(pictures);
-
             Navigator.pop(context);
 
-            print('pictures');
-            print('pictures');
-            print('pictures');
-            print('pictures');
-
-            // dynamicListBloc.dispatch(
-            //   DynamicListCreate(
-            //     context: context,
-            //     content: content,
-            //     pictures: pictures,
-            //   ),
-            // );
+            dynamicListBloc.dispatch(
+              DynamicListCreate(
+                context: context,
+                content: content,
+                pictures: pictures,
+              ),
+            );
           },
         ),
       ),

@@ -40,7 +40,7 @@ class _LazyloadImageState extends State<LazyloadImage> {
           height: widget.height,
           imageUrl: widget.image,
           placeholder: (context, url) => CupertinoActivityIndicator(),
-          errorWidget: (context, url, error) => Text('error'),
+          // errorWidget: (context, url, error) => Text('error'),
           fit: BoxFit.cover,
         ),
       ),
