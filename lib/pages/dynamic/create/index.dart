@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart' hide Action;
-// import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
 import 'package:eight/utils/index.dart';
 // import 'dart:async';
 import 'package:multi_image_picker/multi_image_picker.dart';
@@ -40,13 +40,13 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
     _contentFocusNode.dispose();
   }
 
-  // Future<Null> _pickeImage() async {
-  //   HapticFeedback.selectionClick();
-  //   List<Asset> list = await loadAssets();
-  //   setState(() {
-  //     _images = _images + list;
-  //   });
-  // }
+  Future<Null> _pickeImage() async {
+    HapticFeedback.selectionClick();
+    List<Asset> list = await loadAssets();
+    setState(() {
+      _images = _images + list;
+    });
+  }
 
   Widget buildGridViewImages() {
     // return DragAndDropList<Asset>(
@@ -86,15 +86,15 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
             GestureDetector(
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Color(0x33000000)),
+                  border: Border.all(color: Color(0xFFcccccc)),
                 ),
                 child: Icon(
                   CupertinoIcons.photo_camera_solid,
                   size: 36,
-                  color: Color(0x33000000),
+                  color: Color(0xFFcccccc),
                 ),
               ),
-              // onTap: _pickeImage,
+              onTap: _pickeImage,
             )
           ] +
           List.generate(
@@ -166,33 +166,40 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
     return CupertinoPageScaffold(
       backgroundColor: Color(0xFFf8f8f8),
       navigationBar: CupertinoNavigationBar(
-        // border: Border(
-        //   top: BorderSide(
-        //     style: BorderStyle.none,
-        //   ),
-        // ),
+        border: Border(
+          top: BorderSide(
+            style: BorderStyle.none,
+          ),
+        ),
         // leading: Text('创建'),
-        // middle: Text('创建'),
+        middle: Text(
+          '发布动态',
+          style: TextStyle(
+            color: CupertinoTheme.of(context).primaryColor,
+          ),
+        ),
         trailing: CupertinoButton(
-          color: CupertinoTheme.of(context).primaryColor,
-          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+          // color: CupertinoTheme.of(context).primaryColor,
+          padding: EdgeInsets.symmetric(vertical: 4),
           borderRadius: BorderRadius.circular(16),
           minSize: 0,
-          child: Text('发布', style: TextStyle(fontSize: 20)),
+          child: Text('发布', style: TextStyle(fontSize: 16)),
           onPressed: () async {
-            // print(_contentTextEditingController.text);
+            print(_contentTextEditingController.text);
 
-            // final String content = _contentTextEditingController.text;
+            final String content = _contentTextEditingController.text;
 
-            // List pictures = await uploadMultiAssetsToQiniu(_images);
+            List pictures = await uploadMultiAssetsToQiniu(_images);
 
-            // final dynamicListBloc = BlocProvider.of<DynamicListBloc>(context);
+            final dynamicListBloc = BlocProvider.of<DynamicListBloc>(context);
 
-            // dynamicListBloc.dispatch(DynamicListCreate(
-            //   context: context,
-            //   content: content,
-            //   pictures: pictures,
-            // ));
+            dynamicListBloc.dispatch(
+              DynamicListCreate(
+                context: context,
+                content: content,
+                pictures: pictures,
+              ),
+            );
           },
         ),
       ),
@@ -224,7 +231,7 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
                 border: Border(
                   bottom: BorderSide(
                     style: BorderStyle.solid,
-                    color: Color(0x33000000),
+                    color: Color(0xFFeeeeee),
                   ),
                 ),
               ),
