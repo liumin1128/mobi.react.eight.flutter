@@ -32,6 +32,10 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
     });
 
     // _contentTextEditingController = TextEditingController(text: '');
+
+    Future<void>.delayed(Duration(milliseconds: 500), () {
+      _contentFocusNode.requestFocus();
+    });
   }
 
   void dispose() {
@@ -226,7 +230,7 @@ class DynamicCreatePageState extends State<DynamicCreatePage> {
               placeholder: "想要说些什么？",
               controller: _contentTextEditingController,
               // autofocus: true,
-              // focusNode: focusNodeCode,
+              focusNode: _contentFocusNode,
               maxLines: 8,
               // minLines: 8,
               onChanged: (str) {
