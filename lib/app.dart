@@ -8,6 +8,7 @@ import 'package:eight/blocs/dynamic_list/index.dart';
 import 'package:eight/blocs/news/list/index.dart';
 import 'package:eight/blocs/news/detail/index.dart';
 import 'package:eight/blocs/user/index.dart';
+import 'package:eight/blocs/notification/list/index.dart';
 // import 'package:eight/blocs/comment_list_bloc/index.dart';
 // pages
 import 'package:eight/pages/home/index.dart';
@@ -36,6 +37,7 @@ class AppState extends State<App> {
             providers: [
               BlocProvider<ThemeBloc>(builder: (context) => ThemeBloc()),
               BlocProvider<UserBloc>(builder: (context) => UserBloc(client: client)..dispatch(AppStarted())),
+              BlocProvider<NotificationListBloc>(builder: (context) => NotificationListBloc(client: client)),
               BlocProvider<DynamicListBloc>(builder: (context) => DynamicListBloc(client: client)),
               BlocProvider<NewsListBloc>(builder: (context) => NewsListBloc(client: client)),
               BlocProvider<NewsDetailBloc>(builder: (context) => NewsDetailBloc(client: client)),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:eight/pages/dynamic/list/index.dart';
 import 'package:eight/pages/news/list/index.dart';
+import 'package:eight/pages/notification/list/index.dart';
 import 'package:eight/pages/user/me/index.dart';
 
 import 'package:eight/components/Animate/Scale/index.dart';
@@ -20,8 +21,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   static List<Widget> _widgetOptions = <Widget>[
     DynamicListPage(),
+    NotificationListPage(),
     NewsListPage(),
-    UserMe(),
     UserMe(),
     // BxgifListPage(),
     // BxgifListPage(),
