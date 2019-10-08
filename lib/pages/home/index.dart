@@ -21,11 +21,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   static List<Widget> _widgetOptions = <Widget>[
     DynamicListPage(),
-    NotificationListPage(),
     NewsListPage(),
+    NotificationListPage(),
     UserMe(),
-    // BxgifListPage(),
-    // BxgifListPage(),
   ];
 
   Widget _getIcon(int index, IconData icon) {
